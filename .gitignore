@@ -3,5 +3,5 @@
 .RData
 .Ruserdata
 whomds.Rproj
-/R/data.R
-/data
+R/data.R
+data
