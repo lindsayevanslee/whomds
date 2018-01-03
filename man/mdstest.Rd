@@ -23,7 +23,7 @@
   \item{B....}{survey item (see Brief MDS questionnaire)}
 }}
 \source{
-WHO Disability and Rehabilitation Unit (leel@who.int)
+WHO Disability Programme (leel@who.int)
 }
 \usage{
 mdstest

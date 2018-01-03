@@ -4,28 +4,35 @@
 \alias{prev_table}
 \title{Calculate a prevalence table}
 \usage{
-prev_table(data, id, weight = NULL, strata.svy = NULL, prev_vars,
-  lev = 1:5, which.prev = lev, stratum = NULL, disagg = NULL,
-  stack = FALSE)
+prev_table(data, prev_vars, stratify = FALSE, stratum = NULL,
+  disagg = NULL, form_ids, form_weights = NULL, form_strata = NULL,
+  lev = 1:5, collapse = FALSE, map_lev = lev,
+  which.prev = 1:length(unique(map_lev)), stack = FALSE)
 }
 \arguments{
 \item{data}{a data.table of the survey data}
 
-\item{id}{a character vector (length 1) with the name of the column with the individual IDs}
-
-\item{weight}{a character vector (length 1) with the name of the column with the survey weights, default is NULL}
-
-\item{strata.svy}{a character vector (length 1) with the name of the column with the survey strata, default is NULL}
-
 \item{prev_vars}{a character vector with the names of the survey items for which prevalences should be calculated}
 
-\item{lev}{a numeric vector giving the response options of prev_vars, default is 1:5}
-
-\item{which.prev}{a numeric vector giving the index of the response options that you want prevalences printed for, default is equal to lev. For example if lev=0:1 and you only want prevalences for response option 1 (the second response option), then which.prev=2}
+\item{stratify}{a logical vector (length 1) specifying whether to stratify the results by a factor, default is FALSE}
 
 \item{stratum}{a character vector (length 1) with the name of the column to stratify by, default is NULL}
 
 \item{disagg}{a character vector (length 1) with the name of the column by which to perform a second level of disaggregation (e.g. sex), default is NULL}
+
+\item{form_ids}{formula with cluster ids to pass to survey::svydesign()}
+
+\item{form_weights}{formula with survey weights to pass to survey::svydesign(), default is NULL}
+
+\item{form_strata}{formula with survey strata to pass to survey::svydesign(), default is NULL}
+
+\item{lev}{a numeric vector giving the response options of prev_vars, default is 1:5}
+
+\item{collapse}{a logical vector (length 1) indicating whether to collapse response option percentages, default is FALSE}
+
+\item{map_lev}{a numeric vector of new response options to map original response options (lev) to in order to collapse response options, default is equal to lev. Must be same length as lev. Only change if collapse=TRUE}
+
+\item{which.prev}{a numeric vector giving the index of the response options that you want prevalences printed for, default is the vector of integers from 1 to the number of unique respone options in map_lev. For example if lev=0:4, and you collapse the last two response options by setting map_lev=c(1,2,3,4,4), and you only want percentages for new response options 3 and 4 (the second response option), then which.prev=3:4}
 
 \item{stack}{a logical vector (length 1) indicating whether the prevalence table should be stacked, default is FALSE. This is most useful when prev_vars is length 1}
 }
