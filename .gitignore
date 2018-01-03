@@ -4,4 +4,4 @@
 .Ruserdata
 whomds.Rproj
 /R/data.R
-/data/
+/data/**
