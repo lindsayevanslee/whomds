@@ -1,6 +1,6 @@
 
 #only for disaggregating by one variable for now (group_by_var)
-BasicStatsFunNew <- function(df, hh_id, group_by_var) {
+table_basicstats <- function(df, hh_id, group_by_var) {
   
   sym_group_by_var <- rlang::sym(group_by_var)
   
