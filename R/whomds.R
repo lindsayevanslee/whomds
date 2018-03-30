@@ -6,6 +6,7 @@
 #' @section Table functions:
 #' The table functions output different fit for purpose tables for reporting
 #' results from the WHO Model Disability Survey (MDS)
+#' 
 #'
 #' @section Graph functions:
 #' The graph functions output different graphs for reporting

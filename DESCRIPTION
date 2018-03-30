@@ -2,8 +2,7 @@ Package: whomds
 Type: Package
 Title: Calculate results from WHO Model Disability Survey data
 Version: 0.0.0.9000
-Author@R: c(person("Lindsay", "Lee", email = "leel@who.int", role = c("cre","aut")),
-person("World Health Organization", role = c("cph")))
+Author@R: person("Lindsay", "Lee", email = "leel@who.int", role = c("cre","aut"))
 Description: The Model Disability Survey is a WHO general population survey
     instrument to assess the distribution of disability within a country or 
     region, based in the International Classification of Functioning, 
@@ -15,7 +14,7 @@ Encoding: UTF-8
 LazyData: true
 Imports: 
     dummies,
-    rlang
+    rlang,
     survey, 
     tidyverse
 BugReports: https://github.com/lindsayevanslee/whomds
