@@ -1,13 +1,11 @@
-# .libPaths("//WIMS.who.int/HQ/GVA11/Home/leel/My Documents/R/R-3.3.3/library")
-load("/Users/lindsaylee/Dropbox/WHO/MDS/01b MDS Brief Version/08 Example report/04 Syntax/DescriptiveAnalysis/briefex.RData")
+load("/Users/lindsaylee/Dropbox/WHO/MDS/09 national and regional surveys/Chile 2014/04 Syntax/DescriptiveAnalysis/chile.RData")
 
-demos <- c("sex","age","age_cat", "work_cat","edu_cat","marital_status","ethnicity")
+demos <- c("sex","edad","age_cat", "work_cat","edu_cat","marital_status")
 scores <- c("capacity_cat","performance_cat","CapacityScore","PerformanceScorePredicted")
-vars2keep <- c(vars_id,demos,scores,vars_strata,vars_weights,vars_assistance,vars_assistance_nouseneed, vars_assistance_per,vars_assistance_use,
-               vars_assistance_useneed,vars_attitude,vars_capacity,vars_conditions,vars_environ,vars_health,
-               vars_performance,vars_support)
+vars2keep <- c(vars_indid,demos,scores,vars_ids,vars_strata,vars_weights,vars_capacity,vars_conditions1,vars_environ,vars_health,vars_performance)
 
-
-mdstest <- brief[,vars2keep]
+mdstest <- chile[,vars2keep]
 
 rm(list=setdiff(ls(), c("mdstest")))
+
+save.image("data/mdstest.RData")
