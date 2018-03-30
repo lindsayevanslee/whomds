@@ -6,7 +6,7 @@ Author@R: person("Lindsay", "Lee", email = "leel@who.int", role = c("cre","aut")
 Description: The Model Disability Survey is a WHO general population survey
     instrument to assess the distribution of disability within a country or 
     region, based in the International Classification of Functioning, 
-    Disability and Health. This pacakge provides fit-for-purpose functions 
+    Disability and Health. This package provides fit-for-purpose functions 
     for calculating and presenting the results from this survey, as used by 
     the WHO.
 License: GPL-3

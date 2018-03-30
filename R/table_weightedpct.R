@@ -1,4 +1,23 @@
 
+#' Calculate table of percentages of response distribution for survey items, survey weighted, disaggregated
+#'
+#' @param df a tibble of survey responses, one row per respondent
+#' @param vars_ids a character vector of cluster ids, passed to a \code{survey::svydesign} object
+#' @param vars_strata a character vector of strata ids, passed to a \code{survey::svydesign} object
+#' @param vars_weights a character vector of survey weight ids, passed to a \code{survey::svydesign} object
+#' @param formula_vars a character vector of variables to calculate the percentages of each level for
+#' @param formula_vars_levels a vector of the levels of the the \code{formula_vars}
+#' @param by_vars a character vector of variables to disaggregate results by
+#' @param spread_key a string with variable name to pass to \code{key} argument of \code{dplyr::spread()}. Default is NULL.
+#' @param spread_value a string with variable name to pass to \code{value} argument of \code{dplyr::spread()}. Default is "prop" (the columm of percentages created within the function)
+#' @param arrange_vars a character vector with variables to pass to \code{dplyr::arrange()}. Default is NULL.
+#' @param willfilter a logical variable that tells the function whether or not to filter or transmute the data. Leave as default NULL to not filter or transmute. Set as TRUE to filter and FALSE to transmute. See Details.
+#' @param ... captures expressions to pass to \code{dplyr::filter()} or \code{dplyr::transmute()}, depending on the value of argument \code{willfilter}. See Details.
+#'
+#' @return a tibble of weighted response percentages 
+#' @export
+#'
+#' @examples
 table_weightedpct <- function(df, vars_ids, vars_strata, vars_weights, 
                        formula_vars, formula_vars_levels = 0:1, by_vars, 
                        spread_key = NULL, spread_value = "prop",

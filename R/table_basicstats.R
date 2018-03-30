@@ -1,5 +1,13 @@
-
-#only for disaggregating by one variable for now (group_by_var)
+#' Compute basic statistics of the number of member per group per household
+#'
+#' @param df a tibble of household data where the rows represent members of the households in the sample
+#' @param hh_id string (length 1) indicating the name of the variable in \code{df} uniquely identifying households
+#' @param group_by_var string (length 1) to pass to \code{group_by_at()} with name of variable in \code{df} to group results by
+#'
+#' @return A tibble with rows for each level of \code{group_by_var} and "Total" and columns for the Mean (SD), Median and Range of the number of people in each group per household.
+#' @export
+#'
+#' @examples
 table_basicstats <- function(df, hh_id, group_by_var) {
   
   sym_group_by_var <- rlang::sym(group_by_var)
