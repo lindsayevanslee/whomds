@@ -15,3 +15,23 @@
 #' @docType package
 #' @name whomds
 NULL
+
+#quiets R CMD check
+if (getRversion() >= "2.15.1") {
+  utils::globalVariables(
+    c(
+      "age_cat",
+      "demo",
+      "item",
+      "median",
+      "nperHH",
+      "pct",
+      "pct_n",
+      "prop",
+      "prop_se",
+      "resp",
+      "sd",
+      "sex"
+    )
+  )
+}

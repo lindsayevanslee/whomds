@@ -15,9 +15,17 @@ LazyData: true
 Imports: 
     dplyr,
     dummies,
+    ggplot2,
+    grid,
+    purrr,
+    RColorBrewer,
+    readr,
     rlang,
+    scales,
     srvyr,
     survey, 
+    tibble,
     tidyr
+Depends: R (>= 3.4.3)
 BugReports: https://github.com/lindsayevanslee/whomds
 RoxygenNote: 6.0.1

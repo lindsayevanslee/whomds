@@ -15,19 +15,32 @@
 #' @param ... captures expressions to pass to \code{dplyr::filter()} or \code{dplyr::transmute()}, depending on the value of argument \code{willfilter}. See Details.
 #'
 #' @return a tibble of weighted response percentages 
+#' 
+#' @details 
+#' ADD SOME STUFF ABOUT THE FILTERING
+#' 
 #' @export
+#' 
+#' @import srvyr
 #'
 #' @examples
+#' table_weightedpct(mdstest, 
+#'     vars_ids = c("VARUNIT_N","enc_idr"),
+#'     vars_strata = "VARSTRAT_N",
+#'     vars_weights = "Factor_Persona",
+#'     formula_vars = paste0("fa",1:10),
+#'     formula_vars_levels = 1:5,
+#'     by_vars = "sex")
 table_weightedpct <- function(df, vars_ids, vars_strata, vars_weights, 
                        formula_vars, formula_vars_levels = 0:1, by_vars, 
                        spread_key = NULL, spread_value = "prop",
                        arrange_vars = NULL, 
                        willfilter = NULL, ...
                        ) {
-  
+
   #convert data to long format using variables from formula_vars
   df <- df %>%
-    gather_(
+    tidyr::gather_(
       key = "item",
       value = "resp",
       gather_cols = formula_vars,

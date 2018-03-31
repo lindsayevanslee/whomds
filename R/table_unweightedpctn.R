@@ -6,14 +6,23 @@
 #' @param spread_by_group_by_var logical determining whether to pass \code{group_by_var} to \code{dplyr::spread()} to give a wide-format tab. Default is FALSE.
 #'
 #' @return A tibble with percent and N for each level of each variable in \code{vars_demo}
+#' 
 #' @export
+#' 
+#' @import dplyr
+#' @import rlang
 #'
 #' @examples
+#' table_unweightedpctn(mdstest, vars_demo = c("sex", "age_cat", "work_cat", "edu_cat"))
+#' table_unweightedpctn(mdstest, vars_demo = c("sex", "age_cat", "work_cat", "edu_cat"), 
+#' group_by_var = "performance_cat")
+#' table_unweightedpctn(mdstest, vars_demo = c("sex", "age_cat", "work_cat", "edu_cat"), 
+#' group_by_var = "performance_cat", spread_by_group_by_var = TRUE)
 table_unweightedpctn <- function(df, vars_demo, group_by_var=NULL, spread_by_group_by_var = FALSE) {
   
   #create sym of group_by_var if applicable
   if (!is.null(group_by_var)) {
-    sym_group_by_var <- rlang::sym(group_by_var)
+    sym_group_by_var <- sym(group_by_var)
     
     #initialize final table
     final_tab <- tibble(demo=character(),
@@ -31,7 +40,7 @@ table_unweightedpctn <- function(df, vars_demo, group_by_var=NULL, spread_by_gro
   for (i in seq_along(vars_demo)){
     
     #create sym of vars_demo at this iteration
-    sym_this_vars_demo <- rlang::sym(vars_demo[i])
+    sym_this_vars_demo <- sym(vars_demo[i])
     
     #remove NAs of this vars_demo
     tab <- df %>% 
@@ -63,7 +72,7 @@ table_unweightedpctn <- function(df, vars_demo, group_by_var=NULL, spread_by_gro
                 pct_n = paste0(pct, " (", n, ")")) 
     
     if (spread_by_group_by_var) final_tab <- final_tab %>% 
-        spread(!!sym_group_by_var, pct_n)
+        tidyr::spread(!!sym_group_by_var, pct_n)
   } else {
     final_tab <- final_tab %>% 
       mutate(demo = ordered(demo, levels = unique(demo))) %>% 

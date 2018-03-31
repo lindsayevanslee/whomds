@@ -39,3 +39,15 @@ a tibble of weighted response percentages
 \description{
 Calculate table of percentages of response distribution for survey items, survey weighted, disaggregated
 }
+\details{
+ADD SOME STUFF ABOUT THE FILTERING
+}
+\examples{
+table_weightedpct(mdstest, 
+    vars_ids = c("VARUNIT_N","enc_idr"),
+    vars_strata = "VARSTRAT_N",
+    vars_weights = "Factor_Persona",
+    formula_vars = paste0("fa",1:10),
+    formula_vars_levels = 1:5,
+    by_vars = "sex")
+}

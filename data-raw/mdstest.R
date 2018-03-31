@@ -9,4 +9,4 @@ mdstest <- chile[,vars2keep] %>% as_tibble()
 
 rm(list=setdiff(ls(), c("mdstest")))
 
-save.image("data/mdstest.RData")
+devtools::use_data(mdstest)
