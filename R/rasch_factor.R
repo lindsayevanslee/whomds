@@ -1,3 +1,11 @@
+#' Calculate a factor analysis for a Rasch Model
+#'
+#' @param df a tibble of individual survey data, where each row is an individual 
+#' @param vars_metric a character vector of items to use in the Rasch Analysis
+#' @param print_results a logical vector indicating whether to print the results of the model to the \code{model_name} directory
+#'
+#' @return a list with results from the factor analysis for a Rasch Model
+#' @export
 rasch_factor <- function(df, vars_metric, print_results = TRUE) {
   #----------------------------
   # create data set with ordered factors
@@ -81,5 +89,9 @@ rasch_factor <- function(df, vars_metric, print_results = TRUE) {
     
   }
   
+  
+  factor_result <- list()
+  
+  return(factor_result)
   
 }

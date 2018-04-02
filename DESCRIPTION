@@ -14,7 +14,6 @@ Encoding: UTF-8
 LazyData: true
 Imports: 
     dplyr,
-    dummies,
     ggplot2,
     grid,
     purrr,
