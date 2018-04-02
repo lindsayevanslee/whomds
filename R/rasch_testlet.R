@@ -8,6 +8,8 @@
 #'
 #' @return a named list with the new \code{df}, new \code{vars_metric}, new \code{testlet_strategy} and new \code{max_values} after creating desired testlets
 #' @export
+#' 
+#' @import dplyr
 rasch_testlet <- function(df, vars_metric, testlet_strategy, max_values, resp_opts) {
   
   n_testlets <- length(testlet_strategy)

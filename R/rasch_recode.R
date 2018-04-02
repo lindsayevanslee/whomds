@@ -7,6 +7,8 @@
 #'
 #' @return a named list with the new \code{df} and new \code{max_values} after recoding the desired variables
 #' @export
+#' 
+#' @import dplyr
 rasch_recode <- function(df, vars_metric, recode_strategy, max_values) {
   
   #How many different kinds of recode?

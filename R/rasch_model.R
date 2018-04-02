@@ -7,6 +7,8 @@
 #'
 #' @return a list \code{model_result} with results from the Rasch Model
 #' @export
+#' 
+#' @import eRm
 rasch_model <- function(df, vars_metric, print_results = TRUE, LIDcutoff = 0.2) {
 
   #1. PCM analysis
@@ -35,7 +37,7 @@ rasch_model <- function(df, vars_metric, print_results = TRUE, LIDcutoff = 0.2) 
   names(table_Itemfit) <- c("i.fit", "i.df", "i.outfitMSQ",   "i.infitMSQ",  "i.outfitZ",  "i.infitZ" )
   
   ##additional cut-off for the fit based on Smith (see litterature)
-  Sample_Size <- nrow(data_orig)
+  Sample_Size <- nrow(df)
   Cut_Infit <- 1+(2/sqrt(Sample_Size))
   Cut_Outfit <- 1+(6/sqrt(Sample_Size))
   
@@ -49,7 +51,7 @@ rasch_model <- function(df, vars_metric, print_results = TRUE, LIDcutoff = 0.2) 
   
   #------------------------------------------------------------------------------- 
   #7. Standardized Residuals
-  Residuals_PCM_Recoded <- residuals(person_parameters)
+  Residuals_PCM_Recoded <- stats::residuals(person_parameters)
 
   #------------------------------------------------------------------------------- 
   #8. Person Abilities
@@ -75,14 +77,14 @@ rasch_model <- function(df, vars_metric, print_results = TRUE, LIDcutoff = 0.2) 
   #9. Local Dependency
   
   #Correlation Plot for Local Dependence
-  LID <- cor(Residuals_PCM_Recoded, use="pairwise.complete", method="pearson")
+  LID <- stats::cor(Residuals_PCM_Recoded, use="pairwise.complete", method="pearson")
   
   LIDforgraph <- LID
   
   #------------------------------------------------------------------------------- 
   #10. Principal component analyis: PCA
   
-  PCA <- prcomp(LID,center=TRUE, retx=TRUE)
+  PCA <- stats::prcomp(LID,center=TRUE, retx=TRUE)
   Eigen_Value <- eigen(LID)$values
   Percentage_Eigen_Value <- eigen(LID)$value/sum(eigen(LID)$value)*100 
   Cumulative_Percentage_Eigen_Value <- cumsum(Percentage_Eigen_Value)
@@ -119,47 +121,47 @@ rasch_model <- function(df, vars_metric, print_results = TRUE, LIDcutoff = 0.2) 
     save(model, file="/PCM_model.RData")
     
     #thresholds
-    write.csv(Thr_PCM[3], "Location_Threshold.csv")
-    write.csv(Thresholds_Table_Recoded, file="PCM_thresholds_CI_Recoded.csv")
+    utils::write.csv(Thr_PCM[3], "Location_Threshold.csv")
+    utils::write.csv(Thresholds_Table_Recoded, file="PCM_thresholds_CI_Recoded.csv")
     
     #save ICC curves
-    pdf("ICC_curves.pdf")
+    grDevices::pdf("ICC_curves.pdf")
     plotICC(model, ask=FALSE)
-    dev.off()
+    grDevices::dev.off()
     
     #save the person-item map
-    pdf(file="PImap.pdf", width=7, height=9)
+    grDevices::pdf(file="PImap.pdf", width=7, height=9)
     plotPImap(model, sorted = TRUE)
-    dev.off()
+    grDevices::dev.off()
     
     #item fit
-    write.csv(Additional_Row, file="Item_MSQs.csv")
-    write.csv(table_Itemfit, file="item_fit.csv")
+    utils::write.csv(Additional_Row, file="Item_MSQs.csv")
+    utils::write.csv(table_Itemfit, file="item_fit.csv")
     
     #standardized residuals
-    write.csv(Residuals_PCM_Recoded,file="Residuals_PCM.csv")
+    utils::write.csv(Residuals_PCM_Recoded,file="Residuals_PCM.csv")
     
     #data with abilities
-    write.csv(data_persons, "DatawAbilities.csv",row.names = FALSE)
+    utils::write.csv(data_persons, "DatawAbilities.csv",row.names = FALSE)
     
     #person parameters
-    write.csv(Person_Abilities, file="PersonPara.csv")
+    utils::write.csv(Person_Abilities, file="PersonPara.csv")
     
     #residual correlations
-    write.csv(LID, file="Residual_Correlations.csv")
+    utils::write.csv(LID, file="Residual_Correlations.csv")
     fig_LID(LIDforgraph, LIDcutoff)
     
     #PCA
-    write.csv(Eigen_Value_Table, file= "Original_Data_Eigenvalues.csv" )
-    write.csv(PCA$rotation, file="Original_Data_PCA.csv")
+    utils::write.csv(Eigen_Value_Table, file= "Original_Data_Eigenvalues.csv" )
+    utils::write.csv(PCA$rotation, file="Original_Data_PCA.csv")
     
-    pdf("Original_Data_Screeplot.pdf")
-    barplot(Eigen_Value, main="metric")
-    screeplot(PCA, type="lines", main="metric")
-    dev.off()
+    grDevices::pdf("Original_Data_Screeplot.pdf")
+    graphics::barplot(Eigen_Value, main="metric")
+    stats::screeplot(PCA, type="lines", main="metric")
+    grDevices::dev.off()
     
     #Targeting
-    write.csv(Targetting, file="Targetting.csv")
+    utils::write.csv(Targetting, file="Targetting.csv")
     
   }
   

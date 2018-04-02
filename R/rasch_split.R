@@ -7,6 +7,9 @@
 #'
 #' @return a named list with the new \code{df}, new \code{vars_metric} and new \code{max_values} after splitting the desired variables
 #' @export
+#' 
+#' @import dplyr
+#' @import rlang
 rasch_split <- function(df, vars_metric, split_strategy, max_values) {
   
   

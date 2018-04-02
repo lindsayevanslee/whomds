@@ -14,8 +14,17 @@ Encoding: UTF-8
 LazyData: true
 Imports: 
     dplyr,
+    eRm,
+    foreign,
     ggplot2,
+    grDevices,
     grid,
+    igraph,
+    lordif,
+    nFactors,
+    plyr,
+    polycor,
+    psych,
     purrr,
     RColorBrewer,
     readr,

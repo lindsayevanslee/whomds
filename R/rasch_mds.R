@@ -16,6 +16,8 @@
 #'
 #' @return If \code{print_results} is TRUE, prints files to the working directory with the results of the Rasch Model. 
 #' @export
+#' 
+#' @import dplyr
 rasch_mds <- function(df, 
                       vars_metric,
                       vars_id,
@@ -82,7 +84,7 @@ rasch_mds <- function(df,
                        max_val = max(resp_opts)-1)
   
   # save comment
-  if (!is.null(comment)) write.table(comment, file = "Comment.txt", row.names = FALSE)
+  if (!is.null(comment)) utils::write.table(comment, file = "Comment.txt", row.names = FALSE)
   
   
   # PERFORM TESTLETS--------

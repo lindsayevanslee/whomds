@@ -19,10 +19,13 @@ NULL
 #quiets R CMD check
 if (getRversion() >= "2.15.1") {
   utils::globalVariables(
-    c(
+    c( 
+      ".",
       "age_cat",
       "demo",
       "item",
+      "layout.kamada.kawai",
+      "max_val",
       "median",
       "nperHH",
       "pct",
@@ -31,7 +34,9 @@ if (getRversion() >= "2.15.1") {
       "prop_se",
       "resp",
       "sd",
-      "sex"
+      "sex",
+      "var",
+      "vars_id"
     )
   )
 }
