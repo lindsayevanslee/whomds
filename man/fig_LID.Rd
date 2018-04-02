@@ -4,12 +4,14 @@
 \alias{fig_LID}
 \title{Print a graph showing significant correlations between survey items}
 \usage{
-fig_LID(LIDforgraph, LIDcutoff = 0.2)
+fig_LID(LIDforgraph, LIDcutoff = 0.2, path_output)
 }
 \arguments{
 \item{LIDforgraph}{a square matrix of item correlations}
 
 \item{LIDcutoff}{a numeric value between 0 and 1 for the cut-off for signicant correlation}
+
+\item{path_output}{a string with the path to the output folder}
 }
 \value{
 Prints a pdf graph if the items with correlation > \code{LIDcutoff} and a csv of the corresponding correlations

@@ -2,10 +2,11 @@
 #'
 #' @param LIDforgraph a square matrix of item correlations
 #' @param LIDcutoff a numeric value between 0 and 1 for the cut-off for signicant correlation
+#' @param path_output a string with the path to the output folder
 #'
 #' @return Prints a pdf graph if the items with correlation > \code{LIDcutoff} and a csv of the corresponding correlations
 #' @export
-fig_LID <- function(LIDforgraph, LIDcutoff = 0.2) {
+fig_LID <- function(LIDforgraph, LIDcutoff = 0.2, path_output) {
 
   
   #create dependency graph
@@ -17,7 +18,7 @@ fig_LID <- function(LIDforgraph, LIDcutoff = 0.2) {
   finalgraph <- igraph::induced_subgraph(fullgraph,igraph::V(fullgraph)$comp %in% comp.no)
   
   if (igraph::components(finalgraph)$no==0) {
-    grDevices::pdf("LID_plot.pdf")
+    grDevices::pdf(paste0(path_output,"/LID_plot.pdf"))
     graphics::plot(0,0, col="white", bty="n", xaxt="n", yaxt="n", xlab="", ylab="")
     graphics::text(-0.25,0, "No LID found!", col="blue", cex=1.4)
     grDevices::dev.off()
@@ -32,6 +33,6 @@ fig_LID <- function(LIDforgraph, LIDcutoff = 0.2) {
   LIDforgraph[is.na(LIDforgraph)] <- 0
   LIDforgraph[which(LIDforgraph < LIDcutoff)] <- 0
   
-  utils::write.csv(LIDforgraph, paste0("LID_above_", LIDcutoff,".csv"), row.names=TRUE)
+  utils::write.csv(LIDforgraph, paste0(path_output,"/LID_above_", LIDcutoff,".csv"), row.names=TRUE)
   
 }

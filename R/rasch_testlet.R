@@ -40,8 +40,8 @@ rasch_testlet <- function(df, vars_metric, testlet_strategy, max_values, resp_op
     
     #edit data.frame of maximum possible values
     max_values <- max_values %>% filter(!(var %in% new_testlet_vars))
-    max_values <- max_values %>% bind_rows(c(var = new_testlet,
-                                             max_val = (max(resp_opts)-1)*length(new_testlet_vars)))
+    max_values <- max_values %>% bind_rows(tibble(var = new_testlet,
+                                                  max_val = (max(resp_opts)-1)*length(new_testlet_vars)))
   }
   
   

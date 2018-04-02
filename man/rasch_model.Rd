@@ -4,14 +4,19 @@
 \alias{rasch_model}
 \title{Run the Rasch Model and print diagnositic results}
 \usage{
-rasch_model(df, vars_metric, print_results = TRUE, LIDcutoff = 0.2)
+rasch_model(df, vars_metric, vars_id, print_results = TRUE,
+  path_output = NULL, LIDcutoff = 0.2)
 }
 \arguments{
 \item{df}{a tibble of individual survey data, where each row is an individual}
 
 \item{vars_metric}{a character vector of items to use in the Rasch Analysis}
 
+\item{vars_id}{a string with column name uniquely identifying individuals}
+
 \item{print_results}{a logical vector indicating whether to print the results of the model to the \code{model_name} directory}
+
+\item{path_output}{a string with the path to the output folder. Default is NULL.}
 
 \item{LIDcutoff}{a numeric value between 0 and 1 indicating the cut-off for significant local item dependence}
 }

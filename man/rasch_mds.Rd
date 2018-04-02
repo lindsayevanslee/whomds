@@ -7,7 +7,7 @@
 rasch_mds(df, vars_metric, vars_id, vars_sex, vars_age, resp_opts = 1:5,
   max_NA = 2, testlet_strategy = NULL, recode_strategy = NULL,
   drop_vars = NULL, split_strategy = NULL, comment = NULL,
-  print_results = TRUE)
+  print_results = TRUE, model_name = NULL, path_parent = NULL)
 }
 \arguments{
 \item{df}{a tibble of individual survey data, where each row is an individual}
@@ -35,6 +35,10 @@ rasch_mds(df, vars_metric, vars_id, vars_sex, vars_age, resp_opts = 1:5,
 \item{comment}{a string giving a comment describing the analysis, printed to a txt file. Default is NULL, to not print a comment.}
 
 \item{print_results}{a logical value indicating whether or not to print various files displaying results from the Rasch Model. Default is TRUE, to print the files.}
+
+\item{model_name}{a string with a name for the model, which is used to create a new folder for model output. Default is NULL.}
+
+\item{path_parent}{a string with the path to the folder where results from multiple models will be outputted. Default is NULL}
 }
 \value{
 If \code{print_results} is TRUE, prints files to the working directory with the results of the Rasch Model.

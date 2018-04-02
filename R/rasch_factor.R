@@ -3,30 +3,35 @@
 #' @param df a tibble of individual survey data, where each row is an individual 
 #' @param vars_metric a character vector of items to use in the Rasch Analysis
 #' @param print_results a logical vector indicating whether to print the results of the model to the \code{model_name} directory
+#' @param path_output a string with the path to the output folder. Default is NULL.
 #'
 #' @return a list with results from the factor analysis for a Rasch Model
 #' @export
 #' 
 #' @import dplyr
-rasch_factor <- function(df, vars_metric, print_results = TRUE) {
+rasch_factor <- function(df, vars_metric, print_results = TRUE, path_output = NULL) {
   #----------------------------
-  # create data set with ordered factors
-  df_ordered <- df %>% select(vars_metric)
+  # create data frame with ordered factors
+  df_ordered <- df %>% 
+    select(vars_metric) %>% 
+    mutate_all(funs(ordered)) %>% 
+    as.data.frame()
   
-  df_ordered <- df_ordered %>% 
-    mutate_all(funs(ordered))
+  df_numeric <- df %>% 
+    select(vars_metric) %>% 
+    as.data.frame()
   
   
   # calculate polychoric correlations
-  cor_poly <- polycor::hetcor(df_ordered[,vars_metric], use ="pairwise.complete.obs", ML = FALSE, std.err=FALSE)
+  cor_poly <- polycor::hetcor(df_ordered, use ="pairwise.complete.obs", ML = FALSE, std.err=FALSE)
   
   
   #----------------------------
   # permuted parallel analysis to test the unidimensionality
-  eigenvalues <- nFactors::eigenComputes(x=df[,vars_metric], use="pairwise.complete.obs")
+  eigenvalues <- nFactors::eigenComputes(x=df_numeric, use="pairwise.complete.obs")
   
   # Permutation parallel analysis distribution
-  parallel_analysis <- nFactors::eigenBootParallel(x=df[,vars_metric], quantile=0.95, nboot=30, option="permutation",
+  parallel_analysis <- nFactors::eigenBootParallel(x=df_numeric, quantile=0.95, nboot=30, option="permutation",
                                          cor=TRUE, model="components", use="pairwise.complete.obs")$quantile
   
   # number of components to retain
@@ -49,12 +54,14 @@ rasch_factor <- function(df, vars_metric, print_results = TRUE) {
   # PRINT RESULTS
   if (print_results) {
     
+    if (is.null(path_output)) stop("You need to give an path for the output")
+    
     # polychoric correlations
-    save(cor_poly, file = "cor_poly.RData")
-    utils::write.csv(round(cor_poly$correlations, 3), file="cor_poly.csv")
+    save(cor_poly, file = paste0(path_output,"/cor_poly.RData"))
+    utils::write.csv(round(cor_poly$correlations, 3), file=paste0(path_output,"/cor_poly.csv"))
     
     # scree plot
-    grDevices::pdf(file="parallel_analysis_scree.pdf", width=7, height=7)
+    grDevices::pdf(file=paste0(path_output,"/parallel_analysis_scree.pdf"), width=7, height=7)
     nFactors::plotnScree(results_scree)
     grDevices::dev.off()
     
@@ -65,7 +72,7 @@ rasch_factor <- function(df, vars_metric, print_results = TRUE) {
       col_factors <- RColorBrewer::brewer.pal(ncol(fa_bifactor$loadings),"Spectral")
       
       #create pdf of bifactor analysis
-      grDevices::pdf(file="bifactor_analysis.pdf", width=7, height=7)
+      grDevices::pdf(file=paste0(path_output,"/bifactor_analysis.pdf"), width=7, height=7)
       # par(col="black", mar=c(13, 4, 4, 2) + 0.1)
       
       graphics::plot(fa_bifactor$loadings[,1], type="l", ylim=c(-0.5,1), lwd=1.5, col="black", xaxt="n", xlab="", ylab="Loadings" )
@@ -79,15 +86,15 @@ rasch_factor <- function(df, vars_metric, print_results = TRUE) {
       
       grDevices::dev.off()
       
-      utils::write.csv(cbind(fa_bifactor$loadings, fa_onefactor$loadings), file="bifactor_loadings.csv")
+      utils::write.csv(cbind(fa_bifactor$loadings, fa_onefactor$loadings), file=paste0(path_output,"/bifactor_loadings.csv"))
       
       
     } else { #if fa_bifactor was not able to be computed
-      utils::write.csv(unclass(fa_onefactor$loadings), file="bifactor_loadings.csv")
+      utils::write.csv(unclass(fa_onefactor$loadings), file=paste0(path_output,"/bifactor_loadings.csv"))
     }
     
     # local dependency based on polychoric correlations of the items
-    utils::write.csv(round(fa_resid,3), file="fa_resid.csv")
+    utils::write.csv(round(fa_resid,3), file=paste0(path_output,"/fa_resid.csv"))
     
   }
   

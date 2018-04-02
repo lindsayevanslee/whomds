@@ -13,6 +13,8 @@
 #' @param split_strategy a named list giving the strategy to take for spliting variables by categories, passed to \code{rasch_split()}. One element of the list per variable to split by. Each element of the list must be a character vector of column names to split. The names of the list are the variables to split each group of variables by. Default is NULL, to not split items.
 #' @param comment a string giving a comment describing the analysis, printed to a txt file. Default is NULL, to not print a comment.
 #' @param print_results a logical value indicating whether or not to print various files displaying results from the Rasch Model. Default is TRUE, to print the files.
+#' @param model_name a string with a name for the model, which is used to create a new folder for model output. Default is NULL.
+#' @param path_parent a string with the path to the folder where results from multiple models will be outputted. Default is NULL
 #'
 #' @return If \code{print_results} is TRUE, prints files to the working directory with the results of the Rasch Model. 
 #' @export
@@ -30,9 +32,9 @@ rasch_mds <- function(df,
                       drop_vars = NULL, 
                       split_strategy = NULL,
                       comment = NULL,
-                      print_results = TRUE #,
-                      # metric_name = NULL,
-                      # path_output = NULL,
+                      print_results = TRUE ,
+                      model_name = NULL,
+                      path_parent = NULL #,
                       # sink_errors = FALSE
                       ) {
   
@@ -47,6 +49,19 @@ rasch_mds <- function(df,
   #perform some checks
   if (resp_opts[1]!=1) stop("resp_opts must start with 1")
   if (max_NA >= length(vars_metric)) stop("max_NA must be less than length of vars_metric")
+  
+  # SAVE OUTPUT PATH ---------------------
+  
+  if (print_results) {
+    if (!is.null(path_parent) & !is.null(model_name)) {
+      path_output <- paste0(path_parent, model_name)
+      dir.create(path_output, showWarnings = FALSE)
+    } else{
+      warning("You said you wanted to print results but did not provide an explicit path. Results will be printed to working directory.")
+      path_output <- NULL
+    }
+  } else message("Results will not be printed (print_results is FALSE).")
+  
   
   # PREPARE DATA ------------
   
@@ -84,7 +99,7 @@ rasch_mds <- function(df,
                        max_val = max(resp_opts)-1)
   
   # save comment
-  if (!is.null(comment)) utils::write.table(comment, file = "Comment.txt", row.names = FALSE)
+  if (!is.null(comment)) utils::write.table(comment, file = "Comment.txt", row.names = FALSE, col.names = FALSE)
   
   
   # PERFORM TESTLETS--------
@@ -117,7 +132,7 @@ rasch_mds <- function(df,
   }
   
   # PERFORM FACTOR ANALYSIS ------------
-  factor_result <- rasch_factor(df, vars_metric, print_results)
+  factor_result <- rasch_factor(df, vars_metric, print_results, path_output)
   
   
   # PERFORM SPLIT -------
@@ -132,7 +147,7 @@ rasch_mds <- function(df,
   
   
   # PERFORM RASCH ANALYSIS -----
-  model_result <- rasch_model(df, vars_metric, print_results)
+  model_result <- rasch_model(df, vars_metric, vars_id, print_results, path_output)
   
   
   

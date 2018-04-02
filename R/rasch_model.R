@@ -2,14 +2,16 @@
 #'
 #' @param df a tibble of individual survey data, where each row is an individual 
 #' @param vars_metric a character vector of items to use in the Rasch Analysis
+#' @param vars_id a string with column name uniquely identifying individuals
 #' @param print_results a logical vector indicating whether to print the results of the model to the \code{model_name} directory
+#' @param path_output a string with the path to the output folder. Default is NULL.
 #' @param LIDcutoff a numeric value between 0 and 1 indicating the cut-off for significant local item dependence
 #'
 #' @return a list \code{model_result} with results from the Rasch Model
 #' @export
 #' 
 #' @import eRm
-rasch_model <- function(df, vars_metric, print_results = TRUE, LIDcutoff = 0.2) {
+rasch_model <- function(df, vars_metric, vars_id, print_results = TRUE, path_output = NULL, LIDcutoff = 0.2) {
 
   #1. PCM analysis
   model <- PCM(df[,vars_metric])                                      
@@ -84,14 +86,15 @@ rasch_model <- function(df, vars_metric, print_results = TRUE, LIDcutoff = 0.2) 
   #------------------------------------------------------------------------------- 
   #10. Principal component analyis: PCA
   
-  PCA <- stats::prcomp(LID,center=TRUE, retx=TRUE)
-  Eigen_Value <- eigen(LID)$values
-  Percentage_Eigen_Value <- eigen(LID)$value/sum(eigen(LID)$value)*100 
-  Cumulative_Percentage_Eigen_Value <- cumsum(Percentage_Eigen_Value)
-  Eigen_Value_Table <- cbind(Eigen_Value,Percentage_Eigen_Value,Cumulative_Percentage_Eigen_Value)
-
+  PCA <- try(stats::prcomp(LID,center=TRUE, retx=TRUE), silent=TRUE)
+  Eigen_Value <- try(eigen(LID)$values, silent=TRUE)
+  if (!any(class(Eigen_Value)=="try-error")) {
+    Percentage_Eigen_Value <- Eigen_Value/sum(Eigen_Value)*100
+    Cumulative_Percentage_Eigen_Value <- cumsum(Percentage_Eigen_Value)
+    Eigen_Value_Table <- cbind(Eigen_Value,Percentage_Eigen_Value,Cumulative_Percentage_Eigen_Value)
+    }
   
-  #------------------------------------------------------------------------------- 
+  #------------------------------------------------------------------------------ 
   #11. Targetting
   
   #Item Difficulties
@@ -118,50 +121,57 @@ rasch_model <- function(df, vars_metric, print_results = TRUE, LIDcutoff = 0.2) 
   if (print_results) {
     
     #model
-    save(model, file="/PCM_model.RData")
+    save(model, file=paste0(path_output,"/PCM_model.RData"))
     
     #thresholds
-    utils::write.csv(Thr_PCM[3], "Location_Threshold.csv")
-    utils::write.csv(Thresholds_Table_Recoded, file="PCM_thresholds_CI_Recoded.csv")
+    utils::write.csv(Thr_PCM[3], paste0(path_output,"/Location_Threshold.csv"))
+    utils::write.csv(Thresholds_Table_Recoded, file=paste0(path_output,"/PCM_thresholds_CI_Recoded.csv"))
     
     #save ICC curves
-    grDevices::pdf("ICC_curves.pdf")
+    grDevices::pdf(paste0(path_output,"/ICC_curves.pdf"))
     plotICC(model, ask=FALSE)
     grDevices::dev.off()
     
     #save the person-item map
-    grDevices::pdf(file="PImap.pdf", width=7, height=9)
+    grDevices::pdf(file=paste0(path_output,"/PImap.pdf"), width=7, height=9)
     plotPImap(model, sorted = TRUE)
     grDevices::dev.off()
     
     #item fit
-    utils::write.csv(Additional_Row, file="Item_MSQs.csv")
-    utils::write.csv(table_Itemfit, file="item_fit.csv")
+    utils::write.csv(Additional_Row, file=paste0(path_output,"/Item_MSQs.csv"))
+    utils::write.csv(table_Itemfit, file=paste0(path_output,"/item_fit.csv"))
     
     #standardized residuals
-    utils::write.csv(Residuals_PCM_Recoded,file="Residuals_PCM.csv")
+    utils::write.csv(Residuals_PCM_Recoded,file=paste0(path_output,"/Residuals_PCM.csv"))
     
     #data with abilities
-    utils::write.csv(data_persons, "DatawAbilities.csv",row.names = FALSE)
+    utils::write.csv(data_persons, paste0(path_output,"/DatawAbilities.csv"),row.names = FALSE)
     
     #person parameters
-    utils::write.csv(Person_Abilities, file="PersonPara.csv")
+    utils::write.csv(Person_Abilities, file=paste0(path_output,"/PersonPara.csv"))
     
     #residual correlations
-    utils::write.csv(LID, file="Residual_Correlations.csv")
-    fig_LID(LIDforgraph, LIDcutoff)
+    utils::write.csv(LID, file=paste0(path_output,"/Residual_Correlations.csv"))
+    fig_LID(LIDforgraph, LIDcutoff, path_output)
     
     #PCA
-    utils::write.csv(Eigen_Value_Table, file= "Original_Data_Eigenvalues.csv" )
-    utils::write.csv(PCA$rotation, file="Original_Data_PCA.csv")
+    if (!any(class(Eigen_Value)=="try-error")) {
+      utils::write.csv(Eigen_Value_Table, file= paste0(path_output,"/Original_Data_Eigenvalues.csv"))
+      }
     
-    grDevices::pdf("Original_Data_Screeplot.pdf")
-    graphics::barplot(Eigen_Value, main="metric")
-    stats::screeplot(PCA, type="lines", main="metric")
-    grDevices::dev.off()
+    if (!any(class(PCA)=="try-error")) {
+      utils::write.csv(PCA$rotation, file=paste0(path_output,"/Original_Data_PCA.csv"))
+      
+      grDevices::pdf(paste0(path_output,"/Original_Data_Screeplot.pdf"))
+      graphics::barplot(Eigen_Value, main="metric")
+      stats::screeplot(PCA, type="lines", main="metric")
+      grDevices::dev.off()
+    }
+    
+
     
     #Targeting
-    utils::write.csv(Targetting, file="Targetting.csv")
+    utils::write.csv(Targetting, file=paste0(path_output,"/Targetting.csv"))
     
   }
   
