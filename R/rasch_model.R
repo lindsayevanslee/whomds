@@ -176,7 +176,7 @@ rasch_model <- function(df, vars_metric, vars_id, print_results = TRUE, path_out
   }
   
   
-  model_results <- list()
+  model_results <- list(residuals_PCM = Residuals_PCM_Recoded)
   
   return(model_results)
 
