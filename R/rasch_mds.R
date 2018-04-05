@@ -99,7 +99,7 @@ rasch_mds <- function(df,
                        max_val = max(resp_opts)-1)
   
   # save comment
-  if (!is.null(comment)) utils::write.table(comment, file = "/Comment.txt", row.names = FALSE, col.names = FALSE)
+  if (!is.null(comment)) utils::write.table(comment, file = paste0(path_output, "/Comment.txt"), row.names = FALSE, col.names = FALSE)
   
   
   # PERFORM TESTLETS--------

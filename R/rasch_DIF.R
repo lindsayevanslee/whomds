@@ -10,7 +10,7 @@ rasch_DIF <- function(df, vars_metric, vars_DIF, residuals_PCM) {
   
   ### "DIF analysis bases on the residuals
   residuals_PCM <- residuals_PCM %>% 
-    as_data_frame() %>% 
+    as.data.frame() %>%
     tibble::rownames_to_column("person") %>% 
     rename_at(vars(vars_metric), funs(paste0(.,"_Res")))
   
@@ -22,7 +22,7 @@ rasch_DIF <- function(df, vars_metric, vars_DIF, residuals_PCM) {
   
   ###create class intervals
   
-  # CI <- Class_Intervals(df_DIF[,vars_metric], 6)
+  # class_intervals <- Class_Intervals(df_DIF[,vars_metric], 6)
   breaks <- 6
   
   #Get the residuals....
@@ -35,36 +35,36 @@ rasch_DIF <- function(df, vars_metric, vars_DIF, residuals_PCM) {
   df_metric_rows_sums <- rowSums(df_metric_rows,na.rm=TRUE)
   
   
-  S <- quantile(df_metric_rows_sums, probs = seq(0,1, 1/breaks), na.rm=TRUE)
-  N <- breaks-1
-  vec <- c("<","<=")
-  lst <- lapply(numeric(N), function(df_metric) vec)
-  Gri <- as.matrix(expand.grid(lst))
-  Grid <- cbind(Gri, rep("<=",nrow(Gri)))
-  Mat <- matrix(rep(S[2:(breaks+1)], nrow(Grid)), nrow=nrow(Grid), byrow=TRUE)
+  rows_sums_quantile <- quantile(df_metric_rows_sums, probs = seq(0, 1, 1/breaks), na.rm=TRUE)
   
-  P <- function(df_metric,y){
-    paste0(df_metric,y)
-  }
+  lst <- purrr::map(list()[1:(breaks-1)], ~ c("<","<="))
   
-  Intervals <- matrix(mapply(P, Grid, Mat), ncol=breaks, byrow=FALSE)
+  Gri <- expand.grid(lst) %>% 
+    as_tibble() %>% 
+    mutate_all(as.character)
+  Grid <- Gri %>% 
+    mutate(Var6 = "<=")
   
-  Dmat <- matrix(rep(df_metric_rows_sums,nrow(Grid)), nrow=nrow(Grid), byrow=TRUE)
+  Mat <- rows_sums_quantile[-1] %>% 
+    tibble() %>% 
+    t() %>% 
+    as_data_frame() %>% 
+    slice(rep(1,nrow(Grid)))
+  
+  Intervals <- purrr::map2_dfc(Grid, Mat, ~paste0(..1, ..2))
+  
+  Dmat <- df_metric_rows_sums %>% 
+    tibble() %>% 
+    t() %>% 
+    as_data_frame() %>% 
+    slice(rep(1,nrow(Grid)))
+
   
   ###here save the group intervals
-  
-  Detect <- function(df_metric,y){
-    
-    Dbound <- outer(df_metric, y, paste)
-    Eval_Pars <- function(Z) {
-      eval(parse(text = Z))
-    }
-    Where <- apply(Dbound, c(1, 2), Eval_Pars)
-    Position <- function(df_metric) {
-      min(which(df_metric %in% 1), na.rm = TRUE)
-    }
-    apply(Where, 1, Position)
-    
+  Detect <- function(x,y){
+    Dbound <- outer(x, y, paste)
+    Where <- apply(Dbound, c(1, 2), function(elem) eval(parse(text = elem)))
+    apply(Where, 1, function(r) min(which(r), na.rm = TRUE))
   }
   
   what <- list()
@@ -72,23 +72,27 @@ rasch_DIF <- function(df, vars_metric, vars_DIF, residuals_PCM) {
     what[[i]] <- Detect(Dmat[i,],Intervals[i,])
   }
   
-  sol <- do.call(rbind,what)
+  names(what) <- paste0("v",1:length(what))
+  
+  sol <- bind_cols(what) %>% t() %>% as_data_frame()
   k <- apply(sol,1,table)
   
   
   if(class(k)=="matrix"){
-    Grouping <- min(which(apply(k,2,var)==min(apply(k,2,var, na.rm=TRUE))))
+    Grouping <- which.min(apply(k,2,var))
   } else {
     take_in <- which(lapply(k, length)==breaks)
     K <- k[take_in]
-    Grouping <- take_in[min(which(lapply(K,var)==min(unlist(lapply(K,var, na.rm=TRUE)))  ))  ]
+    Grouping <- take_in[which.min(unlist(lapply(K,var)))]
   }
   
-  CI <- sol[Grouping,]  
+  class_intervals <- sol %>% 
+    slice(Grouping) %>% 
+    t()
   
   ######
   
-  df_DIF_class <- bind_cols(CI, 
+  df_DIF_class <- bind_cols(class_intervals = class_intervals, 
                               select(residuals_PCM,-person), 
                               slice(df_DIF, rows))
   
@@ -130,8 +134,8 @@ rasch_DIF <- function(df, vars_metric, vars_DIF, residuals_PCM) {
           aov(
             as.numeric(df_DIF_class[, PCM_res_names[j]]) ~ # residual
               as.factor(df_DIF_class[, vars_DIF[i]]) + #demographic
-              as.factor(df_DIF_class[, "CI"]) +  #class interval
-              as.factor(df_DIF_class[, vars_DIF[i]]):as.factor(df_DIF_class[, "CI"]) #interaction between demo and CI
+              as.factor(df_DIF_class[, "class_intervals"]) +  #class interval
+              as.factor(df_DIF_class[, vars_DIF[i]]):as.factor(df_DIF_class[, "class_intervals"]) #interaction between demo and class_intervals
           )
         )), ncol = 5), silent = TRUE)
       } 
