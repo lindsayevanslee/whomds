@@ -7,7 +7,7 @@
 #' @param path_output a string with the path to the output folder. Default is NULL.
 #' @param LIDcutoff a numeric value between 0 and 1 indicating the cut-off for significant local item dependence
 #'
-#' @return a list \code{model_result} with results from the Rasch Model
+#' @return a list with results from the Rasch Model
 #' @export
 #' 
 #' @import eRm
@@ -95,7 +95,7 @@ rasch_model <- function(df, vars_metric, vars_id, print_results = TRUE, path_out
     }
   
   #------------------------------------------------------------------------------ 
-  #11. Targetting
+  #11. Targeting
   
   #Item Difficulties
   
@@ -112,9 +112,9 @@ rasch_model <- function(df, vars_metric, vars_id, print_results = TRUE, path_out
   SD_Resi_Abil <-  sd(Person_Abilities[,2])
   Target_Ability <- cbind(Mean_Ability, SD_Ability, Mean_Resi_Abil, SD_Resi_Abil)
   
-  Targetting <- cbind(rbind(Target_Difficulty, Target_Ability), PSIreport)
-  rownames(Targetting) <- c("Difficulty", "Ability")
-  colnames(Targetting) <- c("Mean", "SD", "Mean Residuals", "SD Residuals", "PSI")
+  Targeting <- cbind(rbind(Target_Difficulty, Target_Ability), PSIreport)
+  rownames(Targeting) <- c("Difficulty", "Ability")
+  colnames(Targeting) <- c("Mean", "SD", "Mean Residuals", "SD Residuals", "PSI")
   
   
   #PRINT RESULTS
@@ -171,12 +171,19 @@ rasch_model <- function(df, vars_metric, vars_id, print_results = TRUE, path_out
 
     
     #Targeting
-    utils::write.csv(Targetting, file=paste0(path_output,"/Targetting.csv"))
+    utils::write.csv(Targeting, file=paste0(path_output,"/Targeting.csv"))
     
   }
   
   
-  model_results <- list(residuals_PCM = Residuals_PCM_Recoded)
+  model_results <- list(model = model,
+                        thresholds = Thr_PCM,
+                        person_parameters = person_parameters,
+                        PSI = PSIreport,
+                        item_fit = Itemfit,
+                        residuals_PCM = Residuals_PCM_Recoded,
+                        LID = LID,
+                        targeting = Targeting)
   
   return(model_results)
 

@@ -113,6 +113,8 @@ rasch_mds <- function(df,
     testlet_strategy <- testlet_result[["testlet_strategy"]]
     max_values <- testlet_result[["max_values"]]
     
+    cat("Testlet creation completed. \n")
+    
     }
   
   # PERFORM RECODING --------
@@ -125,6 +127,8 @@ rasch_mds <- function(df,
     df <- recode_result[["df"]]
     max_values <- recode_result[["max_values"]]
     
+    cat("Recoding variables completed. \n")
+    
   }
   
   # DROP VARIABLES ---------
@@ -136,6 +140,8 @@ rasch_mds <- function(df,
     vars_metric <- drop_result[["vars_metric"]]
     max_values <- drop_result[["max_values"]]
     
+    cat("Dropping variables completed. \n")
+    
   }
   
   # PERFORM FACTOR ANALYSIS ------------
@@ -144,6 +150,8 @@ rasch_mds <- function(df,
                                 print_results = print_results, 
                                 path_output = path_output)
   
+  
+  cat("Factor analysis completed. \n")
   
   # PERFORM SPLIT -------
   if (!is.null(split_strategy)) {
@@ -156,6 +164,7 @@ rasch_mds <- function(df,
     vars_metric <- split_result[["vars_metric"]]
     max_values <- split_result[["max_values"]]
     
+    cat("Splitting variables completed. \n")
   }
   
   
@@ -163,10 +172,12 @@ rasch_mds <- function(df,
   model_result <- rasch_model(df = df,
                               vars_metric = vars_metric,
                               vars_id = vars_id,
-                              print_results = path_results,
+                              print_results = print_results,
                               path_output = path_output)
   
   residuals_PCM <- model_result[["residuals_PCM"]]
+  
+  cat("Rasch Model completed. \n")
   
   
   
@@ -179,6 +190,8 @@ rasch_mds <- function(df,
                             split_strategy = split_strategy, 
                             print_results = print_results, 
                             path_output = path_output)
+    
+    cat("DIF analysis completed. \n")
   }
   
   

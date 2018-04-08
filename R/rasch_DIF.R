@@ -9,7 +9,7 @@
 #' @param path_output a string with the path to the output folder. Default is NULL.
 #' @param breaks a numeric value giving the number if class intervals. Default is 6.
 #'
-#' @return
+#' @return a list with results from the DIF analysis
 #' @export
 #' @import dplyr
 #' 
@@ -173,9 +173,9 @@ rasch_DIF <- function(df, vars_metric, vars_DIF, residuals_PCM, split_strategy =
   
   if (print_results) {
     
-    utils::write.csv(df_DIF_class, file = paste0(path_output,"Anova_Residuals.csv"), row.names = FALSE)
+    utils::write.csv(df_DIF_class, file = paste0(path_output,"/Anova_Residuals.csv"), row.names = FALSE)
     
-    utils::write.csv(tab_aov_DIF, file = paste0(path_output, "DIF_rumm.csv"), row.names = FALSE)
+    utils::write.csv(tab_aov_DIF, file = paste0(path_output, "/DIF_rumm.csv"), row.names = FALSE)
     
   }
   

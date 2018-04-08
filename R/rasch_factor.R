@@ -99,7 +99,13 @@ rasch_factor <- function(df, vars_metric, print_results = TRUE, path_output = NU
   }
   
   
-  factor_result <- list()
+  factor_result <- list(cor_poly = cor_poly,
+                        eigenvalues = eigenvalues, 
+                        parallel_analysis = parallel_analysis,
+                        results_scree = results_scree,
+                        n_group_factors = n_group_factors,
+                        fa_onefactor = fa_onefactor,
+                        fa_resid = fa_resid)
   
   return(factor_result)
   
