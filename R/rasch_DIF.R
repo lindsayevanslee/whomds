@@ -1,5 +1,21 @@
-rasch_DIF <- function(df, vars_metric, vars_DIF, residuals_PCM) {
- 
+#' Perform analysis of Differential Item Functioning (DIF) for Rasch Model
+#'
+#' @param df a tibble of individual survey data, where each row is an individual 
+#' @param vars_metric a character vector of items to use in the Rasch Analysis
+#' @param vars_DIF a string with the column names to use for analyzing differential item functioning (DIF)
+#' @param residuals_PCM a matrix giving the residuals of the person parameters from the Rasch Model. Row names are the numbers of the people and the columns are for each variable.
+#' @param split_strategy a named list giving the strategy to take for spliting variables by categories, passed to \code{rasch_split()}. One element of the list per variable to split by. Each element of the list must be a character vector of column names to split. The names of the list are the variables to split each group of variables by. Default is NULL, to indicate there was no splitting. 
+#' @param print_results a logical value indicating whether or not to print various files displaying results from the Rasch Model. Default is TRUE, to print the files.
+#' @param path_output a string with the path to the output folder. Default is NULL.
+#' @param breaks a numeric value giving the number if class intervals. Default is 6.
+#'
+#' @return
+#' @export
+#' @import dplyr
+#' 
+#' @details Currently the calculation of the class intervals is quite slow. Reducing the number of breaks can improve speed.
+rasch_DIF <- function(df, vars_metric, vars_DIF, residuals_PCM, split_strategy = NULL, print_results = TRUE, path_output = NULL, breaks = 6) {
+  
   #save data frame for DIF
   df_DIF <- df %>% 
     select(c(vars_metric,vars_DIF))
@@ -14,6 +30,8 @@ rasch_DIF <- function(df, vars_metric, vars_DIF, residuals_PCM) {
     tibble::rownames_to_column("person") %>% 
     rename_at(vars(vars_metric), funs(paste0(.,"_Res")))
   
+  vars_metric_res <- colnames(residuals_PCM)[-1] #list of names of variable residuals
+  
   rows <- residuals_PCM %>% 
     pull(person) %>% 
     stringr::str_extract_all("[:digit:]+") %>% 
@@ -21,9 +39,6 @@ rasch_DIF <- function(df, vars_metric, vars_DIF, residuals_PCM) {
     as.numeric()
   
   ###create class intervals
-  
-  # class_intervals <- Class_Intervals(df_DIF[,vars_metric], 6)
-  breaks <- 6
   
   #Get the residuals....
   residuals_PCM_cols <- residuals_PCM %>%
@@ -33,7 +48,6 @@ rasch_DIF <- function(df, vars_metric, vars_DIF, residuals_PCM) {
     slice(rows)
   
   df_metric_rows_sums <- rowSums(df_metric_rows,na.rm=TRUE)
-  
   
   rows_sums_quantile <- quantile(df_metric_rows_sums, probs = seq(0, 1, 1/breaks), na.rm=TRUE)
   
@@ -58,7 +72,7 @@ rasch_DIF <- function(df, vars_metric, vars_DIF, residuals_PCM) {
     t() %>% 
     as_data_frame() %>% 
     slice(rep(1,nrow(Grid)))
-
+  
   
   ###here save the group intervals
   Detect <- function(x,y){
@@ -68,7 +82,7 @@ rasch_DIF <- function(df, vars_metric, vars_DIF, residuals_PCM) {
   }
   
   what <- list()
-  for(i in 1:nrow(Dmat)){
+  for(i in 1:nrow(Dmat)){ #very slow
     what[[i]] <- Detect(Dmat[i,],Intervals[i,])
   }
   
@@ -90,119 +104,86 @@ rasch_DIF <- function(df, vars_metric, vars_DIF, residuals_PCM) {
     slice(Grouping) %>% 
     t()
   
-  ######
-  
   df_DIF_class <- bind_cols(class_intervals = class_intervals, 
-                              select(residuals_PCM,-person), 
-                              slice(df_DIF, rows))
+                            select(residuals_PCM,-person), 
+                            slice(df_DIF, rows))
   
-  # write.csv(df_DIF_class, file=paste(path_rasch,"Anova_Residuals.csv", sep=""))
+  #perform ANOVA for each vars_metric_res and each vars_DIF
+  list_aov_DIF <- purrr::map(.x = vars_metric_res,
+                        .f = ~ purrr::map2(.x, .y = vars_DIF,
+                                           .f = function(res, dif) {
+                                             
+                                             # if there was a split AND  this vars_DIF was used to split vars AND if this vars_metric was split by this vars_DIF
+                                             if(!is.null(split_strategy) & 
+                                                (dif %in% names(split_strategy)) & 
+                                                (unlist(strsplit(res,"_"))[1] %in% split_strategy[[dif]])){
+                                               
+                                               result <- rbind(c("n.a. split item", "", "", "", ""), rep("", 5), rep("",5), rep("", 5) )
+                                             } 
+                                             #if there was not a split OR this vars_DIF not used to split vars OR  this variable not split by this vars_DIF
+                                             else {
+                                               
+                                               #Anova of item residual and dif group
+                                               result <- try(matrix(unlist(summary(
+                                                 stats::aov(
+                                                   as.numeric(pull(df_DIF_class, res)) ~ # residual
+                                                     as.factor(pull(df_DIF_class, dif)) + #demographic
+                                                     as.factor(pull(df_DIF_class, "class_intervals")) +  #class interval
+                                                     as.factor(pull(df_DIF_class, dif)):as.factor(pull(df_DIF_class, "class_intervals")) #interaction between demo and class_intervals
+                                                 )
+                                               )), ncol = 5), silent = TRUE)
+                                             }
+                                             
+                                             
+                                             if (class(result) != "try-error") {
+                                               colnames(result) <-
+                                                 c("Df", "Sum Sq", "Mean Sq", "F value", "Pr(>F)")
+                                               rownames(result) <-
+                                                 c(
+                                                   vars_DIF[i],
+                                                   paste0("class interval", i),
+                                                   paste0(vars_DIF[i], ":class interval", i),
+                                                   paste0("residuals", i)
+                                                 )
+                                               
+                                               result <- result %>% as_tibble(rownames = "rownames")
+                                               
+                                             }
+                                             
+                                             return(result)
+                                             
+                                           }) %>% bind_rows()
+                        
+  )
   
-  DIF_aov <- list()
+  names(list_aov_DIF) <- vars_metric_res
   
-  PCM_res_names <- colnames(residuals_PCM)[-1] #list of names of variable residuals
   
-  #for each variable 
-  for(j in 1:length(PCM_res_names)){ 
-    
-    DIF_aov[[j]] <- list()
-    
-    #for each of variables in split
-    for(i in 1:length(vars_DIF)){ 
-      
-      ###check if it is a Split case
-      
-      # if there was a split
-      if(Split){    
-        #if this variable is split by this demographic characteristic
-        if(nrow(match_df(data.frame(var = vars_metric[j], split = vars_DIF[i]), Split_Design))>0) { 
-          Case_Question <- FALSE 
-        }
-        #if this variable not split by this demo
-        else{ 
-          Case_Question <- TRUE
-        }
-      } 
-      #if there was not a split
-      else { 
-        Case_Question <- TRUE
-      }
-      
-      if (Case_Question) {
-        ###Anova of item residual and dif group
-        DIF_aov[[j]][[i]] <- try(matrix(unlist(summary(
-          aov(
-            as.numeric(df_DIF_class[, PCM_res_names[j]]) ~ # residual
-              as.factor(df_DIF_class[, vars_DIF[i]]) + #demographic
-              as.factor(df_DIF_class[, "class_intervals"]) +  #class interval
-              as.factor(df_DIF_class[, vars_DIF[i]]):as.factor(df_DIF_class[, "class_intervals"]) #interaction between demo and class_intervals
-          )
-        )), ncol = 5), silent = TRUE)
-      } 
-      else {
-        DIF_aov[[j]][[i]] <- rbind(c("n.a. split item", "", "", "", ""), rep("", 5), rep("",5), rep("", 5) )
-      }
-      
-      if (class(DIF_aov[[j]][[i]]) != "try-error") {
-        colnames(DIF_aov[[j]][[i]]) <-
-          c("Df", "Sum Sq", "Mean Sq", "F value", "Pr(>F)")
-        rownames(DIF_aov[[j]][[i]]) <-
-          c(
-            vars_DIF[i],
-            paste0("class interval", i),
-            paste0(vars_DIF[i], ":class interval", i),
-            paste0("residuals", i)
-          )
-      }}
-    
-    names(DIF_aov[[j]]) <- vars_DIF
-    
-    DIF_aov[[j]] <- do.call(rbind, DIF_aov[[j]]) #stack info for each demo characteristic
-    
-  }
-  names(DIF_aov) <- PCM_res_names
+  #store Bonferonni corrected p-value
+  Bonferonni <- 0.05 / (length(vars_DIF) *
+                          3 *
+                          (length(vars_DIF) + length(vars_metric)))
   
-  #put all information into one excel sheet
-  DIF_aov_table <- as.matrix(do.call(cbind, DIF_aov)) #DIF_aov_table combines data frames for each variable horizontally
-  DIF_aov_table <- rbind(" ", DIF_aov_table) #add NA row
-  rownames(DIF_aov_table)[1] <- "variable"
-  DIF_aov_table[1,which(colnames(DIF_aov_table)%in%"Df")] <- PCM_res_names #add variable names
+  #tab_aov_DIF stacks data frames for each variable vertically and flags possible DIF
+  tab_aov_DIF <- bind_rows(list_aov_DIF, .id = "variable") %>% 
+    mutate(!!rlang::sym(paste0("significant_at_",Bonferonni)) := case_when(
+      `Pr(>F)` < Bonferonni ~ "X",
+      TRUE ~ "-"
+    ))
   
-  write.csv(DIF_aov_table, file=paste0(path_rasch, "DIF_rumm.csv"))
-  
-  ###simplified DIFrumm output with only the p-values
-  col.keep <- which(colnames(DIF_aov_table)=="Pr(>F)")
-  row.remove <- which(rownames(DIF_aov_table)%in% c("variable","residuals"))
-  DIF_aov_pval <- DIF_aov_table[-row.remove,col.keep]
-  
-  if (ncol(DIF_aov_pval)==length(PCM_res_names)) {
-    colnames(DIF_aov_pval) <- PCM_res_names
+  if (print_results) {
     
-    #spreadsheet that flags possible DIF
-    DIF_aov_signif <- DIF_aov_pval
-    Bonferonni <-
-      0.05 / ((dim(df_DIF[, vars_DIF])[2]) * 3 * dim(df_DIF)[2])
-    DIF_aov_signif[as.numeric(DIF_aov_signif) < Bonferonni] <- "X"
-    DIF_aov_signif[DIF_aov_signif != "X"] <- " "
-    write.csv(
-      DIF_aov_signif,
-      file = paste0(path_rasch, "Flagged DIF.csv"),
-      row.names = TRUE
-    )
+    utils::write.csv(df_DIF_class, file = paste0(path_output,"Anova_Residuals.csv"), row.names = FALSE)
     
-    
-    #print DIF p-values with Bonferroni corrected p-value
-    DIF_aov_pval <- rbind(DIF_aov_pval, " ")
-    DIF_aov_pval[nrow(DIF_aov_pval), 1:3] <-
-      c("Bonferroni Corrected P-value",
-        "item*3tests*DIFtests",
-        0.05 / ((dim(df_DIF[, vars_DIF])[2]) * 3 * dim(df_DIF)[2]))
-    
-    write.csv(DIF_aov_pval, file = paste(path_rasch, "Sig DIF rumm.csv", sep =
-                                           ""))
+    utils::write.csv(tab_aov_DIF, file = paste0(path_output, "DIF_rumm.csv"), row.names = FALSE)
     
   }
   
+  
+  DIF_result <- list(df_DIF_class = df_DIF_class,
+                     tab_aov_DIF = tab_aov_DIF)
+  
+  return(DIF_result)
   
   
   

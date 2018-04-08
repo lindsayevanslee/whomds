@@ -3,8 +3,7 @@
 #' @param df a tibble of individual survey data, where each row is an individual 
 #' @param vars_metric a character vector of items to use in the Rasch Analysis
 #' @param vars_id a string with column name uniquely identifying individuals
-#' @param vars_sex a string with column name identifying sex of individuals
-#' @param vars_age a string with column name identifying numeric age of individuals
+#' @param vars_DIF a string with the column names to use for analyzing differential item functioning (DIF). Default is NULL, to skip analysis of DIF.
 #' @param resp_opts a numeric vector of possible response options for \code{vars_metric}. Must begin with 1. Default is 1:5
 #' @param max_NA a numeric value for the maximum number of NAs allowed per individual among \code{vars_metric}. Default is 2.
 #' @param testlet_strategy a list giving the strategy to take for creating testlets, passed to \code{rasch_testlet()}. One element of the list per testlet to create. Each element of the list must be a character vector of column names to use for the testlet. Optionally, name the element of the list to give the name of the new testlet. Otherwise, the new testlet will be the original column names separated by "_". Default is NULL, to not create testlets.
@@ -23,8 +22,7 @@
 rasch_mds <- function(df, 
                       vars_metric,
                       vars_id,
-                      vars_sex,
-                      vars_age,
+                      vars_DIF = NULL,
                       resp_opts = 1:5,
                       max_NA = 2,
                       testlet_strategy = NULL, 
@@ -104,7 +102,11 @@ rasch_mds <- function(df,
   
   # PERFORM TESTLETS--------
   if (!is.null(testlet_strategy)) {
-    testlet_result <- rasch_testlet(df, vars_metric, testlet_strategy, max_values, resp_opts)
+    testlet_result <- rasch_testlet(df = df, 
+                                    vars_metric = vars_metric, 
+                                    testlet_strategy = testlet_strategy, 
+                                    max_values = max_values, 
+                                    resp_opts = resp_opts)
     
     df <- testlet_result[["df"]]
     vars_metric <- testlet_result[["vars_metric"]]
@@ -115,7 +117,10 @@ rasch_mds <- function(df,
   
   # PERFORM RECODING --------
   if (!is.null(recode_strategy)) {
-    recode_result <- rasch_recode(df, vars_metric, recode_strategy, max_values)
+    recode_result <- rasch_recode(df = df, 
+                                  vars_metric = vars_metric, 
+                                  recode_strategy = recode_strategy, 
+                                  max_values = max_values)
     
     df <- recode_result[["df"]]
     max_values <- recode_result[["max_values"]]
@@ -124,7 +129,9 @@ rasch_mds <- function(df,
   
   # DROP VARIABLES ---------
   if (!is.null(drop_vars)) {
-    drop_result <- rasch_drop(vars_metric, drop_vars, max_values)
+    drop_result <- rasch_drop(vars_metric = vars_metric, 
+                              drop_vars = drop_vars, 
+                              max_values = max_values)
     
     vars_metric <- drop_result[["vars_metric"]]
     max_values <- drop_result[["max_values"]]
@@ -132,12 +139,18 @@ rasch_mds <- function(df,
   }
   
   # PERFORM FACTOR ANALYSIS ------------
-  factor_result <- rasch_factor(df, vars_metric, print_results, path_output)
+  factor_result <- rasch_factor(df = df, 
+                                vars_metric = vars_metric, 
+                                print_results = print_results, 
+                                path_output = path_output)
   
   
   # PERFORM SPLIT -------
   if (!is.null(split_strategy)) {
-    split_result <- rasch_split(df, vars_metric, split_strategy, max_values)
+    split_result <- rasch_split(df = df, 
+                                vars_metric = vars_metric, 
+                                split_strategy = split_strategy, 
+                                max_values = max_values)
     
     df <- split_result[["df"]]
     vars_metric <- split_result[["vars_metric"]]
@@ -147,11 +160,26 @@ rasch_mds <- function(df,
   
   
   # PERFORM RASCH ANALYSIS -----
-  model_result <- rasch_model(df, vars_metric, vars_id, print_results, path_output)
+  model_result <- rasch_model(df = df,
+                              vars_metric = vars_metric,
+                              vars_id = vars_id,
+                              print_results = path_results,
+                              path_output = path_output)
   
   residuals_PCM <- model_result[["residuals_PCM"]]
   
+  
+  
   # PERFORM DIF ANALYSIS ---------
+  if (!is.null(vars_DIF)) {
+    DIF_result <- rasch_DIF(df = df, 
+                            vars_metric = vars_metric, 
+                            vars_DIF = vars_DIF, 
+                            residuals_PCM = residuals_PCM, 
+                            split_strategy = split_strategy, 
+                            print_results = print_results, 
+                            path_output = path_output)
+  }
   
   
   

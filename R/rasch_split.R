@@ -71,7 +71,8 @@ rasch_split <- function(df, vars_metric, split_strategy, max_values) {
   #save results
   split_result <- list(df = df,
                        vars_metric = vars_metric,
-                       max_values = max_values)
+                       max_values = max_values,
+                       split_strategy = split_strategy)
   
   return(split_result)
   
