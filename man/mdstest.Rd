@@ -6,7 +6,7 @@
 \title{Example of WHO Model Disability Survey data}
 \format{A tibble with 12256 rows and 136 variables:
 \describe{
-  \item{enc_idr}{identification number}
+  \item{enc_id}{household number}
   \item{sex}{sex, Male or Female}
   \item{edad}{age in years}
   \item{age_cat}{age catgory, either "18-39y", "40-59y", or "60+y"}

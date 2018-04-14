@@ -1,3 +1,13 @@
+#' Add the raw scores to the data and artificial individuals attaining the minimum and/or maximum
+#'
+#' @param df a tibble of individual survey data, where each row is an individual 
+#' @param vars_metric a character vector of items to use in the Rasch Analysis
+#' @param vars_id a string with column name uniquely identifying individuals
+#' @param max_values a tibble with two columns, \code{var} equivalent to \code{vars_metric} and \code{max_val} with their corresponding maximum possible values
+#'
+#' @return a tibble with a new column "RawScore" with the raw sum score of \code{vars_metric} for each individual, and artificial rows with individuals that attain the minimum and/or maximum if either is not attained in \code{df}. The artificial maximum row has value "MAX" in the \code{vars_id} column, and likewise the artificial minimum row has the value "MIN" in this column.
+#' @export
+#'
 rasch_rawscore <- function(df, vars_metric, vars_id, max_values) {
   
   df <- df %>% 

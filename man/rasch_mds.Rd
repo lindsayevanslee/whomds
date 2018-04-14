@@ -4,7 +4,7 @@
 \alias{rasch_mds}
 \title{Top-level function to perform Rasch Analysis on WHO Model Disability Survey data}
 \usage{
-rasch_mds(df, vars_metric, vars_id, vars_sex, vars_age, resp_opts = 1:5,
+rasch_mds(df, vars_metric, vars_id, vars_DIF = NULL, resp_opts = 1:5,
   max_NA = 2, testlet_strategy = NULL, recode_strategy = NULL,
   drop_vars = NULL, split_strategy = NULL, comment = NULL,
   print_results = TRUE, model_name = NULL, path_parent = NULL)
@@ -16,9 +16,7 @@ rasch_mds(df, vars_metric, vars_id, vars_sex, vars_age, resp_opts = 1:5,
 
 \item{vars_id}{a string with column name uniquely identifying individuals}
 
-\item{vars_sex}{a string with column name identifying sex of individuals}
-
-\item{vars_age}{a string with column name identifying numeric age of individuals}
+\item{vars_DIF}{a string with the column names to use for analyzing differential item functioning (DIF). Default is NULL, to skip analysis of DIF.}
 
 \item{resp_opts}{a numeric vector of possible response options for \code{vars_metric}. Must begin with 1. Default is 1:5}
 

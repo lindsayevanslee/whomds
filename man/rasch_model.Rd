@@ -21,7 +21,7 @@ rasch_model(df, vars_metric, vars_id, print_results = TRUE,
 \item{LIDcutoff}{a numeric value between 0 and 1 indicating the cut-off for significant local item dependence}
 }
 \value{
-a list \code{model_result} with results from the Rasch Model
+a list with results from the Rasch Model
 }
 \description{
 Run the Rasch Model and print diagnositic results
