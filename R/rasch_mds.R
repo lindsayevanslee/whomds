@@ -63,7 +63,7 @@ rasch_mds <- function(df,
   
   # PREPARE DATA ------------
   
-  #recode non-resp_opts to NA
+  #recode non-resp_opts to NA, make vars_id charactr
   to_NA <- df %>% 
     select(vars_metric) %>% 
     unlist() %>% 
@@ -74,7 +74,8 @@ rasch_mds <- function(df,
     mutate_at(vars(vars_metric),
               dplyr::funs(plyr::mapvalues, .args = list(
                 from = to_NA, to = rep(NA, length(to_NA)), warn_missing = FALSE
-              )))
+              ))) %>% 
+    mutate_at(vars(vars_id), funs(as.character))
   
   #remove people with too many NAs
   rm_rows <- df %>% 
@@ -167,6 +168,24 @@ rasch_mds <- function(df,
     cat("Splitting variables completed. \n")
   }
   
+  # ADD RAW SCORE ---------
+  df <- df %>% 
+    mutate(RawScore = rowSums(df %>% select(vars_metric), na.rm=TRUE))
+  
+  max_value <- max_values %>% pull(max_val) %>% sum
+  
+  if (!any(pull(df, RawScore)==max_value, na.rm=TRUE)) {
+    
+    df_max <- t(max_values) %>% 
+      as_data_frame() %>% 
+      rename_all(funs(pull(max_values,var))) %>% 
+      slice(2) %>% 
+      mutate_all(funs(as.numeric)) %>% 
+      mutate(!!rlang::sym(vars_id) := "MAX",
+             RawScore = max_value)
+    
+    df <- df %>% full_join(df_max)
+  }
   
   # PERFORM RASCH ANALYSIS -----
   model_result <- rasch_model(df = df,
@@ -176,6 +195,7 @@ rasch_mds <- function(df,
                               path_output = path_output)
   
   residuals_PCM <- model_result[["residuals_PCM"]]
+  df_score <- model_result[["df_score"]]
   
   cat("Rasch Model completed. \n")
   
@@ -197,6 +217,14 @@ rasch_mds <- function(df,
   
   
   # RESCALE SCORE --------
+  #FIX: adds more rows..........MDSTEST VARS_ID IS NOT UNIQUE
+  df_final <- df %>% 
+    left_join(df_score) %>% 
+    mutate(rescaled = scales::rescale(person_pars, c(0,100))) %>% 
+    filter_at(vars(vars_id), any_vars(. != "MAX"))
   
+  
+  # RETURN DATA WITH SCORE ----------
+  return(df_final)
   
 }

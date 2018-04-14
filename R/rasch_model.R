@@ -177,6 +177,7 @@ rasch_model <- function(df, vars_metric, vars_id, print_results = TRUE, path_out
   
   
   model_results <- list(model = model,
+                        df_score = data_persons,
                         thresholds = Thr_PCM,
                         person_parameters = person_parameters,
                         PSI = PSIreport,
