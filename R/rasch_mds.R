@@ -32,8 +32,7 @@ rasch_mds <- function(df,
                       comment = NULL,
                       print_results = TRUE ,
                       model_name = NULL,
-                      path_parent = NULL #,
-                      # sink_errors = FALSE
+                      path_parent = NULL
                       ) {
   
   # # examples:
@@ -169,23 +168,10 @@ rasch_mds <- function(df,
   }
   
   # ADD RAW SCORE ---------
-  df <- df %>% 
-    mutate(RawScore = rowSums(df %>% select(vars_metric), na.rm=TRUE))
-  
-  max_value <- max_values %>% pull(max_val) %>% sum
-  
-  if (!any(pull(df, RawScore)==max_value, na.rm=TRUE)) {
-    
-    df_max <- t(max_values) %>% 
-      as_data_frame() %>% 
-      rename_all(funs(pull(max_values,var))) %>% 
-      slice(2) %>% 
-      mutate_all(funs(as.numeric)) %>% 
-      mutate(!!rlang::sym(vars_id) := "MAX",
-             RawScore = max_value)
-    
-    df <- df %>% full_join(df_max)
-  }
+  df <- rasch_rawscore(df = df,
+                       vars_metric = vars_metric,
+                       vars_id = vars_id,
+                       max_values = max_values)
   
   # PERFORM RASCH ANALYSIS -----
   model_result <- rasch_model(df = df,
@@ -217,11 +203,9 @@ rasch_mds <- function(df,
   
   
   # RESCALE SCORE --------
-  #FIX: adds more rows..........MDSTEST VARS_ID IS NOT UNIQUE
-  df_final <- df %>% 
-    left_join(df_score) %>% 
-    mutate(rescaled = scales::rescale(person_pars, c(0,100))) %>% 
-    filter_at(vars(vars_id), any_vars(. != "MAX"))
+  df_final <- rasch_rescale(df = df,
+                            df_score = df_score,
+                            vars_id = vars_id)
   
   
   # RETURN DATA WITH SCORE ----------
