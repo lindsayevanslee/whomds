@@ -44,7 +44,7 @@ ADD SOME STUFF ABOUT THE FILTERING
 }
 \examples{
 table_weightedpct(mdstest, 
-    vars_ids = c("VARUNIT_N","enc_idr"),
+    vars_ids = c("VARUNIT_N","enc_id"),
     vars_strata = "VARSTRAT_N",
     vars_weights = "Factor_Persona",
     formula_vars = paste0("fa",1:10),

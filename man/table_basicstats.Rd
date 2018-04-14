@@ -20,5 +20,5 @@ A tibble with rows for each level of \code{group_by_var} and "Total" and columns
 Compute basic statistics of the number of member per group per household
 }
 \examples{
-table_basicstats(mdstest, "enc_idr", "age_cat")
+table_basicstats(mdstest, "enc_id", "age_cat")
 }

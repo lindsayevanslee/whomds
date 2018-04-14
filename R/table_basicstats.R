@@ -12,7 +12,7 @@
 #' @import rlang
 #' 
 #' @examples
-#' table_basicstats(mdstest, "enc_idr", "age_cat")
+#' table_basicstats(mdstest, "enc_id", "age_cat")
 table_basicstats <- function(df, hh_id, group_by_var) {
 
   sym_group_by_var <- sym(group_by_var)

@@ -49,7 +49,7 @@ rasch_DIF <- function(df, vars_metric, vars_DIF, residuals_PCM, split_strategy =
   
   df_metric_rows_sums <- rowSums(df_metric_rows,na.rm=TRUE)
   
-  rows_sums_quantile <- quantile(df_metric_rows_sums, probs = seq(0, 1, 1/breaks), na.rm=TRUE)
+  rows_sums_quantile <- stats::quantile(df_metric_rows_sums, probs = seq(0, 1, 1/breaks), na.rm=TRUE)
   
   lst <- purrr::map(list()[1:(breaks-1)], ~ c("<","<="))
   
