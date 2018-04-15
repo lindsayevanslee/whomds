@@ -7,7 +7,21 @@
 #' @param path_output a string with the path to the output folder. Default is NULL.
 #' @param LIDcutoff a numeric value between 0 and 1 indicating the cut-off for significant local item dependence
 #'
-#' @return a list with results from the Rasch Model
+#' @details The Rasch Model is calculated using the function \code{eRm::PCM()}. 
+#' 
+#' @return a list with results from the Rasch Model:
+#' \item{model}{the results from the Rasch Model}
+#' \item{df_score}{a tibble with the items used in the analysis and the person abilities}
+#' \item{thresholds}{the item thresholds (i.e., crossings)}
+#' \item{person_parameters}{person abilities}
+#' \item{PSI}{the person-separation index}
+#' \item{item_fit}{infit and outfit statistics per item}
+#' \item{residuals_PCM}{the standardized person residuals}
+#' \item{LID}{matrix with the item residual correlations}
+#' \item{targeting}{a matrix with information on the targeting of the model}
+#' 
+#' @family rasch functions
+#' 
 #' @export
 #' 
 #' @import eRm

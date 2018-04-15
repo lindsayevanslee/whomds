@@ -29,3 +29,7 @@ group_by_var = "performance_cat")
 table_unweightedpctn(mdstest, vars_demo = c("sex", "age_cat", "work_cat", "edu_cat"), 
 group_by_var = "performance_cat", spread_by_group_by_var = TRUE)
 }
+\seealso{
+Other table functions: \code{\link{table_basicstats}},
+  \code{\link{table_weightedpct}}
+}

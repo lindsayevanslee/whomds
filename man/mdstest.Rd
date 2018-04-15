@@ -25,7 +25,7 @@
   \item{f....}{survey item from "FACTORES AMBIENTALES" section (see Chile ENDIS II questionnaire)}
 }}
 \source{
-WHO Disability Programme (leel@who.int)
+WHO Disability Programme (leel@who.int), El Servicio Nacional de la Discapacidad de Chile
 }
 \usage{
 mdstest

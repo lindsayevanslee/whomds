@@ -6,7 +6,13 @@
 #'
 #' @return A population pyramid figure 
 #' 
+#' @details A population pyramid gives an image of the age and sex distribution of a population.
+#' 
+#' The function divides the \code{var_age} variable into 5-year intervals.
+#' 
 #' @export
+#' 
+#' @family figure functions
 #' 
 #' @import ggplot2
 #' @import dplyr

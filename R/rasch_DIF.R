@@ -9,11 +9,18 @@
 #' @param path_output a string with the path to the output folder. Default is NULL.
 #' @param breaks a numeric value giving the number if class intervals. Default is 6.
 #'
-#' @return a list with results from the DIF analysis
+#' @return a list with results from the DIF analysis: 
+#' \item{df_DIF_class}{the person residuals from the Rasch Model, the assigned class intervals, and the variables used for DIF analysis}
+#' \item{tab_aov_DIF}{the results of the ANOVA used to analyze DIF}
+#' 
+#' @details Differential Item Functioning (DIF) refers to the circumstance when different groups in a sample respond to items in different ways. For instance, DIF would be observed if men and women had different patterns of responses to a set of survey questions. DIF can cause poor fit for the Rasch Model, and therefore should be analyzed. This function uses ANOVA to find DIF by the variables supplied and by a generated class interval.
+#' 
+#' @family rasch functions
+#' 
 #' @export
 #' @import dplyr
 #' 
-#' @details Currently the calculation of the class intervals is quite slow. Reducing the number of breaks can improve speed.
+#' @note Currently the calculation of the class intervals is quite slow. Reducing the number of breaks can improve speed.
 rasch_DIF <- function(df, vars_metric, vars_DIF, residuals_PCM, split_strategy = NULL, print_results = TRUE, path_output = NULL, breaks = 6) {
   
   #save data frame for DIF

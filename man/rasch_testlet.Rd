@@ -23,3 +23,6 @@ a named list with the new \code{df}, new \code{vars_metric}, new \code{testlet_s
 \description{
 Create testlets of survey items for a Rasch Model
 }
+\details{
+If high local item dependence is observed (i.e., residual correlation) is observed between items, it may be desirable to combine them into a testlet. This code creates the testlets as desired.
+}

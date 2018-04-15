@@ -40,7 +40,10 @@ a tibble of weighted response percentages
 Calculate table of percentages of response distribution for survey items, survey weighted, disaggregated
 }
 \details{
-ADD SOME STUFF ABOUT THE FILTERING
+If \code{willfilter} is NULL, the table is not filtered or transmuted. If \code{willfilter} is TRUE, the table is filtered before it is spread or arranged. If \code{willfilter} is FALSE, the table is transmuted after the spread and/or arrange. "..." captures the non-standard evaluation expressions (NSE) to pass to \code{dplyr::filter} or \code{dplyr::transmute()}.
+}
+\note{
+Right now, if \code{willfilter} is non-NULL, then every argument needs to be explictly named (i.e., cannot just use default values) in order for NSE expressions to be properly used. This is a bug that will be fixed.
 }
 \examples{
 table_weightedpct(mdstest, 
@@ -50,4 +53,10 @@ table_weightedpct(mdstest,
     formula_vars = paste0("fa",1:10),
     formula_vars_levels = 1:5,
     by_vars = "sex")
+}
+\seealso{
+See \code{vignette("programming", package = "dplyr")} for more about non-standard evaluation (NSE)
+
+Other table functions: \code{\link{table_basicstats}},
+  \code{\link{table_unweightedpctn}}
 }

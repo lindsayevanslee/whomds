@@ -19,3 +19,10 @@ Prints a pdf graph if the items with correlation > \code{LIDcutoff} and a csv of
 \description{
 Print a graph showing significant correlations between survey items
 }
+\details{
+This function could be applied to visualize any kind of correlations. But within the context of the Rasch Analysis used for the WHO Model Disability Survey, the  residual correlations are used when analyzing item dependence.
+}
+\seealso{
+Other figure functions: \code{\link{fig_dist}},
+  \code{\link{fig_poppyramid}}
+}

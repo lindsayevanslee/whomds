@@ -5,7 +5,11 @@
 #' @param path_output a string with the path to the output folder
 #'
 #' @return Prints a pdf graph if the items with correlation > \code{LIDcutoff} and a csv of the corresponding correlations
+#' 
+#' @details This function could be applied to visualize any kind of correlations. But within the context of the Rasch Analysis used for the WHO Model Disability Survey, the  residual correlations are used when analyzing item dependence.
 #' @export
+#' 
+#' @family figure functions
 fig_LID <- function(LIDforgraph, LIDcutoff = 0.2, path_output) {
 
   

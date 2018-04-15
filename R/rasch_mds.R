@@ -15,7 +15,14 @@
 #' @param model_name a string with a name for the model, which is used to create a new folder for model output. Default is NULL.
 #' @param path_parent a string with the path to the folder where results from multiple models will be outputted. Default is NULL
 #'
-#' @return If \code{print_results} is TRUE, prints files to the working directory with the results of the Rasch Model. 
+#' @details This function combines all of the separate analyses of model fit necessary to assess the quality of the Rasch Model. It is designed to require minimal intervention from the user. Users wishing to have more control over the analysis can use the other Rasch functions in this package separately.
+#' 
+#' @return a tibble with new columns representing the original person abilities (\code{person_pars}) and the rescaled person abilities (\code{rescaled}). 
+#' 
+#' If \code{print_results} is TRUE, prints files to the working directory with the results of the Rasch Model. 
+#' 
+#' @family rasch functions
+#' 
 #' @export
 #' 
 #' @import dplyr

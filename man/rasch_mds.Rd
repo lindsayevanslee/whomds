@@ -39,8 +39,19 @@ rasch_mds(df, vars_metric, vars_id, vars_DIF = NULL, resp_opts = 1:5,
 \item{path_parent}{a string with the path to the folder where results from multiple models will be outputted. Default is NULL}
 }
 \value{
+a tibble with new columns representing the original person abilities (\code{person_pars}) and the rescaled person abilities (\code{rescaled}). 
+
 If \code{print_results} is TRUE, prints files to the working directory with the results of the Rasch Model.
 }
 \description{
 Top-level function to perform Rasch Analysis on WHO Model Disability Survey data
+}
+\details{
+This function combines all of the separate analyses of model fit necessary to assess the quality of the Rasch Model. It is designed to require minimal intervention from the user. Users wishing to have more control over the analysis can use the other Rasch functions in this package separately.
+}
+\seealso{
+Other rasch functions: \code{\link{rasch_DIF}},
+  \code{\link{rasch_drop}}, \code{\link{rasch_factor}},
+  \code{\link{rasch_model}}, \code{\link{rasch_rawscore}},
+  \code{\link{rasch_rescale}}
 }

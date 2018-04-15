@@ -16,8 +16,14 @@ rasch_rawscore(df, vars_metric, vars_id, max_values)
 \item{max_values}{a tibble with two columns, \code{var} equivalent to \code{vars_metric} and \code{max_val} with their corresponding maximum possible values}
 }
 \value{
-a tibble with a new column "RawScore" with the raw sum score of \code{vars_metric} for each individual, and artificial rows with individuals that attain the minimum and/or maximum if either is not attained in \code{df}. The artificial maximum row has value "MAX" in the \code{vars_id} column, and likewise the artificial minimum row has the value "MIN" in this column.
+a tibble with a new column \code{RawScore} with the raw sum score of \code{vars_metric} for each individual, and artificial rows with individuals that attain the minimum and/or maximum if either is not attained in \code{df}. The artificial maximum row has value "MAX" in the \code{vars_id} column, and likewise the artificial minimum row has the value "MIN" in this column.
 }
 \description{
 Add the raw scores to the data and artificial individuals attaining the minimum and/or maximum
+}
+\seealso{
+Other rasch functions: \code{\link{rasch_DIF}},
+  \code{\link{rasch_drop}}, \code{\link{rasch_factor}},
+  \code{\link{rasch_mds}}, \code{\link{rasch_model}},
+  \code{\link{rasch_rescale}}
 }

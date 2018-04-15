@@ -25,11 +25,22 @@ rasch_DIF(df, vars_metric, vars_DIF, residuals_PCM, split_strategy = NULL,
 \item{breaks}{a numeric value giving the number if class intervals. Default is 6.}
 }
 \value{
-a list with results from the DIF analysis
+a list with results from the DIF analysis: 
+\item{df_DIF_class}{the person residuals from the Rasch Model, the assigned class intervals, and the variables used for DIF analysis}
+\item{tab_aov_DIF}{the results of the ANOVA used to analyze DIF}
 }
 \description{
 Perform analysis of Differential Item Functioning (DIF) for Rasch Model
 }
 \details{
+Differential Item Functioning (DIF) refers to the circumstance when different groups in a sample respond to items in different ways. For instance, DIF would be observed if men and women had different patterns of responses to a set of survey questions. DIF can cause poor fit for the Rasch Model, and therefore should be analyzed. This function uses ANOVA to find DIF by the variables supplied and by a generated class interval.
+}
+\note{
 Currently the calculation of the class intervals is quite slow. Reducing the number of breaks can improve speed.
+}
+\seealso{
+Other rasch functions: \code{\link{rasch_drop}},
+  \code{\link{rasch_factor}}, \code{\link{rasch_mds}},
+  \code{\link{rasch_model}}, \code{\link{rasch_rawscore}},
+  \code{\link{rasch_rescale}}
 }

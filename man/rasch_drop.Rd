@@ -19,3 +19,12 @@ a named list with the new \code{vars_metric} and new \code{max_values} after dro
 \description{
 Drop items from a Rasch Analysis
 }
+\details{
+Dropping variables might be desirable if one finds that particular items are causing a lot of problems for the fit of a Rasch Model.
+}
+\seealso{
+Other rasch functions: \code{\link{rasch_DIF}},
+  \code{\link{rasch_factor}}, \code{\link{rasch_mds}},
+  \code{\link{rasch_model}}, \code{\link{rasch_rawscore}},
+  \code{\link{rasch_rescale}}
+}

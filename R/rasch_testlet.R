@@ -6,6 +6,8 @@
 #' @param max_values a tibble with two columns, \code{var} equivalent to \code{vars_metric} and \code{max_val} with their corresponding maximum possible values
 #' @param resp_opts a numeric vector of possible response options for \code{vars_metric}.
 #'
+#' @details If high local item dependence is observed (i.e., residual correlation) is observed between items, it may be desirable to combine them into a testlet. This code creates the testlets as desired.
+#'
 #' @return a named list with the new \code{df}, new \code{vars_metric}, new \code{testlet_strategy} and new \code{max_values} after creating desired testlets
 #' @export
 #' 

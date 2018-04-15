@@ -5,7 +5,19 @@
 #' @param print_results a logical vector indicating whether to print the results of the model to the \code{model_name} directory
 #' @param path_output a string with the path to the output folder. Default is NULL.
 #'
-#' @return a list with results from the factor analysis for a Rasch Model
+#' @return a list with results from the factor analysis for a Rasch Model:
+#' \item{cor_poly}{the matrix of polychoric correlations}
+#' \item{eigenvalues}{the eigenvalues}
+#' \item{parallel_analysis}{permutation parallel analysis distribution}
+#' \item{results_scree}{results of a scree analysis}
+#' \item{n_group_factors}{number of factors from the parallel analysis in the scree analysis}
+#' \item{fa_onefactor}{results from factor analysis with one factor}
+#' \item{fa_resid}{local dependency based on polychoric correlations of the items}
+#' 
+#' @details Unidimensionality of the data is one of the core assumptions of the Rasch Model. This function performs the factor analysis to assess the unidimensionality of the data.
+#' 
+#' @family rasch functions
+#' 
 #' @export
 #' 
 #' @import dplyr

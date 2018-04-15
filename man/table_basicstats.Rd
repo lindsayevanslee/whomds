@@ -19,6 +19,13 @@ A tibble with rows for each level of \code{group_by_var} and "Total" and columns
 \description{
 Compute basic statistics of the number of member per group per household
 }
+\note{
+Includes a call to \code{tidyr::complete()}, which causes the function to be a bit slow.
+}
 \examples{
 table_basicstats(mdstest, "enc_id", "age_cat")
+}
+\seealso{
+Other table functions: \code{\link{table_unweightedpctn}},
+  \code{\link{table_weightedpct}}
 }

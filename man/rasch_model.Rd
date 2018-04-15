@@ -21,8 +21,26 @@ rasch_model(df, vars_metric, vars_id, print_results = TRUE,
 \item{LIDcutoff}{a numeric value between 0 and 1 indicating the cut-off for significant local item dependence}
 }
 \value{
-a list with results from the Rasch Model
+a list with results from the Rasch Model:
+\item{model}{the results from the Rasch Model}
+\item{df_score}{a tibble with the items used in the analysis and the person abilities}
+\item{thresholds}{the item thresholds (i.e., crossings)}
+\item{person_parameters}{person abilities}
+\item{PSI}{the person-separation index}
+\item{item_fit}{infit and outfit statistics per item}
+\item{residuals_PCM}{the standardized person residuals}
+\item{LID}{matrix with the item residual correlations}
+\item{targeting}{a matrix with information on the targeting of the model}
 }
 \description{
 Run the Rasch Model and print diagnositic results
+}
+\details{
+The Rasch Model is calculated using the function \code{eRm::PCM()}.
+}
+\seealso{
+Other rasch functions: \code{\link{rasch_DIF}},
+  \code{\link{rasch_drop}}, \code{\link{rasch_factor}},
+  \code{\link{rasch_mds}}, \code{\link{rasch_rawscore}},
+  \code{\link{rasch_rescale}}
 }

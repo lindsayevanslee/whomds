@@ -17,11 +17,18 @@
 #' @return a tibble of weighted response percentages 
 #' 
 #' @details 
-#' ADD SOME STUFF ABOUT THE FILTERING
+#' If \code{willfilter} is NULL, the table is not filtered or transmuted. If \code{willfilter} is TRUE, the table is filtered before it is spread or arranged. If \code{willfilter} is FALSE, the table is transmuted after the spread and/or arrange. "..." captures the non-standard evaluation expressions (NSE) to pass to \code{dplyr::filter} or \code{dplyr::transmute()}.
+#' 
+#' @note Right now, if \code{willfilter} is non-NULL, then every argument needs to be explictly named (i.e., cannot just use default values) in order for NSE expressions to be properly used. This is a bug that will be fixed.
+#' 
+#' 
+#' @family table functions
 #' 
 #' @export
 #' 
 #' @import srvyr
+#' 
+#' @seealso See \code{vignette("programming", package = "dplyr")} for more about non-standard evaluation (NSE)
 #'
 #' @examples
 #' table_weightedpct(mdstest, 

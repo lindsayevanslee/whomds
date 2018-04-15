@@ -22,5 +22,5 @@
 #'   \item{d....}{survey item from "DESEMPENO" section (see Chile ENDIS II questionnaire)}
 #'   \item{f....}{survey item from "FACTORES AMBIENTALES" section (see Chile ENDIS II questionnaire)}
 #' }
-#' @source WHO Disability Programme (leel@@who.int)
+#' @source WHO Disability Programme (leel@@who.int), El Servicio Nacional de la Discapacidad de Chile
 "mdstest"

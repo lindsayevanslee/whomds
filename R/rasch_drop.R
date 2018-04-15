@@ -5,6 +5,11 @@
 #' @param max_values a tibble with two columns, \code{var} equivalent to \code{vars_metric} and \code{max_val} with their corresponding maximum possible values
 #'
 #' @return a named list with the new \code{vars_metric} and new \code{max_values} after dropping the desired variables
+#' 
+#' @details Dropping variables might be desirable if one finds that particular items are causing a lot of problems for the fit of a Rasch Model.
+#' 
+#' @family rasch functions
+#' 
 #' @export
 rasch_drop <- function(vars_metric, drop_vars, max_values) {
   

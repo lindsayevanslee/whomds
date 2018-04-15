@@ -5,8 +5,12 @@
 #' @param group_by_var string (length 1) to pass to \code{group_by_at()} with name of variable in \code{df} to group results by
 #'
 #' @return A tibble with rows for each level of \code{group_by_var} and "Total" and columns for the Mean (SD), Median and Range of the number of people in each group per household.
+#' 
+#' @note Includes a call to \code{tidyr::complete()}, which causes the function to be a bit slow.
 #'
 #' @export
+#'
+#' @family table functions
 #'
 #' @import dplyr
 #' @import rlang

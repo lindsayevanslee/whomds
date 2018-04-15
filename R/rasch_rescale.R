@@ -5,6 +5,9 @@
 #' @param vars_id a string with column name uniquely identifying individuals
 #'
 #' @return a tibble with the full join between \code{df} and \code{df_score} and new column "rescaled" with the rescaled person abilities, ranging from 0 to 100, and filter out any rows with an artificial minimum or maximum
+#'
+#' @family rasch functions
+#'
 #' @export
 #'
 #'

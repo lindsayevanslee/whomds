@@ -7,6 +7,8 @@
 #'
 #' @return A tibble with percent and N for each level of each variable in \code{vars_demo}
 #' 
+#' @family table functions
+#' 
 #' @export
 #' 
 #' @import dplyr

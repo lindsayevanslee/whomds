@@ -19,6 +19,15 @@ A population pyramid figure
 \description{
 Print a population pyramid
 }
+\details{
+A population pyramid gives an image of the age and sex distribution of a population.
+
+The function divides the \code{var_age} variable into 5-year intervals.
+}
 \examples{
 fig_poppyramid(mdstest, "edad", "sex")
+}
+\seealso{
+Other figure functions: \code{\link{fig_LID}},
+  \code{\link{fig_dist}}
 }

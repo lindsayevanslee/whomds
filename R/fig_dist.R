@@ -1,4 +1,4 @@
-#' Title
+#' Plot a distribution of a score
 #'
 #' @param df a tibble where each row is an individual, containing at least a score column (between 0 and 100) and a categorization of that score
 #' @param score a string (length 1) of the column name for the score variable to print the distribution of
@@ -11,6 +11,9 @@
 #'
 #' @return A score distribution figure with fill based on categorization of the score
 #' 
+#' @details Plots a histogram of a score that ranges between 0 and 100, with the fill determined by some set categorization of the score. This is the function used to plot the distributions of disability scores resulting from the WHO Model Disability Survey.
+#' 
+#' @family figure functions
 #' @export 
 #' 
 #' @import ggplot2

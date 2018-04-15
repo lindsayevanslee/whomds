@@ -2,7 +2,7 @@
 % Please edit documentation in R/fig_dist.R
 \name{fig_dist}
 \alias{fig_dist}
-\title{Title}
+\title{Plot a distribution of a score}
 \usage{
 fig_dist(df, score, score_cat, cutoffs, x_lab = "Score", y_max = NULL,
   pcent = FALSE, pal = "Blues")
@@ -28,7 +28,10 @@ fig_dist(df, score, score_cat, cutoffs, x_lab = "Score", y_max = NULL,
 A score distribution figure with fill based on categorization of the score
 }
 \description{
-Title
+Plot a distribution of a score
+}
+\details{
+Plots a histogram of a score that ranges between 0 and 100, with the fill determined by some set categorization of the score. This is the function used to plot the distributions of disability scores resulting from the WHO Model Disability Survey.
 }
 \examples{
 fig_dist(mdstest, score = "PerformanceScorePredicted", score_cat = "performance_cat", 
@@ -37,4 +40,8 @@ fig_dist(mdstest, score = "PerformanceScorePredicted", score_cat = "performance_
 cutoffs = c(19.1, 34.4, 49.6), x_lab = "Disability score", y_max = 2000)
 fig_dist(mdstest, score = "PerformanceScorePredicted", score_cat = "performance_cat", 
 cutoffs = c(19.1, 34.4, 49.6), x_lab = "Disability score", y_max = 0.2, pcent=TRUE)
+}
+\seealso{
+Other figure functions: \code{\link{fig_LID}},
+  \code{\link{fig_poppyramid}}
 }
