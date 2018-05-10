@@ -35,6 +35,6 @@ Imports:
     survey, 
     tibble,
     tidyr
-Depends: R (>= 3.3.3)
+Depends: R (>= 3.2.5)
 BugReports: https://github.com/lindsayevanslee/whomds
 RoxygenNote: 6.0.1
