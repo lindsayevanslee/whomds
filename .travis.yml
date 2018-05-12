@@ -7,4 +7,6 @@ os:
   - linux
   - osx
 after_success:
-    - Rscript -e 'covr::codecov(type = "all")'
+    - Rscript -e 'covr::codecov(type = "all", token = "7bbd498a-9111-4001-9f99-1873915db12e")'
+notifications:
+  email: false
