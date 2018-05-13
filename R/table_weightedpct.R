@@ -6,21 +6,18 @@
 #' @param vars_strata a character vector of strata ids, passed to a \code{survey::svydesign} object
 #' @param vars_weights a character vector of survey weight ids, passed to a \code{survey::svydesign} object
 #' @param formula_vars a character vector of variables to calculate the percentages of each level for
+#' @param ... captures expressions to pass to \code{dplyr::filter()} or \code{dplyr::transmute()}, depending on the value of argument \code{willfilter}. See Details.
 #' @param formula_vars_levels a vector of the levels of the the \code{formula_vars}
-#' @param by_vars a character vector of variables to disaggregate results by
-#' @param spread_key a string with variable name to pass to \code{key} argument of \code{dplyr::spread()}. Default is NULL.
+#' @param by_vars a character vector of variables to disaggregate results by. Default is \code{NULL} for no disaggregation.
+#' @param spread_key a string with variable name to pass to \code{key} argument of \code{dplyr::spread()}. Default is \code{NULL}.
 #' @param spread_value a string with variable name to pass to \code{value} argument of \code{dplyr::spread()}. Default is "prop" (the columm of percentages created within the function)
 #' @param arrange_vars a character vector with variables to pass to \code{dplyr::arrange()}. Default is NULL.
-#' @param willfilter a logical variable that tells the function whether or not to filter or transmute the data. Leave as default NULL to not filter or transmute. Set as TRUE to filter and FALSE to transmute. See Details.
-#' @param ... captures expressions to pass to \code{dplyr::filter()} or \code{dplyr::transmute()}, depending on the value of argument \code{willfilter}. See Details.
+#' @param willfilter a logical variable that tells the function whether or not to filter or transmute the data. Leave as default \code{NULL} to not filter or transmute. Set as \code{TRUE} to filter and \code{FALSE} to transmute. See Details.
 #'
 #' @return a tibble of weighted response percentages 
 #' 
 #' @details 
 #' If \code{willfilter} is NULL, the table is not filtered or transmuted. If \code{willfilter} is TRUE, the table is filtered before it is spread or arranged. If \code{willfilter} is FALSE, the table is transmuted after the spread and/or arrange. "..." captures the non-standard evaluation expressions (NSE) to pass to \code{dplyr::filter} or \code{dplyr::transmute()}.
-#' 
-#' @note Right now, if \code{willfilter} is non-NULL, then every argument needs to be explictly named (i.e., cannot just use default values) in order for NSE expressions to be properly used. This is a bug that will be fixed.
-#' 
 #' 
 #' @family table functions
 #' 
@@ -39,10 +36,11 @@
 #'     formula_vars_levels = 1:5,
 #'     by_vars = "sex")
 table_weightedpct <- function(df, vars_ids, vars_strata, vars_weights, 
-                       formula_vars, formula_vars_levels = 0:1, by_vars, 
+                       formula_vars, ..., 
+                       formula_vars_levels = 0:1, by_vars = NULL,
                        spread_key = NULL, spread_value = "prop",
                        arrange_vars = NULL, 
-                       willfilter = NULL, ...
+                       willfilter = NULL
                        ) {
 
   #convert data to long format using variables from formula_vars

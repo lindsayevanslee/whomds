@@ -4,9 +4,9 @@
 \alias{table_weightedpct}
 \title{Calculate table of percentages of response distribution for survey items, survey weighted, disaggregated}
 \usage{
-table_weightedpct(df, vars_ids, vars_strata, vars_weights, formula_vars,
-  formula_vars_levels = 0:1, by_vars, spread_key = NULL,
-  spread_value = "prop", arrange_vars = NULL, willfilter = NULL, ...)
+table_weightedpct(df, vars_ids, vars_strata, vars_weights, formula_vars, ...,
+  formula_vars_levels = 0:1, by_vars = NULL, spread_key = NULL,
+  spread_value = "prop", arrange_vars = NULL, willfilter = NULL)
 }
 \arguments{
 \item{df}{a tibble of survey responses, one row per respondent}
@@ -19,19 +19,19 @@ table_weightedpct(df, vars_ids, vars_strata, vars_weights, formula_vars,
 
 \item{formula_vars}{a character vector of variables to calculate the percentages of each level for}
 
+\item{...}{captures expressions to pass to \code{dplyr::filter()} or \code{dplyr::transmute()}, depending on the value of argument \code{willfilter}. See Details.}
+
 \item{formula_vars_levels}{a vector of the levels of the the \code{formula_vars}}
 
-\item{by_vars}{a character vector of variables to disaggregate results by}
+\item{by_vars}{a character vector of variables to disaggregate results by. Default is \code{NULL} for no disaggregation.}
 
-\item{spread_key}{a string with variable name to pass to \code{key} argument of \code{dplyr::spread()}. Default is NULL.}
+\item{spread_key}{a string with variable name to pass to \code{key} argument of \code{dplyr::spread()}. Default is \code{NULL}.}
 
 \item{spread_value}{a string with variable name to pass to \code{value} argument of \code{dplyr::spread()}. Default is "prop" (the columm of percentages created within the function)}
 
 \item{arrange_vars}{a character vector with variables to pass to \code{dplyr::arrange()}. Default is NULL.}
 
-\item{willfilter}{a logical variable that tells the function whether or not to filter or transmute the data. Leave as default NULL to not filter or transmute. Set as TRUE to filter and FALSE to transmute. See Details.}
-
-\item{...}{captures expressions to pass to \code{dplyr::filter()} or \code{dplyr::transmute()}, depending on the value of argument \code{willfilter}. See Details.}
+\item{willfilter}{a logical variable that tells the function whether or not to filter or transmute the data. Leave as default \code{NULL} to not filter or transmute. Set as \code{TRUE} to filter and \code{FALSE} to transmute. See Details.}
 }
 \value{
 a tibble of weighted response percentages
@@ -41,9 +41,6 @@ Calculate table of percentages of response distribution for survey items, survey
 }
 \details{
 If \code{willfilter} is NULL, the table is not filtered or transmuted. If \code{willfilter} is TRUE, the table is filtered before it is spread or arranged. If \code{willfilter} is FALSE, the table is transmuted after the spread and/or arrange. "..." captures the non-standard evaluation expressions (NSE) to pass to \code{dplyr::filter} or \code{dplyr::transmute()}.
-}
-\note{
-Right now, if \code{willfilter} is non-NULL, then every argument needs to be explictly named (i.e., cannot just use default values) in order for NSE expressions to be properly used. This is a bug that will be fixed.
 }
 \examples{
 table_weightedpct(mdstest, 
