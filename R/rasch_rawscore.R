@@ -15,7 +15,7 @@
 rasch_rawscore <- function(df, vars_metric, vars_id, max_values) {
   
   #convert to tibble
-  if (!is_tibble(df)) df <- df %>% as_tibble()
+  if (!tibble::is_tibble(df)) df <- df %>% as_tibble()
   
   df <- df %>% 
     mutate(RawScore = rowSums(df %>% select(vars_metric), na.rm=TRUE))

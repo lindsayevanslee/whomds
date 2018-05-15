@@ -22,7 +22,7 @@
 fig_poppyramid <- function(df, var_age, var_sex){
   
   #convert to tibble
-  if (!is_tibble(df)) df <- df %>% as_tibble()
+  if (!tibble::is_tibble(df)) df <- df %>% as_tibble()
   
   df <- df %>% 
     mutate(age_cat = cut(pull(df,var_age),

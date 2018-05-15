@@ -28,7 +28,7 @@
 rasch_model <- function(df, vars_metric, vars_id, print_results = TRUE, path_output = NULL, LIDcutoff = 0.2) {
 
   #convert to tibble
-  if (!is_tibble(df)) df <- df %>% as_tibble()
+  if (!tibble::is_tibble(df)) df <- df %>% as_tibble()
   
   #1. PCM analysis
   model <- PCM(df[,vars_metric])                                      

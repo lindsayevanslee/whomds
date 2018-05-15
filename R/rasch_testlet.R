@@ -15,7 +15,7 @@
 rasch_testlet <- function(df, vars_metric, testlet_strategy, max_values, resp_opts) {
   
   #convert to tibble
-  if (!is_tibble(df)) df <- df %>% as_tibble()
+  if (!tibble::is_tibble(df)) df <- df %>% as_tibble()
   
   n_testlets <- length(testlet_strategy)
   

@@ -20,7 +20,7 @@
 table_basicstats <- function(df, hh_id, group_by_var) {
   
   #convert to tibble
-  if (!is_tibble(df)) df <- df %>% as_tibble()
+  if (!tibble::is_tibble(df)) df <- df %>% as_tibble()
 
   sym_group_by_var <- sym(group_by_var)
   

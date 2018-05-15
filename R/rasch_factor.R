@@ -24,7 +24,7 @@
 rasch_factor <- function(df, vars_metric, print_results = TRUE, path_output = NULL) {
   #----------------------------
   #convert to tibble
-  if (!is_tibble(df)) df <- df %>% as_tibble()
+  if (!tibble::is_tibble(df)) df <- df %>% as_tibble()
   
   # create data frame with ordered factors
   df_ordered <- df %>% 

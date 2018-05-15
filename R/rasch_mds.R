@@ -70,7 +70,7 @@ rasch_mds <- function(df,
   # PREPARE DATA ------------
   
   #convert to tibble
-  if (!is_tibble(df)) df <- df %>% as_tibble()
+  if (!tibble::is_tibble(df)) df <- df %>% as_tibble()
   
   #recode non-resp_opts to NA, make vars_id character
   to_NA <- df %>% 

@@ -12,7 +12,7 @@
 rasch_recode <- function(df, vars_metric, recode_strategy, max_values) {
   
   #convert to tibble
-  if (!is_tibble(df)) df <- df %>% as_tibble()
+  if (!tibble::is_tibble(df)) df <- df %>% as_tibble()
   
   #How many different kinds of recode?
   n_recode <- length(recode_strategy)

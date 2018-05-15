@@ -14,7 +14,7 @@
 rasch_rescale <- function(df, df_score, vars_id) {
   
   #convert to tibble
-  if (!is_tibble(df)) df <- df %>% as_tibble()
+  if (!tibble::is_tibble(df)) df <- df %>% as_tibble()
   
   df_final <- df %>% 
     left_join(df_score) %>% 

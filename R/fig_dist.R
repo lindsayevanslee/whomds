@@ -30,7 +30,7 @@ fig_dist <- function(df, score, score_cat, cutoffs,
                         x_lab = "Score", y_max = NULL, pcent=FALSE, pal = "Blues"){
   
   #convert to tibble
-  if (!is_tibble(df)) df <- df %>% as_tibble()
+  if (!tibble::is_tibble(df)) df <- df %>% as_tibble()
   
   if (pcent) {
     y_lab <- "Percent"

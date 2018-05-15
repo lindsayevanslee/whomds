@@ -44,7 +44,7 @@ table_weightedpct <- function(df, vars_ids, vars_strata, vars_weights,
                        ) {
 
   #convert to tibble
-  if (!is_tibble(df)) df <- df %>% as_tibble()
+  if (!tibble::is_tibble(df)) df <- df %>% as_tibble()
   
   #convert data to long format using variables from formula_vars
   df <- df %>%
