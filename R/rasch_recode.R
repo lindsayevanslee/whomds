@@ -26,7 +26,11 @@ rasch_recode <- function(df, vars_metric, recode_strategy, max_values) {
     if (!all(new_recoded %in% vars_metric)) stop("You input a string that is not included in the variable list.")
     
     #capture range of maximum values for each recoded variable and test if max values are equal
-    resp_opts_range <- range(as.numeric(max_values[max_values$var %in% new_recoded,"max_val"]))
+    resp_opts_range <- max_values %>% 
+      filter(var %in% new_recoded) %>% 
+      pull("max_val") %>% 
+      as.numeric() %>% 
+      range()
     if (!isTRUE(all.equal(resp_opts_range[1],resp_opts_range[2])))  stop("You input variables with different possible response options.")
     if (length(new_outcome)!=unique(resp_opts_range)+1) stop("Outcome string must have same # of characters as possible response options.")
 
