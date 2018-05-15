@@ -1,6 +1,6 @@
 #' Compute unweighted percent and N for multiple variables, disaggregated
 #'
-#' @param df a tibble of individual data where each row is an individual
+#' @param df a data frame of individual data where each row is an individual
 #' @param vars_demo a character vector of names of variables to calculate percent and N for
 #' @param group_by_var a string (length 1) with the name of the variable from \code{df} to disaggregate by
 #' @param spread_by_group_by_var logical determining whether to pass \code{group_by_var} to \code{dplyr::spread()} to give a wide-format tab. Default is FALSE.
@@ -21,6 +21,9 @@
 #' table_unweightedpctn(mdstest, vars_demo = c("sex", "age_cat", "work_cat", "edu_cat"), 
 #' group_by_var = "performance_cat", spread_by_group_by_var = TRUE)
 table_unweightedpctn <- function(df, vars_demo, group_by_var=NULL, spread_by_group_by_var = FALSE) {
+  
+  #convert to tibble
+  if (!is_tibble(df)) df <- df %>% as_tibble()
   
   #create sym of group_by_var if applicable
   if (!is.null(group_by_var)) {

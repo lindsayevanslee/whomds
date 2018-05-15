@@ -1,6 +1,6 @@
 #' Plot a distribution of a score
 #'
-#' @param df a tibble where each row is an individual, containing at least a score column (between 0 and 100) and a categorization of that score
+#' @param df a data frame where each row is an individual, containing at least a score column (between 0 and 100) and a categorization of that score
 #' @param score a string (length 1) of the column name for the score variable to print the distribution of
 #' @param score_cat a string (length 1) of the column name for the categorization of the score variable
 #' @param cutoffs a numeric vector of the cut-offs for the score categorization
@@ -28,6 +28,9 @@
 #' cutoffs = c(19.1, 34.4, 49.6), x_lab = "Disability score", y_max = 0.2, pcent=TRUE)
 fig_dist <- function(df, score, score_cat, cutoffs,
                         x_lab = "Score", y_max = NULL, pcent=FALSE, pal = "Blues"){
+  
+  #convert to tibble
+  if (!is_tibble(df)) df <- df %>% as_tibble()
   
   if (pcent) {
     y_lab <- "Percent"

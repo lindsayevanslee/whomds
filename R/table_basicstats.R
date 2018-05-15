@@ -1,6 +1,6 @@
 #' Compute basic statistics of the number of member per group per household
 #'
-#' @param df a tibble of household data where the rows represent members of the households in the sample
+#' @param df a data frame of household data where the rows represent members of the households in the sample
 #' @param hh_id string (length 1) indicating the name of the variable in \code{df} uniquely identifying households
 #' @param group_by_var string (length 1) to pass to \code{group_by_at()} with name of variable in \code{df} to group results by
 #'
@@ -18,6 +18,9 @@
 #' @examples
 #' table_basicstats(mdstest, "enc_id", "age_cat")
 table_basicstats <- function(df, hh_id, group_by_var) {
+  
+  #convert to tibble
+  if (!is_tibble(df)) df <- df %>% as_tibble()
 
   sym_group_by_var <- sym(group_by_var)
   

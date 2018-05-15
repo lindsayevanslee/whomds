@@ -10,7 +10,7 @@ rasch_mds(df, vars_metric, vars_id, vars_DIF = NULL, resp_opts = 1:5,
   print_results = TRUE, model_name = NULL, path_parent = NULL)
 }
 \arguments{
-\item{df}{a tibble of individual survey data, where each row is an individual}
+\item{df}{a data frame of individual survey data, where each row is an individual}
 
 \item{vars_metric}{a character vector of items to use in the Rasch Analysis}
 

@@ -1,6 +1,6 @@
 #' Create testlets of survey items for a Rasch Model
 #'
-#' @param df a tibble of individual survey data, where each row is an individual 
+#' @param df a data frame of individual survey data, where each row is an individual 
 #' @param vars_metric a character vector of items to use in the Rasch Analysis
 #' @param testlet_strategy a list giving the strategy to take for creating testlets, passed to \code{rasch_testlet()}. One element of the list per testlet to create. Each element of the list must be a character vector of column names to use for the testlet. Optionally, name the element of the list to give the name of the new testlet. Otherwise, the new testlet will be the original column names separated by "_".
 #' @param max_values a tibble with two columns, \code{var} equivalent to \code{vars_metric} and \code{max_val} with their corresponding maximum possible values
@@ -13,6 +13,9 @@
 #' 
 #' @import dplyr
 rasch_testlet <- function(df, vars_metric, testlet_strategy, max_values, resp_opts) {
+  
+  #convert to tibble
+  if (!is_tibble(df)) df <- df %>% as_tibble()
   
   n_testlets <- length(testlet_strategy)
   

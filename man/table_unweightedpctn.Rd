@@ -8,7 +8,7 @@ table_unweightedpctn(df, vars_demo, group_by_var = NULL,
   spread_by_group_by_var = FALSE)
 }
 \arguments{
-\item{df}{a tibble of individual data where each row is an individual}
+\item{df}{a data frame of individual data where each row is an individual}
 
 \item{vars_demo}{a character vector of names of variables to calculate percent and N for}
 

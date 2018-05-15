@@ -1,7 +1,7 @@
 
 #' Calculate table of percentages of response distribution for survey items, survey weighted, disaggregated
 #'
-#' @param df a tibble of survey responses, one row per respondent
+#' @param df a data frame of survey responses, one row per respondent
 #' @param vars_ids a character vector of cluster ids, passed to a \code{survey::svydesign} object
 #' @param vars_strata a character vector of strata ids, passed to a \code{survey::svydesign} object
 #' @param vars_weights a character vector of survey weight ids, passed to a \code{survey::svydesign} object
@@ -43,6 +43,9 @@ table_weightedpct <- function(df, vars_ids, vars_strata, vars_weights,
                        willfilter = NULL
                        ) {
 
+  #convert to tibble
+  if (!is_tibble(df)) df <- df %>% as_tibble()
+  
   #convert data to long format using variables from formula_vars
   df <- df %>%
     tidyr::gather_(

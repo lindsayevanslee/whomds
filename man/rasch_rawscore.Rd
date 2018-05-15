@@ -7,7 +7,7 @@
 rasch_rawscore(df, vars_metric, vars_id, max_values)
 }
 \arguments{
-\item{df}{a tibble of individual survey data, where each row is an individual}
+\item{df}{a data frame of individual survey data, where each row is an individual}
 
 \item{vars_metric}{a character vector of items to use in the Rasch Analysis}
 

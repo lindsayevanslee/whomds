@@ -17,7 +17,7 @@ results from the WHO Model Disability Survey (MDS). They begin with \code{table_
 
 \section{Figure functions}{
 
-The graph functions output different graphs for reporting
+The figures functions output different figures for reporting
 results from the WHO Model Disability Survey (MDS). They begin with \code{fig_*()}
 }
 

@@ -1,6 +1,6 @@
 #' Print a population pyramid
 #'
-#' @param df a tibble of household survey data where each row is a household member
+#' @param df a data frame of household survey data where each row is a household member
 #' @param var_age a string (length 1) of the name of the age column
 #' @param var_sex a string (length 1) of the name of the sex column
 #'
@@ -20,6 +20,9 @@
 #' @examples 
 #' fig_poppyramid(mdstest, "edad", "sex")
 fig_poppyramid <- function(df, var_age, var_sex){
+  
+  #convert to tibble
+  if (!is_tibble(df)) df <- df %>% as_tibble()
   
   df <- df %>% 
     mutate(age_cat = cut(pull(df,var_age),

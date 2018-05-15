@@ -8,7 +8,7 @@ fig_dist(df, score, score_cat, cutoffs, x_lab = "Score", y_max = NULL,
   pcent = FALSE, pal = "Blues")
 }
 \arguments{
-\item{df}{a tibble where each row is an individual, containing at least a score column (between 0 and 100) and a categorization of that score}
+\item{df}{a data frame where each row is an individual, containing at least a score column (between 0 and 100) and a categorization of that score}
 
 \item{score}{a string (length 1) of the column name for the score variable to print the distribution of}
 

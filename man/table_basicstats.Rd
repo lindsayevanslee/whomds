@@ -7,7 +7,7 @@
 table_basicstats(df, hh_id, group_by_var)
 }
 \arguments{
-\item{df}{a tibble of household data where the rows represent members of the households in the sample}
+\item{df}{a data frame of household data where the rows represent members of the households in the sample}
 
 \item{hh_id}{string (length 1) indicating the name of the variable in \code{df} uniquely identifying households}
 

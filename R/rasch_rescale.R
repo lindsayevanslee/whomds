@@ -1,6 +1,6 @@
 #' Rescale score from Rasch Analysis to range from 0 to 100
 #'
-#' @param df a tibble of individual survey data, where each row is an individual 
+#' @param df a data frame of individual survey data, where each row is an individual 
 #' @param df_score a tibble resulting from \code{rasch_model()} with the person abilities from the Rasch Model
 #' @param vars_id a string with column name uniquely identifying individuals
 #'
@@ -12,6 +12,9 @@
 #'
 #'
 rasch_rescale <- function(df, df_score, vars_id) {
+  
+  #convert to tibble
+  if (!is_tibble(df)) df <- df %>% as_tibble()
   
   df_final <- df %>% 
     left_join(df_score) %>% 

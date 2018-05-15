@@ -1,6 +1,6 @@
 #' Split survey items by categories for a Rasch Model
 #'
-#' @param df a tibble of individual survey data, where each row is an individual 
+#' @param df a data frame of individual survey data, where each row is an individual 
 #' @param vars_metric a character vector of items to use in the Rasch Analysis
 #' @param split_strategy a named list giving the strategy to take for spliting variables by categories, passed to \code{rasch_split()}. One element of the list per variable to split by. Each element of the list must be a character vector of column names to split. The names of the list are the variables to split each group of variables by.
 #' @param max_values a tibble with two columns, \code{var} equivalent to \code{vars_metric} and \code{max_val} with their corresponding maximum possible values
@@ -14,6 +14,8 @@
 #' @import rlang
 rasch_split <- function(df, vars_metric, split_strategy, max_values) {
   
+  #convert to tibble
+  if (!is_tibble(df)) df <- df %>% as_tibble()
   
   #How many different kinds of recode?
   n_split <- length(split_strategy)

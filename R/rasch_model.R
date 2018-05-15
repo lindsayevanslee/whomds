@@ -1,6 +1,6 @@
 #' Run the Rasch Model and print diagnositic results
 #'
-#' @param df a tibble of individual survey data, where each row is an individual 
+#' @param df a data frame of individual survey data, where each row is an individual 
 #' @param vars_metric a character vector of items to use in the Rasch Analysis
 #' @param vars_id a string with column name uniquely identifying individuals
 #' @param print_results a logical vector indicating whether to print the results of the model to the \code{model_name} directory
@@ -27,6 +27,9 @@
 #' @import eRm
 rasch_model <- function(df, vars_metric, vars_id, print_results = TRUE, path_output = NULL, LIDcutoff = 0.2) {
 
+  #convert to tibble
+  if (!is_tibble(df)) df <- df %>% as_tibble()
+  
   #1. PCM analysis
   model <- PCM(df[,vars_metric])                                      
   

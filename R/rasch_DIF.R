@@ -1,6 +1,6 @@
 #' Perform analysis of Differential Item Functioning (DIF) for Rasch Model
 #'
-#' @param df a tibble of individual survey data, where each row is an individual 
+#' @param df a data frame of individual survey data, where each row is an individual 
 #' @param vars_metric a character vector of items to use in the Rasch Analysis
 #' @param vars_DIF a string with the column names to use for analyzing differential item functioning (DIF)
 #' @param residuals_PCM a matrix giving the residuals of the person parameters from the Rasch Model. Row names are the numbers of the people and the columns are for each variable.
@@ -22,6 +22,9 @@
 #' 
 #' @note Currently the calculation of the class intervals is quite slow. Reducing the number of breaks can improve speed.
 rasch_DIF <- function(df, vars_metric, vars_DIF, residuals_PCM, split_strategy = NULL, print_results = TRUE, path_output = NULL, breaks = 6) {
+  
+  #convert to tibble
+  if (!is_tibble(df)) df <- df %>% as_tibble()
   
   #save data frame for DIF
   df_DIF <- df %>% 

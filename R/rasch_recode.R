@@ -1,6 +1,6 @@
 #' Recode survey items for use in Rasch Analysis
 #'
-#' @param df a tibble of individual survey data, where each row is an individual 
+#' @param df a data frame of individual survey data, where each row is an individual 
 #' @param vars_metric a character vector of items to use in the Rasch Analysis
 #' @param recode_strategy a named list giving the strategy to take for recoding variables, passed to \code{rasch_recode()}. One element of the list per recode strategy. Each element of the list is a numeric vector giving the new values to map the variables to. The names of the list are the groups of column names to use for each recoding strategy, separated only by ",".
 #' @param max_values a tibble with two columns, \code{var} equivalent to \code{vars_metric} and \code{max_val} with their corresponding maximum possible values
@@ -10,6 +10,9 @@
 #' 
 #' @import dplyr
 rasch_recode <- function(df, vars_metric, recode_strategy, max_values) {
+  
+  #convert to tibble
+  if (!is_tibble(df)) df <- df %>% as_tibble()
   
   #How many different kinds of recode?
   n_recode <- length(recode_strategy)

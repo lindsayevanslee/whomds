@@ -1,6 +1,6 @@
 #' Top-level function to perform Rasch Analysis on WHO Model Disability Survey data
 #'
-#' @param df a tibble of individual survey data, where each row is an individual 
+#' @param df a data frame of individual survey data, where each row is an individual 
 #' @param vars_metric a character vector of items to use in the Rasch Analysis
 #' @param vars_id a string with column name uniquely identifying individuals
 #' @param vars_DIF a string with the column names to use for analyzing differential item functioning (DIF). Default is NULL, to skip analysis of DIF.
@@ -69,7 +69,10 @@ rasch_mds <- function(df,
   
   # PREPARE DATA ------------
   
-  #recode non-resp_opts to NA, make vars_id charactr
+  #convert to tibble
+  if (!is_tibble(df)) df <- df %>% as_tibble()
+  
+  #recode non-resp_opts to NA, make vars_id character
   to_NA <- df %>% 
     select(vars_metric) %>% 
     unlist() %>% 

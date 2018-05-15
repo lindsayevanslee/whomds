@@ -1,6 +1,6 @@
 #' Calculate a factor analysis for a Rasch Model
 #'
-#' @param df a tibble of individual survey data, where each row is an individual 
+#' @param df a data frame of individual survey data, where each row is an individual 
 #' @param vars_metric a character vector of items to use in the Rasch Analysis
 #' @param print_results a logical vector indicating whether to print the results of the model to the \code{model_name} directory
 #' @param path_output a string with the path to the output folder. Default is NULL.
@@ -23,6 +23,9 @@
 #' @import dplyr
 rasch_factor <- function(df, vars_metric, print_results = TRUE, path_output = NULL) {
   #----------------------------
+  #convert to tibble
+  if (!is_tibble(df)) df <- df %>% as_tibble()
+  
   # create data frame with ordered factors
   df_ordered <- df %>% 
     select(vars_metric) %>% 
