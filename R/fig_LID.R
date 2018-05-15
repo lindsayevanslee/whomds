@@ -27,7 +27,7 @@ fig_LID <- function(LIDforgraph, LIDcutoff = 0.2, path_output) {
     graphics::text(-0.25,0, "No LID found!", col="blue", cex=1.4)
     grDevices::dev.off()
   } else {
-    grDevices::pdf(paste0(path_output,"LID_plot.pdf"))
+    grDevices::pdf(paste0(path_output,"/LID_plot.pdf"))
     graphics::plot(finalgraph,layout=igraph::layout.kamada.kawai, vertex.label=igraph::V(finalgraph)$name, vertex.size=25, main="Local Dependendencies",
          vertex.color="lightgrey", vertex.label.color="black", edge.color="black")
     grDevices::dev.off()
