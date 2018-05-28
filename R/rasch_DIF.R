@@ -150,10 +150,10 @@ rasch_DIF <- function(df, vars_metric, vars_DIF, residuals_PCM, split_strategy =
                                                  c("Df", "Sum Sq", "Mean Sq", "F value", "Pr(>F)")
                                                rownames(result) <-
                                                  c(
-                                                   vars_DIF[i],
-                                                   paste0("class interval", i),
-                                                   paste0(vars_DIF[i], ":class interval", i),
-                                                   paste0("residuals", i)
+                                                   dif,
+                                                   "class interval",
+                                                   paste0(dif, ":class interval"),
+                                                   "residuals"
                                                  )
                                                
                                                result <- result %>% as_tibble(rownames = "rownames")
