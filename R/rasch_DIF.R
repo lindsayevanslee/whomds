@@ -156,7 +156,9 @@ rasch_DIF <- function(df, vars_metric, vars_DIF, residuals_PCM, split_strategy =
                                                    "residuals"
                                                  )
                                                
-                                               result <- result %>% as_tibble(rownames = "rownames")
+                                               result <- result %>% 
+                                                 as_tibble(rownames = "anova") %>% 
+                                                 tibble::add_column(DIF = dif, .before = 1)
                                                
                                              }
                                              
