@@ -222,6 +222,7 @@ rasch_mds <- function(df,
   
   
   # RETURN DATA WITH SCORE ----------
-  return(df_final)
+  return(list(df = df_final,
+              vars_metric = vars_metric))
   
 }
