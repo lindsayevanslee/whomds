@@ -26,7 +26,7 @@ rasch_recode <- function(df, vars_metric, recode_strategy, max_values) {
     
     new_recoded <- names(recode_strategy)[i]
     new_recoded <- unlist(strsplit(new_recoded,","))
-    if (!all(new_recoded %in% vars_metric)) stop("You input a string that is not included in the variable list.")
+    if (!all(new_recoded %in% helper_varlist(vars_metric))) stop("You input a string that is not included in the variable list.")
     
     #capture range of maximum values for each recoded variable and test if max values are equal
     resp_opts_range <- max_values %>% 

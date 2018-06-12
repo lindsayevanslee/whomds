@@ -17,7 +17,7 @@ rasch_split <- function(df, vars_metric, split_strategy, max_values) {
   #convert to tibble
   if (!tibble::is_tibble(df)) df <- df %>% as_tibble()
   
-  #How many different kinds of recode?
+  #How many different kinds of splitting?
   n_split <- length(split_strategy)
   
   
@@ -26,7 +26,7 @@ rasch_split <- function(df, vars_metric, split_strategy, max_values) {
     #capture new variable to split by
     new_split_by <- names(split_strategy)[i]
     
-    if (!(new_split_by %in% names(df))) stop("You input a string that is not included in the variable list.")
+    if (!(new_split_by %in% names(df))) stop("You input a string to split by that is not included in the variable list.")
     
     #categories of split variable
     split_cats <- df %>% pull(new_split_by) %>% unique()
@@ -35,7 +35,7 @@ rasch_split <- function(df, vars_metric, split_strategy, max_values) {
     #capture variables to split
     new_vars_to_split <- split_strategy[[i]]
     
-    if (!all(new_vars_to_split %in% vars_metric)) stop("You input a string that is not included in the variable list.")
+    if (!all(new_vars_to_split %in% helper_varslist(vars_metric))) stop("You input a string that is not included in the variable list.")
     
     
     #create split
@@ -54,11 +54,30 @@ rasch_split <- function(df, vars_metric, split_strategy, max_values) {
     
     
     #edit list of variables
-    new_split_vars <- paste(rep(new_vars_to_split,each=length(split_cats)),
-                            split_cats,sep="_")
+    if (is.list(vars_metric)) {
+      vars_metric <- purrr::map(vars_metric, function(vset) {
+        test <- vset %in% new_vars_to_split
+        
+        if (any(test)) {
+          
+          new_split_vars <- paste(rep(vset[which(test)], 
+                                      each = length(split_cats)),
+                                  split_cats, sep = "_")
+          
+          new_vset <- vset[-which(test)]
+          new_vset <- c(new_vset, new_split_vars)
+        }
+        
+        return(new_vset)
+        
+      })} else {
+        new_split_vars <- paste(rep(new_vars_to_split,each=length(split_cats)),
+                                split_cats,sep="_")
+        vars_metric <- vars_metric[-which(vars_metric %in% new_vars_to_split)]
+        vars_metric <- c(vars_metric, new_split_vars)
+      }
     
-    vars_metric <- vars_metric[-which(vars_metric %in% new_vars_to_split)]
-    vars_metric <- c(vars_metric, new_split_vars)
+
     
     #edit max_values
     new_max_values <- max_values %>% 

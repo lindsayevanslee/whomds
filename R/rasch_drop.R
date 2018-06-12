@@ -14,10 +14,24 @@
 rasch_drop <- function(vars_metric, drop_vars, max_values) {
   
 
-  if (!all(drop_vars %in% vars_metric)) stop("You input a string that is not included in the variable list.")
+  if (!all(drop_vars %in% helper_varlist(vars_metric))) stop("You input a string that is not included in the variable list.")
 
   #edit list of variables
-  vars_metric <- vars_metric[-which(vars_metric %in% drop_vars)]
+  if (is.list(vars_metric)) {
+    vars_metric <- purrr::map(vars_metric, function(vset) {
+      
+      if (drop_vars %in% vset) {
+        new_vset <-  vset[-which(vset %in% drop_vars)]
+      } else {
+        new_vset <- vset
+      }
+      
+      return(new_vset)
+      
+    })
+  } else {
+    vars_metric <- vars_metric[-which(vars_metric %in% drop_vars)]
+  }
   
   #edit data.frame of maximum possible values
   max_values <- max_values %>% 

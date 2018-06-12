@@ -1,8 +1,10 @@
-#' Top-level function to perform Rasch Analysis on WHO Model Disability Survey data
+#' Top-level function to perform Rasch Analysis on WHO Model Disability Survey data for children
 #'
 #' @param df a data frame of individual survey data, where each row is an individual 
-#' @param vars_metric a character vector of items to use in the Rasch Analysis
+#' @param vars_metric_common a character vector the common items among all individuals
+#' @param vars_metric_grouped a named list of character vectors with the items to use in the Rasch Analysis per group. The list should have names corresponding to the different groups, and contain character vectors of the corrsponding items for each group.
 #' @param vars_id a string with column name uniquely identifying individuals
+#' @param vars_metric a named list of character vectors with the items to use in the Rasch Analysis. One element of the list should be "common" and contain a character vector of the common items among all individuals. Other elements of the list should have names corresponding to the different groups, and contain character vectors of the corrsponding items for each group.
 #' @param vars_DIF a string with the column names to use for analyzing differential item functioning (DIF). Default is NULL, to skip analysis of DIF.
 #' @param resp_opts a numeric vector of possible response options for \code{vars_metric}. Must begin with 1. Default is 1:5
 #' @param max_NA a numeric value for the maximum number of NAs allowed per individual among \code{vars_metric}. Default is 2.
@@ -26,20 +28,24 @@
 #' @export
 #' 
 #' @import dplyr
-rasch_mds <- function(df, 
-                      vars_metric,
-                      vars_id,
-                      vars_DIF = NULL,
-                      resp_opts = 1:5,
-                      max_NA = 2,
-                      print_results = TRUE,
-                      path_parent = NULL,
-                      model_name = NULL,
-                      testlet_strategy = NULL, 
-                      recode_strategy = NULL, 
-                      drop_vars = NULL, 
-                      split_strategy = NULL,
-                      comment = NULL
+rasch_mds_children <- function(df, 
+                               vars_id,
+                               vars_age_group,
+                               vars_metric_common = NULL,
+                               vars_metric_grouped = NULL,
+                               vars_metric = NULL,
+                               TAM_model = "PCM2",
+                               vars_DIF = NULL,
+                               resp_opts = 1:5,
+                               max_NA = 2,
+                               print_results = TRUE,
+                               path_parent = NULL,
+                               model_name = NULL,
+                               testlet_strategy = NULL, 
+                               recode_strategy = NULL, 
+                               drop_vars = NULL, 
+                               split_strategy = NULL,
+                               comment = NULL
 ) {
   
   # # examples:
@@ -49,10 +55,31 @@ rasch_mds <- function(df,
   # drop_vars <- c("c1","c2")
   # split_strategy <- list("sex" = c("c1","c2","c3"))
   
+  #TO IMPLEMENT
+  #DONE take input of common items and age-specific items
+  #DONE argument of models to try for TAM
+  #DONE how to do age split
+  #DONE adapt testlet, drop, recode, split to account for list of variables across groups -> should testlets be allowed between common items and specific items?
+  #DONE split df by age group
+  #6_RunModels through 10_ModelQuality should be basically fine
+  #select TAM model to use
+  #adapt recode function
+  #13_Thresholds, dependency graph, levels should ve mostly ok
+  #factor analysis? DIF?
+  
+  #check for correct entry of vars_metric/_common/_grouped
+  if (is.null(vars_metric) & (is.null(vars_metric_common) | is.null(vars_metric_grouped))) stop("You either must enter EITHER vars_metric OR both vars_metric_common and vars_metric_grouped")
+  else if (!is.null(vars_metric) & (!is.null(vars_metric_common) | !is.null(vars_metric_grouped))) stop("You entered vars_metric and at least one of vars_metric_common and vars_metric_grouped. You either must enter EITHER vars_metric OR both vars_metric_common and vars_metric_grouped.")
+  
+  #combine items into one list
+  if (!is.null(vars_metric)) {
+    vars_metric <- c(list(common = vars_metric_common),
+                     vars_metric_grouped)
+  }
   
   #perform some checks
   if (resp_opts[1]!=1) stop("resp_opts must start with 1")
-  if (max_NA >= length(vars_metric)) stop("max_NA must be less than length of vars_metric")
+  if (max_NA >= length(helper_varslist(vars_metric))) stop("max_NA must be less than length of vars_metric")
   
   # SAVE OUTPUT PATH ---------------------
   
@@ -103,11 +130,21 @@ rasch_mds <- function(df,
   
   
   #store initial data frame of maximum possible values for each variable
-  max_values <- tibble(var = vars_metric,
+  max_values <- tibble(var = vars_metric_all,
                        max_val = max(resp_opts)-1)
   
   # save comment
   if (!is.null(comment)) utils::write.table(comment, file = paste0(path_output, "/Comment.txt"), row.names = FALSE, col.names = FALSE)
+  
+  # SPLIT BY AGE/MAKE VARS DISCRETE BY AGE --------
+  if (length(vars_metric) > 1) {
+    split_age_result <- rasch_split_age(df = df,
+                                        vars_age_group = vars_age_group, 
+                                        vars_metric = vars_metric)
+    df <- split_age_result[["df"]]
+    vars_metric <- split_age_result[["vars_metric"]]
+    
+  }
   
   
   # PERFORM TESTLETS--------
@@ -125,7 +162,7 @@ rasch_mds <- function(df,
     
     cat("Testlet creation completed. \n")
     
-    }
+  }
   
   # PERFORM RECODING --------
   if (!is.null(recode_strategy)) {
@@ -153,6 +190,15 @@ rasch_mds <- function(df,
     cat("Dropping variables completed. \n")
     
   }
+  
+  
+  # SPLIT DATA BY AGE -----
+  df_nest <- rasch_df_nest(df = df,
+                           vars_age_group = vars_age_group,
+                           vars_id = vars_id)
+  
+  
+  
   
   # PERFORM FACTOR ANALYSIS ------------
   factor_result <- rasch_factor(df = df, 
