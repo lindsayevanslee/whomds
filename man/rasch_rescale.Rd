@@ -22,6 +22,7 @@ Rescale score from Rasch Analysis to range from 0 to 100
 \seealso{
 Other rasch functions: \code{\link{rasch_DIF}},
   \code{\link{rasch_drop}}, \code{\link{rasch_factor}},
+  \code{\link{rasch_mds_children}},
   \code{\link{rasch_mds}}, \code{\link{rasch_model}},
   \code{\link{rasch_rawscore}}
 }

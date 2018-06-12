@@ -24,7 +24,8 @@ Dropping variables might be desirable if one finds that particular items are cau
 }
 \seealso{
 Other rasch functions: \code{\link{rasch_DIF}},
-  \code{\link{rasch_factor}}, \code{\link{rasch_mds}},
-  \code{\link{rasch_model}}, \code{\link{rasch_rawscore}},
-  \code{\link{rasch_rescale}}
+  \code{\link{rasch_factor}},
+  \code{\link{rasch_mds_children}},
+  \code{\link{rasch_mds}}, \code{\link{rasch_model}},
+  \code{\link{rasch_rawscore}}, \code{\link{rasch_rescale}}
 }

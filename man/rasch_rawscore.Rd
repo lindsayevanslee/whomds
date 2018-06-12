@@ -24,6 +24,7 @@ Add the raw scores to the data and artificial individuals attaining the minimum 
 \seealso{
 Other rasch functions: \code{\link{rasch_DIF}},
   \code{\link{rasch_drop}}, \code{\link{rasch_factor}},
+  \code{\link{rasch_mds_children}},
   \code{\link{rasch_mds}}, \code{\link{rasch_model}},
   \code{\link{rasch_rescale}}
 }

@@ -33,7 +33,8 @@ Unidimensionality of the data is one of the core assumptions of the Rasch Model.
 }
 \seealso{
 Other rasch functions: \code{\link{rasch_DIF}},
-  \code{\link{rasch_drop}}, \code{\link{rasch_mds}},
-  \code{\link{rasch_model}}, \code{\link{rasch_rawscore}},
-  \code{\link{rasch_rescale}}
+  \code{\link{rasch_drop}},
+  \code{\link{rasch_mds_children}},
+  \code{\link{rasch_mds}}, \code{\link{rasch_model}},
+  \code{\link{rasch_rawscore}}, \code{\link{rasch_rescale}}
 }

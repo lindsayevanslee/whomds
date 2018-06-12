@@ -40,7 +40,8 @@ Currently the calculation of the class intervals is quite slow. Reducing the num
 }
 \seealso{
 Other rasch functions: \code{\link{rasch_drop}},
-  \code{\link{rasch_factor}}, \code{\link{rasch_mds}},
-  \code{\link{rasch_model}}, \code{\link{rasch_rawscore}},
-  \code{\link{rasch_rescale}}
+  \code{\link{rasch_factor}},
+  \code{\link{rasch_mds_children}},
+  \code{\link{rasch_mds}}, \code{\link{rasch_model}},
+  \code{\link{rasch_rawscore}}, \code{\link{rasch_rescale}}
 }
