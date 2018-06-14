@@ -35,8 +35,8 @@ fig_LID <- function(LIDforgraph, LIDcutoff = 0.2, path_output, extra_file_label 
   }
   
   #save vector for colors
-  if (is.null(vars_print_blue)) vertex_color <- "lightgrey"
-  else vertex_color <- c("skyblue","lightgrey")[1+V(finalgraph)$name %in% vertex_print_grey]
+  if (is.null(vertex_print_grey)) vertex_color <- "lightgrey"
+  else vertex_color <- c("skyblue","lightgrey")[1+igraph::V(finalgraph)$name %in% vertex_print_grey]
   
   #print plot
   if (igraph::components(finalgraph)$no==0) {

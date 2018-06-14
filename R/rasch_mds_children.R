@@ -231,14 +231,11 @@ rasch_mds_children <- function(df,
                                   vars_age_group = vars_age_group,
                                   TAM_model = TAM_model)
   
-  ### YOU TESTED TO HERE (EXCEPT TESTLET, RECODE, DROP, SPLIT) --------------------
-  
-  
-  
   # CALCULATE MODEL QUALITY -----------
   df_nest <- rasch_quality_children(df_nest = df_nest,
                                     vars_metric = vars_metric)
   
+ 
   # PRINT RESULTS ------------
   if (print_results) {
     rasch_quality_children_print(df_nest = df_nest,
@@ -273,6 +270,8 @@ rasch_mds_children <- function(df,
   #   
   #   cat("DIF analysis completed. \n")
   # }
+  
+  ### YOU TESTED TO HERE (EXCEPT TESTLET, RECODE, DROP, SPLIT) --------------------
   
   
   
