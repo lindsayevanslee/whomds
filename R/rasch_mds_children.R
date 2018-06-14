@@ -61,10 +61,8 @@ rasch_mds_children <- function(df,
   #DONE how to do age split
   #DONE adapt testlet, drop, recode, split to account for list of variables across groups -> should testlets be allowed between common items and specific items?
   #DONE split df by age group
-  #6_RunModels through 10_ModelQuality should be basically fine
-  #select TAM model to use
-  #adapt recode function
-  #13_Thresholds, dependency graph, levels should ve mostly ok
+  #DONE 6_RunModels through 10_ModelQuality should be basically fine
+  #DONE 13_Thresholds, dependency graph, levels should ve mostly ok
   #factor analysis? DIF?
   
   #check for correct entry of vars_metric/_common/_grouped
@@ -191,24 +189,6 @@ rasch_mds_children <- function(df,
     
   }
   
-  
-  # SPLIT DATA BY AGE -----
-  df_nest <- rasch_df_nest(df = df,
-                           vars_age_group = vars_age_group,
-                           vars_id = vars_id)
-  
-  
-  
-  
-  # PERFORM FACTOR ANALYSIS ------------
-  factor_result <- rasch_factor(df = df, 
-                                vars_metric = vars_metric, 
-                                print_results = print_results, 
-                                path_output = path_output)
-  
-  
-  cat("Factor analysis completed. \n")
-  
   # PERFORM SPLIT -------
   if (!is.null(split_strategy)) {
     split_result <- rasch_split(df = df, 
@@ -223,44 +203,64 @@ rasch_mds_children <- function(df,
     cat("Splitting variables completed. \n")
   }
   
-  # ADD RAW SCORE ---------
-  df <- rasch_rawscore(df = df,
-                       vars_metric = vars_metric,
-                       vars_id = vars_id,
-                       max_values = max_values)
-  
-  # PERFORM RASCH ANALYSIS -----
-  model_result <- rasch_model(df = df,
-                              vars_metric = vars_metric,
-                              vars_id = vars_id,
-                              print_results = print_results,
-                              path_output = path_output)
-  
-  residuals_PCM <- model_result[["residuals_PCM"]]
-  df_score <- model_result[["df_score"]]
-  
-  cat("Rasch Model completed. \n")
+  # SPLIT DATA BY AGE -----
+  df_nest <- rasch_df_nest(df = df,
+                           vars_age_group = vars_age_group,
+                           vars_id = vars_id)
   
   
   
-  # PERFORM DIF ANALYSIS ---------
-  if (!is.null(vars_DIF)) {
-    DIF_result <- rasch_DIF(df = df, 
-                            vars_metric = vars_metric, 
-                            vars_DIF = vars_DIF, 
-                            residuals_PCM = residuals_PCM, 
-                            split_strategy = split_strategy, 
-                            print_results = print_results, 
-                            path_output = path_output)
+  # CALCULATE MODELS --------------
+  df_nest <- rasch_children_model(df = df, 
+                                  df_nest = df_nest,
+                                  vars_metric = vars_metric,
+                                  vars_age_group = vars_age_group,
+                                  TAM_model = TAM_model)
+  
+  # CALCULATE MODEL QUALITY -----------
+  df_nest <- rasch_quality_children(df_nest = df_nest,
+                                    vars_metric = vars_metric)
+  
+  # PRINT RESULTS ------------
+  if (print_results) {
+    rasch_quality_children_print(df_nest = df_nest,
+                                 vars_metric = vars_metric,
+                                 vars_age_group = vars_age_group,
+                                 TAM_model = TAM_model,
+                                 path_output = path_output)
     
-    cat("DIF analysis completed. \n")
   }
+  
+  # 
+  # 
+  # 
+  # 
+  # # ADD RAW SCORE ---------
+  # df <- rasch_rawscore(df = df,
+  #                      vars_metric = vars_metric,
+  #                      vars_id = vars_id,
+  #                      max_values = max_values)
+  # 
+  # 
+  # 
+  # # PERFORM DIF ANALYSIS ---------
+  # if (!is.null(vars_DIF)) {
+  #   DIF_result <- rasch_DIF(df = df, 
+  #                           vars_metric = vars_metric, 
+  #                           vars_DIF = vars_DIF, 
+  #                           residuals_PCM = residuals_PCM, 
+  #                           split_strategy = split_strategy, 
+  #                           print_results = print_results, 
+  #                           path_output = path_output)
+  #   
+  #   cat("DIF analysis completed. \n")
+  # }
   
   
   
   # RESCALE SCORE --------
-  df_final <- rasch_rescale(df = df,
-                            df_score = df_score,
+  df_final <- rasch_rescale_children(df_nest = df_nest,
+                            vars_age_group = vars_age_group,
                             vars_id = vars_id)
   
   # PRINT DATA ---------
