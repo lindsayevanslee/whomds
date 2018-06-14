@@ -57,7 +57,7 @@ rasch_split_age <- function (df, vars_age_group, vars_metric) {
       
       new_vset <- vset[-which(test)]
       new_vset <- c(new_vset, new_split_vars)
-    }
+    } else new_vset <- vset
     
     return(new_vset)
     

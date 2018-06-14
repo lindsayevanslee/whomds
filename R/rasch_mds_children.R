@@ -37,7 +37,8 @@ rasch_mds_children <- function(df,
                                TAM_model = "PCM2",
                                vars_DIF = NULL,
                                resp_opts = 1:5,
-                               max_NA = 2,
+                               has_at_least_one = 4:5,
+                               max_NA = 10,
                                print_results = TRUE,
                                path_parent = NULL,
                                model_name = NULL,
@@ -63,14 +64,18 @@ rasch_mds_children <- function(df,
   #DONE split df by age group
   #DONE 6_RunModels through 10_ModelQuality should be basically fine
   #DONE 13_Thresholds, dependency graph, levels should ve mostly ok
+  #adapt so that either anchored or multigroup model can be used
   #factor analysis? DIF?
   
   #check for correct entry of vars_metric/_common/_grouped
-  if (is.null(vars_metric) & (is.null(vars_metric_common) | is.null(vars_metric_grouped))) stop("You either must enter EITHER vars_metric OR both vars_metric_common and vars_metric_grouped")
-  else if (!is.null(vars_metric) & (!is.null(vars_metric_common) | !is.null(vars_metric_grouped))) stop("You entered vars_metric and at least one of vars_metric_common and vars_metric_grouped. You either must enter EITHER vars_metric OR both vars_metric_common and vars_metric_grouped.")
+  if (is.null(vars_metric) & (is.null(vars_metric_common) | is.null(vars_metric_grouped))) {
+    stop("You either must enter EITHER vars_metric OR both vars_metric_common and vars_metric_grouped")
+  } else if (!is.null(vars_metric) & (!is.null(vars_metric_common) | !is.null(vars_metric_grouped))) {
+    stop("You entered vars_metric and at least one of vars_metric_common and vars_metric_grouped. You either must enter EITHER vars_metric OR both vars_metric_common and vars_metric_grouped.")
+  }
   
   #combine items into one list
-  if (!is.null(vars_metric)) {
+  if (is.null(vars_metric)) {
     vars_metric <- c(list(common = vars_metric_common),
                      vars_metric_grouped)
   }
@@ -99,13 +104,13 @@ rasch_mds_children <- function(df,
   
   #recode non-resp_opts to NA, make vars_id character
   to_NA <- df %>% 
-    select(vars_metric) %>% 
+    select(helper_varslist(vars_metric)) %>% 
     unlist() %>% 
     unique() %>% 
     setdiff(c(resp_opts, NA))
   
   df <- df %>%
-    mutate_at(vars(vars_metric),
+    mutate_at(vars(helper_varslist(vars_metric)),
               dplyr::funs(plyr::mapvalues, .args = list(
                 from = to_NA, to = rep(NA, length(to_NA)), warn_missing = FALSE
               ))) %>% 
@@ -113,7 +118,7 @@ rasch_mds_children <- function(df,
   
   #remove people with too many NAs
   rm_rows <- df %>% 
-    select(vars_metric) %>% 
+    select(helper_varslist(vars_metric)) %>% 
     is.na() %>% 
     rowSums()
   rm_rows <- rm_rows > max_NA
@@ -123,16 +128,25 @@ rasch_mds_children <- function(df,
   
   #convert values to start at 0
   df <- df %>%
-    mutate_at(vars(vars_metric),
+    mutate_at(vars(helper_varslist(vars_metric)),
               dplyr::funs(. - 1))
   
   
   #store initial data frame of maximum possible values for each variable
-  max_values <- tibble(var = vars_metric_all,
+  max_values <- tibble(var = helper_varslist(vars_metric),
                        max_val = max(resp_opts)-1)
   
   # save comment
   if (!is.null(comment)) utils::write.table(comment, file = paste0(path_output, "/Comment.txt"), row.names = FALSE, col.names = FALSE)
+  
+  
+  # keep only those with at least one of vars_metric in has_at_least_one ---------
+  if (!is.null(has_at_least_one)) {
+    df <- df %>% 
+      filter_at(vars(helper_varslist(vars_metric)), 
+                any_vars(. %in% (has_at_least_one - 1)))
+  }
+  
   
   # SPLIT BY AGE/MAKE VARS DISCRETE BY AGE --------
   if (length(vars_metric) > 1) {
@@ -209,13 +223,17 @@ rasch_mds_children <- function(df,
                            vars_id = vars_id)
   
   
-  
+
   # CALCULATE MODELS --------------
-  df_nest <- rasch_children_model(df = df, 
+  df_nest <- rasch_model_children(df = df, 
                                   df_nest = df_nest,
                                   vars_metric = vars_metric,
                                   vars_age_group = vars_age_group,
                                   TAM_model = TAM_model)
+  
+  ### YOU TESTED TO HERE (EXCEPT TESTLET, RECODE, DROP, SPLIT) --------------------
+  
+  
   
   # CALCULATE MODEL QUALITY -----------
   df_nest <- rasch_quality_children(df_nest = df_nest,
@@ -260,8 +278,8 @@ rasch_mds_children <- function(df,
   
   # RESCALE SCORE --------
   df_final <- rasch_rescale_children(df_nest = df_nest,
-                            vars_age_group = vars_age_group,
-                            vars_id = vars_id)
+                                     vars_age_group = vars_age_group,
+                                     vars_id = vars_id)
   
   # PRINT DATA ---------
   if (print_results) df_final %>% readr::write_csv(path = paste0(path_output, "/Data_final.csv"))

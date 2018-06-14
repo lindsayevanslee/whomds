@@ -9,40 +9,41 @@ rasch_model_children <- function(df, df_nest, vars_metric, vars_age_group, TAM_m
   
   #Calculate start models and store in list column called mod_start
   df_nest <- df_nest %>%
-    mutate(mod_start = tam.f(df_split %>% select(c(
-      vars_metric[["common"]],
-      vars_metric[[!!rlang::sym(vars_age_group)]]
-    )),
-    irtmodel = TAM_model,
-    verbose = FALSE))
+    mutate(df_split_selected = map2(df_split, !!rlang::sym(vars_age_group), 
+                                    ~ select(..1, c(vars_metric[["common"]], vars_metric[[as.character(..2)]]))),
+           mod_start = map(df_split_selected, 
+                           ~ tam.f(resp = ., irtmodel = TAM_model, verbose = FALSE))
+           )
+  
+  
   
   #Calculate multigroup model with only common items
-  mod_multigroup <-
-    tam.f(resp = df %>% select(vars_metric[["common"]]),
+  mod_multigroup <- df %>% 
+    select(vars_metric[["common"]]) %>% 
+    tam.f(resp = .,
           irtmodel = TAM_model,
           group = pull(df, vars_age_group),
           beta.fixed = FALSE,
           verbose = FALSE)
   df_nest <- df_nest %>% 
-    mutate(mod_multigroup = mod_multigroup)
+    mutate(mod_multigroup = list(mod_multigroup))
   
   #Calculate anchored model
   df_nest <- df_nest %>% 
-    mutate(start_xsi = pull(mod_start, "xsi.fixed.estimated"),
-           multigroup_xsi = pull(mod_multigroup, "xsi.fixed.estimated"),
-           index_uniqueitems = which(grepl(pattern = paste(vars_metric[[!!rlang::sym(vars_age_group)]], collapse="|"),
-                                           rownames(start_xsi))),
-           anchored_xsi = rbind(multigroup_xsi,
-                                start_xsi[index_uniqueitems,]),
-           mod_anchored = tam.f(resp = df_split %>% select(c(
-             vars_metric[["common"]],
-             vars_metric[[!!rlang::sym(vars_age_group)]]
-           )),
-           irtmodel = TAM_model,
-           xsi.fixed = anchored_xsi,
-           verbose = FALSE))
+    mutate(start_xsi = map(mod_start, "xsi.fixed.estimated"),
+           multigroup_xsi = map(mod_multigroup, "xsi.fixed.estimated"),
+           index_uniqueitems = map2(start_xsi, !!rlang::sym(vars_age_group), 
+                                    ~ which(grepl(pattern = paste(vars_metric[[as.character(..2)]], collapse="|"), rownames(..1)))),
+           anchored_xsi = pmap(list(multigroup_xsi, start_xsi, index_uniqueitems), 
+                               ~ rbind(..1, ..2[..3,])),
+           mod_anchored = map2(df_split_selected, anchored_xsi,
+                              ~ tam.f(resp = ..1, 
+                                      irtmodel = TAM_model, 
+                                      xsi.fixed = ..2,
+                                      verbose = FALSE))
+           
+           )
 
-  
   return(df_nest)
   
 } 
