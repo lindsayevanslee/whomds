@@ -1,3 +1,13 @@
+#' Nest data by age group
+#'
+#' @inheritParams rasch_mds_children
+#'
+#' @return nested tibble with two columns: the age group given by \code{vars_age_group} and \code{df_split} with the split data
+#' @export
+#' 
+#' @family rasch functions
+#' @family children analysis functions
+#'
 rasch_df_nest <- function(df, vars_age_group, vars_id) {
   
   #remove people with NA for age group 

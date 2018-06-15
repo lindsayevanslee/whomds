@@ -14,7 +14,7 @@ rasch_model(df, vars_metric, vars_id, print_results = TRUE,
 
 \item{vars_id}{a string with column name uniquely identifying individuals}
 
-\item{print_results}{a logical vector indicating whether to print the results of the model to the \code{model_name} directory}
+\item{print_results}{a logical value indicating whether or not to print various files displaying results from the Rasch Model. Default is TRUE, to print the files.}
 
 \item{path_output}{a string with the path to the output folder. Default is NULL.}
 
@@ -40,8 +40,16 @@ The Rasch Model is calculated using the function \code{eRm::PCM()}.
 }
 \seealso{
 Other rasch functions: \code{\link{rasch_DIF}},
-  \code{\link{rasch_drop}}, \code{\link{rasch_factor}},
+  \code{\link{rasch_df_nest}}, \code{\link{rasch_drop}},
+  \code{\link{rasch_factor}},
   \code{\link{rasch_mds_children}},
-  \code{\link{rasch_mds}}, \code{\link{rasch_rawscore}},
-  \code{\link{rasch_rescale}}
+  \code{\link{rasch_mds}},
+  \code{\link{rasch_model_children}},
+  \code{\link{rasch_quality_children_print}},
+  \code{\link{rasch_quality_children}},
+  \code{\link{rasch_rawscore}}, \code{\link{rasch_recode}},
+  \code{\link{rasch_rescale_children}},
+  \code{\link{rasch_rescale}},
+  \code{\link{rasch_split_age}}, \code{\link{rasch_split}},
+  \code{\link{rasch_testlet}}
 }

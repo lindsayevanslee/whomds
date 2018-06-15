@@ -1,14 +1,16 @@
 #' Drop items from a Rasch Analysis
 #'
-#' @param vars_metric a character vector of items to use in the Rasch Analysis
-#' @param drop_vars a character vector of items to drop from the Rasch Analysis
-#' @param max_values a tibble with two columns, \code{var} equivalent to \code{vars_metric} and \code{max_val} with their corresponding maximum possible values
+#' @inheritParams rasch_mds
+#' @inheritParams rasch_testlet
 #'
-#' @return a named list with the new \code{vars_metric} and new \code{max_values} after dropping the desired variables
+#' @return a named list with:
+#' \item{vars_metric}{new \code{vars_metric} after dropping the desired variables}
+#' \item{max_values}{new \code{max_values} after dropping the desired variables}
 #' 
 #' @details Dropping variables might be desirable if one finds that particular items are causing a lot of problems for the fit of a Rasch Model.
 #' 
 #' @family rasch functions
+#' @family children analysis functions
 #' 
 #' @export
 rasch_drop <- function(vars_metric, drop_vars, max_values) {

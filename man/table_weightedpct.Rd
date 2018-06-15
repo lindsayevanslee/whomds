@@ -9,7 +9,7 @@ table_weightedpct(df, vars_ids, vars_strata, vars_weights, formula_vars, ...,
   spread_value = "prop", arrange_vars = NULL, willfilter = NULL)
 }
 \arguments{
-\item{df}{a data frame of survey responses, one row per respondent}
+\item{df}{a data frame of individual survey data, where each row is an individual}
 
 \item{vars_ids}{a character vector of cluster ids, passed to a \code{survey::svydesign} object}
 

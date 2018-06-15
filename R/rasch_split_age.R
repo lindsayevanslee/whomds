@@ -1,3 +1,18 @@
+#' Split all survey items by age category for a Rasch Model if they are not discrete
+#'
+#' @inheritParams rasch_mds_children
+#' @inheritParams rasch_mds
+#' @inheritParams rasch_testlet
+#'
+#' @return a named list with:
+#' \item{df}{new \code{df} after splitting the variables}
+#' \item{vars_metric}{new \code{vars_metric} after splitting the variables}
+#' \item{max_values}{new \code{max_values} after splitting the variables}
+#' @export
+#' 
+#' @family rasch functions
+#' @family children analysis functions
+#'
 rasch_split_age <- function (df, vars_age_group, vars_metric, vars_id, max_values) {
   
   #capture levels of age_group

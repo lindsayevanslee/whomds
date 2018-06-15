@@ -7,7 +7,7 @@
 fig_poppyramid(df, var_age, var_sex)
 }
 \arguments{
-\item{df}{a data frame of household survey data where each row is a household member}
+\item{df}{a data frame of individual survey data, where each row is an individual}
 
 \item{var_age}{a string (length 1) of the name of the age column}
 

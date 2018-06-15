@@ -14,15 +14,23 @@ rasch_rescale(df, df_score, vars_id)
 \item{vars_id}{a string with column name uniquely identifying individuals}
 }
 \value{
-a tibble with the full join between \code{df} and \code{df_score} and new column "rescaled" with the rescaled person abilities, ranging from 0 to 100, and filter out any rows with an artificial minimum or maximum
+a tibble with the left join between \code{df} and \code{df_score} and new column "rescaled" with the rescaled person abilities, ranging from 0 to 100, and filter out any rows with an artificial minimum or maximum
 }
 \description{
 Rescale score from Rasch Analysis to range from 0 to 100
 }
 \seealso{
 Other rasch functions: \code{\link{rasch_DIF}},
-  \code{\link{rasch_drop}}, \code{\link{rasch_factor}},
+  \code{\link{rasch_df_nest}}, \code{\link{rasch_drop}},
+  \code{\link{rasch_factor}},
   \code{\link{rasch_mds_children}},
-  \code{\link{rasch_mds}}, \code{\link{rasch_model}},
-  \code{\link{rasch_rawscore}}
+  \code{\link{rasch_mds}},
+  \code{\link{rasch_model_children}},
+  \code{\link{rasch_model}},
+  \code{\link{rasch_quality_children_print}},
+  \code{\link{rasch_quality_children}},
+  \code{\link{rasch_rawscore}}, \code{\link{rasch_recode}},
+  \code{\link{rasch_rescale_children}},
+  \code{\link{rasch_split_age}}, \code{\link{rasch_split}},
+  \code{\link{rasch_testlet}}
 }

@@ -1,11 +1,8 @@
 #' Run the Rasch Model and print diagnositic results
 #'
-#' @param df a data frame of individual survey data, where each row is an individual 
-#' @param vars_metric a character vector of items to use in the Rasch Analysis
-#' @param vars_id a string with column name uniquely identifying individuals
-#' @param print_results a logical vector indicating whether to print the results of the model to the \code{model_name} directory
 #' @param path_output a string with the path to the output folder. Default is NULL.
 #' @param LIDcutoff a numeric value between 0 and 1 indicating the cut-off for significant local item dependence
+#' @inheritParams rasch_mds
 #'
 #' @details The Rasch Model is calculated using the function \code{eRm::PCM()}. 
 #' 

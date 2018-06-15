@@ -51,8 +51,16 @@ This function combines all of the separate analyses of model fit necessary to as
 }
 \seealso{
 Other rasch functions: \code{\link{rasch_DIF}},
-  \code{\link{rasch_drop}}, \code{\link{rasch_factor}},
+  \code{\link{rasch_df_nest}}, \code{\link{rasch_drop}},
+  \code{\link{rasch_factor}},
   \code{\link{rasch_mds_children}},
-  \code{\link{rasch_model}}, \code{\link{rasch_rawscore}},
-  \code{\link{rasch_rescale}}
+  \code{\link{rasch_model_children}},
+  \code{\link{rasch_model}},
+  \code{\link{rasch_quality_children_print}},
+  \code{\link{rasch_quality_children}},
+  \code{\link{rasch_rawscore}}, \code{\link{rasch_recode}},
+  \code{\link{rasch_rescale_children}},
+  \code{\link{rasch_rescale}},
+  \code{\link{rasch_split_age}}, \code{\link{rasch_split}},
+  \code{\link{rasch_testlet}}
 }

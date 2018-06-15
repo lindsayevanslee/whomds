@@ -1,3 +1,14 @@
+#' Calculate quality of multigroup and anchored Rasch Models
+#'
+#' @inheritParams rasch_mds_children
+#' @inheritParams rasch_model_children
+#'
+#' @return a nested tibble with new columns with information about model quality
+#' @export
+#' 
+#' @family rasch functions
+#' @family children analysis functions
+#'
 rasch_quality_children <- function(df_nest, vars_metric) {
   
   #calculate start model quality

@@ -1,13 +1,9 @@
 #' Perform analysis of Differential Item Functioning (DIF) for Rasch Model
 #'
-#' @param df a data frame of individual survey data, where each row is an individual 
-#' @param vars_metric a character vector of items to use in the Rasch Analysis
-#' @param vars_DIF a string with the column names to use for analyzing differential item functioning (DIF)
 #' @param residuals_PCM a matrix giving the residuals of the person parameters from the Rasch Model. Row names are the numbers of the people and the columns are for each variable.
-#' @param split_strategy a named list giving the strategy to take for spliting variables by categories, passed to \code{rasch_split()}. One element of the list per variable to split by. Each element of the list must be a character vector of column names to split. The names of the list are the variables to split each group of variables by. Default is NULL, to indicate there was no splitting. 
-#' @param print_results a logical value indicating whether or not to print various files displaying results from the Rasch Model. Default is TRUE, to print the files.
-#' @param path_output a string with the path to the output folder. Default is NULL.
 #' @param breaks a numeric value giving the number if class intervals. Default is 6.
+#' @inheritParams rasch_mds
+#' @inheritParams rasch_factor
 #'
 #' @return a list with results from the DIF analysis: 
 #' \item{df_DIF_class}{the person residuals from the Rasch Model, the assigned class intervals, and the variables used for DIF analysis}

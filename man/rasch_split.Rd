@@ -11,16 +11,46 @@ rasch_split(df, vars_metric, split_strategy, max_values)
 
 \item{vars_metric}{a character vector of items to use in the Rasch Analysis}
 
-\item{split_strategy}{a named list giving the strategy to take for spliting variables by categories, passed to \code{rasch_split()}. One element of the list per variable to split by. Each element of the list must be a character vector of column names to split. The names of the list are the variables to split each group of variables by.}
+\item{split_strategy}{a named list giving the strategy to take for spliting variables by categories, passed to \code{rasch_split()}. One element of the list per variable to split by. Each element of the list must be a character vector of column names to split. The names of the list are the variables to split each group of variables by. Default is NULL, to not split items.}
 
 \item{max_values}{a tibble with two columns, \code{var} equivalent to \code{vars_metric} and \code{max_val} with their corresponding maximum possible values}
 }
 \value{
-a named list with the new \code{df}, new \code{vars_metric} and new \code{max_values} after splitting the desired variables
+a named list with:
+\item{df}{new \code{df} after splitting the desired variables}
+\item{vars_metric}{new \code{vars_metric} after splitting the desired variables}
+\item{max_values}{new \code{max_values} after splitting the desired variables}
 }
 \description{
 Split survey items by categories for a Rasch Model
 }
 \details{
 If significant differential item functioning (DIF) is observed, it may be desirable to split variables based on the charactersitic for which DIF is observed. For example, if men and women have significantly different patterns of responses to items, then it may be desirable to split items by sex. This function performs that variable splitting.
+}
+\seealso{
+Other rasch functions: \code{\link{rasch_DIF}},
+  \code{\link{rasch_df_nest}}, \code{\link{rasch_drop}},
+  \code{\link{rasch_factor}},
+  \code{\link{rasch_mds_children}},
+  \code{\link{rasch_mds}},
+  \code{\link{rasch_model_children}},
+  \code{\link{rasch_model}},
+  \code{\link{rasch_quality_children_print}},
+  \code{\link{rasch_quality_children}},
+  \code{\link{rasch_rawscore}}, \code{\link{rasch_recode}},
+  \code{\link{rasch_rescale_children}},
+  \code{\link{rasch_rescale}},
+  \code{\link{rasch_split_age}},
+  \code{\link{rasch_testlet}}
+
+Other children analysis functions: \code{\link{rasch_df_nest}},
+  \code{\link{rasch_drop}},
+  \code{\link{rasch_mds_children}},
+  \code{\link{rasch_model_children}},
+  \code{\link{rasch_quality_children_print}},
+  \code{\link{rasch_quality_children}},
+  \code{\link{rasch_recode}},
+  \code{\link{rasch_rescale_children}},
+  \code{\link{rasch_split_age}},
+  \code{\link{rasch_testlet}}
 }

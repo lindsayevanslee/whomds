@@ -11,12 +11,12 @@ rasch_factor(df, vars_metric, print_results = TRUE, path_output = NULL)
 
 \item{vars_metric}{a character vector of items to use in the Rasch Analysis}
 
-\item{print_results}{a logical vector indicating whether to print the results of the model to the \code{model_name} directory}
+\item{print_results}{a logical value indicating whether or not to print various files displaying results from the Rasch Model. Default is TRUE, to print the files.}
 
 \item{path_output}{a string with the path to the output folder. Default is NULL.}
 }
 \value{
-a list with results from the factor analysis for a Rasch Model:
+a named list with results from the factor analysis for a Rasch Model:
 \item{cor_poly}{the matrix of polychoric correlations}
 \item{eigenvalues}{the eigenvalues}
 \item{parallel_analysis}{permutation parallel analysis distribution}
@@ -33,8 +33,16 @@ Unidimensionality of the data is one of the core assumptions of the Rasch Model.
 }
 \seealso{
 Other rasch functions: \code{\link{rasch_DIF}},
-  \code{\link{rasch_drop}},
+  \code{\link{rasch_df_nest}}, \code{\link{rasch_drop}},
   \code{\link{rasch_mds_children}},
-  \code{\link{rasch_mds}}, \code{\link{rasch_model}},
-  \code{\link{rasch_rawscore}}, \code{\link{rasch_rescale}}
+  \code{\link{rasch_mds}},
+  \code{\link{rasch_model_children}},
+  \code{\link{rasch_model}},
+  \code{\link{rasch_quality_children_print}},
+  \code{\link{rasch_quality_children}},
+  \code{\link{rasch_rawscore}}, \code{\link{rasch_recode}},
+  \code{\link{rasch_rescale_children}},
+  \code{\link{rasch_rescale}},
+  \code{\link{rasch_split_age}}, \code{\link{rasch_split}},
+  \code{\link{rasch_testlet}}
 }

@@ -9,12 +9,14 @@ rasch_drop(vars_metric, drop_vars, max_values)
 \arguments{
 \item{vars_metric}{a character vector of items to use in the Rasch Analysis}
 
-\item{drop_vars}{a character vector of items to drop from the Rasch Analysis}
+\item{drop_vars}{a character vector of column names to drop from the Rasch Analysis. Default is NULL, to not drop items.}
 
 \item{max_values}{a tibble with two columns, \code{var} equivalent to \code{vars_metric} and \code{max_val} with their corresponding maximum possible values}
 }
 \value{
-a named list with the new \code{vars_metric} and new \code{max_values} after dropping the desired variables
+a named list with:
+\item{vars_metric}{new \code{vars_metric} after dropping the desired variables}
+\item{max_values}{new \code{max_values} after dropping the desired variables}
 }
 \description{
 Drop items from a Rasch Analysis
@@ -24,8 +26,26 @@ Dropping variables might be desirable if one finds that particular items are cau
 }
 \seealso{
 Other rasch functions: \code{\link{rasch_DIF}},
-  \code{\link{rasch_factor}},
+  \code{\link{rasch_df_nest}}, \code{\link{rasch_factor}},
   \code{\link{rasch_mds_children}},
-  \code{\link{rasch_mds}}, \code{\link{rasch_model}},
-  \code{\link{rasch_rawscore}}, \code{\link{rasch_rescale}}
+  \code{\link{rasch_mds}},
+  \code{\link{rasch_model_children}},
+  \code{\link{rasch_model}},
+  \code{\link{rasch_quality_children_print}},
+  \code{\link{rasch_quality_children}},
+  \code{\link{rasch_rawscore}}, \code{\link{rasch_recode}},
+  \code{\link{rasch_rescale_children}},
+  \code{\link{rasch_rescale}},
+  \code{\link{rasch_split_age}}, \code{\link{rasch_split}},
+  \code{\link{rasch_testlet}}
+
+Other children analysis functions: \code{\link{rasch_df_nest}},
+  \code{\link{rasch_mds_children}},
+  \code{\link{rasch_model_children}},
+  \code{\link{rasch_quality_children_print}},
+  \code{\link{rasch_quality_children}},
+  \code{\link{rasch_recode}},
+  \code{\link{rasch_rescale_children}},
+  \code{\link{rasch_split_age}}, \code{\link{rasch_split}},
+  \code{\link{rasch_testlet}}
 }

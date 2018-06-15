@@ -11,13 +11,41 @@ rasch_recode(df, vars_metric, recode_strategy, max_values)
 
 \item{vars_metric}{a character vector of items to use in the Rasch Analysis}
 
-\item{recode_strategy}{a named list giving the strategy to take for recoding variables, passed to \code{rasch_recode()}. One element of the list per recode strategy. Each element of the list is a numeric vector giving the new values to map the variables to. The names of the list are the groups of column names to use for each recoding strategy, separated only by ",".}
+\item{recode_strategy}{a named list giving the strategy to take for recoding variables, passed to \code{rasch_recode()}. One element of the list per recode strategy. Each element of the list is a numeric vector giving the new values to map the variables to. The names of the list are the groups of column names to use for each recoding strategy, separated only by ",". Default is NULL, to not recode items.}
 
 \item{max_values}{a tibble with two columns, \code{var} equivalent to \code{vars_metric} and \code{max_val} with their corresponding maximum possible values}
 }
 \value{
-a named list with the new \code{df} and new \code{max_values} after recoding the desired variables
+a named list with:
+\item{df}{new \code{df} after recoding the desired variables}
+\item{max_values}{new \code{max_values} after recoding the desired variables}
 }
 \description{
 Recode survey items for use in Rasch Analysis
+}
+\seealso{
+Other rasch functions: \code{\link{rasch_DIF}},
+  \code{\link{rasch_df_nest}}, \code{\link{rasch_drop}},
+  \code{\link{rasch_factor}},
+  \code{\link{rasch_mds_children}},
+  \code{\link{rasch_mds}},
+  \code{\link{rasch_model_children}},
+  \code{\link{rasch_model}},
+  \code{\link{rasch_quality_children_print}},
+  \code{\link{rasch_quality_children}},
+  \code{\link{rasch_rawscore}},
+  \code{\link{rasch_rescale_children}},
+  \code{\link{rasch_rescale}},
+  \code{\link{rasch_split_age}}, \code{\link{rasch_split}},
+  \code{\link{rasch_testlet}}
+
+Other children analysis functions: \code{\link{rasch_df_nest}},
+  \code{\link{rasch_drop}},
+  \code{\link{rasch_mds_children}},
+  \code{\link{rasch_model_children}},
+  \code{\link{rasch_quality_children_print}},
+  \code{\link{rasch_quality_children}},
+  \code{\link{rasch_rescale_children}},
+  \code{\link{rasch_split_age}}, \code{\link{rasch_split}},
+  \code{\link{rasch_testlet}}
 }

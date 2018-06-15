@@ -1,3 +1,15 @@
+#' Run the multigroup and anchored Rasch Model 
+#'
+#' @param df_nest a nested tibble that contains the column \code{df_split} with the data split by the categories in the column \code{vars_age_group}
+#' @inheritParams rasch_mds
+#' @inheritParams rasch_mds_children
+#'
+#' @family rasch functions
+#' @family children analysis functions
+#'
+#' @return a nested tibble with new columns with the Rasch Models calculated with the \code{TAM} package
+#' @export
+#'
 rasch_model_children <- function(df, df_nest, vars_metric, vars_age_group, TAM_model) {
   
   #choose tam model function based on TAM_model

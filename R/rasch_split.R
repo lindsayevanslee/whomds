@@ -1,14 +1,19 @@
 #' Split survey items by categories for a Rasch Model
 #'
-#' @param df a data frame of individual survey data, where each row is an individual 
-#' @param vars_metric a character vector of items to use in the Rasch Analysis
-#' @param split_strategy a named list giving the strategy to take for spliting variables by categories, passed to \code{rasch_split()}. One element of the list per variable to split by. Each element of the list must be a character vector of column names to split. The names of the list are the variables to split each group of variables by.
-#' @param max_values a tibble with two columns, \code{var} equivalent to \code{vars_metric} and \code{max_val} with their corresponding maximum possible values
 #'
+#' @inheritParams rasch_mds
+#' @inheritParams rasch_testlet
+#' 
 #' @details If significant differential item functioning (DIF) is observed, it may be desirable to split variables based on the charactersitic for which DIF is observed. For example, if men and women have significantly different patterns of responses to items, then it may be desirable to split items by sex. This function performs that variable splitting.
 #'
-#' @return a named list with the new \code{df}, new \code{vars_metric} and new \code{max_values} after splitting the desired variables
+#' @return a named list with:
+#' \item{df}{new \code{df} after splitting the desired variables}
+#' \item{vars_metric}{new \code{vars_metric} after splitting the desired variables}
+#' \item{max_values}{new \code{max_values} after splitting the desired variables}
 #' @export
+#' 
+#' @family rasch functions
+#' @family children analysis functions
 #' 
 #' @import dplyr
 #' @import rlang

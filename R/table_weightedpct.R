@@ -1,7 +1,5 @@
-
 #' Calculate table of percentages of response distribution for survey items, survey weighted, disaggregated
 #'
-#' @param df a data frame of survey responses, one row per respondent
 #' @param vars_ids a character vector of cluster ids, passed to a \code{survey::svydesign} object
 #' @param vars_strata a character vector of strata ids, passed to a \code{survey::svydesign} object
 #' @param vars_weights a character vector of survey weight ids, passed to a \code{survey::svydesign} object
@@ -13,7 +11,8 @@
 #' @param spread_value a string with variable name to pass to \code{value} argument of \code{dplyr::spread()}. Default is "prop" (the columm of percentages created within the function)
 #' @param arrange_vars a character vector with variables to pass to \code{dplyr::arrange()}. Default is NULL.
 #' @param willfilter a logical variable that tells the function whether or not to filter or transmute the data. Leave as default \code{NULL} to not filter or transmute. Set as \code{TRUE} to filter and \code{FALSE} to transmute. See Details.
-#'
+#' @inheritParams rasch_mds
+#' 
 #' @return a tibble of weighted response percentages 
 #' 
 #' @details 

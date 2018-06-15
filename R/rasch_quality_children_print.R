@@ -1,4 +1,18 @@
-rasch_quality_children_print <- function(df_nest, vars_metric, vars_age_group, TAM_model, LID_cutoff, path_output) {
+#' Print results of analysis of Rasch Model quality
+#'
+#' @inheritParams rasch_mds
+#' @inheritParams rasch_mds_children
+#' @inheritParams rasch_model
+#' @inheritParams rasch_model_children
+#' @inheritParams rasch_factor
+#'
+#' @return does not return anything to the environment, but prints files to the folder specified in \code{path_output}
+#' @export
+#'
+#' @family rasch functions
+#' @family children analysis functions
+#' 
+rasch_quality_children_print <- function(df_nest, vars_metric, vars_age_group, TAM_model, LIDcutoff = 0.2, path_output) {
   
   for (r in 1:nrow(df_nest)) {
     age_name <- df_nest %>% 
@@ -53,7 +67,7 @@ rasch_quality_children_print <- function(df_nest, vars_metric, vars_age_group, T
       
       #create dependency graph
       fig_LID(LIDforgraph = df_nest$cor_multigroup[[r]], 
-              LIDcutoff = 0.2, 
+              LIDcutoff = LIDcutoff, 
               path_output = path_output,
               extra_file_label = "Multigroup")
       
@@ -108,7 +122,7 @@ rasch_quality_children_print <- function(df_nest, vars_metric, vars_age_group, T
       
       #create dependency graph
       fig_LID(LIDforgraph = df_nest$cor_anchored[[r]], 
-              LIDcutoff = 0.2, 
+              LIDcutoff = LIDcutoff, 
               path_output = path_output,
               extra_file_label = age_name,
               vertex_print_grey = vars_metric[["common"]])

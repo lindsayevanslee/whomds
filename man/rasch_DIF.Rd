@@ -12,11 +12,11 @@ rasch_DIF(df, vars_metric, vars_DIF, residuals_PCM, split_strategy = NULL,
 
 \item{vars_metric}{a character vector of items to use in the Rasch Analysis}
 
-\item{vars_DIF}{a string with the column names to use for analyzing differential item functioning (DIF)}
+\item{vars_DIF}{a string with the column names to use for analyzing differential item functioning (DIF). Default is NULL, to skip analysis of DIF.}
 
 \item{residuals_PCM}{a matrix giving the residuals of the person parameters from the Rasch Model. Row names are the numbers of the people and the columns are for each variable.}
 
-\item{split_strategy}{a named list giving the strategy to take for spliting variables by categories, passed to \code{rasch_split()}. One element of the list per variable to split by. Each element of the list must be a character vector of column names to split. The names of the list are the variables to split each group of variables by. Default is NULL, to indicate there was no splitting.}
+\item{split_strategy}{a named list giving the strategy to take for spliting variables by categories, passed to \code{rasch_split()}. One element of the list per variable to split by. Each element of the list must be a character vector of column names to split. The names of the list are the variables to split each group of variables by. Default is NULL, to not split items.}
 
 \item{print_results}{a logical value indicating whether or not to print various files displaying results from the Rasch Model. Default is TRUE, to print the files.}
 
@@ -39,9 +39,17 @@ Differential Item Functioning (DIF) refers to the circumstance when different gr
 Currently the calculation of the class intervals is quite slow. Reducing the number of breaks can improve speed.
 }
 \seealso{
-Other rasch functions: \code{\link{rasch_drop}},
-  \code{\link{rasch_factor}},
+Other rasch functions: \code{\link{rasch_df_nest}},
+  \code{\link{rasch_drop}}, \code{\link{rasch_factor}},
   \code{\link{rasch_mds_children}},
-  \code{\link{rasch_mds}}, \code{\link{rasch_model}},
-  \code{\link{rasch_rawscore}}, \code{\link{rasch_rescale}}
+  \code{\link{rasch_mds}},
+  \code{\link{rasch_model_children}},
+  \code{\link{rasch_model}},
+  \code{\link{rasch_quality_children_print}},
+  \code{\link{rasch_quality_children}},
+  \code{\link{rasch_rawscore}}, \code{\link{rasch_recode}},
+  \code{\link{rasch_rescale_children}},
+  \code{\link{rasch_rescale}},
+  \code{\link{rasch_split_age}}, \code{\link{rasch_split}},
+  \code{\link{rasch_testlet}}
 }

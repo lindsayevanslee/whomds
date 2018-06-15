@@ -1,12 +1,13 @@
 #' Rescale score from Rasch Analysis for children to range from 0 to 100
+#' 
+#' @inheritParams rasch_mds
+#' @inheritParams rasch_mds_children
+#' @inheritParams rasch_model_children
 #'
-#' @param df_nest a data frame of individual survey data, where each row is an individual 
-#' @param vars_age_group
-#' @param vars_id a string with column name uniquely identifying individuals
-#'
-#' @return a tibble with the full join between \code{df} and \code{df_score} and new column "rescaled" with the rescaled person abilities, ranging from 0 to 100, and filter out any rows with an artificial minimum or maximum
+#' @return a tibble with the data \code{df} or unnested \code{df_nest} and new columns "Metric" and "MetricRescaled" with the original and rescaled person abilities, ranging from 0 to 100, and filter out any rows with an artificial minimum or maximum
 #'
 #' @family rasch functions
+#' @family children analysis functions
 #'
 #' @export
 #'

@@ -1,4 +1,12 @@
 #use this function for generating the color palette (from colorspace package)
+#' Color palette for the MDS
+#' 
+#' @details Generated with \code{colorspace::choose_palette()}
+#'
+#' @return \code{n} hex codes from the color palette
+#' 
+#' @family helper functions
+#'
 helper_palette <- function(n, h = c(-100, 100), c. = c(60, 100), l = c(15, 95), 
                            power = c(2, 0.9), fixup = TRUE, gamma = NULL, alpha = 1, 
                            ...) {

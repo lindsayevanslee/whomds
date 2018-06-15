@@ -1,11 +1,9 @@
 #' Calculate a factor analysis for a Rasch Model
 #'
-#' @param df a data frame of individual survey data, where each row is an individual 
-#' @param vars_metric a character vector of items to use in the Rasch Analysis
-#' @param print_results a logical vector indicating whether to print the results of the model to the \code{model_name} directory
 #' @param path_output a string with the path to the output folder. Default is NULL.
-#'
-#' @return a list with results from the factor analysis for a Rasch Model:
+#' @inheritParams rasch_mds
+#' 
+#' @return a named list with results from the factor analysis for a Rasch Model:
 #' \item{cor_poly}{the matrix of polychoric correlations}
 #' \item{eigenvalues}{the eigenvalues}
 #' \item{parallel_analysis}{permutation parallel analysis distribution}

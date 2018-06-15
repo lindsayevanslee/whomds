@@ -1,11 +1,15 @@
 #' Recode survey items for use in Rasch Analysis
 #'
-#' @param df a data frame of individual survey data, where each row is an individual 
-#' @param vars_metric a character vector of items to use in the Rasch Analysis
-#' @param recode_strategy a named list giving the strategy to take for recoding variables, passed to \code{rasch_recode()}. One element of the list per recode strategy. Each element of the list is a numeric vector giving the new values to map the variables to. The names of the list are the groups of column names to use for each recoding strategy, separated only by ",".
-#' @param max_values a tibble with two columns, \code{var} equivalent to \code{vars_metric} and \code{max_val} with their corresponding maximum possible values
-#'
-#' @return a named list with the new \code{df} and new \code{max_values} after recoding the desired variables
+#' @inheritParams rasch_mds
+#' @inheritParams rasch_testlet
+#' 
+#' @return a named list with:
+#' \item{df}{new \code{df} after recoding the desired variables}
+#' \item{max_values}{new \code{max_values} after recoding the desired variables}
+#' 
+#' @family rasch functions
+#' @family children analysis functions
+#' 
 #' @export
 #' 
 #' @import dplyr

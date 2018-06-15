@@ -11,18 +11,47 @@ rasch_testlet(df, vars_metric, testlet_strategy, max_values, resp_opts)
 
 \item{vars_metric}{a character vector of items to use in the Rasch Analysis}
 
-\item{testlet_strategy}{a list giving the strategy to take for creating testlets, passed to \code{rasch_testlet()}. One element of the list per testlet to create. Each element of the list must be a character vector of column names to use for the testlet. Optionally, name the element of the list to give the name of the new testlet. Otherwise, the new testlet will be the original column names separated by "_".}
+\item{testlet_strategy}{a list giving the strategy to take for creating testlets, passed to \code{rasch_testlet()}. One element of the list per testlet to create. Each element of the list must be a character vector of column names to use for the testlet. Optionally, name the element of the list to give the name of the new testlet. Otherwise, the new testlet will be the original column names separated by "_". Default is NULL, to not create testlets.}
 
 \item{max_values}{a tibble with two columns, \code{var} equivalent to \code{vars_metric} and \code{max_val} with their corresponding maximum possible values}
 
-\item{resp_opts}{a numeric vector of possible response options for \code{vars_metric}.}
+\item{resp_opts}{a numeric vector of possible response options for \code{vars_metric}. Must begin with 1. Default is 1:5}
 }
 \value{
-a named list with the new \code{df}, new \code{vars_metric}, new \code{testlet_strategy} and new \code{max_values} after creating desired testlets
+a named list with:
+\item{df}{new \code{df} after creating desired testlets}
+\item{vars_metric}{new \code{vars_metric} after creating desired testlets}
+\item{testlet_strategy}{new \code{testlet_strategy} after creating desired testlets}
+\item{max_values}{new \code{max_values} after creating desired testlets}
 }
 \description{
 Create testlets of survey items for a Rasch Model
 }
 \details{
 If high local item dependence is observed (i.e., residual correlation) is observed between items, it may be desirable to combine them into a testlet. This code creates the testlets as desired.
+}
+\seealso{
+Other rasch functions: \code{\link{rasch_DIF}},
+  \code{\link{rasch_df_nest}}, \code{\link{rasch_drop}},
+  \code{\link{rasch_factor}},
+  \code{\link{rasch_mds_children}},
+  \code{\link{rasch_mds}},
+  \code{\link{rasch_model_children}},
+  \code{\link{rasch_model}},
+  \code{\link{rasch_quality_children_print}},
+  \code{\link{rasch_quality_children}},
+  \code{\link{rasch_rawscore}}, \code{\link{rasch_recode}},
+  \code{\link{rasch_rescale_children}},
+  \code{\link{rasch_rescale}},
+  \code{\link{rasch_split_age}}, \code{\link{rasch_split}}
+
+Other children analysis functions: \code{\link{rasch_df_nest}},
+  \code{\link{rasch_drop}},
+  \code{\link{rasch_mds_children}},
+  \code{\link{rasch_model_children}},
+  \code{\link{rasch_quality_children_print}},
+  \code{\link{rasch_quality_children}},
+  \code{\link{rasch_recode}},
+  \code{\link{rasch_rescale_children}},
+  \code{\link{rasch_split_age}}, \code{\link{rasch_split}}
 }

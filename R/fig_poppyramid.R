@@ -1,8 +1,8 @@
 #' Print a population pyramid
 #'
-#' @param df a data frame of household survey data where each row is a household member
 #' @param var_age a string (length 1) of the name of the age column
 #' @param var_sex a string (length 1) of the name of the sex column
+#' @inheritParams rasch_mds
 #'
 #' @return A population pyramid figure 
 #' 

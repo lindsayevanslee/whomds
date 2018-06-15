@@ -4,7 +4,8 @@
 \alias{fig_LID}
 \title{Print a graph showing significant correlations between survey items}
 \usage{
-fig_LID(LIDforgraph, LIDcutoff = 0.2, path_output)
+fig_LID(LIDforgraph, LIDcutoff = 0.2, path_output, extra_file_label = NULL,
+  vertex_print_grey = NULL)
 }
 \arguments{
 \item{LIDforgraph}{a square matrix of item correlations}
@@ -12,6 +13,10 @@ fig_LID(LIDforgraph, LIDcutoff = 0.2, path_output)
 \item{LIDcutoff}{a numeric value between 0 and 1 for the cut-off for signicant correlation}
 
 \item{path_output}{a string with the path to the output folder}
+
+\item{extra_file_label}{a string to tack on to the end of names of files outputted and the title of the plot. Default is NULL.}
+
+\item{vertex_print_grey}{a character vector with the names of vertices to print in \code{"lightgrey"}, with all others printed in \code{"skyblue"}. If left as default NULL, all vertices will be printed in \code{"lightgrey"}.}
 }
 \value{
 Prints a pdf graph if the items with correlation > \code{LIDcutoff} and a csv of the corresponding correlations

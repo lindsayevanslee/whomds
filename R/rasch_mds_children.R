@@ -1,29 +1,24 @@
 #' Top-level function to perform Rasch Analysis on WHO Model Disability Survey data for children
 #'
-#' @param df a data frame of individual survey data, where each row is an individual 
+#' @param vars_age_group a string with the column name identifying age groups
 #' @param vars_metric_common a character vector the common items among all individuals
 #' @param vars_metric_grouped a named list of character vectors with the items to use in the Rasch Analysis per group. The list should have names corresponding to the different groups, and contain character vectors of the corrsponding items for each group.
-#' @param vars_id a string with column name uniquely identifying individuals
 #' @param vars_metric a named list of character vectors with the items to use in the Rasch Analysis. One element of the list should be "common" and contain a character vector of the common items among all individuals. Other elements of the list should have names corresponding to the different groups, and contain character vectors of the corrsponding items for each group.
-#' @param vars_DIF a string with the column names to use for analyzing differential item functioning (DIF). Default is NULL, to skip analysis of DIF.
-#' @param resp_opts a numeric vector of possible response options for \code{vars_metric}. Must begin with 1. Default is 1:5
-#' @param max_NA a numeric value for the maximum number of NAs allowed per individual among \code{vars_metric}. Default is 2.
-#' @param print_results a logical value indicating whether or not to print various files displaying results from the Rasch Model. Default is TRUE, to print the files.
-#' @param path_parent a string with the path to the folder where results from multiple models will be outputted. Default is NULL
-#' @param model_name a string with a name for the model, which is used to create a new folder for model output. Default is NULL.
-#' @param testlet_strategy a list giving the strategy to take for creating testlets, passed to \code{rasch_testlet()}. One element of the list per testlet to create. Each element of the list must be a character vector of column names to use for the testlet. Optionally, name the element of the list to give the name of the new testlet. Otherwise, the new testlet will be the original column names separated by "_". Default is NULL, to not create testlets.
-#' @param recode_strategy a named list giving the strategy to take for recoding variables, passed to \code{rasch_recode()}. One element of the list per recode strategy. Each element of the list is a numeric vector giving the new values to map the variables to. The names of the list are the groups of column names to use for each recoding strategy, separated only by ",". Default is NULL, to not recode items.
-#' @param drop_vars a character vector of column names to drop from the Rasch Analysis. Default is NULL, to not drop items.
-#' @param split_strategy a named list giving the strategy to take for spliting variables by categories, passed to \code{rasch_split()}. One element of the list per variable to split by. Each element of the list must be a character vector of column names to split. The names of the list are the variables to split each group of variables by. Default is NULL, to not split items.
-#' @param comment a string giving a comment describing the analysis, printed to a txt file. Default is NULL, to not print a comment.
-#'
+#' @param TAM_model a string with the type of IRT model to use, passed to \code{irtmodel} argument of \code{TAM::tam()}. Default is \code{"PCM2"}
+#' @param vars_DIF Currently does nothing. In the future, a string with the column names to use for analyzing differential item functioning (DIF). Default is NULL, to skip analysis of DIF.
+#' @param has_at_least_one a numeric vector with the response options that a respondent must have at least one of in order to be included in the metric calculation. See details for more information.
+#' @inheritParams rasch_mds
+#' 
 #' @details This function combines all of the separate analyses of model fit necessary to assess the quality of the Rasch Model. It is designed to require minimal intervention from the user. Users wishing to have more control over the analysis can use the other Rasch functions in this package separately.
+#' 
+#' Often Rasch Analysis of children data is more difficult because of the extreme skewness of the responses. For this reason, it is often advisable to build a scale only with the respondents on the more severe end of the disability continuum. By specifying \code{has_at_least_one}, the function will remove all children from the sample who do endorse an answer of any of \code{has_at_least_one} in at least one \code{vars_metric}. The scores created can be reunited with the excluded children post-hoc.
 #' 
 #' @return a tibble with new columns representing the original person abilities (\code{person_pars}) and the rescaled person abilities (\code{rescaled}). 
 #' 
 #' If \code{print_results} is TRUE, prints files to the working directory with the results of the Rasch Model. 
 #' 
 #' @family rasch functions
+#' @family children analysis functions
 #' 
 #' @export
 #' 

@@ -6,15 +6,17 @@
 \usage{
 rasch_mds_children(df, vars_id, vars_age_group, vars_metric_common = NULL,
   vars_metric_grouped = NULL, vars_metric = NULL, TAM_model = "PCM2",
-  vars_DIF = NULL, resp_opts = 1:5, max_NA = 2, print_results = TRUE,
-  path_parent = NULL, model_name = NULL, testlet_strategy = NULL,
-  recode_strategy = NULL, drop_vars = NULL, split_strategy = NULL,
-  comment = NULL)
+  vars_DIF = NULL, resp_opts = 1:5, has_at_least_one = 4:5, max_NA = 10,
+  print_results = TRUE, path_parent = NULL, model_name = NULL,
+  testlet_strategy = NULL, recode_strategy = NULL, drop_vars = NULL,
+  split_strategy = NULL, comment = NULL)
 }
 \arguments{
 \item{df}{a data frame of individual survey data, where each row is an individual}
 
 \item{vars_id}{a string with column name uniquely identifying individuals}
+
+\item{vars_age_group}{a string with the column name identifying age groups}
 
 \item{vars_metric_common}{a character vector the common items among all individuals}
 
@@ -22,9 +24,13 @@ rasch_mds_children(df, vars_id, vars_age_group, vars_metric_common = NULL,
 
 \item{vars_metric}{a named list of character vectors with the items to use in the Rasch Analysis. One element of the list should be "common" and contain a character vector of the common items among all individuals. Other elements of the list should have names corresponding to the different groups, and contain character vectors of the corrsponding items for each group.}
 
-\item{vars_DIF}{a string with the column names to use for analyzing differential item functioning (DIF). Default is NULL, to skip analysis of DIF.}
+\item{TAM_model}{a string with the type of IRT model to use, passed to \code{irtmodel} argument of \code{TAM::tam()}. Default is \code{"PCM2"}}
+
+\item{vars_DIF}{Currently does nothing. In the future, a string with the column names to use for analyzing differential item functioning (DIF). Default is NULL, to skip analysis of DIF.}
 
 \item{resp_opts}{a numeric vector of possible response options for \code{vars_metric}. Must begin with 1. Default is 1:5}
+
+\item{has_at_least_one}{a numeric vector with the response options that a respondent must have at least one of in order to be included in the metric calculation. See details for more information.}
 
 \item{max_NA}{a numeric value for the maximum number of NAs allowed per individual among \code{vars_metric}. Default is 2.}
 
@@ -54,10 +60,30 @@ Top-level function to perform Rasch Analysis on WHO Model Disability Survey data
 }
 \details{
 This function combines all of the separate analyses of model fit necessary to assess the quality of the Rasch Model. It is designed to require minimal intervention from the user. Users wishing to have more control over the analysis can use the other Rasch functions in this package separately.
+
+Often Rasch Analysis of children data is more difficult because of the extreme skewness of the responses. For this reason, it is often advisable to build a scale only with the respondents on the more severe end of the disability continuum. By specifying \code{has_at_least_one}, the function will remove all children from the sample who do endorse an answer of any of \code{has_at_least_one} in at least one \code{vars_metric}. The scores created can be reunited with the excluded children post-hoc.
 }
 \seealso{
 Other rasch functions: \code{\link{rasch_DIF}},
-  \code{\link{rasch_drop}}, \code{\link{rasch_factor}},
-  \code{\link{rasch_mds}}, \code{\link{rasch_model}},
-  \code{\link{rasch_rawscore}}, \code{\link{rasch_rescale}}
+  \code{\link{rasch_df_nest}}, \code{\link{rasch_drop}},
+  \code{\link{rasch_factor}}, \code{\link{rasch_mds}},
+  \code{\link{rasch_model_children}},
+  \code{\link{rasch_model}},
+  \code{\link{rasch_quality_children_print}},
+  \code{\link{rasch_quality_children}},
+  \code{\link{rasch_rawscore}}, \code{\link{rasch_recode}},
+  \code{\link{rasch_rescale_children}},
+  \code{\link{rasch_rescale}},
+  \code{\link{rasch_split_age}}, \code{\link{rasch_split}},
+  \code{\link{rasch_testlet}}
+
+Other children analysis functions: \code{\link{rasch_df_nest}},
+  \code{\link{rasch_drop}},
+  \code{\link{rasch_model_children}},
+  \code{\link{rasch_quality_children_print}},
+  \code{\link{rasch_quality_children}},
+  \code{\link{rasch_recode}},
+  \code{\link{rasch_rescale_children}},
+  \code{\link{rasch_split_age}}, \code{\link{rasch_split}},
+  \code{\link{rasch_testlet}}
 }
