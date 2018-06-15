@@ -12,21 +12,19 @@
 #'
 #'
 rasch_rescale_children <- function(df_nest, vars_age_group, vars_id) {
-
+  
   df_final <- df_nest %>% 
     mutate(df_split = map2(df_split, WLE_anchored, function(df_age, WLE_age) {
       df_age <- df_age %>% 
         add_column(Metric = WLE_age$theta)
       return(df_age)
     })) %>% 
-    select(c(vars_age_group, df_split)) %>% 
+    select(c(vars_age_group, "df_split")) %>% 
     unnest() %>% 
     mutate(MetricRescaled = scales::rescale(pull(., Metric), c(0, 100))) %>% 
     filter_at(vars(vars_id), any_vars(. != "MAX")) %>% 
     filter_at(vars(vars_id), any_vars(. !="MIN"))
   
   return(df_final)
-  
-  
   
 }

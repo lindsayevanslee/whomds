@@ -66,6 +66,7 @@ rasch_mds_children <- function(df,
   #DONE 13_Thresholds, dependency graph, levels should ve mostly ok
   #adapt so that either anchored or multigroup model can be used
   #factor analysis? DIF?
+  #test testlet, recode, drop, split
   
   #check for correct entry of vars_metric/_common/_grouped
   if (is.null(vars_metric) & (is.null(vars_metric_common) | is.null(vars_metric_grouped))) {
@@ -270,10 +271,7 @@ rasch_mds_children <- function(df,
   #   
   #   cat("DIF analysis completed. \n")
   # }
-  
-  ### YOU TESTED TO HERE (EXCEPT TESTLET, RECODE, DROP, SPLIT) --------------------
-  
-  
+
   
   # RESCALE SCORE --------
   df_final <- rasch_rescale_children(df_nest = df_nest,
