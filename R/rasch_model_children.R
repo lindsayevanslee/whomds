@@ -13,8 +13,7 @@ rasch_model_children <- function(df, df_nest, vars_metric, vars_age_group, TAM_m
                                     ~ select(..1, c(vars_metric[["common"]], vars_metric[[as.character(..2)]]))),
            mod_start = map(df_split_selected, 
                            ~ tam.f(resp = ., irtmodel = TAM_model, verbose = FALSE))
-           )
-  
+    )
   
   
   #Calculate multigroup model with only common items
@@ -37,13 +36,13 @@ rasch_model_children <- function(df, df_nest, vars_metric, vars_age_group, TAM_m
            anchored_xsi = pmap(list(multigroup_xsi, start_xsi, index_uniqueitems), 
                                ~ rbind(..1, ..2[..3,])),
            mod_anchored = map2(df_split_selected, anchored_xsi,
-                              ~ tam.f(resp = ..1, 
-                                      irtmodel = TAM_model, 
-                                      xsi.fixed = ..2,
-                                      verbose = FALSE))
+                               ~ tam.f(resp = ..1, 
+                                       irtmodel = TAM_model, 
+                                       xsi.fixed = ..2,
+                                       verbose = FALSE))
            
-           )
-
+    )
+  
   return(df_nest)
   
 } 

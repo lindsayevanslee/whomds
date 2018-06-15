@@ -44,8 +44,8 @@ rasch_split <- function(df, vars_metric, split_strategy, max_values) {
       for (var in new_vars_to_split) {
         
         df <- df %>% 
-          mutate(!!sym(paste(var,ct, sep="_")) := case_when(
-            !!sym(new_split_by)==ct ~ !!sym(var)
+          mutate(!!rlang::sym(paste(var,ct, sep="_")) := case_when(
+            !!rlang::sym(new_split_by)==ct ~ !!rlang::sym(var)
           ))
         
       }
@@ -66,7 +66,7 @@ rasch_split <- function(df, vars_metric, split_strategy, max_values) {
           
           new_vset <- vset[-which(test)]
           new_vset <- c(new_vset, new_split_vars)
-        }
+        } else new_vset <- vset
         
         return(new_vset)
         

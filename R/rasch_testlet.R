@@ -37,18 +37,13 @@ rasch_testlet <- function(df, vars_metric, testlet_strategy, max_values, resp_op
     }
     
     df <- df %>% 
-      mutate(!!sym(new_testlet) := rowSums(df[,new_testlet_vars],na.rm=TRUE))
-    
-    # #edit list of variables
-    # vars_metric <- vars_metric[-which(vars_metric %in% new_testlet_vars)]
-    # vars_metric <- c(vars_metric,new_testlet)
-    
+      mutate(!!rlang::sym(new_testlet) := rowSums(df[,new_testlet_vars],na.rm=TRUE))
     
     #edit list of variables
     if (is.list(vars_metric)) {
       vars_metric <- purrr::map(vars_metric, function(vset) {
         
-        if (new_testlet_vars %in% vset) {
+        if (all(new_testlet_vars %in% vset)) {
           new_vset <-  vset[-which(vset %in% new_testlet_vars)]
           new_vset <- c(new_vset, new_testlet)
         } else {

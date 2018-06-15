@@ -1,4 +1,4 @@
-rasch_split_age <- function (df, vars_age_group, vars_metric) {
+rasch_split_age <- function (df, vars_age_group, vars_metric, vars_id, max_values) {
   
   #capture levels of age_group
   levels_age_group <- levels(pull(df, vars_age_group))
@@ -45,6 +45,7 @@ rasch_split_age <- function (df, vars_age_group, vars_metric) {
     left_join(df)
   
   
+  
   #edit list of variables - all list and grouped list
   vars_metric_almost <- purrr::map(names(vars_metric), function(nm_vset) {
     vset <- vars_metric[[nm_vset]]
@@ -57,18 +58,44 @@ rasch_split_age <- function (df, vars_age_group, vars_metric) {
       
       new_vset <- vset[-which(test)]
       new_vset <- c(new_vset, new_split_vars)
-    } else new_vset <- vset
+      
+      
+    } else {
+      new_vset <- vset
+    }
     
     return(new_vset)
     
   })
-  
   names(vars_metric_almost) <- names(vars_metric) 
+  
+  #edit max values
+  max_values_almost <- purrr::map(names(vars_metric), function(nm_vset)  {
+    vset <- vars_metric[[nm_vset]]
+    test <- vset %in% vars_metric_overlap_all
+    
+    if (any(test)) {
+      
+      new_max_values <- max_values %>% 
+        filter(var %in% vset[which(test)]) %>% 
+        mutate(var = paste0(var, "_", nm_vset))
+      
+      return(new_max_values)
+      
+    } 
+    
+  })
+  
+  #finish up edits
   vars_metric <- vars_metric_almost
+  max_values <- max_values %>%
+    filter(!(var %in% vars_metric_overlap_all)) %>% 
+    bind_rows(max_values_almost)
   
   
   split_age_result <- list(df = df,
-                           vars_metric = vars_metric)
+                           vars_metric = vars_metric,
+                           max_values = max_values)
   
   return(split_age_result)
   

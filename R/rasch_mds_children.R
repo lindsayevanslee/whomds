@@ -153,9 +153,14 @@ rasch_mds_children <- function(df,
   if (length(vars_metric) > 1) {
     split_age_result <- rasch_split_age(df = df,
                                         vars_age_group = vars_age_group, 
-                                        vars_metric = vars_metric)
+                                        vars_metric = vars_metric,
+                                        vars_id = vars_id,
+                                        max_values = max_values)
     df <- split_age_result[["df"]]
     vars_metric <- split_age_result[["vars_metric"]]
+    max_values <- split_age_result[["max_values"]]
+    
+    cat("Splitting by age to create discrete age-specific variables completed. \n")
     
   }
   
