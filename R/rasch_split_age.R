@@ -43,7 +43,7 @@ rasch_split_age <- function (df, vars_age_group, vars_metric, vars_id, max_value
     
     #spread variables to create three discrete variables
     subtbl_spread <- subtbl %>% 
-      spread(key = !!quo(vars_age_group), value = !!quo(var)) %>%
+      tidyr::spread(key = !!quo(vars_age_group), value = !!quo(var)) %>%
       rename_at(vars(levels_age_group), funs(paste0(var,"_",.)))
     
     #give error if number of rows isn't maintained

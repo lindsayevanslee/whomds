@@ -11,33 +11,31 @@
 #'
 #' @export
 #'
-#'
 rasch_rescale_children <- function(df, df_nest, vars_age_group, vars_id) {
   
   
   #Anchored
   if ("WLE_anchored" %in% names(df_nest)) {
     df_final <- df_nest %>% 
-      mutate(df_split = map2(df_split, WLE_anchored, function(df_age, WLE_age) {
+      dplyr::mutate(df_split = purrr::map2(df_split, WLE_anchored, function(df_age, WLE_age) {
         df_age <- df_age %>% 
-          add_column(Metric = WLE_age$theta)
+          tibble::add_column(Metric = WLE_age$theta)
         return(df_age)
       })) %>% 
-      select(c(vars_age_group, "df_split")) %>% 
-      unnest()
+      dplyr::select(c(vars_age_group, "df_split")) %>% 
+      tidyr::unnest()
   }
   #Multigroup
   else {
-    # browser()
     df_final <- df %>% 
-      add_column(Metric = df_nest$WLE_multigroup[[1]]$theta)
+      tibble::add_column(Metric = df_nest$WLE_multigroup[[1]]$theta)
     
   }
   
    df_final <- df_final  %>% 
-    mutate(MetricRescaled = scales::rescale(pull(., Metric), c(0, 100))) %>% 
-    filter_at(vars(vars_id), any_vars(. != "MAX")) %>% 
-    filter_at(vars(vars_id), any_vars(. !="MIN"))
+    dplyr::mutate(MetricRescaled = scales::rescale(pull(., Metric), c(0, 100))) %>% 
+    dplyr::filter_at(vars(vars_id), any_vars(. != "MAX")) %>% 
+    dplyr::filter_at(vars(vars_id), any_vars(. !="MIN"))
   
   return(df_final)
   

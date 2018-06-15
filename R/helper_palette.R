@@ -19,7 +19,7 @@ helper_palette <- function(n, h = c(-100, 100), c. = c(60, 100), l = c(15, 95),
   l <- rep(l, length.out = 2L)
   power <- rep(power, length.out = 2L)
   rval <- seq(1, 0, length = n)
-  rval <- hex(polarLUV(L = l[2L] - diff(l) * rval^power[2L], 
+  rval <- colorspace::hex(colorspace::polarLUV(L = l[2L] - diff(l) * rval^power[2L], 
                        C = c[2L] - diff(c) * rval^power[1L], H = h[2L] - diff(h) * 
                          rval), fixup = fixup, ...)
   if (!missing(alpha)) {

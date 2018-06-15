@@ -7,8 +7,8 @@
 #' @param ... captures expressions to pass to \code{dplyr::filter()} or \code{dplyr::transmute()}, depending on the value of argument \code{willfilter}. See Details.
 #' @param formula_vars_levels a vector of the levels of the the \code{formula_vars}
 #' @param by_vars a character vector of variables to disaggregate results by. Default is \code{NULL} for no disaggregation.
-#' @param spread_key a string with variable name to pass to \code{key} argument of \code{dplyr::spread()}. Default is \code{NULL}.
-#' @param spread_value a string with variable name to pass to \code{value} argument of \code{dplyr::spread()}. Default is "prop" (the columm of percentages created within the function)
+#' @param spread_key a string with variable name to pass to \code{key} argument of \code{tidyr::spread()}. Default is \code{NULL}.
+#' @param spread_value a string with variable name to pass to \code{value} argument of \code{tidyr::spread()}. Default is "prop" (the columm of percentages created within the function)
 #' @param arrange_vars a character vector with variables to pass to \code{dplyr::arrange()}. Default is NULL.
 #' @param willfilter a logical variable that tells the function whether or not to filter or transmute the data. Leave as default \code{NULL} to not filter or transmute. Set as \code{TRUE} to filter and \code{FALSE} to transmute. See Details.
 #' @inheritParams rasch_mds

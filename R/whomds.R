@@ -27,11 +27,23 @@ if (getRversion() >= "2.15.1") {
     c( 
       ".",
       "age_cat",
+      "anchored_xsi",
+      "cor_anchored", 
+      "cor_multigroup", 
+      "cor_start", 
       "demo",
+      "df_split",
+      "df_split_selected",
+      "index_uniqueitems",
       "item",
       "layout.kamada.kawai",
       "max_val",
       "median",
+      "Metric",
+      "mod_anchored",
+      "mod_multigroup", 
+      "mod_start", 
+      "multigroup_xsi", 
       "nperHH",
       "pct",
       "pct_n",
@@ -43,8 +55,10 @@ if (getRversion() >= "2.15.1") {
       "resp",
       "sd",
       "sex",
+      "start_xsi",
       "var",
-      "vars_id"
+      "vars_id",
+      "WLE_anchored"
     )
   )
 }

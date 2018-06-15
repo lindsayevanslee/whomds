@@ -25,9 +25,9 @@ table_weightedpct(df, vars_ids, vars_strata, vars_weights, formula_vars, ...,
 
 \item{by_vars}{a character vector of variables to disaggregate results by. Default is \code{NULL} for no disaggregation.}
 
-\item{spread_key}{a string with variable name to pass to \code{key} argument of \code{dplyr::spread()}. Default is \code{NULL}.}
+\item{spread_key}{a string with variable name to pass to \code{key} argument of \code{tidyr::spread()}. Default is \code{NULL}.}
 
-\item{spread_value}{a string with variable name to pass to \code{value} argument of \code{dplyr::spread()}. Default is "prop" (the columm of percentages created within the function)}
+\item{spread_value}{a string with variable name to pass to \code{value} argument of \code{tidyr::spread()}. Default is "prop" (the columm of percentages created within the function)}
 
 \item{arrange_vars}{a character vector with variables to pass to \code{dplyr::arrange()}. Default is NULL.}
 

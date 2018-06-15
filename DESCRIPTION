@@ -13,6 +13,7 @@ License: GPL-3
 Encoding: UTF-8
 LazyData: true
 Imports: 
+    colorspace,
     dplyr,
     eRm,
     foreign,
@@ -22,6 +23,7 @@ Imports:
     igraph,
     lordif,
     nFactors,
+    openxlsx,
     plyr,
     polycor,
     psych,
@@ -33,8 +35,10 @@ Imports:
     srvyr,
     stringr,
     survey, 
+    TAM,
     tibble,
-    tidyr
+    tidyr,
+    WrightMap
 Depends: R (>= 3.2.5)
 BugReports: https://github.com/lindsayevanslee/whomds
 RoxygenNote: 6.0.1

@@ -16,29 +16,29 @@ rasch_quality_children_print <- function(df_nest, vars_metric, vars_age_group, T
   
   for (r in 1:nrow(df_nest)) {
     age_name <- df_nest %>% 
-      pull(vars_age_group) %>% 
+      dplyr::pull(vars_age_group) %>% 
       .[r]
     
     ### Print multigroup results (only need to do once because should all be identical) ----------
     if (r==1) {
       #print scree plot multigroup
       if (is.numeric(unlist(df_nest$eigen_multigroup[[r]]))) {
-        pdf(paste0(path_output,"/ScreePlot_Multigroup_",TAM_model,".pdf"))
+        grDevices::pdf(paste0(path_output,"/ScreePlot_Multigroup_",TAM_model,".pdf"))
         nFactors::plotnScree(nFactors::nScree(x = unlist(df_nest$eigen_multigroup[[r]])))
-        dev.off()
+        grDevices::dev.off()
       }
       
-      capture.output(summary(df_nest$mod_multigroup[[r]]), file = paste0(path_output, "/", TAM_model,"_summary_multigroup.txt"))
+      utils::capture.output(summary(df_nest$mod_multigroup[[r]]), file = paste0(path_output, "/", TAM_model,"_summary_multigroup.txt"))
       openxlsx::write.xlsx(df_nest$itemfit_multigroup[[r]], file = paste0(path_output, "/", TAM_model,"_itemfit_multigroup.xlsx"), row.names = TRUE, keepNA = TRUE)
       openxlsx::write.xlsx(df_nest$cor_multigroup[[r]], file = paste0(path_output, "/", TAM_model,"_residual_correlation_multigroup.xlsx"), row.names = TRUE, keepNA = TRUE)
       openxlsx::write.xlsx(df_nest$xsithresh_multigroup[[r]], file = paste0(path_output, "/", TAM_model,"_xsi_thresholds_multigroup.xlsx"), row.names = TRUE, keepNA = TRUE)
       openxlsx::write.xlsx(df_nest$eigen_multigroup[[r]], file = paste0(path_output, "/", TAM_model,"_eigenvalues_multigroup.xlsx"), row.names = TRUE, keepNA = TRUE)
       openxlsx::write.xlsx(df_nest$PCA_multigroup[[r]], file = paste0(path_output, "/", TAM_model,"_first_vector_loadings_multigroup.xlsx"), row.names = TRUE, keepNA = TRUE)
-      capture.output(df_nest$WLE_multigroup[[r]],file = paste0(path_output, "/", TAM_model,"_WLE_multigroup.txt"))
+      utils::capture.output(df_nest$WLE_multigroup[[r]],file = paste0(path_output, "/", TAM_model,"_WLE_multigroup.txt"))
       openxlsx::write.xlsx(df_nest$EAP_multigroup[[r]], file = paste0(path_output, "/", TAM_model,"_EAP_reliability_multigroup.xlsx"), row.names = TRUE, keepNA = TRUE)
       
       #save Thurstonian thresholds (always ordered) and save
-      write.csv(df_nest$tthresh_multigroup[[r]],
+      utils::write.csv(df_nest$tthresh_multigroup[[r]],
                 paste0(path_output, "/ThurstonianThresholds_multigroup.csv"),
                 row.names = TRUE)
       
@@ -51,7 +51,7 @@ rasch_quality_children_print <- function(df_nest, vars_metric, vars_age_group, T
                byrow = TRUE)
       
       #print Wright Map
-      pdf(paste0(path_output,"/WrightMap_multigroup.pdf"))
+      grDevices::pdf(paste0(path_output,"/WrightMap_multigroup.pdf"))
       WrightMap::wrightMap(
         df_nest$WLE_multigroup[[r]]$theta,
         df_nest$tthresh_multigroup[[r]][order(df_nest$mod_multigroup[[r]]$item$xsi.item),],
@@ -62,7 +62,7 @@ rasch_quality_children_print <- function(df_nest, vars_metric, vars_age_group, T
         thr.sym.cex = 1.5,
         breaks=50
       )
-      dev.off()
+      grDevices::dev.off()
       
       
       #create dependency graph
@@ -76,9 +76,9 @@ rasch_quality_children_print <- function(df_nest, vars_metric, vars_age_group, T
     
     #print scree plot start
     if (is.numeric(unlist(df_nest$eigen_start[[r]]))) {
-      pdf(paste0(path_output,"/ScreePlot_Start_",TAM_model,"_",age_name,".pdf"))
+      grDevices::pdf(paste0(path_output,"/ScreePlot_Start_",TAM_model,"_",age_name,".pdf"))
       nFactors::plotnScree(nFactors::nScree(x = unlist(df_nest$eigen_start[[r]])))
-      dev.off()
+      grDevices::dev.off()
     }
     
     ### Print Anchored results --------
@@ -86,15 +86,15 @@ rasch_quality_children_print <- function(df_nest, vars_metric, vars_age_group, T
       
       #print scree plot anchored
       if (is.numeric(unlist(df_nest$eigen_anchored[[r]]))) {
-        pdf(paste0(path_output,"/ScreePlot_Anchored_",TAM_model,"_",age_name,".pdf"))
+        grDevices::pdf(paste0(path_output,"/ScreePlot_Anchored_",TAM_model,"_",age_name,".pdf"))
         nFactors::plotnScree(nFactors::nScree(x = unlist(df_nest$eigen_anchored[[r]])))
-        dev.off()
+        grDevices::dev.off()
       }
       
-      capture.output(summary(df_nest$mod_anchored[[r]]), file = paste0(path_output, "/", TAM_model,"_summary_anchored_",age_name,".txt"))
+      utils::capture.output(summary(df_nest$mod_anchored[[r]]), file = paste0(path_output, "/", TAM_model,"_summary_anchored_",age_name,".txt"))
       
       #save Thurstonian thresholds (always ordered)
-      write.csv(df_nest$tthresh_anchored[[r]],
+      utils::write.csv(df_nest$tthresh_anchored[[r]],
                 paste0(path_output, "/ThurstonianThresholds_anchored",age_name, ".csv"),
                 row.names = TRUE)
       
@@ -107,7 +107,7 @@ rasch_quality_children_print <- function(df_nest, vars_metric, vars_age_group, T
                byrow = TRUE)
       
       #print Wright Map
-      pdf(paste0(path_output,"/WrightMap_anchored_",age_name,".pdf"))
+      grDevices::pdf(paste0(path_output,"/WrightMap_anchored_",age_name,".pdf"))
       WrightMap::wrightMap(
         df_nest$WLE_anchored[[r]]$theta,
         df_nest$tthresh_anchored[[r]][order(df_nest$mod_anchored[[r]]$item$xsi.item),],
@@ -118,7 +118,7 @@ rasch_quality_children_print <- function(df_nest, vars_metric, vars_age_group, T
         thr.sym.cex = 1.5,
         breaks=50
       )
-      dev.off()
+      grDevices::dev.off()
       
       #create dependency graph
       fig_LID(LIDforgraph = df_nest$cor_anchored[[r]], 
@@ -137,7 +137,7 @@ rasch_quality_children_print <- function(df_nest, vars_metric, vars_age_group, T
     openxlsx::write.xlsx(df_nest$xsithresh_anchored, file = paste0(path_output, "/", TAM_model,"_xsi_thresholds_anchored.xlsx"), row.names = TRUE, keepNA = TRUE)
     openxlsx::write.xlsx(df_nest$eigen_anchored, file = paste0(path_output, "/", TAM_model,"_eigenvalues_anchored.xlsx"), row.names = TRUE, keepNA = TRUE)
     openxlsx::write.xlsx(df_nest$PCA_anchored, file = paste0(path_output, "/", TAM_model,"_first_vector_loadings_anchored.xlsx"), row.names = TRUE, keepNA = TRUE)
-    capture.output(df_nest$WLE_anchored,file = paste0(path_output, "/", TAM_model,"_WLE_anchored.txt"))
+    utils::capture.output(df_nest$WLE_anchored,file = paste0(path_output, "/", TAM_model,"_WLE_anchored.txt"))
     openxlsx::write.xlsx(df_nest$EAP_anchored, file = paste0(path_output, "/", TAM_model,"_EAP_reliability_anchored.xlsx"), row.names = TRUE, keepNA = TRUE)
   }
 }

@@ -2,7 +2,7 @@
 #'
 #' @param vars_demo a character vector of names of variables to calculate percent and N for
 #' @param group_by_var a string (length 1) with the name of the variable from \code{df} to disaggregate by
-#' @param spread_by_group_by_var logical determining whether to pass \code{group_by_var} to \code{dplyr::spread()} to give a wide-format tab. Default is FALSE.
+#' @param spread_by_group_by_var logical determining whether to pass \code{group_by_var} to \code{tidyr::spread()} to give a wide-format tab. Default is FALSE.
 #' @inheritParams rasch_mds
 #'
 #' @return A tibble with percent and N for each level of each variable in \code{vars_demo}

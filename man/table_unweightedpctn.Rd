@@ -14,7 +14,7 @@ table_unweightedpctn(df, vars_demo, group_by_var = NULL,
 
 \item{group_by_var}{a string (length 1) with the name of the variable from \code{df} to disaggregate by}
 
-\item{spread_by_group_by_var}{logical determining whether to pass \code{group_by_var} to \code{dplyr::spread()} to give a wide-format tab. Default is FALSE.}
+\item{spread_by_group_by_var}{logical determining whether to pass \code{group_by_var} to \code{tidyr::spread()} to give a wide-format tab. Default is FALSE.}
 }
 \value{
 A tibble with percent and N for each level of each variable in \code{vars_demo}
