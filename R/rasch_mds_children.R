@@ -64,9 +64,8 @@ rasch_mds_children <- function(df,
   #DONE split df by age group
   #DONE 6_RunModels through 10_ModelQuality should be basically fine
   #DONE 13_Thresholds, dependency graph, levels should ve mostly ok
-  #adapt so that either anchored or multigroup model can be used
+  #DONE adapt so that either anchored or multigroup model can be used
   #factor analysis? DIF?
-  #test testlet, recode, drop, split
   
   #check for correct entry of vars_metric/_common/_grouped
   if (is.null(vars_metric) & (is.null(vars_metric_common) | is.null(vars_metric_grouped))) {
@@ -161,7 +160,6 @@ rasch_mds_children <- function(df,
     max_values <- split_age_result[["max_values"]]
     
     cat("Splitting by age to create discrete age-specific variables completed. \n")
-    
   }
   
   
@@ -179,7 +177,6 @@ rasch_mds_children <- function(df,
     max_values <- testlet_result[["max_values"]]
     
     cat("Testlet creation completed. \n")
-    
   }
   
   # PERFORM RECODING --------
@@ -193,7 +190,6 @@ rasch_mds_children <- function(df,
     max_values <- recode_result[["max_values"]]
     
     cat("Recoding variables completed. \n")
-    
   }
   
   # DROP VARIABLES ---------
@@ -206,7 +202,6 @@ rasch_mds_children <- function(df,
     max_values <- drop_result[["max_values"]]
     
     cat("Dropping variables completed. \n")
-    
   }
   
   # PERFORM SPLIT -------
@@ -236,10 +231,12 @@ rasch_mds_children <- function(df,
                                   vars_metric = vars_metric,
                                   vars_age_group = vars_age_group,
                                   TAM_model = TAM_model)
+  cat("Models completed. \n")
   
   # CALCULATE MODEL QUALITY -----------
   df_nest <- rasch_quality_children(df_nest = df_nest,
                                     vars_metric = vars_metric)
+  cat("Model quality calculated. \n")
   
  
   # PRINT RESULTS ------------
@@ -249,21 +246,10 @@ rasch_mds_children <- function(df,
                                  vars_age_group = vars_age_group,
                                  TAM_model = TAM_model,
                                  path_output = path_output)
-    
+    cat("Model quality printed. \n")
   }
   
-  # 
-  # 
-  # 
-  # 
-  # # ADD RAW SCORE ---------
-  # df <- rasch_rawscore(df = df,
-  #                      vars_metric = vars_metric,
-  #                      vars_id = vars_id,
-  #                      max_values = max_values)
-  # 
-  # 
-  # 
+  
   # # PERFORM DIF ANALYSIS ---------
   # if (!is.null(vars_DIF)) {
   #   DIF_result <- rasch_DIF(df = df, 
@@ -279,7 +265,8 @@ rasch_mds_children <- function(df,
 
   
   # RESCALE SCORE --------
-  df_final <- rasch_rescale_children(df_nest = df_nest,
+  df_final <- rasch_rescale_children(df = df,
+                                     df_nest = df_nest,
                                      vars_age_group = vars_age_group,
                                      vars_id = vars_id)
   

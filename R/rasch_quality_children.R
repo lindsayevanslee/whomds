@@ -36,22 +36,23 @@ rasch_quality_children <- function(df_nest, vars_metric) {
     )
   
   #calculate anchored model quality
-  df_nest <- df_nest %>% 
-    mutate(itemfit_anchored = map(mod_anchored, ~ msq.itemfit(.)$itemfit),
-           cor_anchored = map(mod_anchored, ~ cor(IRT.residuals(.)$stand_residuals, use="pairwise.complete.obs")),
-           xsithresh_anchored = map(mod_anchored, ~ cbind(.$xsi[vars_metric[["common"]],],
-                                                          tam.threshold(.)[vars_metric[["common"]], ])),
-           tthresh_anchored = map(mod_anchored, ~ tam.threshold(.)),
-           eigen_anchored = map(cor_anchored, ~ ifelse(any(is.na(.)),
+  if (length(vars_metric) > 1) {
+    df_nest <- df_nest %>% 
+      mutate(itemfit_anchored = map(mod_anchored, ~ msq.itemfit(.)$itemfit),
+             cor_anchored = map(mod_anchored, ~ cor(IRT.residuals(.)$stand_residuals, use="pairwise.complete.obs")),
+             xsithresh_anchored = map(mod_anchored, ~ cbind(.$xsi[vars_metric[["common"]],],
+                                                            tam.threshold(.)[vars_metric[["common"]], ])),
+             tthresh_anchored = map(mod_anchored, ~ tam.threshold(.)),
+             eigen_anchored = map(cor_anchored, ~ ifelse(any(is.na(.)),
+                                                         "NA in residual correlation matrix for start model. Unable to calculate eigenvalues and eigenvectors. Consider changing your testlets.",
+                                                         list(eigen(.)$values))),
+             PCA_anchored = map(cor_anchored, ~ ifelse(any(is.na(.)),
                                                        "NA in residual correlation matrix for start model. Unable to calculate eigenvalues and eigenvectors. Consider changing your testlets.",
-                                                       list(eigen(.)$values))),
-           PCA_anchored = map(cor_anchored, ~ ifelse(any(is.na(.)),
-                                                     "NA in residual correlation matrix for start model. Unable to calculate eigenvalues and eigenvectors. Consider changing your testlets.",
-                                                     list(eigen(.)$vectors[,1]))),
-           WLE_anchored = map(mod_anchored, ~ tam.wle(., progress = FALSE)),
-           EAP_anchored = map(mod_anchored, ~ .$EAP.rel[1])
-    )
-  
+                                                       list(eigen(.)$vectors[,1]))),
+             WLE_anchored = map(mod_anchored, ~ tam.wle(., progress = FALSE)),
+             EAP_anchored = map(mod_anchored, ~ .$EAP.rel[1])
+      )
+  }
   
   return(df_nest)
   
