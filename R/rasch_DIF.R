@@ -124,7 +124,7 @@ rasch_DIF <- function(df, vars_metric, vars_DIF, residuals_PCM, split_strategy =
                                                 (dif %in% names(split_strategy)) & 
                                                 (unlist(strsplit(res,"_"))[1] %in% split_strategy[[dif]])){
                                                
-                                               result <- rbind(c("n.a. split item", "", "", "", ""), rep("", 5), rep("",5), rep("", 5) )
+                                               result <- matrix(NA, nrow = 4, ncol = 5)
                                              } 
                                              #if there was not a split OR this vars_DIF not used to split vars OR  this variable not split by this vars_DIF
                                              else {
