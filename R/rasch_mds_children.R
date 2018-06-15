@@ -154,7 +154,7 @@ rasch_mds_children <- function(df,
     vars_metric <- split_age_result[["vars_metric"]]
     max_values <- split_age_result[["max_values"]]
     
-    cat("Splitting by age to create discrete age-specific variables completed. \n")
+    message("Splitting by age to create discrete age-specific variables completed.")
   }
   
   
@@ -171,7 +171,7 @@ rasch_mds_children <- function(df,
     testlet_strategy <- testlet_result[["testlet_strategy"]]
     max_values <- testlet_result[["max_values"]]
     
-    cat("Testlet creation completed. \n")
+    message("Testlet creation completed.")
   }
   
   # PERFORM RECODING --------
@@ -184,7 +184,7 @@ rasch_mds_children <- function(df,
     df <- recode_result[["df"]]
     max_values <- recode_result[["max_values"]]
     
-    cat("Recoding variables completed. \n")
+    message("Recoding variables completed.")
   }
   
   # DROP VARIABLES ---------
@@ -196,7 +196,7 @@ rasch_mds_children <- function(df,
     vars_metric <- drop_result[["vars_metric"]]
     max_values <- drop_result[["max_values"]]
     
-    cat("Dropping variables completed. \n")
+    message("Dropping variables completed.")
   }
   
   # PERFORM SPLIT -------
@@ -210,7 +210,7 @@ rasch_mds_children <- function(df,
     vars_metric <- split_result[["vars_metric"]]
     max_values <- split_result[["max_values"]]
     
-    cat("Splitting variables completed. \n")
+    message("Splitting variables completed.")
   }
   
   # SPLIT DATA BY AGE -----
@@ -226,12 +226,12 @@ rasch_mds_children <- function(df,
                                   vars_metric = vars_metric,
                                   vars_age_group = vars_age_group,
                                   TAM_model = TAM_model)
-  cat("Models completed. \n")
+  message("Models completed.")
   
   # CALCULATE MODEL QUALITY -----------
   df_nest <- rasch_quality_children(df_nest = df_nest,
                                     vars_metric = vars_metric)
-  cat("Model quality calculated. \n")
+  message("Model quality calculated.")
   
  
   # PRINT RESULTS ------------
@@ -241,7 +241,7 @@ rasch_mds_children <- function(df,
                                  vars_age_group = vars_age_group,
                                  TAM_model = TAM_model,
                                  path_output = path_output)
-    cat("Model quality printed. \n")
+    message("Model quality printed.")
   }
   
   
@@ -255,7 +255,7 @@ rasch_mds_children <- function(df,
   #                           print_results = print_results, 
   #                           path_output = path_output)
   #   
-  #   cat("DIF analysis completed. \n")
+  #   message("DIF analysis completed.")
   # }
 
   

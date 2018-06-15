@@ -123,7 +123,7 @@ rasch_mds <- function(df,
     testlet_strategy <- testlet_result[["testlet_strategy"]]
     max_values <- testlet_result[["max_values"]]
     
-    cat("Testlet creation completed. \n")
+    message("Testlet creation completed.")
     
     }
   
@@ -137,7 +137,7 @@ rasch_mds <- function(df,
     df <- recode_result[["df"]]
     max_values <- recode_result[["max_values"]]
     
-    cat("Recoding variables completed. \n")
+    message("Recoding variables completed.")
     
   }
   
@@ -150,7 +150,7 @@ rasch_mds <- function(df,
     vars_metric <- drop_result[["vars_metric"]]
     max_values <- drop_result[["max_values"]]
     
-    cat("Dropping variables completed. \n")
+    message("Dropping variables completed.")
     
   }
   
@@ -161,7 +161,7 @@ rasch_mds <- function(df,
                                 path_output = path_output)
   
   
-  cat("Factor analysis completed. \n")
+  message("Factor analysis completed.")
   
   # PERFORM SPLIT -------
   if (!is.null(split_strategy)) {
@@ -174,7 +174,7 @@ rasch_mds <- function(df,
     vars_metric <- split_result[["vars_metric"]]
     max_values <- split_result[["max_values"]]
     
-    cat("Splitting variables completed. \n")
+    message("Splitting variables completed.")
   }
   
   # ADD RAW SCORE ---------
@@ -193,7 +193,7 @@ rasch_mds <- function(df,
   residuals_PCM <- model_result[["residuals_PCM"]]
   df_score <- model_result[["df_score"]]
   
-  cat("Rasch Model completed. \n")
+  message("Rasch Model completed.")
   
   
   
@@ -207,7 +207,7 @@ rasch_mds <- function(df,
                             print_results = print_results, 
                             path_output = path_output)
     
-    cat("DIF analysis completed. \n")
+    message("DIF analysis completed.")
   }
   
   
