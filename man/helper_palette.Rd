@@ -7,6 +7,29 @@
 helper_palette(n, h = c(-100, 100), c. = c(60, 100), l = c(15, 95),
   power = c(2, 0.9), fixup = TRUE, gamma = NULL, alpha = 1, ...)
 }
+\arguments{
+\item{n}{the number of colors (\eqn{\ge 1}{>= 1}) to be in the palette.}
+
+\item{h}{hue value in the HCL or HSV color description, has to be
+    in [0, 360] for HCL and in [0, 1] for HSV colors.}
+
+\item{c.}{chroma value in the HCL color description.}
+
+\item{l}{luminance value in the HCL color description.}
+
+\item{power}{control parameter determining how chroma
+    and luminance should be increased (1 = linear, 2 = quadratic, etc.).}
+
+\item{fixup}{logical. Should the color be corrected to a valid RGB
+    value before correction?}
+
+\item{gamma}{Deprecated.}
+
+\item{alpha}{numeric vector of values in the range \code{[0, 1]} for
+    alpha transparency channel (0 means transparent and 1 means opaque).}
+
+\item{...}{Other arguments passed to \code{\link{hex}}.}
+}
 \value{
 \code{n} hex codes from the color palette
 }

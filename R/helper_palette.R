@@ -1,6 +1,8 @@
 #use this function for generating the color palette (from colorspace package)
 #' Color palette for the MDS
 #' 
+#' @inheritParams colorspace::heat_hcl
+#' 
 #' @details Generated with \code{colorspace::choose_palette()}
 #'
 #' @return \code{n} hex codes from the color palette

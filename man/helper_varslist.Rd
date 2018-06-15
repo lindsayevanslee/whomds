@@ -15,10 +15,6 @@ a character vector of all unique items from \code{vars_list}
 \description{
 Convert list to vector with unique elements
 }
-\examples{
-my_list <- list(letters[1:3], letters[3:6], letters[4:10])
-helper_varslist(my_list)
-}
 \seealso{
 Other helper functions: \code{\link{helper_palette}}
 }
