@@ -1,4 +1,4 @@
-#' Example of WHO Model Disability Survey data
+#' Example of WHO Model Disability Survey data for adults
 #'
 #' An example data set of data from the WHO Model Disability Survey. The data is taken from the Chilean survey ENDIS II (2014)
 #'
@@ -24,3 +24,22 @@
 #' }
 #' @source WHO Disability Programme (leel@@who.int), El Servicio Nacional de la Discapacidad de Chile
 "chile_adults"
+
+#' Example of WHO Model Disability Survey data for children
+#'
+#' An example data set of data from the WHO Model Disability Survey. The data is taken from the Chilean survey ENDIS II (2014)
+#'
+#' @format A tibble with 5515 rows and 199 variables:
+#' \describe{
+#'   \item{enc_id}{household number}
+#'   \item{sex}{sex, Male or Female}
+#'   \item{edad}{age in years}
+#'   \item{age_cat}{age catgory, either "Age2to4",  "Age5to9" or "Age10to17"}
+#'   \item{VARUNIT_N}{cluster id}
+#'   \item{VARSTRAT_N}{survey strata}
+#'   \item{Factor_Persona}{survey weights}
+#'   \item{e....}{survey item from "EDUCACION" section (see Chile ENDIS II questionnaire)}
+#'   \item{n....}{survey item from "CUESTIONARIO INFANTIL" (see Chile ENDIS II questionnaire)}
+#' }
+#' @source WHO Disability Programme (leel@@who.int), El Servicio Nacional de la Discapacidad de Chile
+"chile_children"
