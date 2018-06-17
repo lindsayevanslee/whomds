@@ -154,6 +154,19 @@ rasch_mds <- function(df,
     
   }
   
+  # PRINT RESPONSE FREQUENCIES -------
+  if (print_results) {
+    df %>% 
+      select(vars_metric) %>% 
+      map(table, useNA="always") %>% 
+      map(as_data_frame) %>% 
+      bind_rows(.id = "Q") %>% 
+      spread(Q,n) %>% 
+      rename(resp=Var1) %>% 
+      write_csv(paste0(path_output, "response_freq.csv"))
+    
+  }
+  
   # PERFORM FACTOR ANALYSIS ------------
   factor_result <- rasch_factor(df = df, 
                                 vars_metric = vars_metric, 
