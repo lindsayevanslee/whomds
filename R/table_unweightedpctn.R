@@ -15,10 +15,10 @@
 #' @import rlang
 #'
 #' @examples
-#' table_unweightedpctn(mdstest, vars_demo = c("sex", "age_cat", "work_cat", "edu_cat"))
-#' table_unweightedpctn(mdstest, vars_demo = c("sex", "age_cat", "work_cat", "edu_cat"), 
+#' table_unweightedpctn(chile_adults, vars_demo = c("sex", "age_cat", "work_cat", "edu_cat"))
+#' table_unweightedpctn(chile_adults, vars_demo = c("sex", "age_cat", "work_cat", "edu_cat"), 
 #' group_by_var = "performance_cat")
-#' table_unweightedpctn(mdstest, vars_demo = c("sex", "age_cat", "work_cat", "edu_cat"), 
+#' table_unweightedpctn(chile_adults, vars_demo = c("sex", "age_cat", "work_cat", "edu_cat"), 
 #' group_by_var = "performance_cat", spread_by_group_by_var = TRUE)
 table_unweightedpctn <- function(df, vars_demo, group_by_var=NULL, spread_by_group_by_var = FALSE) {
   

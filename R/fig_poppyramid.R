@@ -18,7 +18,7 @@
 #' @import dplyr
 #'
 #' @examples 
-#' fig_poppyramid(mdstest, "edad", "sex")
+#' fig_poppyramid(chile_adults, "edad", "sex")
 fig_poppyramid <- function(df, var_age, var_sex){
   
   #convert to tibble

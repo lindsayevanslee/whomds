@@ -23,7 +23,7 @@ Compute basic statistics of the number of member per group per household
 Includes a call to \code{tidyr::complete()}, which causes the function to be a bit slow.
 }
 \examples{
-table_basicstats(mdstest, "enc_id", "age_cat")
+table_basicstats(chile_adults, "enc_id", "age_cat")
 }
 \seealso{
 Other table functions: \code{\link{table_unweightedpctn}},

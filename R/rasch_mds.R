@@ -163,7 +163,7 @@ rasch_mds <- function(df,
       bind_rows(.id = "Q") %>% 
       spread(Q,n) %>% 
       rename(resp=Var1) %>% 
-      write_csv(paste0(path_output, "response_freq.csv"))
+      write_csv(paste0(path_output, "/response_freq.csv"))
     
   }
   

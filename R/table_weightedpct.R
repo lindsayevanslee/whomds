@@ -27,7 +27,7 @@
 #' @seealso See \code{vignette("programming", package = "dplyr")} for more about non-standard evaluation (NSE)
 #'
 #' @examples
-#' table_weightedpct(mdstest, 
+#' table_weightedpct(chile_adults, 
 #'     vars_ids = c("VARUNIT_N","enc_id"),
 #'     vars_strata = "VARSTRAT_N",
 #'     vars_weights = "Factor_Persona",

@@ -43,7 +43,7 @@ Calculate table of percentages of response distribution for survey items, survey
 If \code{willfilter} is NULL, the table is not filtered or transmuted. If \code{willfilter} is TRUE, the table is filtered before it is spread or arranged. If \code{willfilter} is FALSE, the table is transmuted after the spread and/or arrange. "..." captures the non-standard evaluation expressions (NSE) to pass to \code{dplyr::filter} or \code{dplyr::transmute()}.
 }
 \examples{
-table_weightedpct(mdstest, 
+table_weightedpct(chile_adults, 
     vars_ids = c("VARUNIT_N","enc_id"),
     vars_strata = "VARSTRAT_N",
     vars_weights = "Factor_Persona",
