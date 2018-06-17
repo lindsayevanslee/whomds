@@ -24,10 +24,12 @@ chile_children <- data_total %>%
   ),
   sex = factor(sexo, levels = 1:2, labels = c("Male", "Female"))) %>% 
   select(c("enc_id", "sex", "edad", "age_cat", "VARUNIT_N", "VARSTRAT_N", "Factor_Persona"), 
-         matches("e\\d"), matches("n\\d"))
+         matches("e\\d"), matches("n[1-5][0-9]"), matches("n[6][0-3]"), -contains("especifique")) %>% 
+  map(function(x) {
+    attr(x, "value.labels") <- NULL
+    return(x)
+  })
   
-
-
 
 rm(list=setdiff(ls(), c("chile_adults", "chile_children")))
 

@@ -2,7 +2,7 @@
 % Please edit documentation in R/table_basicstats.R
 \name{table_basicstats}
 \alias{table_basicstats}
-\title{Compute basic statistics of the number of member per group per household}
+\title{Compute basic statistics of the number of members per group per household}
 \usage{
 table_basicstats(df, hh_id, group_by_var)
 }
@@ -17,7 +17,7 @@ table_basicstats(df, hh_id, group_by_var)
 A tibble with rows for each level of \code{group_by_var} and "Total" and columns for the Mean (SD), Median and Range of the number of people in each group per household.
 }
 \description{
-Compute basic statistics of the number of member per group per household
+Compute basic statistics of the number of members per group per household
 }
 \note{
 Includes a call to \code{tidyr::complete()}, which causes the function to be a bit slow.

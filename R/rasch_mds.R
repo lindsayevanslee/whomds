@@ -158,12 +158,12 @@ rasch_mds <- function(df,
   if (print_results) {
     df %>% 
       select(vars_metric) %>% 
-      map(table, useNA="always") %>% 
-      map(as_data_frame) %>% 
+      purrr::map(table, useNA="always") %>% 
+      purrr::map(as_data_frame) %>% 
       bind_rows(.id = "Q") %>% 
-      spread(Q,n) %>% 
+      tidyr::spread(Q,n) %>% 
       rename(resp=Var1) %>% 
-      write_csv(paste0(path_output, "/response_freq.csv"))
+      readr::write_csv(paste0(path_output, "/response_freq.csv"))
     
   }
   

@@ -1,4 +1,4 @@
-#' Compute basic statistics of the number of member per group per household
+#' Compute basic statistics of the number of members per group per household
 #'
 #' @param df a data frame of household data where the rows represent members of the households in the sample
 #' @param hh_id string (length 1) indicating the name of the variable in \code{df} uniquely identifying households

@@ -213,6 +213,19 @@ rasch_mds_children <- function(df,
     message("Splitting variables completed.")
   }
   
+  # PRINT RESPONSE FREQUENCIES -------
+  if (print_results) {
+    df %>% 
+      select(helper_varslist(vars_metric)) %>% 
+      purrr::map(table, useNA="always") %>% 
+      purrr::map(as_data_frame) %>% 
+      bind_rows(.id = "Q") %>% 
+      tidyr::spread(Q,n) %>% 
+      rename(resp=Var1) %>% 
+      readr::write_csv(paste0(path_output, "/response_freq.csv"))
+    
+  }
+  
   # SPLIT DATA BY AGE -----
   df_nest <- rasch_df_nest(df = df,
                            vars_age_group = vars_age_group,

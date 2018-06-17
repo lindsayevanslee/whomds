@@ -51,12 +51,14 @@ if (getRversion() >= "2.15.1") {
       "person_pars",
       "prop",
       "prop_se",
+      "Q",
       "RawScore",
       "resp",
       "sd",
       "sex",
       "start_xsi",
       "var",
+      "Var1",
       "vars_id",
       "WLE_anchored"
     )
