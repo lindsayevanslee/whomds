@@ -12,7 +12,7 @@ rasch_quality_children_print(df_nest, vars_metric, vars_group, TAM_model,
 
 \item{vars_metric}{a character vector of items to use in the Rasch Analysis}
 
-\item{vars_group}{a string with the column name identifying age groups}
+\item{vars_group}{a string with the column name identifying grouping variable}
 
 \item{TAM_model}{a string with the type of IRT model to use, passed to \code{irtmodel} argument of \code{TAM::tam()}. Default is \code{"PCM2"}}
 

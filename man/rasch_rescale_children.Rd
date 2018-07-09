@@ -11,7 +11,7 @@ rasch_rescale_children(df, df_nest, vars_group, vars_id)
 
 \item{df_nest}{a nested tibble that contains the column \code{df_split} with the data split by the categories in the column \code{vars_group}}
 
-\item{vars_group}{a string with the column name identifying age groups}
+\item{vars_group}{a string with the column name identifying grouping variable}
 
 \item{vars_id}{a string with column name uniquely identifying individuals}
 }

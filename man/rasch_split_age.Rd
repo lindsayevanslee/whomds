@@ -9,7 +9,7 @@ rasch_split_age(df, vars_group, vars_metric, vars_id, max_values)
 \arguments{
 \item{df}{a data frame of individual survey data, where each row is an individual}
 
-\item{vars_group}{a string with the column name identifying age groups}
+\item{vars_group}{a string with the column name identifying grouping variable}
 
 \item{vars_metric}{a character vector of items to use in the Rasch Analysis}
 

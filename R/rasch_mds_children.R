@@ -1,6 +1,6 @@
 #' Top-level function to perform Rasch Analysis on WHO Model Disability Survey data for children
 #'
-#' @param vars_group a string with the column name identifying age groups
+#' @param vars_group a string with the column name identifying grouping variable
 #' @param vars_metric_common a character vector the common items among all individuals
 #' @param vars_metric_grouped a named list of character vectors with the items to use in the Rasch Analysis per group. The list should have names corresponding to the different groups, and contain character vectors of the corrsponding items for each group.
 #' @param TAM_model a string with the type of IRT model to use, passed to \code{irtmodel} argument of \code{TAM::tam()}. Default is \code{"PCM2"}
