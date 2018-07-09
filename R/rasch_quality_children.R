@@ -13,7 +13,7 @@ rasch_quality_children <- function(df_nest, vars_metric) {
   
   #calculate start model quality
   df_nest <- df_nest %>% 
-    mutate(itemfit_start = purrr::map(mod_start, ~ msq.itemfit(.)$itemfit),
+    mutate(itemfit_start = purrr::map(mod_start, ~ TAM::msq.itemfit(.)$itemfit),
            cor_start = purrr::map(mod_start, ~ cor(IRT.residuals(.)$stand_residuals, use="pairwise.complete.obs")),
            xsithresh_start = purrr::map(mod_start, ~ cbind(.$xsi[vars_metric[["common"]],],
                                                     tam.threshold(.)[vars_metric[["common"]], ])),
@@ -31,7 +31,7 @@ rasch_quality_children <- function(df_nest, vars_metric) {
   
   #calculate multigroup model quality
   df_nest <- df_nest %>% 
-    mutate(itemfit_multigroup = purrr::map(mod_multigroup, ~ msq.itemfit(.)$itemfit),
+    mutate(itemfit_multigroup = purrr::map(mod_multigroup, ~ TAM::msq.itemfit(.)$itemfit),
            cor_multigroup = purrr::map(mod_multigroup, ~ cor(IRT.residuals(.)$stand_residuals, use="pairwise.complete.obs")),
            xsithresh_multigroup = purrr::map(mod_multigroup, ~ cbind(.$xsi[vars_metric[["common"]],],
                                                               tam.threshold(.)[vars_metric[["common"]], ])),
@@ -49,7 +49,7 @@ rasch_quality_children <- function(df_nest, vars_metric) {
   #calculate anchored model quality
   if (length(vars_metric) > 1) {
     df_nest <- df_nest %>% 
-      mutate(itemfit_anchored = purrr::map(mod_anchored, ~ msq.itemfit(.)$itemfit),
+      mutate(itemfit_anchored = purrr::map(mod_anchored, ~ TAM::msq.itemfit(.)$itemfit),
              cor_anchored = purrr::map(mod_anchored, ~ cor(IRT.residuals(.)$stand_residuals, use="pairwise.complete.obs")),
              xsithresh_anchored = purrr::map(mod_anchored, ~ cbind(.$xsi[vars_metric[["common"]],],
                                                             tam.threshold(.)[vars_metric[["common"]], ])),

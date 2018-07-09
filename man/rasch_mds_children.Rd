@@ -5,8 +5,8 @@
 \title{Top-level function to perform Rasch Analysis on WHO Model Disability Survey data for children}
 \usage{
 rasch_mds_children(df, vars_id, vars_age_group, vars_metric_common = NULL,
-  vars_metric_grouped = NULL, vars_metric = NULL, TAM_model = "PCM2",
-  vars_DIF = NULL, resp_opts = 1:5, has_at_least_one = 4:5, max_NA = 10,
+  vars_metric_grouped = NULL, TAM_model = "PCM2", vars_DIF = NULL,
+  resp_opts = 1:5, has_at_least_one = 4:5, max_NA = 10,
   print_results = TRUE, path_parent = NULL, model_name = NULL,
   testlet_strategy = NULL, recode_strategy = NULL, drop_vars = NULL,
   split_strategy = NULL, comment = NULL)
@@ -21,8 +21,6 @@ rasch_mds_children(df, vars_id, vars_age_group, vars_metric_common = NULL,
 \item{vars_metric_common}{a character vector the common items among all individuals}
 
 \item{vars_metric_grouped}{a named list of character vectors with the items to use in the Rasch Analysis per group. The list should have names corresponding to the different groups, and contain character vectors of the corrsponding items for each group.}
-
-\item{vars_metric}{a named list of character vectors with the items to use in the Rasch Analysis. One element of the list should be "common" and contain a character vector of the common items among all individuals. Other elements of the list should have names corresponding to the different groups, and contain character vectors of the corrsponding items for each group.}
 
 \item{TAM_model}{a string with the type of IRT model to use, passed to \code{irtmodel} argument of \code{TAM::tam()}. Default is \code{"PCM2"}}
 

@@ -11,7 +11,7 @@ rasch_split_age(df, vars_age_group, vars_metric, vars_id, max_values)
 
 \item{vars_age_group}{a string with the column name identifying age groups}
 
-\item{vars_metric}{a named list of character vectors with the items to use in the Rasch Analysis. One element of the list should be "common" and contain a character vector of the common items among all individuals. Other elements of the list should have names corresponding to the different groups, and contain character vectors of the corrsponding items for each group.}
+\item{vars_metric}{a character vector of items to use in the Rasch Analysis}
 
 \item{vars_id}{a string with column name uniquely identifying individuals}
 

@@ -3,7 +3,6 @@
 #' @param vars_age_group a string with the column name identifying age groups
 #' @param vars_metric_common a character vector the common items among all individuals
 #' @param vars_metric_grouped a named list of character vectors with the items to use in the Rasch Analysis per group. The list should have names corresponding to the different groups, and contain character vectors of the corrsponding items for each group.
-#' @param vars_metric a named list of character vectors with the items to use in the Rasch Analysis. One element of the list should be "common" and contain a character vector of the common items among all individuals. Other elements of the list should have names corresponding to the different groups, and contain character vectors of the corrsponding items for each group.
 #' @param TAM_model a string with the type of IRT model to use, passed to \code{irtmodel} argument of \code{TAM::tam()}. Default is \code{"PCM2"}
 #' @param vars_DIF Currently does nothing. In the future, a string with the column names to use for analyzing differential item functioning (DIF). Default is NULL, to skip analysis of DIF.
 #' @param has_at_least_one a numeric vector with the response options that a respondent must have at least one of in order to be included in the metric calculation. See details for more information.
@@ -28,7 +27,6 @@ rasch_mds_children <- function(df,
                                vars_age_group,
                                vars_metric_common = NULL,
                                vars_metric_grouped = NULL,
-                               vars_metric = NULL,
                                TAM_model = "PCM2",
                                vars_DIF = NULL,
                                resp_opts = 1:5,
@@ -62,18 +60,9 @@ rasch_mds_children <- function(df,
   #DONE adapt so that either anchored or multigroup model can be used
   #factor analysis? DIF?
   
-  #check for correct entry of vars_metric/_common/_grouped
-  if (is.null(vars_metric) & (is.null(vars_metric_common) | is.null(vars_metric_grouped))) {
-    stop("You either must enter EITHER vars_metric OR both vars_metric_common and vars_metric_grouped")
-  } else if (!is.null(vars_metric) & (!is.null(vars_metric_common) | !is.null(vars_metric_grouped))) {
-    stop("You entered vars_metric and at least one of vars_metric_common and vars_metric_grouped. You either must enter EITHER vars_metric OR both vars_metric_common and vars_metric_grouped.")
-  }
-  
   #combine items into one list
-  if (is.null(vars_metric)) {
-    vars_metric <- c(list(common = vars_metric_common),
-                     vars_metric_grouped)
-  }
+  vars_metric <- c(list(common = vars_metric_common),
+                   vars_metric_grouped)
   
   #perform some checks
   if (resp_opts[1]!=1) stop("resp_opts must start with 1")
@@ -232,7 +221,7 @@ rasch_mds_children <- function(df,
                            vars_id = vars_id)
   
   
-
+  
   # CALCULATE MODELS --------------
   df_nest <- rasch_model_children(df = df, 
                                   df_nest = df_nest,
@@ -246,7 +235,7 @@ rasch_mds_children <- function(df,
                                     vars_metric = vars_metric)
   message("Model quality calculated.")
   
- 
+  
   # PRINT RESULTS ------------
   if (print_results) {
     rasch_quality_children_print(df_nest = df_nest,
@@ -270,7 +259,7 @@ rasch_mds_children <- function(df,
   #   
   #   message("DIF analysis completed.")
   # }
-
+  
   
   # RESCALE SCORE --------
   df_final <- rasch_rescale_children(df = df,

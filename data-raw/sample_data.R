@@ -28,7 +28,8 @@ chile_children <- data_total %>%
   map(function(x) {
     attr(x, "value.labels") <- NULL
     return(x)
-  })
+  }) %>% 
+  as_tibble()
   
 
 rm(list=setdiff(ls(), c("chile_adults", "chile_children")))
