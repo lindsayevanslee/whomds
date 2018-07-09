@@ -4,16 +4,16 @@
 \alias{rasch_model_children}
 \title{Run the multigroup and anchored Rasch Model}
 \usage{
-rasch_model_children(df, df_nest, vars_metric, vars_age_group, TAM_model)
+rasch_model_children(df, df_nest, vars_metric, vars_group, TAM_model)
 }
 \arguments{
 \item{df}{a data frame of individual survey data, where each row is an individual}
 
-\item{df_nest}{a nested tibble that contains the column \code{df_split} with the data split by the categories in the column \code{vars_age_group}}
+\item{df_nest}{a nested tibble that contains the column \code{df_split} with the data split by the categories in the column \code{vars_group}}
 
 \item{vars_metric}{a character vector of items to use in the Rasch Analysis}
 
-\item{vars_age_group}{a string with the column name identifying age groups}
+\item{vars_group}{a string with the column name identifying age groups}
 
 \item{TAM_model}{a string with the type of IRT model to use, passed to \code{irtmodel} argument of \code{TAM::tam()}. Default is \code{"PCM2"}}
 }

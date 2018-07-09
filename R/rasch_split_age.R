@@ -13,10 +13,10 @@
 #' @family rasch functions
 #' @family children analysis functions
 #'
-rasch_split_age <- function (df, vars_age_group, vars_metric, vars_id, max_values) {
+rasch_split_age <- function (df, vars_group, vars_metric, vars_id, max_values) {
   
   #capture levels of age_group
-  levels_age_group <- levels(pull(df, vars_age_group))
+  levels_age_group <- levels(pull(df, vars_group))
   
   #initialize list of overlapping varibles
   vars_metric_overlap <- vector("list",length(vars_metric))
@@ -39,11 +39,11 @@ rasch_split_age <- function (df, vars_age_group, vars_metric, vars_id, max_value
     
     #select vars needed
     subtbl <- df %>% 
-      select(vars_id, vars_age_group, var)
+      select(vars_id, vars_group, var)
     
     #spread variables to create three discrete variables
     subtbl_spread <- subtbl %>% 
-      tidyr::spread(key = !!quo(vars_age_group), value = !!quo(var)) %>%
+      tidyr::spread(key = !!quo(vars_group), value = !!quo(var)) %>%
       rename_at(vars(levels_age_group), funs(paste0(var,"_",.)))
     
     #give error if number of rows isn't maintained

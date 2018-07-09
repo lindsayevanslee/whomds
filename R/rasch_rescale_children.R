@@ -11,7 +11,7 @@
 #'
 #' @export
 #'
-rasch_rescale_children <- function(df, df_nest, vars_age_group, vars_id) {
+rasch_rescale_children <- function(df, df_nest, vars_group, vars_id) {
   
   
   #Anchored
@@ -22,7 +22,7 @@ rasch_rescale_children <- function(df, df_nest, vars_age_group, vars_id) {
           tibble::add_column(Metric = WLE_age$theta)
         return(df_age)
       })) %>% 
-      dplyr::select(c(vars_age_group, "df_split")) %>% 
+      dplyr::select(c(vars_group, "df_split")) %>% 
       tidyr::unnest()
   }
   #Multigroup

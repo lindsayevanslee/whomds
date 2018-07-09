@@ -12,11 +12,11 @@
 #' @family rasch functions
 #' @family children analysis functions
 #' 
-rasch_quality_children_print <- function(df_nest, vars_metric, vars_age_group, TAM_model, LIDcutoff = 0.2, path_output) {
+rasch_quality_children_print <- function(df_nest, vars_metric, vars_group, TAM_model, LIDcutoff = 0.2, path_output) {
   
   for (r in 1:nrow(df_nest)) {
     age_name <- df_nest %>% 
-      dplyr::pull(vars_age_group) %>% 
+      dplyr::pull(vars_group) %>% 
       .[r]
     
     ### Print multigroup results (only need to do once because should all be identical) ----------

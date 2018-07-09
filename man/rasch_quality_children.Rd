@@ -7,7 +7,7 @@
 rasch_quality_children(df_nest, vars_metric)
 }
 \arguments{
-\item{df_nest}{a nested tibble that contains the column \code{df_split} with the data split by the categories in the column \code{vars_age_group}}
+\item{df_nest}{a nested tibble that contains the column \code{df_split} with the data split by the categories in the column \code{vars_group}}
 
 \item{vars_metric}{a character vector of items to use in the Rasch Analysis}
 }

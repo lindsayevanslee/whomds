@@ -4,17 +4,17 @@
 \alias{rasch_df_nest}
 \title{Nest data by age group}
 \usage{
-rasch_df_nest(df, vars_age_group, vars_id)
+rasch_df_nest(df, vars_group, vars_id)
 }
 \arguments{
 \item{df}{a data frame of individual survey data, where each row is an individual}
 
-\item{vars_age_group}{a string with the column name identifying age groups}
+\item{vars_group}{a string with the column name identifying age groups}
 
 \item{vars_id}{a string with column name uniquely identifying individuals}
 }
 \value{
-nested tibble with two columns: the age group given by \code{vars_age_group} and \code{df_split} with the split data
+nested tibble with two columns: the age group given by \code{vars_group} and \code{df_split} with the split data
 }
 \description{
 Nest data by age group

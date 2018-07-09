@@ -1,6 +1,6 @@
 #' Top-level function to perform Rasch Analysis on WHO Model Disability Survey data for children
 #'
-#' @param vars_age_group a string with the column name identifying age groups
+#' @param vars_group a string with the column name identifying age groups
 #' @param vars_metric_common a character vector the common items among all individuals
 #' @param vars_metric_grouped a named list of character vectors with the items to use in the Rasch Analysis per group. The list should have names corresponding to the different groups, and contain character vectors of the corrsponding items for each group.
 #' @param TAM_model a string with the type of IRT model to use, passed to \code{irtmodel} argument of \code{TAM::tam()}. Default is \code{"PCM2"}
@@ -24,7 +24,7 @@
 #' @import dplyr
 rasch_mds_children <- function(df, 
                                vars_id,
-                               vars_age_group,
+                               vars_group,
                                vars_metric_common = NULL,
                                vars_metric_grouped = NULL,
                                TAM_model = "PCM2",
@@ -135,7 +135,7 @@ rasch_mds_children <- function(df,
   # SPLIT BY AGE/MAKE VARS DISCRETE BY AGE --------
   if (length(vars_metric) > 1) {
     split_age_result <- rasch_split_age(df = df,
-                                        vars_age_group = vars_age_group, 
+                                        vars_group = vars_group, 
                                         vars_metric = vars_metric,
                                         vars_id = vars_id,
                                         max_values = max_values)
@@ -217,7 +217,7 @@ rasch_mds_children <- function(df,
   
   # SPLIT DATA BY AGE -----
   df_nest <- rasch_df_nest(df = df,
-                           vars_age_group = vars_age_group,
+                           vars_group = vars_group,
                            vars_id = vars_id)
   
   
@@ -226,7 +226,7 @@ rasch_mds_children <- function(df,
   df_nest <- rasch_model_children(df = df, 
                                   df_nest = df_nest,
                                   vars_metric = vars_metric,
-                                  vars_age_group = vars_age_group,
+                                  vars_group = vars_group,
                                   TAM_model = TAM_model)
   message("Models completed.")
   
@@ -240,7 +240,7 @@ rasch_mds_children <- function(df,
   if (print_results) {
     rasch_quality_children_print(df_nest = df_nest,
                                  vars_metric = vars_metric,
-                                 vars_age_group = vars_age_group,
+                                 vars_group = vars_group,
                                  TAM_model = TAM_model,
                                  path_output = path_output)
     message("Model quality printed.")
@@ -264,7 +264,7 @@ rasch_mds_children <- function(df,
   # RESCALE SCORE --------
   df_final <- rasch_rescale_children(df = df,
                                      df_nest = df_nest,
-                                     vars_age_group = vars_age_group,
+                                     vars_group = vars_group,
                                      vars_id = vars_id)
   
   # PRINT DATA ---------

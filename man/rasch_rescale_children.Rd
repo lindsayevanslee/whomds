@@ -4,14 +4,14 @@
 \alias{rasch_rescale_children}
 \title{Rescale score from Rasch Analysis for children to range from 0 to 100}
 \usage{
-rasch_rescale_children(df, df_nest, vars_age_group, vars_id)
+rasch_rescale_children(df, df_nest, vars_group, vars_id)
 }
 \arguments{
 \item{df}{a data frame of individual survey data, where each row is an individual}
 
-\item{df_nest}{a nested tibble that contains the column \code{df_split} with the data split by the categories in the column \code{vars_age_group}}
+\item{df_nest}{a nested tibble that contains the column \code{df_split} with the data split by the categories in the column \code{vars_group}}
 
-\item{vars_age_group}{a string with the column name identifying age groups}
+\item{vars_group}{a string with the column name identifying age groups}
 
 \item{vars_id}{a string with column name uniquely identifying individuals}
 }

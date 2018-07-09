@@ -4,15 +4,15 @@
 \alias{rasch_quality_children_print}
 \title{Print results of analysis of Rasch Model quality}
 \usage{
-rasch_quality_children_print(df_nest, vars_metric, vars_age_group, TAM_model,
+rasch_quality_children_print(df_nest, vars_metric, vars_group, TAM_model,
   LIDcutoff = 0.2, path_output)
 }
 \arguments{
-\item{df_nest}{a nested tibble that contains the column \code{df_split} with the data split by the categories in the column \code{vars_age_group}}
+\item{df_nest}{a nested tibble that contains the column \code{df_split} with the data split by the categories in the column \code{vars_group}}
 
 \item{vars_metric}{a character vector of items to use in the Rasch Analysis}
 
-\item{vars_age_group}{a string with the column name identifying age groups}
+\item{vars_group}{a string with the column name identifying age groups}
 
 \item{TAM_model}{a string with the type of IRT model to use, passed to \code{irtmodel} argument of \code{TAM::tam()}. Default is \code{"PCM2"}}
 
