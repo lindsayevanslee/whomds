@@ -25,7 +25,7 @@
 rasch_mds_children <- function(df, 
                                vars_id,
                                vars_group,
-                               vars_metric_common = NULL,
+                               vars_metric_common,
                                vars_metric_grouped = NULL,
                                TAM_model = "PCM2",
                                vars_DIF = NULL,
@@ -60,12 +60,15 @@ rasch_mds_children <- function(df,
   #DONE adapt so that either anchored or multigroup model can be used
   #factor analysis? DIF?
   
+  
+  
   #combine items into one list
   vars_metric <- c(list(common = vars_metric_common),
                    vars_metric_grouped)
   
   #perform some checks
   if (resp_opts[1]!=1) stop("resp_opts must start with 1")
+  if (!is.null(vars_metric_grouped) & is.null(vars_metric_common)) stop("vars_metric_grouped cannot be specified without vars_metric_common")
   if (max_NA >= length(helper_varslist(vars_metric))) stop("max_NA must be less than length of vars_metric")
   
   # SAVE OUTPUT PATH ---------------------
