@@ -4,7 +4,7 @@
 \alias{rasch_mds_children}
 \title{Top-level function to perform Rasch Analysis on WHO Model Disability Survey data for children}
 \usage{
-rasch_mds_children(df, vars_id, vars_group, vars_metric_common = NULL,
+rasch_mds_children(df, vars_id, vars_group, vars_metric_common,
   vars_metric_grouped = NULL, TAM_model = "PCM2", vars_DIF = NULL,
   resp_opts = 1:5, has_at_least_one = 4:5, max_NA = 10,
   print_results = TRUE, path_parent = NULL, model_name = NULL,

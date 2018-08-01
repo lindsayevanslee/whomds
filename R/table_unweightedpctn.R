@@ -3,6 +3,7 @@
 #' @param vars_demo a character vector of names of variables to calculate percent and N for
 #' @param group_by_var a string (length 1) with the name of the variable from \code{df} to disaggregate by
 #' @param spread_by_group_by_var logical determining whether to pass \code{group_by_var} to \code{tidyr::spread()} to give a wide-format tab. Default is FALSE.
+#' @param group_by_var_sums_to_100 logical determining whether percentages sum to 100 along the margin of \code{group_by_var}, if applicable. Default is FALSE.
 #' @inheritParams rasch_mds
 #'
 #' @return A tibble with percent and N for each level of each variable in \code{vars_demo}
@@ -20,7 +21,7 @@
 #' group_by_var = "performance_cat")
 #' table_unweightedpctn(chile_adults, vars_demo = c("sex", "age_cat", "work_cat", "edu_cat"), 
 #' group_by_var = "performance_cat", spread_by_group_by_var = TRUE)
-table_unweightedpctn <- function(df, vars_demo, group_by_var=NULL, spread_by_group_by_var = FALSE) {
+table_unweightedpctn <- function(df, vars_demo, group_by_var=NULL, spread_by_group_by_var = FALSE, group_by_var_sums_to_100 = FALSE) {
   
   #convert to tibble
   if (!tibble::is_tibble(df)) df <- df %>% as_tibble()
@@ -57,9 +58,19 @@ table_unweightedpctn <- function(df, vars_demo, group_by_var=NULL, spread_by_gro
         filter(!is.na(!!sym_group_by_var))
     }
     
+    #start grouping
+    if (!group_by_var_sums_to_100) {
+      tab <- tab %>% 
+        group_by_at(c(vars_demo[i], group_by_var))
+    }
+    if (group_by_var_sums_to_100) {
+      tab <- tab %>% 
+        group_by_at(c(group_by_var, vars_demo[i]))
+    }
+    
+    
     #create summary table
-    tab <- tab %>% 
-      group_by_at(c(vars_demo[i], group_by_var)) %>%
+    tab <- tab %>%
       summarize(n=n()) %>% 
       mutate(pct=round(n/sum(n)*100,1)) %>% 
       rename(demo = !!sym_this_vars_demo)
@@ -85,7 +96,7 @@ table_unweightedpctn <- function(df, vars_demo, group_by_var=NULL, spread_by_gro
                 pct_n = paste0(pct, " (", n, ")"))
   }
   
-
+  
   
   return(final_tab)
 }
