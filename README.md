@@ -15,7 +15,7 @@ The Model Disability Survey (MDS) is a World Health Organization (WHO) general p
 
 ## How to use
 
-A long guide on using the package is available. Please email me at leel@who.int for access. In the future, this will be included as a vignette.
+An extensive guide on using the package is available. Please email me at leel@who.int for access. In the future, this will be included as a vignette.
 
 ## Warning
 
