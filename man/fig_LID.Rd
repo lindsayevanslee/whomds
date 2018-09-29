@@ -4,8 +4,8 @@
 \alias{fig_LID}
 \title{Print a graph showing significant correlations between survey items}
 \usage{
-fig_LID(LIDforgraph, LIDcutoff = 0.2, path_output, extra_file_label = NULL,
-  vertex_print_grey = NULL)
+fig_LID(LIDforgraph, LIDcutoff = 0.2, path_output,
+  extra_file_label = NULL, vertex_print_grey = NULL)
 }
 \arguments{
 \item{LIDforgraph}{a square matrix of item correlations}
@@ -31,3 +31,4 @@ This function could be applied to visualize any kind of correlations. But within
 Other figure functions: \code{\link{fig_dist}},
   \code{\link{fig_poppyramid}}
 }
+\concept{figure functions}

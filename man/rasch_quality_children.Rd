@@ -42,3 +42,5 @@ Other children analysis functions: \code{\link{rasch_df_nest}},
   \code{\link{rasch_split_age}}, \code{\link{rasch_split}},
   \code{\link{rasch_testlet}}
 }
+\concept{children analysis functions}
+\concept{rasch functions}

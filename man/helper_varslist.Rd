@@ -18,3 +18,4 @@ Convert list to vector with unique elements
 \seealso{
 Other helper functions: \code{\link{helper_palette}}
 }
+\concept{helper functions}

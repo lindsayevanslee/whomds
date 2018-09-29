@@ -39,7 +39,10 @@ rasch_mds(df, vars_metric, vars_id, vars_DIF = NULL, resp_opts = 1:5,
 \item{comment}{a string giving a comment describing the analysis, printed to a txt file. Default is NULL, to not print a comment.}
 }
 \value{
-a tibble with new columns representing the original person abilities (\code{person_pars}) and the rescaled person abilities (\code{rescaled}). 
+a named list with:
+\item{df}{a tibble with new columns representing the original person abilities (\code{person_pars}) and the rescaled person abilities (\code{rescaled})} 
+\item{vars_metric}{a character vector with the variables used in the metric after all adjustments}
+\item{df_results}{a tibble of one row with key results of the model}
 
 If \code{print_results} is TRUE, prints files to the working directory with the results of the Rasch Model.
 }
@@ -64,3 +67,4 @@ Other rasch functions: \code{\link{rasch_DIF}},
   \code{\link{rasch_split_age}}, \code{\link{rasch_split}},
   \code{\link{rasch_testlet}}
 }
+\concept{rasch functions}

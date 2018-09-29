@@ -31,6 +31,9 @@ a list with results from the Rasch Model:
 \item{residuals_PCM}{the standardized person residuals}
 \item{LID}{matrix with the item residual correlations}
 \item{targeting}{a matrix with information on the targeting of the model}
+\item{fit_results}{a string with results of the item fit}
+\item{LID_results}{a string with results of the local item dependency}
+\item{disordered_results}{a string listing items with disordered thresholds}
 }
 \description{
 Run the Rasch Model and print diagnositic results
@@ -53,3 +56,4 @@ Other rasch functions: \code{\link{rasch_DIF}},
   \code{\link{rasch_split_age}}, \code{\link{rasch_split}},
   \code{\link{rasch_testlet}}
 }
+\concept{rasch functions}

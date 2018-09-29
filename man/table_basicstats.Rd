@@ -29,3 +29,4 @@ table_basicstats(chile_adults, "enc_id", "age_cat")
 Other table functions: \code{\link{table_unweightedpctn}},
   \code{\link{table_weightedpct}}
 }
+\concept{table functions}

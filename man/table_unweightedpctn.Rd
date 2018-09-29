@@ -35,3 +35,4 @@ group_by_var = "performance_cat", spread_by_group_by_var = TRUE)
 Other table functions: \code{\link{table_basicstats}},
   \code{\link{table_weightedpct}}
 }
+\concept{table functions}

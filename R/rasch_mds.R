@@ -17,7 +17,10 @@
 #'
 #' @details This function combines all of the separate analyses of model fit necessary to assess the quality of the Rasch Model. It is designed to require minimal intervention from the user. Users wishing to have more control over the analysis can use the other Rasch functions in this package separately.
 #' 
-#' @return a tibble with new columns representing the original person abilities (\code{person_pars}) and the rescaled person abilities (\code{rescaled}). 
+#' @return a named list with:
+#' \item{df}{a tibble with new columns representing the original person abilities (\code{person_pars}) and the rescaled person abilities (\code{rescaled})} 
+#' \item{vars_metric}{a character vector with the variables used in the metric after all adjustments}
+#' \item{df_results}{a tibble of one row with key results of the model}
 #' 
 #' If \code{print_results} is TRUE, prints files to the working directory with the results of the Rasch Model. 
 #' 
@@ -221,7 +224,7 @@ rasch_mds <- function(df,
                             path_output = path_output)
     
     message("DIF analysis completed.")
-  }
+  } else DIF_result <- list(DIF_results = "did not calculate")
   
   
   
@@ -234,8 +237,21 @@ rasch_mds <- function(df,
   if (print_results) df_final %>% readr::write_csv(path = paste0(path_output, "/Data_final.csv"))
   
   
+  # PREPARE RESULTS DF ROW ----------
+  df_results <- tibble(model_name = model_name,
+                       vars_metric = paste(vars_metric, collapse = ", "),
+                       comment = comment,
+                       LID = model_result$LID_results,
+                       unidimensionality = factor_result$n_group_factors,
+                       disordering = model_result$disordered_results,
+                       DIF = DIF_result$DIF_results,
+                       item_fit = model_result$fit_results,
+                       model_fit = model_result$PSI)
+  
+  
   # RETURN DATA WITH SCORE ----------
   return(list(df = df_final,
-              vars_metric = vars_metric))
+              vars_metric = vars_metric,
+              df_results = df_results))
   
 }

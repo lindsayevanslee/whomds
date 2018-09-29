@@ -16,6 +16,9 @@
 #' \item{residuals_PCM}{the standardized person residuals}
 #' \item{LID}{matrix with the item residual correlations}
 #' \item{targeting}{a matrix with information on the targeting of the model}
+#' \item{fit_results}{a string with results of the item fit}
+#' \item{LID_results}{a string with results of the local item dependency}
+#' \item{disordered_results}{a string listing items with disordered thresholds}
 #' 
 #' @family rasch functions
 #' 
@@ -36,6 +39,20 @@ rasch_model <- function(df, vars_metric, vars_id, print_results = TRUE, path_out
   
   Thresholds_Table_Recoded <- cbind(Thr_PCM$threshpar, Thr_PCM$se.thresh)
   colnames(Thresholds_Table_Recoded) <- c("Threshold", "SE Threshold")
+  
+  disordered_results <- Thresholds_Table_Recoded %>% 
+    as.data.frame() %>% 
+    tibble::rownames_to_column("var") %>% 
+    as_tibble() %>% 
+    mutate(var = stringr::str_replace_all(var, "thresh beta ", "")) %>% 
+    tidyr::separate(col = var, into = c("var", "n_threshold"), sep = "\\.") %>% 
+    select(-`SE Threshold`) %>% 
+    arrange(var, n_threshold) %>% 
+    group_by(var) %>% 
+    summarize(disordered = is.unsorted(Threshold)) %>% 
+    filter(disordered) %>% 
+    pull(var) %>% 
+    paste(collapse = ", ")
 
   #-------------------------------------------------------------------------------  
   #4. person parameters
@@ -51,6 +68,32 @@ rasch_model <- function(df, vars_metric, vars_id, print_results = TRUE, path_out
   Itemfit <- eRm::itemfit(person_parameters)
   table_Itemfit <- as.data.frame(cbind(Itemfit$i.fit, Itemfit$i.df, Itemfit$i.outfitMSQ,   Itemfit$i.infitMSQ,  Itemfit$i.outfitZ,  Itemfit$i.infitZ  ) )
   names(table_Itemfit) <- c("i.fit", "i.df", "i.outfitMSQ",   "i.infitMSQ",  "i.outfitZ",  "i.infitZ" )
+  
+  
+  fit_results <- table_Itemfit %>% 
+    tibble::rownames_to_column("var") %>% 
+    as_tibble() %>% 
+    select(var, contains("MSQ")) %>% 
+    mutate_at(vars(contains("MSQ")),
+              funs(case_when(
+                . > 1.1 ~ "Overfit",
+                . < 0.9 ~ "Underfit",
+                TRUE ~ "OK"
+              ))) %>% 
+    mutate(fit = case_when(
+      i.outfitMSQ == "Underfit" & i.infitMSQ == "Overfit" ~ "Underfit & Overfit",
+      i.infitMSQ == "Underfit" & i.outfitMSQ == "Overfit" ~ "Underfit & Overfit",
+      i.outfitMSQ == "Underfit" | i.infitMSQ == "Underfit" ~ "Underfit",
+      i.outfitMSQ == "Overfit" | i.infitMSQ == "Overfit" ~ "Overfit",
+      TRUE ~ "OK"
+    )) %>% 
+    select(var, fit) %>% 
+    group_by(fit) %>% 
+    summarize(vars = paste(var, collapse = ",")) %>% 
+    tidyr::unite(col = "fit_results", fit, vars, sep = ": ") %>%
+    pull(fit_results) %>% 
+    paste(collapse = "; ")
+  
   
   ##additional cut-off for the fit based on Smith (see litterature)
   Sample_Size <- nrow(df)
@@ -96,6 +139,20 @@ rasch_model <- function(df, vars_metric, vars_id, print_results = TRUE, path_out
   LID <- stats::cor(Residuals_PCM_Recoded, use="pairwise.complete", method="pearson")
   
   LIDforgraph <- LID
+  
+  
+  LID_results <- ((LIDforgraph >= 0.01)*1 - diag(length(vars_metric))) %>% 
+    data.frame() 
+  LID_results[upper.tri(LID_results)] <- 0
+  LID_results <- LID_results %>%   
+    tibble::rownames_to_column("var1") %>% 
+    as_tibble() %>% 
+    tidyr::gather(key = "var2", value = "LID", -var1) %>% 
+    filter(LID == 1) %>% 
+    select(-LID) %>% 
+    tidyr::unite(col = "vars", var1, var2, sep = " & ") %>% 
+    pull(vars) %>% 
+    paste(collapse = "; ")
   
   #------------------------------------------------------------------------------- 
   #10. Principal component analyis: PCA
@@ -190,7 +247,7 @@ rasch_model <- function(df, vars_metric, vars_id, print_results = TRUE, path_out
   }
   
   
-  model_results <- list(model = model,
+  model_result <- list(model = model,
                         df_score = data_persons,
                         thresholds = Thr_PCM,
                         person_parameters = person_parameters,
@@ -198,9 +255,12 @@ rasch_model <- function(df, vars_metric, vars_id, print_results = TRUE, path_out
                         item_fit = Itemfit,
                         residuals_PCM = Residuals_PCM_Recoded,
                         LID = LID,
-                        targeting = Targeting)
+                        targeting = Targeting,
+                        fit_results = fit_results,
+                        LID_results = LID_results,
+                        disordered_results = disordered_results)
   
-  return(model_results)
+  return(model_result)
 
   
 }

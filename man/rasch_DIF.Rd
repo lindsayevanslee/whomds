@@ -4,8 +4,9 @@
 \alias{rasch_DIF}
 \title{Perform analysis of Differential Item Functioning (DIF) for Rasch Model}
 \usage{
-rasch_DIF(df, vars_metric, vars_DIF, residuals_PCM, split_strategy = NULL,
-  print_results = TRUE, path_output = NULL, breaks = 6)
+rasch_DIF(df, vars_metric, vars_DIF, residuals_PCM,
+  split_strategy = NULL, print_results = TRUE, path_output = NULL,
+  breaks = 6)
 }
 \arguments{
 \item{df}{a data frame of individual survey data, where each row is an individual}
@@ -28,6 +29,7 @@ rasch_DIF(df, vars_metric, vars_DIF, residuals_PCM, split_strategy = NULL,
 a list with results from the DIF analysis: 
 \item{df_DIF_class}{the person residuals from the Rasch Model, the assigned class intervals, and the variables used for DIF analysis}
 \item{tab_aov_DIF}{the results of the ANOVA used to analyze DIF}
+\item{DIF_results}{string of various that exhibit some form of DIF}
 }
 \description{
 Perform analysis of Differential Item Functioning (DIF) for Rasch Model
@@ -53,3 +55,4 @@ Other rasch functions: \code{\link{rasch_df_nest}},
   \code{\link{rasch_split_age}}, \code{\link{rasch_split}},
   \code{\link{rasch_testlet}}
 }
+\concept{rasch functions}

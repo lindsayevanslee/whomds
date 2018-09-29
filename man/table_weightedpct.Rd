@@ -4,8 +4,8 @@
 \alias{table_weightedpct}
 \title{Calculate table of percentages of response distribution for survey items, survey weighted, disaggregated}
 \usage{
-table_weightedpct(df, vars_ids, vars_strata, vars_weights, formula_vars, ...,
-  formula_vars_levels = 0:1, by_vars = NULL, spread_key = NULL,
+table_weightedpct(df, vars_ids, vars_strata, vars_weights, formula_vars,
+  ..., formula_vars_levels = 0:1, by_vars = NULL, spread_key = NULL,
   spread_value = "prop", arrange_vars = NULL, willfilter = NULL)
 }
 \arguments{
@@ -57,3 +57,4 @@ See \code{vignette("programming", package = "dplyr")} for more about non-standar
 Other table functions: \code{\link{table_basicstats}},
   \code{\link{table_unweightedpctn}}
 }
+\concept{table functions}

@@ -42,3 +42,4 @@ Generated with \code{colorspace::choose_palette()}
 \seealso{
 Other helper functions: \code{\link{helper_varslist}}
 }
+\concept{helper functions}

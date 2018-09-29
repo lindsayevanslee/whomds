@@ -8,6 +8,7 @@
 #' @return a list with results from the DIF analysis: 
 #' \item{df_DIF_class}{the person residuals from the Rasch Model, the assigned class intervals, and the variables used for DIF analysis}
 #' \item{tab_aov_DIF}{the results of the ANOVA used to analyze DIF}
+#' \item{DIF_results}{string of various that exhibit some form of DIF}
 #' 
 #' @details Differential Item Functioning (DIF) refers to the circumstance when different groups in a sample respond to items in different ways. For instance, DIF would be observed if men and women had different patterns of responses to a set of survey questions. DIF can cause poor fit for the Rasch Model, and therefore should be analyzed. This function uses ANOVA to find DIF by the variables supplied and by a generated class interval.
 #' 
@@ -179,6 +180,13 @@ rasch_DIF <- function(df, vars_metric, vars_DIF, residuals_PCM, split_strategy =
       TRUE ~ "-"
     ))
   
+  DIF_results <- tab_aov_DIF %>% 
+    select(variable, contains("significant")) %>% 
+    filter_at(vars(contains("significant")),
+              all_vars(. == "X")) %>% 
+    pull(variable) %>% 
+    paste(collapse = ", ")
+  
   if (print_results) {
     
     utils::write.csv(df_DIF_class, file = paste0(path_output,"/Anova_Residuals.csv"), row.names = FALSE)
@@ -189,7 +197,8 @@ rasch_DIF <- function(df, vars_metric, vars_DIF, residuals_PCM, split_strategy =
   
   
   DIF_result <- list(df_DIF_class = df_DIF_class,
-                     tab_aov_DIF = tab_aov_DIF)
+                     tab_aov_DIF = tab_aov_DIF,
+                     DIF_results = DIF_results)
   
   return(DIF_result)
   
