@@ -4,7 +4,8 @@
 \alias{fig_poppyramid}
 \title{Print a population pyramid}
 \usage{
-fig_poppyramid(df, var_age, var_sex)
+fig_poppyramid(df, var_age, var_sex, x_axis = c("n", "pct"),
+  age_plus = 100, age_by = 5)
 }
 \arguments{
 \item{df}{a data frame of individual survey data, where each row is an individual}
@@ -12,6 +13,12 @@ fig_poppyramid(df, var_age, var_sex)
 \item{var_age}{a string (length 1) of the name of the age column}
 
 \item{var_sex}{a string (length 1) of the name of the sex column}
+
+\item{x_axis}{a string (length 1) indicating whether to use absolute numbers or sample percentage on the x-axis. Choices are \code{"n"} (default) or \code{"pct"}.}
+
+\item{age_plus}{a numeric value (length 1) indicating the age that is the first value of the oldest age group. Default is 100, for the last age group to be 100+}
+
+\item{age_by}{a numeric value (length 1) indicating the width of each age group, in years. Default is 5.}
 }
 \value{
 A population pyramid figure
@@ -22,7 +29,7 @@ Print a population pyramid
 \details{
 A population pyramid gives an image of the age and sex distribution of a population.
 
-The function divides the \code{var_age} variable into 5-year intervals.
+The function divides the \code{var_age} variable into intervals of width \code{age_by}.
 }
 \examples{
 fig_poppyramid(chile_adults, "edad", "sex")
