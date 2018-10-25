@@ -14,6 +14,7 @@
 #' 
 #' @import dplyr
 #' @import rlang
+#' @import tidyr
 #'
 #' @examples
 #' table_unweightedpctn(chile_adults, vars_demo = c("sex", "age_cat", "work_cat", "edu_cat"))
@@ -83,20 +84,31 @@ table_unweightedpctn <- function(df, vars_demo, group_by_var=NULL, spread_by_gro
     final_tab <- final_tab %>% 
       mutate(demo = ordered(demo, levels = unique(demo)), 
              !!sym_group_by_var := ordered(!!sym_group_by_var, levels=unique(!!sym_group_by_var))) %>% 
-      transmute(demo,
-                !!sym_group_by_var,
-                pct_n = paste0(pct, " (", n, ")")) 
+      select(demo, !!sym_group_by_var, pct, n)
     
-    if (spread_by_group_by_var) final_tab <- final_tab %>% 
+    #spread, if applicable
+    if (spread_by_group_by_var) {
+      final_tab <- final_tab %>% 
+        transmute(demo, !!sym_group_by_var,
+                  pct_n = paste0(pct, "_", n)) %>% 
         tidyr::spread(!!sym_group_by_var, pct_n)
+      
+      #separate pct and n
+      for (col in colnames(final_tab)[-1]) {
+        final_tab <- final_tab %>% 
+          tidyr::separate(!!rlang::sym(col), 
+                          into = paste0(col, "_", c("pct", "n")), 
+                          sep = "_")
+      }
+      
+    }
+    
   } else {
     final_tab <- final_tab %>% 
       mutate(demo = ordered(demo, levels = unique(demo))) %>% 
-      transmute(demo,
-                pct_n = paste0(pct, " (", n, ")"))
+      select(demo, pct, n)
+    
   }
-  
-  
   
   return(final_tab)
 }
