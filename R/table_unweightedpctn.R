@@ -113,7 +113,8 @@ table_unweightedpctn <- function(df, vars_demo, group_by_var=NULL, spread_by_gro
     
   } else {
     final_tab <- final_tab %>% 
-      mutate(demo = ordered(demo, levels = unique(demo))) 
+      mutate(demo = ordered(demo, levels = unique(demo))) %>% 
+      select(item, demo, pct, n)
     
   }
   
