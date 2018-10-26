@@ -32,14 +32,19 @@ table_unweightedpctn <- function(df, vars_demo, group_by_var=NULL, spread_by_gro
     sym_group_by_var <- sym(group_by_var)
     
     #initialize final table
-    final_tab <- tibble(demo=character(),
-                        !!sym_group_by_var := character(),
-                        n = numeric(),
-                        pct = numeric())
+    final_tab <- tibble(
+      item = character(),
+      demo = character(),
+      !!sym_group_by_var := character(),
+      n = numeric(),
+      pct = numeric()
+    )
   } else {
-    final_tab <- tibble(demo=character(),
-                        n = numeric(),
-                        pct = numeric())
+    final_tab <- tibble(
+      item = character(),
+      demo = character(),
+      n = numeric(),
+      pct = numeric())
   }
   
   
@@ -74,41 +79,47 @@ table_unweightedpctn <- function(df, vars_demo, group_by_var=NULL, spread_by_gro
     tab <- tab %>%
       summarize(n=n()) %>% 
       mutate(pct=round(n/sum(n)*100,1)) %>% 
-      rename(demo = !!sym_this_vars_demo)
+      rename(demo = !!sym_this_vars_demo) %>% 
+      tibble::add_column(item = vars_demo[i], .before = 1)
     
     final_tab <- bind_rows(final_tab, tab)
     
   }
+
   
   if (!is.null(group_by_var)) {
     final_tab <- final_tab %>% 
       mutate(demo = ordered(demo, levels = unique(demo)), 
              !!sym_group_by_var := ordered(!!sym_group_by_var, levels=unique(!!sym_group_by_var))) %>% 
-      select(demo, !!sym_group_by_var, pct, n)
+      select(item, demo, !!sym_group_by_var, pct, n)
     
     #spread, if applicable
     if (spread_by_group_by_var) {
       final_tab <- final_tab %>% 
-        transmute(demo, !!sym_group_by_var,
+        transmute(item, demo, !!sym_group_by_var,
                   pct_n = paste0(pct, "_", n)) %>% 
         tidyr::spread(!!sym_group_by_var, pct_n)
       
       #separate pct and n
-      for (col in colnames(final_tab)[-1]) {
+      for (col in colnames(final_tab)[-(1:2)]) {
         final_tab <- final_tab %>% 
           tidyr::separate(!!rlang::sym(col), 
                           into = paste0(col, "_", c("pct", "n")), 
                           sep = "_")
       }
+
       
     }
     
   } else {
     final_tab <- final_tab %>% 
-      mutate(demo = ordered(demo, levels = unique(demo))) %>% 
-      select(demo, pct, n)
+      mutate(demo = ordered(demo, levels = unique(demo))) 
     
   }
+  
+  #arrange in same order as vars_demo
+  final_tab <- final_tab %>% 
+    arrange(match(item, vars_demo))
   
   return(final_tab)
 }

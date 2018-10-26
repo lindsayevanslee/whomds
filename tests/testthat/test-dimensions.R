@@ -1,13 +1,13 @@
 context("Dimensions of tables")
 
-test_that("Dimensions as number of levels and 3", {
+test_that("Dimensions as number of levels and 4", {
   tab <- table_unweightedpctn(chile_adults, c("sex", "edu_cat"))
   
   expect_equal(nrow(tab),
                length(c(
                  levels(chile_adults$sex), levels(chile_adults$edu_cat)
                )))
-  expect_equal(ncol(tab), 3)
+  expect_equal(ncol(tab), 4)
 })
 
 
