@@ -31,6 +31,7 @@ if (getRversion() >= "2.15.1") {
       "cor_anchored", 
       "cor_multigroup", 
       "cor_start", 
+      "data",
       "demo",
       "df_split",
       "df_split_selected",

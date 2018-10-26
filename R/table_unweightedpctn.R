@@ -4,6 +4,7 @@
 #' @param group_by_var a string (length 1) with the name of the variable from \code{df} to disaggregate by
 #' @param spread_by_group_by_var logical determining whether to pass \code{group_by_var} to \code{tidyr::spread()} to give a wide-format tab. Default is FALSE.
 #' @param group_by_var_sums_to_100 logical determining whether percentages sum to 100 along the margin of \code{group_by_var}, if applicable. Default is FALSE.
+#' @param add_totals logical determinging whether to create total rows or columns (as appropriate) that demonstrate margin that sums to 100. Default is FALSE.
 #' @inheritParams rasch_mds
 #'
 #' @return A tibble with percent and N for each level of each variable in \code{vars_demo}
@@ -22,7 +23,11 @@
 #' group_by_var = "performance_cat")
 #' table_unweightedpctn(chile_adults, vars_demo = c("sex", "age_cat", "work_cat", "edu_cat"), 
 #' group_by_var = "performance_cat", spread_by_group_by_var = TRUE)
-table_unweightedpctn <- function(df, vars_demo, group_by_var=NULL, spread_by_group_by_var = FALSE, group_by_var_sums_to_100 = FALSE) {
+table_unweightedpctn <- function(df, vars_demo, 
+                                 group_by_var=NULL, 
+                                 spread_by_group_by_var = FALSE, 
+                                 group_by_var_sums_to_100 = FALSE,
+                                 add_totals = FALSE) {
   
   #convert to tibble
   if (!tibble::is_tibble(df)) df <- df %>% as_tibble()
@@ -58,10 +63,13 @@ table_unweightedpctn <- function(df, vars_demo, group_by_var=NULL, spread_by_gro
     tab <- df %>% 
       filter(!is.na(!!sym_this_vars_demo)) 
     
-    #if applicable, remove NAs of group_by_var
+    #if grouping, remove NAs of group_by_var
     if (!is.null(group_by_var)) {
       tab <- tab %>%
         filter(!is.na(!!sym_group_by_var))
+      
+      
+      
     }
     
     #start grouping
@@ -73,6 +81,7 @@ table_unweightedpctn <- function(df, vars_demo, group_by_var=NULL, spread_by_gro
       tab <- tab %>% 
         group_by_at(c(group_by_var, vars_demo[i]))
     }
+  
     
     
     #create summary table
@@ -85,7 +94,7 @@ table_unweightedpctn <- function(df, vars_demo, group_by_var=NULL, spread_by_gro
     final_tab <- bind_rows(final_tab, tab)
     
   }
-
+  
   
   if (!is.null(group_by_var)) {
     final_tab <- final_tab %>% 
@@ -107,7 +116,7 @@ table_unweightedpctn <- function(df, vars_demo, group_by_var=NULL, spread_by_gro
                           into = paste0(col, "_", c("pct", "n")), 
                           sep = "_")
       }
-
+      
       
     }
     
@@ -118,11 +127,124 @@ table_unweightedpctn <- function(df, vars_demo, group_by_var=NULL, spread_by_gro
     
   }
   
-  #make sure appropriate columns are numeric and arrange in same order as vars_demo
-  final_tab <- final_tab %>% 
-    mutate_at(vars(-item, -demo), as.numeric) %>% 
-    arrange(match(item, vars_demo))
   
+  #make sure appropriate columns are numeric 
+  if ((!is.null(group_by_var)) & !spread_by_group_by_var) {
+      final_tab <- final_tab %>% 
+        mutate_at(vars(-item, -demo, -!!sym(group_by_var)), as.numeric)
+    } else {
+    final_tab <- final_tab %>% 
+      mutate_at(vars(-item, -demo), as.numeric) 
+    }
+  
+  if (!is.null(group_by_var) & spread_by_group_by_var) {
+    final_tab <- final_tab %>% 
+      arrange(match(item, vars_demo))
+  }
+
+  
+  
+  #add totals, if applicable
+  if (add_totals) {
+    
+    #if grouping...
+    if (!is.null(group_by_var)) {
+      
+      #if spreading...
+      if (spread_by_group_by_var) {
+        
+        #if summing along group_by_var... (total rows)
+        if (group_by_var_sums_to_100) {
+          
+          # table_unweightedpctn(chile_adults, vars_demo = c("sex", "age_cat", "work_cat", "edu_cat"), add_totals = TRUE, group_by_var = "performance_cat", spread_by_group_by_var = TRUE, group_by_var_sums_to_100 = TRUE)
+          
+
+          final_tab <- final_tab %>%
+            mutate(item = ordered(item)) %>%
+            split(.$item) %>%
+            purrr::map_dfr(function(df) {
+              df %>%
+                bind_rows(
+                  df %>%
+                    summarize_at(vars(-item, -demo), funs(sum(., na.rm = TRUE))) %>%
+                    tibble::add_column(item = unique(df$item), demo = "Total", .before = 1)
+                )
+            }) 
+          
+        } 
+        #if not summing along group_by_var... (total col)
+        else {
+          
+          # table_unweightedpctn(chile_adults, vars_demo = c("sex", "age_cat", "work_cat", "edu_cat"), add_totals = TRUE, group_by_var = "performance_cat", spread_by_group_by_var = TRUE, group_by_var_sums_to_100 = FALSE)
+          
+          final_tab <- final_tab %>% 
+            tibble::add_column(Total_pct = (final_tab %>% 
+                                      select(ends_with("_pct")) %>% 
+                                      rowSums(na.rm = TRUE)),
+                       Total_n = (final_tab %>% 
+                                    select(ends_with("_n")) %>% 
+                                    rowSums(na.rm = TRUE)))
+        }
+        
+        final_tab <- final_tab %>% 
+          arrange(match(item, vars_demo))
+        
+      }
+      #if not spreading...
+      else {
+        
+        #if summing along group_by_var... 
+        if (group_by_var_sums_to_100) {
+          
+          # table_unweightedpctn(chile_adults, vars_demo = c("sex", "age_cat", "work_cat", "edu_cat"), add_totals = TRUE, group_by_var = "performance_cat", spread_by_group_by_var = FALSE, group_by_var_sums_to_100 = TRUE)
+          
+          final_tab <-  final_tab %>% 
+            group_by(item, !!sym(group_by_var)) %>% 
+            nest() %>% 
+            mutate(data = purrr::map(data, function(df) {
+              df %>% 
+                add_row(demo = "Total", pct = sum(df$pct, na.rm = TRUE), n = sum(df$n, na.rm = TRUE))
+            })) %>% 
+            unnest()
+          
+
+        }
+        #if not summing along group_by_var...
+        else {
+          # table_unweightedpctn(chile_adults, vars_demo = c("sex", "age_cat", "work_cat", "edu_cat"), add_totals = TRUE, group_by_var = "performance_cat", spread_by_group_by_var = FALSE, group_by_var_sums_to_100 = FALSE)
+          
+          final_tab <-  final_tab %>% 
+            group_by(item, demo) %>% 
+            nest() %>% 
+            mutate(data = purrr::map(data, function(df) {
+              df %>% 
+                add_row(!!sym(group_by_var) := "Total", pct = sum(df$pct, na.rm = TRUE), n = sum(df$n, na.rm = TRUE))
+            })) %>% 
+            unnest()
+          
+        }
+        
+      }
+      
+    } 
+    #if not grouping...
+    else {
+      # table_unweightedpctn(chile_adults, vars_demo = c("sex", "age_cat", "work_cat", "edu_cat"), add_totals = TRUE, group_by_var = NULL)
+      final_tab <-  final_tab %>% 
+        group_by(item) %>% 
+        nest() %>% 
+        mutate(data = purrr::map(data, function(df) {
+          df %>% 
+            add_row(demo := "Total", pct = sum(df$pct, na.rm = TRUE), n = sum(df$n, na.rm = TRUE))
+        })) %>% 
+        unnest()
+      
+    }
+
+    
+  }
+  
+ 
   return(final_tab)
 }
 
