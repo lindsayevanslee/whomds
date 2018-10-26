@@ -118,8 +118,9 @@ table_unweightedpctn <- function(df, vars_demo, group_by_var=NULL, spread_by_gro
     
   }
   
-  #arrange in same order as vars_demo
+  #make sure appropriate columns are numeric and arrange in same order as vars_demo
   final_tab <- final_tab %>% 
+    mutate_at(vars(-item, -demo), as.numeric) %>% 
     arrange(match(item, vars_demo))
   
   return(final_tab)
