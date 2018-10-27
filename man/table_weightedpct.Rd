@@ -5,8 +5,9 @@
 \title{Calculate table of percentages of response distribution for survey items, survey weighted, disaggregated}
 \usage{
 table_weightedpct(df, vars_ids, vars_strata, vars_weights, formula_vars,
-  ..., formula_vars_levels = 0:1, by_vars = NULL, spread_key = NULL,
-  spread_value = "prop", arrange_vars = NULL, willfilter = NULL)
+  ..., formula_vars_levels = 0:1, by_vars = NULL, willfilter = NULL,
+  add_totals = FALSE, spread_key = NULL, spread_value = "prop",
+  arrange_vars = NULL)
 }
 \arguments{
 \item{df}{a data frame of individual survey data, where each row is an individual}
@@ -25,13 +26,15 @@ table_weightedpct(df, vars_ids, vars_strata, vars_weights, formula_vars,
 
 \item{by_vars}{a character vector of variables to disaggregate results by. Default is \code{NULL} for no disaggregation.}
 
+\item{willfilter}{a logical variable that tells the function whether or not to filter or transmute the data. Leave as default \code{NULL} to not filter or transmute. Set as \code{TRUE} to filter and \code{FALSE} to transmute. See Details.}
+
+\item{add_totals}{logical determinging whether to create total rows or columns (as appropriate) that demonstrate margin that sums to 100. Default is FALSE.}
+
 \item{spread_key}{a string with variable name to pass to \code{key} argument of \code{tidyr::spread()}. Default is \code{NULL}.}
 
 \item{spread_value}{a string with variable name to pass to \code{value} argument of \code{tidyr::spread()}. Default is "prop" (the columm of percentages created within the function)}
 
 \item{arrange_vars}{a character vector with variables to pass to \code{dplyr::arrange()}. Default is NULL.}
-
-\item{willfilter}{a logical variable that tells the function whether or not to filter or transmute the data. Leave as default \code{NULL} to not filter or transmute. Set as \code{TRUE} to filter and \code{FALSE} to transmute. See Details.}
 }
 \value{
 a tibble of weighted response percentages
@@ -41,6 +44,8 @@ Calculate table of percentages of response distribution for survey items, survey
 }
 \details{
 If \code{willfilter} is NULL, the table is not filtered or transmuted. If \code{willfilter} is TRUE, the table is filtered before it is spread or arranged. If \code{willfilter} is FALSE, the table is transmuted after the spread and/or arrange. "..." captures the non-standard evaluation expressions (NSE) to pass to \code{dplyr::filter} or \code{dplyr::transmute()}.
+
+The function performs the following actions with the table after results are calculated in the following order (if applicable): filter, add totals, spread, arrange, transmute
 }
 \examples{
 table_weightedpct(chile_adults, 

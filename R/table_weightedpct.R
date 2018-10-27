@@ -7,16 +7,19 @@
 #' @param ... captures expressions to pass to \code{dplyr::filter()} or \code{dplyr::transmute()}, depending on the value of argument \code{willfilter}. See Details.
 #' @param formula_vars_levels a vector of the levels of the the \code{formula_vars}
 #' @param by_vars a character vector of variables to disaggregate results by. Default is \code{NULL} for no disaggregation.
+#' @param willfilter a logical variable that tells the function whether or not to filter or transmute the data. Leave as default \code{NULL} to not filter or transmute. Set as \code{TRUE} to filter and \code{FALSE} to transmute. See Details.
 #' @param spread_key a string with variable name to pass to \code{key} argument of \code{tidyr::spread()}. Default is \code{NULL}.
 #' @param spread_value a string with variable name to pass to \code{value} argument of \code{tidyr::spread()}. Default is "prop" (the columm of percentages created within the function)
 #' @param arrange_vars a character vector with variables to pass to \code{dplyr::arrange()}. Default is NULL.
-#' @param willfilter a logical variable that tells the function whether or not to filter or transmute the data. Leave as default \code{NULL} to not filter or transmute. Set as \code{TRUE} to filter and \code{FALSE} to transmute. See Details.
 #' @inheritParams rasch_mds
+#' @inheritParams table_unweightedpctn
 #' 
 #' @return a tibble of weighted response percentages 
 #' 
 #' @details 
 #' If \code{willfilter} is NULL, the table is not filtered or transmuted. If \code{willfilter} is TRUE, the table is filtered before it is spread or arranged. If \code{willfilter} is FALSE, the table is transmuted after the spread and/or arrange. "..." captures the non-standard evaluation expressions (NSE) to pass to \code{dplyr::filter} or \code{dplyr::transmute()}.
+#' 
+#' The function performs the following actions with the table after results are calculated in the following order (if applicable): filter, add totals, spread, arrange, transmute
 #' 
 #' @family table functions
 #' 
@@ -37,9 +40,11 @@
 table_weightedpct <- function(df, vars_ids, vars_strata, vars_weights, 
                        formula_vars, ..., 
                        formula_vars_levels = 0:1, by_vars = NULL,
+                       willfilter = NULL, 
+                       add_totals = FALSE,
                        spread_key = NULL, spread_value = "prop",
-                       arrange_vars = NULL, 
-                       willfilter = NULL
+                       arrange_vars = NULL
+                       
                        ) {
 
   #convert to tibble
@@ -88,6 +93,19 @@ table_weightedpct <- function(df, vars_ids, vars_strata, vars_weights,
   
   #filter, if willfilter==TRUE
   if (!is.null(willfilter) & isTRUE(willfilter)) prevtab <- prevtab %>% filter(!!!exprs)
+  
+  #add totals, if applicable
+  if (add_totals) {
+    prevtab <- prevtab %>% 
+      group_by_at(c(by_vars, "item")) %>% 
+      nest() %>% 
+      mutate(data = purrr::map(data, function(df) {
+        df %>% 
+          add_row(resp := "Total", prop = sum(df$prop, na.rm = TRUE))
+      })) %>% 
+      unnest()
+    
+  }
   
   
   #spread 
