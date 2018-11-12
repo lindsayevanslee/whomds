@@ -8,7 +8,8 @@
 #' @param y_max a numeric value of the maximum limit on the y-axis. Default is NULL to use default value from \code{geom_histogram()}
 #' @param pcent a logical value determining whether or not to display the distribution as percentages or frequency. Default is FALSE, to display as frequency.
 #' @param pal a string to pass to \code{RColorBrewer::brewer.pal()} with the name of the color palette to use
-#'
+#' @param binwidth a numeric value giving the width of the bins in the histograph. Default is 5.
+#' 
 #' @return A score distribution figure with fill based on categorization of the score
 #' 
 #' @details Plots a histogram of a score that ranges between 0 and 100, with the fill determined by some set categorization of the score. This is the function used to plot the distributions of disability scores resulting from the WHO Model Disability Survey.
@@ -27,7 +28,7 @@
 #' fig_dist(chile_adults, score = "PerformanceScorePredicted", score_cat = "performance_cat", 
 #' cutoffs = c(19.1, 34.4, 49.6), x_lab = "Disability score", y_max = 0.2, pcent=TRUE)
 fig_dist <- function(df, score, score_cat, cutoffs,
-                        x_lab = "Score", y_max = NULL, pcent=FALSE, pal = "Blues"){
+                        x_lab = "Score", y_max = NULL, pcent=FALSE, pal = "Blues", binwidth = 5){
   
   #convert to tibble
   if (!tibble::is_tibble(df)) df <- df %>% as_tibble()
@@ -57,7 +58,7 @@ fig_dist <- function(df, score, score_cat, cutoffs,
   
   #Begin plot
   plot_dist <- ggplot(df, aes_string(x = score, fill = score_cat)) +
-    geom_histogram(position = "identity", binwidth = 5, aes_string(y=type), col="black") +
+    geom_histogram(position = "identity", binwidth = binwidth, aes_string(y=type), col="black") +
     scale_fill_manual(values = fill_colors, drop=FALSE)  +
     scale_x_continuous(breaks = seq(0, 100, by = 10), limits = c(min(-2.5,min(cutoffs)),102.5)) +
     # scale_y_continuous(breaks = seq(0, y_max, by = final_scale), limits=c(NA,y_max), labels=lab) +

@@ -5,7 +5,7 @@
 \title{Plot a distribution of a score}
 \usage{
 fig_dist(df, score, score_cat, cutoffs, x_lab = "Score", y_max = NULL,
-  pcent = FALSE, pal = "Blues")
+  pcent = FALSE, pal = "Blues", binwidth = 5)
 }
 \arguments{
 \item{df}{a data frame where each row is an individual, containing at least a score column (between 0 and 100) and a categorization of that score}
@@ -23,6 +23,8 @@ fig_dist(df, score, score_cat, cutoffs, x_lab = "Score", y_max = NULL,
 \item{pcent}{a logical value determining whether or not to display the distribution as percentages or frequency. Default is FALSE, to display as frequency.}
 
 \item{pal}{a string to pass to \code{RColorBrewer::brewer.pal()} with the name of the color palette to use}
+
+\item{binwidth}{a numeric value giving the width of the bins in the histograph. Default is 5.}
 }
 \value{
 A score distribution figure with fill based on categorization of the score
