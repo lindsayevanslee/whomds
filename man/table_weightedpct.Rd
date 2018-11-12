@@ -7,7 +7,7 @@
 table_weightedpct(df, vars_ids, vars_strata, vars_weights, formula_vars,
   ..., formula_vars_levels = 0:1, by_vars = NULL, willfilter = NULL,
   add_totals = FALSE, spread_key = NULL, spread_value = "prop",
-  arrange_vars = NULL)
+  arrange_vars = NULL, include_SE = FALSE)
 }
 \arguments{
 \item{df}{a data frame of individual survey data, where each row is an individual}
@@ -35,6 +35,8 @@ table_weightedpct(df, vars_ids, vars_strata, vars_weights, formula_vars,
 \item{spread_value}{a string with variable name to pass to \code{value} argument of \code{tidyr::spread()}. Default is "prop" (the columm of percentages created within the function)}
 
 \item{arrange_vars}{a character vector with variables to pass to \code{dplyr::arrange()}. Default is NULL.}
+
+\item{include_SE}{a logical variable indicating whether to include the standard errors in the table. Default is FALSE. Currently does not work when adding totals, spreading or transmutting.}
 }
 \value{
 a tibble of weighted response percentages

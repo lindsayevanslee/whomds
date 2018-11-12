@@ -11,6 +11,7 @@
 #' @param spread_key a string with variable name to pass to \code{key} argument of \code{tidyr::spread()}. Default is \code{NULL}.
 #' @param spread_value a string with variable name to pass to \code{value} argument of \code{tidyr::spread()}. Default is "prop" (the columm of percentages created within the function)
 #' @param arrange_vars a character vector with variables to pass to \code{dplyr::arrange()}. Default is NULL.
+#' @param include_SE a logical variable indicating whether to include the standard errors in the table. Default is FALSE. Currently does not work when adding totals, spreading or transmutting.
 #' @inheritParams rasch_mds
 #' @inheritParams table_unweightedpctn
 #' 
@@ -43,10 +44,18 @@ table_weightedpct <- function(df, vars_ids, vars_strata, vars_weights,
                        willfilter = NULL, 
                        add_totals = FALSE,
                        spread_key = NULL, spread_value = "prop",
-                       arrange_vars = NULL
-                       
+                       arrange_vars = NULL,
+                       include_SE = FALSE
                        ) {
 
+  ##TESTING: if include_SE = TRUE, don't allow for adding totals, spreading, filtering, transmuting
+  if (include_SE) {
+    if(add_totals) stop("For testing of include_SE, add_totals must be FALSE")
+    if(isFALSE(willfilter)) stop("For testing of include_SE, willfilter must be NULL or TRUE (i.e., must not transmute in order to avoid SE's from being erroneously summed)")
+    if(!is.null(spread_key)) stop("For testing of include_SE, spread_key must be NULL")
+  }
+  
+  
   #convert to tibble
   if (!tibble::is_tibble(df)) df <- df %>% as_tibble()
   
@@ -84,11 +93,21 @@ table_weightedpct <- function(df, vars_ids, vars_strata, vars_weights,
   }
   
   #initialize results table
-  prevtab <- des %>%
-    group_by_at(c(by_vars, "item", "resp")) %>%
-    summarize(prop = survey_mean(na.rm=TRUE)) %>%
-    dplyr::select(-prop_se) %>%
-    mutate(prop = prop*100)
+  if (include_SE) {
+    prevtab <- des %>%
+      group_by_at(c(by_vars, "item", "resp")) %>%
+      summarize(prop = survey_mean(na.rm=TRUE)) %>% 
+      mutate(prop = prop*100,
+             prop_se = prop_se*100)
+  } else {
+    prevtab <- des %>%
+      group_by_at(c(by_vars, "item", "resp")) %>%
+      summarize(prop = survey_mean(na.rm=TRUE)) %>%
+      dplyr::select(-prop_se) %>%
+      mutate(prop = prop*100)
+  }
+  
+
   
   
   #filter, if willfilter==TRUE
