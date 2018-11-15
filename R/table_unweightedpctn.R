@@ -153,12 +153,27 @@ table_unweightedpctn <- function(df, vars_demo,
       #if spreading...
       if (spread_by_group_by_var) {
         
-        #if summing along group_by_var... (total rows)
+        #if summing along group_by_var... (total col)
         if (group_by_var_sums_to_100) {
           
-          # table_unweightedpctn(chile_adults, vars_demo = c("sex", "age_cat", "work_cat", "edu_cat"), add_totals = TRUE, group_by_var = "performance_cat", spread_by_group_by_var = TRUE, group_by_var_sums_to_100 = TRUE)
+          # table_unweightedpctn(chile_adults, vars_demo = c("sex", "age_cat", "work_cat", "edu_cat"), add_totals = TRUE, group_by_var = "performance_cat", spread_by_group_by_var = TRUE, group_by_var_sums_to_100 = FALSE)
+          
+          final_tab <- final_tab %>% 
+            tibble::add_column(Total_pct = (final_tab %>% 
+                                              select(ends_with("_pct")) %>% 
+                                              rowSums(na.rm = TRUE)),
+                               Total_n = (final_tab %>% 
+                                            select(ends_with("_n")) %>% 
+                                            rowSums(na.rm = TRUE)))
           
 
+          
+        } 
+        #if not summing along group_by_var... (total row)
+        else {
+          # table_unweightedpctn(chile_adults, vars_demo = c("sex", "age_cat", "work_cat", "edu_cat"), add_totals = TRUE, group_by_var = "performance_cat", spread_by_group_by_var = TRUE, group_by_var_sums_to_100 = TRUE)
+          
+          
           final_tab <- final_tab %>%
             mutate(item = ordered(item)) %>%
             split(.$item) %>%
@@ -170,20 +185,7 @@ table_unweightedpctn <- function(df, vars_demo,
                     tibble::add_column(item = unique(df$item), demo = "Total", .before = 1)
                 )
             }) 
-          
-        } 
-        #if not summing along group_by_var... (total col)
-        else {
-          
-          # table_unweightedpctn(chile_adults, vars_demo = c("sex", "age_cat", "work_cat", "edu_cat"), add_totals = TRUE, group_by_var = "performance_cat", spread_by_group_by_var = TRUE, group_by_var_sums_to_100 = FALSE)
-          
-          final_tab <- final_tab %>% 
-            tibble::add_column(Total_pct = (final_tab %>% 
-                                      select(ends_with("_pct")) %>% 
-                                      rowSums(na.rm = TRUE)),
-                       Total_n = (final_tab %>% 
-                                    select(ends_with("_n")) %>% 
-                                    rowSums(na.rm = TRUE)))
+
         }
         
         final_tab <- final_tab %>% 
