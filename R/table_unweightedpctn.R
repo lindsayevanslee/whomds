@@ -73,11 +73,11 @@ table_unweightedpctn <- function(df, vars_demo,
     }
     
     #start grouping
-    if (!group_by_var_sums_to_100) {
+    if (group_by_var_sums_to_100) {
       tab <- tab %>% 
         group_by_at(c(vars_demo[i], group_by_var))
     }
-    if (group_by_var_sums_to_100) {
+    if (!group_by_var_sums_to_100) {
       tab <- tab %>% 
         group_by_at(c(group_by_var, vars_demo[i]))
     }
