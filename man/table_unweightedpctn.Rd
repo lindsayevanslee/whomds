@@ -19,7 +19,7 @@ table_unweightedpctn(df, vars_demo, group_by_var = NULL,
 
 \item{group_by_var_sums_to_100}{logical determining whether percentages sum to 100 along the margin of \code{group_by_var}, if applicable. Default is FALSE.}
 
-\item{add_totals}{logical determinging whether to create total rows or columns (as appropriate) that demonstrate margin that sums to 100. Default is FALSE.}
+\item{add_totals}{logical determinging whether to create total rows or columns (as appropriate) that demonstrate the margin that sums to 100. Default is FALSE.}
 }
 \value{
 A tibble with percent and N for each level of each variable in \code{vars_demo}

@@ -28,7 +28,7 @@ table_weightedpct(df, vars_ids, vars_strata, vars_weights, formula_vars,
 
 \item{willfilter}{a logical variable that tells the function whether or not to filter or transmute the data. Leave as default \code{NULL} to not filter or transmute. Set as \code{TRUE} to filter and \code{FALSE} to transmute. See Details.}
 
-\item{add_totals}{logical determinging whether to create total rows or columns (as appropriate) that demonstrate margin that sums to 100. Default is FALSE.}
+\item{add_totals}{logical determinging whether to create total rows or columns (as appropriate) that demonstrate the margin that sums to 100. Default is FALSE.}
 
 \item{spread_key}{a string with variable name to pass to \code{key} argument of \code{tidyr::spread()}. Default is \code{NULL}.}
 
