@@ -1,4 +1,4 @@
-#' Calculate table of percentages of response distribution for survey items, survey weighted, disaggregated
+#' Calculate table of percentages or N of response distribution for survey items, survey weighted, disaggregated
 #'
 #' @param vars_ids a character vector of cluster ids, passed to a \code{survey::svydesign} object
 #' @param vars_strata a character vector of strata ids, passed to a \code{survey::svydesign} object
@@ -7,6 +7,7 @@
 #' @param ... captures expressions to pass to \code{dplyr::filter()} or \code{dplyr::transmute()}, depending on the value of argument \code{willfilter}. See Details.
 #' @param formula_vars_levels a vector of the levels of the the \code{formula_vars}
 #' @param by_vars a character vector of variables to disaggregate results by. Default is \code{NULL} for no disaggregation.
+#' @param pct a logical variable indicating whether or not to calculate weighted percentages. Default is \code{TRUE} for weighted percentages. Set to \code{FALSE} for weighted N.
 #' @param willfilter a logical variable that tells the function whether or not to filter or transmute the data. Leave as default \code{NULL} to not filter or transmute. Set as \code{TRUE} to filter and \code{FALSE} to transmute. See Details.
 #' @param spread_key a string with variable name to pass to \code{key} argument of \code{tidyr::spread()}. Default is \code{NULL}.
 #' @param spread_value a string with variable name to pass to \code{value} argument of \code{tidyr::spread()}. Default is "prop" (the columm of percentages created within the function)
@@ -41,6 +42,7 @@
 table_weightedpct <- function(df, vars_ids, vars_strata, vars_weights, 
                        formula_vars, ..., 
                        formula_vars_levels = 0:1, by_vars = NULL,
+                       pct = TRUE,
                        willfilter = NULL, 
                        add_totals = FALSE,
                        spread_key = NULL, spread_value = "prop",
@@ -92,22 +94,44 @@ table_weightedpct <- function(df, vars_ids, vars_strata, vars_weights,
     if (length(exprs)==0) stop("willfilter is not NULL but you didn't include any expressions to pass to filter() or transmute()")
   }
   
+  
+  
+  
+  
   #initialize results table
-  if (include_SE) {
+  
+  #if wanting weighted percentage
+  if (pct) {
+    
     prevtab <- des %>%
       group_by_at(c(by_vars, "item", "resp")) %>%
       summarize(prop = survey_mean(na.rm=TRUE)) %>% 
-      mutate(prop = prop*100,
-             prop_se = prop_se*100)
-  } else {
+      mutate(prop = prop*100)
+    
+    if (include_SE) {
+       prevtab <- prevtab %>% 
+        mutate(prop_se = prop_se*100)
+       
+    } else {
+      prevtab <- prevtab %>% 
+        dplyr::select(-prop_se)
+    }
+    
+  } 
+  #if wanting weighted N
+  else {
+    
     prevtab <- des %>%
       group_by_at(c(by_vars, "item", "resp")) %>%
-      summarize(prop = survey_mean(na.rm=TRUE)) %>%
-      dplyr::select(-prop_se) %>%
-      mutate(prop = prop*100)
+      summarize(total = survey_total(na.rm=TRUE))
+    
+    if (!include_SE) {
+      prevtab <- prevtab %>% 
+        dplyr::select(-total_se)
+    }
+    
+    
   }
-  
-
   
   
   #filter, if willfilter==TRUE

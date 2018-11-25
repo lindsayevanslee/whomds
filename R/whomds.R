@@ -64,6 +64,7 @@ if (getRversion() >= "2.15.1") {
       "sex",
       "start_xsi",
       "Threshold",
+      "total_se",
       "var",
       "var1",
       "var2",
