@@ -16,7 +16,7 @@
 #' @inheritParams rasch_mds
 #' @inheritParams table_unweightedpctn
 #' 
-#' @return a tibble of weighted response percentages 
+#' @return a tibble of weighted response percentages or N's
 #' 
 #' @details 
 #' If \code{willfilter} is NULL, the table is not filtered or transmuted. If \code{willfilter} is TRUE, the table is filtered before it is spread or arranged. If \code{willfilter} is FALSE, the table is transmuted after the spread and/or arrange. "..." captures the non-standard evaluation expressions (NSE) to pass to \code{dplyr::filter} or \code{dplyr::transmute()}.

@@ -41,7 +41,7 @@ table_weightedpct(df, vars_ids, vars_strata, vars_weights, formula_vars,
 \item{include_SE}{a logical variable indicating whether to include the standard errors in the table. Default is FALSE. Currently does not work when adding totals, spreading or transmutting.}
 }
 \value{
-a tibble of weighted response percentages
+a tibble of weighted response percentages or N's
 }
 \description{
 Calculate table of percentages or N of response distribution for survey items, survey weighted, disaggregated
