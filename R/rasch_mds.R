@@ -166,6 +166,8 @@ rasch_mds <- function(df,
       bind_rows(.id = "Q") %>% 
       tidyr::spread(Q,n) %>% 
       rename(resp=Var1) %>% 
+      mutate(resp = as.numeric(resp)) %>% 
+      arrange(resp) %>% 
       readr::write_csv(paste0(path_output, "/response_freq.csv"))
     
   }
