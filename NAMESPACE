@@ -3,6 +3,7 @@
 export(fig_LID)
 export(fig_dist)
 export(fig_poppyramid)
+export(helper_indicator)
 export(helper_rowSums)
 export(rasch_DIF)
 export(rasch_df_nest)
