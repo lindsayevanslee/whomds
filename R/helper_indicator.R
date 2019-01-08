@@ -5,7 +5,7 @@
 #' @param mapvalues_from vector to pass to \code{plyr::mapvalues()} argument \code{from}
 #' @param mapvalues_to vector to pass to \code{plyr::mapvalues()} argument \code{to}
 #'
-#' @return a data frame with new columns that are the indicators from \code{vars_indicators}, with the same names pasted with \code{"_ind"}.
+#' @return a data frame with new columns that are the indicators (factors) from \code{vars_indicators}, with the same names pasted with \code{"_ind"}.
 #' @export
 #'
 #' @examples helper_indicator(df = chile_adults, 
@@ -24,7 +24,8 @@ helper_indicator <- function(df, vars_indicators, mapvalues_from , mapvalues_to)
                   funs(paste0(., "_ind")))
     ) %>%
     mutate_at(vars(vars_indicators_new), 
-              funs(plyr::mapvalues(., from = mapvalues_from, to = mapvalues_to, warn_missing = TRUE)))
+              funs(plyr::mapvalues(., from = mapvalues_from, to = mapvalues_to, warn_missing = TRUE))) %>% 
+    mutate_at(vars(vars_indicators_new), funs(factor))
   
   return(df_new)
   

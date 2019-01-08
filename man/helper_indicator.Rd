@@ -16,7 +16,7 @@ helper_indicator(df, vars_indicators, mapvalues_from, mapvalues_to)
 \item{mapvalues_to}{vector to pass to \code{plyr::mapvalues()} argument \code{to}}
 }
 \value{
-a data frame with new columns that are the indicators from \code{vars_indicators}, with the same names pasted with \code{"_ind"}.
+a data frame with new columns that are the indicators (factors) from \code{vars_indicators}, with the same names pasted with \code{"_ind"}.
 }
 \description{
 Create indicators from data frame
