@@ -4,9 +4,9 @@
 #' @param vars_indicators a character vector of the variables from \code{df} to create indicators for
 #' @param mapvalues_from vector to pass to \code{plyr::mapvalues()} argument \code{from}
 #' @param mapvalues_to vector to pass to \code{plyr::mapvalues()} argument \code{to}
-#' @param make_factor
+#' @param make_factor a logical indicating whethre resulting indicators should be factors. Default is \code{TRUE}.
 #'
-#' @return a data frame with new columns that are the indicators (factors) from \code{vars_indicators}, with the same names pasted with \code{"_ind"}.
+#' @return a data frame with new columns that are the indicators from \code{vars_indicators}, with the same names pasted with \code{"_ind"}.
 #' @export
 #'
 #' @examples helper_indicator(df = chile_adults, 
