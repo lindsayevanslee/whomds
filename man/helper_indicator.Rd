@@ -4,7 +4,8 @@
 \alias{helper_indicator}
 \title{Create indicators from data frame}
 \usage{
-helper_indicator(df, vars_indicators, mapvalues_from, mapvalues_to)
+helper_indicator(df, vars_indicators, mapvalues_from, mapvalues_to,
+  make_factor = TRUE)
 }
 \arguments{
 \item{df}{a data frame}
@@ -14,6 +15,8 @@ helper_indicator(df, vars_indicators, mapvalues_from, mapvalues_to)
 \item{mapvalues_from}{vector to pass to \code{plyr::mapvalues()} argument \code{from}}
 
 \item{mapvalues_to}{vector to pass to \code{plyr::mapvalues()} argument \code{to}}
+
+\item{make_factor}{}
 }
 \value{
 a data frame with new columns that are the indicators (factors) from \code{vars_indicators}, with the same names pasted with \code{"_ind"}.
