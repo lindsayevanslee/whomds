@@ -162,7 +162,7 @@ rasch_mds <- function(df,
     df %>% 
       select(vars_metric) %>% 
       purrr::map(table, useNA="always") %>% 
-      purrr::map(as_tibble, .name_repair = "unique") %>% 
+      purrr::map(~ suppressMessages(as_tibble(., .name_repair = "unique"))) %>% 
       bind_rows(.id = "Q") %>% 
       tidyr::spread(Q,n) %>% 
       rename(resp = "..1") %>% 
