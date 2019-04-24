@@ -23,7 +23,7 @@ rasch_rawscore <- function(df, vars_metric, vars_id, max_values) {
   if (!any(pull(df, RawScore)==max_value, na.rm=TRUE)) {
     
     df_max <- t(max_values) %>% 
-      as_data_frame() %>% 
+      as_tibble() %>% 
       rename_all(funs(pull(max_values,var))) %>% 
       slice(2) %>% 
       mutate_all(funs(as.numeric)) %>% 

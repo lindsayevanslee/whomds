@@ -210,10 +210,10 @@ rasch_mds_children <- function(df,
     df %>% 
       select(helper_varslist(vars_metric)) %>% 
       purrr::map(table, useNA="always") %>% 
-      purrr::map(as_data_frame) %>% 
+      purrr::map(as_tibble, .name_repair = "unique") %>% 
       bind_rows(.id = "Q") %>% 
       tidyr::spread(Q,n) %>% 
-      rename(resp=Var1) %>% 
+      rename(resp = "..1") %>% 
       readr::write_csv(paste0(path_output, "/response_freq.csv"))
     
   }

@@ -69,7 +69,7 @@ rasch_DIF <- function(df, vars_metric, vars_DIF, residuals_PCM, split_strategy =
   Mat <- rows_sums_quantile[-1] %>% 
     tibble() %>% 
     t() %>% 
-    as_data_frame() %>% 
+    as_tibble() %>% 
     slice(rep(1,nrow(Grid)))
   
   Intervals <- purrr::map2_dfc(Grid, Mat, ~paste0(..1, ..2))
@@ -77,7 +77,7 @@ rasch_DIF <- function(df, vars_metric, vars_DIF, residuals_PCM, split_strategy =
   Dmat <- df_metric_rows_sums %>% 
     tibble() %>% 
     t() %>% 
-    as_data_frame() %>% 
+    as_tibble() %>% 
     slice(rep(1,nrow(Grid)))
   
   
@@ -95,7 +95,7 @@ rasch_DIF <- function(df, vars_metric, vars_DIF, residuals_PCM, split_strategy =
   
   names(what) <- paste0("v",1:length(what))
   
-  sol <- bind_cols(what) %>% t() %>% as_data_frame()
+  sol <- bind_cols(what) %>% t() %>% as_tibble()
   k <- apply(sol,1,table)
   
   

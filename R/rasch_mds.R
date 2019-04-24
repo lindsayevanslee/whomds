@@ -162,10 +162,10 @@ rasch_mds <- function(df,
     df %>% 
       select(vars_metric) %>% 
       purrr::map(table, useNA="always") %>% 
-      purrr::map(as_data_frame) %>% 
+      purrr::map(as_tibble, .name_repair = "unique") %>% 
       bind_rows(.id = "Q") %>% 
       tidyr::spread(Q,n) %>% 
-      rename(resp=Var1) %>% 
+      rename(resp = "..1") %>% 
       mutate(resp = as.numeric(resp)) %>% 
       arrange(resp) %>% 
       readr::write_csv(paste0(path_output, "/response_freq.csv"))
