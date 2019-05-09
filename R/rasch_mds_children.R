@@ -209,11 +209,10 @@ rasch_mds_children <- function(df,
   if (print_results) {
     df %>% 
       select(helper_varslist(vars_metric)) %>% 
-      purrr::map(table, useNA="always") %>% 
-      purrr::map(~ suppressMessages(as_tibble(., .name_repair = "unique"))) %>% 
+      purrr::map(~ table(resp = ., useNA = "always")) %>% 
+      purrr::map(~ as_tibble(.)) %>% 
       bind_rows(.id = "Q") %>% 
       tidyr::spread(Q,n) %>% 
-      rename(resp = "..1") %>% 
       readr::write_csv(paste0(path_output, "/response_freq.csv"))
     
   }

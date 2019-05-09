@@ -84,10 +84,9 @@ rasch_mds <- function(df,
   
   df <- df %>%
     mutate_at(vars(vars_metric),
-              dplyr::funs(plyr::mapvalues, .args = list(
-                from = to_NA, to = rep(NA, length(to_NA)), warn_missing = FALSE
+              list(~ plyr::mapvalues(., from = to_NA, to = rep(NA, length(to_NA)), warn_missing = FALSE
               ))) %>% 
-    mutate_at(vars(vars_id), funs(as.character))
+    mutate_at(vars(vars_id), list(~as.character))
   
   #remove people with too many NAs
   rm_rows <- df %>% 
@@ -102,7 +101,7 @@ rasch_mds <- function(df,
   #convert values to start at 0
   df <- df %>%
     mutate_at(vars(vars_metric),
-              dplyr::funs(. - 1))
+              list(~ . - 1))
   
   
   #store initial data frame of maximum possible values for each variable
@@ -128,7 +127,7 @@ rasch_mds <- function(df,
     
     message("Testlet creation completed.")
     
-    }
+  }
   
   # PERFORM RECODING --------
   if (!is.null(recode_strategy)) {
@@ -161,11 +160,10 @@ rasch_mds <- function(df,
   if (print_results) {
     df %>% 
       select(vars_metric) %>% 
-      purrr::map(table, useNA="always") %>% 
-      purrr::map(~ suppressMessages(as_tibble(., .name_repair = "unique"))) %>% 
+      purrr::map(~ table(resp = ., useNA = "always")) %>% 
+      purrr::map(~ as_tibble(.)) %>% 
       bind_rows(.id = "Q") %>% 
       tidyr::spread(Q,n) %>% 
-      rename(resp = "..1") %>% 
       mutate(resp = as.numeric(resp)) %>% 
       arrange(resp) %>% 
       readr::write_csv(paste0(path_output, "/response_freq.csv"))
