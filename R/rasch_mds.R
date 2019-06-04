@@ -86,7 +86,7 @@ rasch_mds <- function(df,
     mutate_at(vars(vars_metric),
               list(~ plyr::mapvalues(., from = to_NA, to = rep(NA, length(to_NA)), warn_missing = FALSE
               ))) %>% 
-    mutate_at(vars(vars_id), list(~as.character))
+    mutate_at(vars(vars_id), list(as.character))
   
   #remove people with too many NAs
   rm_rows <- df %>% 
