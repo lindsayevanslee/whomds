@@ -79,12 +79,21 @@ table_weightedpct <- function(df, vars_ids, vars_strata, vars_weights,
   
   
   #create survey design object
+  if (is.null(vars_ids)) expr_ids <- "NULL"
+  else expr_ids <- paste0("c(", paste0(vars_ids, collapse = ","), ")")
+  
+  if (is.null(vars_strata)) expr_strata <- "NULL"
+  else expr_strata <- paste0("c(", paste0(vars_strata, collapse = ","), ")")
+  
+  if (is.null(vars_weights)) expr_weights <- "NULL"
+  else expr_weights <- paste0("c(", paste0(vars_weights, collapse = ","), ")")
+  
   des <-
     df %>%
     as_survey_design(
-      ids = c(!!!rlang::syms(vars_ids)),
-      strata = c(!!!rlang::syms(vars_strata)),
-      weights = c(!!!rlang::syms(vars_weights)),
+      ids = !!rlang::parse_expr(expr_ids),
+      strata = !!rlang::parse_expr(expr_strata),
+      weights = !!rlang::parse_expr(expr_weights),
       nest = TRUE
     )
   
