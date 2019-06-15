@@ -63,10 +63,10 @@ table_weightedpct <- function(df, vars_ids, vars_strata, vars_weights,
   
   #convert data to long format using variables from formula_vars
   df <- df %>%
-    tidyr::gather_(
+    tidyr::gather(
       key = "item",
       value = "resp",
-      gather_cols = formula_vars,
+      !!!rlang::syms(formula_vars),
       factor_key = TRUE,
       na.rm = TRUE
     ) %>%
@@ -81,10 +81,10 @@ table_weightedpct <- function(df, vars_ids, vars_strata, vars_weights,
   #create survey design object
   des <-
     df %>%
-    as_survey_design_(
-      ids = vars_ids,
-      strata = vars_strata,
-      weights = vars_weights,
+    as_survey_design(
+      ids = c(!!!rlang::syms(vars_ids)),
+      strata = c(!!!rlang::syms(vars_strata)),
+      weights = c(!!!rlang::syms(vars_weights)),
       nest = TRUE
     )
   
@@ -154,7 +154,7 @@ table_weightedpct <- function(df, vars_ids, vars_strata, vars_weights,
   #spread 
   if (!is.null(spread_key)) {
     prevtab <- prevtab %>%
-      tidyr::spread_(key = spread_key, value = spread_value) 
+      tidyr::spread(key = !!rlang::sym(spread_key), value = !!rlang::sym(spread_value))
   }
   
   #arrange
