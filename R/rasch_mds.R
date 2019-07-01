@@ -98,10 +98,10 @@ rasch_mds <- function(df,
   df <- df %>% 
     filter(!rm_rows)
   
-  #convert values to start at 0
+  #convert values to start at 0 (explictly convert first to numeric, in case df has factor columns)
   df <- df %>%
     mutate_at(vars(vars_metric),
-              list(~ . - 1))
+              list(~ as.numeric(as.character(.)) - 1))
   
   
   #store initial data frame of maximum possible values for each variable

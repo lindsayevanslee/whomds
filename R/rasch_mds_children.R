@@ -116,7 +116,7 @@ rasch_mds_children <- function(df,
   #convert values to start at 0
   df <- df %>%
     mutate_at(vars(helper_varslist(vars_metric)),
-              dplyr::funs(. - 1))
+              list(~ as.numeric(as.character(.)) - 1))
   
   
   #store initial data frame of maximum possible values for each variable
