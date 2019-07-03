@@ -97,8 +97,6 @@ fig_dist <- function(df, score, score_cat, cutoffs,
       scale_y_continuous(labels=lab)
   }
   
-
-  gt <- ggplot_gtable(ggplot_build(plot_dist))
-  gt$layout$clip[gt$layout$name == "panel"] <- "off"
-  grid::grid.draw(gt)
+  
+  return(plot_dist)
 }
