@@ -36,6 +36,6 @@ fig_poppyramid(chile_adults, "edad", "sex")
 }
 \seealso{
 Other figure functions: \code{\link{fig_LID}},
-  \code{\link{fig_dist}}
+  \code{\link{fig_density}}, \code{\link{fig_dist}}
 }
 \concept{figure functions}
