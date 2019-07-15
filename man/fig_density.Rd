@@ -37,9 +37,12 @@ Plot a density of a score
 Plots a histogram of a score that ranges between 0 and 100, with the fill determined by some set categorization of the score. This is the function used to plot the distributions of disability scores resulting from the WHO Model Disability Survey.
 }
 \examples{
-fig_density(chile_adults, score = "PerformanceScorePredicted", cutoffs = c(19.1, 34.4, 49.6), x_lab = "Disability score")
-fig_density(chile_adults, score = "PerformanceScorePredicted", var_color = "sex", cutoffs = c(19.1, 34.4, 49.6), x_lab = "Disability score")
-fig_density(chile_adults, score = "PerformanceScorePredicted", var_color = "sex", var_facet = "age_cat",  cutoffs = c(19.1, 34.4, 49.6), x_lab = "Disability score")
+fig_density(chile_adults, score = "PerformanceScorePredicted", cutoffs = c(19.1, 34.4, 49.6), 
+x_lab = "Disability score")
+fig_density(chile_adults, score = "PerformanceScorePredicted", var_color = "sex", 
+cutoffs = c(19.1, 34.4, 49.6), x_lab = "Disability score")
+fig_density(chile_adults, score = "PerformanceScorePredicted", var_color = "sex", 
+var_facet = "age_cat",  cutoffs = c(19.1, 34.4, 49.6), x_lab = "Disability score")
 }
 \seealso{
 Other figure functions: \code{\link{fig_LID}},
