@@ -23,7 +23,7 @@
 #' @examples
 #' fig_density(chile_adults, score = "PerformanceScorePredicted", cutoffs = c(19.1, 34.4, 49.6), x_lab = "Disability score")
 #' fig_density(chile_adults, score = "PerformanceScorePredicted", var_color = "sex", cutoffs = c(19.1, 34.4, 49.6), x_lab = "Disability score")
-#' fig_density(chile_adults, score = "PerformanceScorePredicted", var_facet = "sex",  cutoffs = c(19.1, 34.4, 49.6), x_lab = "Disability score")
+#' fig_density(chile_adults, score = "PerformanceScorePredicted", var_color = "sex", var_facet = "age_cat",  cutoffs = c(19.1, 34.4, 49.6), x_lab = "Disability score")
 fig_density <- function(df, score, var_color = NULL, var_facet = NULL,
                         cutoffs = NULL, x_lab = "Score", 
                         pal = "Paired", adjust = 2, size = 1.5){
@@ -32,9 +32,6 @@ fig_density <- function(df, score, var_color = NULL, var_facet = NULL,
   if (!tibble::is_tibble(df)) df <- df %>% as_tibble()
   
 
-  
-  
-  
   #Initialize plot
   if (is.null(var_color)) {
     plot_density <- ggplot(df, aes(x = !!rlang::sym(score))) 
@@ -44,10 +41,19 @@ fig_density <- function(df, score, var_color = NULL, var_facet = NULL,
                                    color = !!rlang::sym(var_color))) 
   }
   
+  #set colors
+  if (pal %in% rownames(RColorBrewer::brewer.pal.info)) {
+    plot_density <- plot_density +
+      geom_density(adjust = adjust, size = size) +
+      scale_color_brewer(palette = pal)
+  } else {
+    plot_density <- plot_density +
+      geom_density(adjust = adjust, size = size, color = pal)
+  }
+  
   
   #Continue plot with formatting
   plot_density <- plot_density + 
-    geom_density(adjust = adjust, size = size) +
     scale_x_continuous(limits = c(min(-2.5, min(cutoffs) ), 102.5)) +
     labs(x = "Score") +
     theme(
@@ -71,15 +77,6 @@ fig_density <- function(df, score, var_color = NULL, var_facet = NULL,
       
     ) 
   
-  
-  #set colors
-  if (pal %in% rownames(RColorBrewer::brewer.pal.info)) {
-    plot_density <- plot_density +
-      scale_color_brewer(palette = pal)
-  } else {
-    plot_density <- plot_density +
-      scale_color_manual(values = pal) #doesn't work.....
-  }
   
   
   #add cutoffs lines if non-NULL
