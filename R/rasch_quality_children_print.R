@@ -66,10 +66,12 @@ rasch_quality_children_print <- function(df_nest, vars_metric, vars_group, TAM_m
       
       
       #create dependency graph
+      grDevices::pdf(paste0(path_output,"/LID_plot_Multigroup.pdf"))
       fig_LID(LIDforgraph = df_nest$cor_multigroup[[r]], 
               LIDcutoff = LIDcutoff, 
               path_output = path_output,
               extra_file_label = "Multigroup")
+      grDevices::dev.off()
       
       
     }
@@ -121,11 +123,13 @@ rasch_quality_children_print <- function(df_nest, vars_metric, vars_group, TAM_m
       grDevices::dev.off()
       
       #create dependency graph
+      grDevices::pdf(paste0(path_output,"/LID_plot_",age_name,".pdf"))
       fig_LID(LIDforgraph = df_nest$cor_anchored[[r]], 
               LIDcutoff = LIDcutoff, 
               path_output = path_output,
               extra_file_label = age_name,
               vertex_print_grey = vars_metric[["common"]])
+      grDevices::dev.off()
       
     }
   }

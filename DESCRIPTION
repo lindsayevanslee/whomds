@@ -17,6 +17,7 @@ Imports:
     dplyr,
     eRm,
     foreign,
+    GGally,
     ggplot2,
     grDevices,
     grid,

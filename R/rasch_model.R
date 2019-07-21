@@ -223,7 +223,10 @@ rasch_model <- function(df, vars_metric, vars_id, print_results = TRUE, path_out
     
     #residual correlations
     utils::write.csv(LID, file=paste0(path_output,"/Residual_Correlations.csv"))
+    
+    grDevices::pdf(paste0(path_output,"/LID_plot.pdf"))
     fig_LID(LIDforgraph, LIDcutoff, path_output)
+    grDevices::dev.off()
     
     #PCA
     if (!any(class(Eigen_Value)=="try-error")) {
