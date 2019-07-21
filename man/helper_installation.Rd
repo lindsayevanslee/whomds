@@ -10,7 +10,7 @@ helper_installation()
 Prints a message stating whether or not installed package is same as most updated version from Github
 }
 \description{
-Check installation of whomds is the most updated
+Compares build date of installed package against the date of the last commit from GitHub (\url{https://github.com/lindsayevanslee/whomds})
 }
 \examples{
 whomds:::helper_installation()
