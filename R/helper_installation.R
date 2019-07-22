@@ -4,7 +4,7 @@
 #'
 #' @return Prints a message stating whether or not installed package is same as most updated version from Github
 #'
-#' @examples whomds:::helper_installation()
+#' @examples \dontrun{whomds:::helper_installation()}
 helper_installation <- function() {
   
   #capture last commit time
