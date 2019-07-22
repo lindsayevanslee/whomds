@@ -8,8 +8,8 @@
 helper_installation <- function() {
   
   #capture last commit time
-  commit <- httr::content(httr::GET("https://api.github.com/repos/lindsayevanslee/whomds/git/refs/heads/master"))
-  commit_info <- httr::content(httr::GET(commit$object$url))
+  commit <- httr::content(httr::GET(url = "https://api.github.com/repos/lindsayevanslee/whomds/git/refs/heads/master"))
+  commit_info <- httr::content(httr::GET(url = commit$object$url))
   
   last_commit_datetime <- lubridate::as_datetime(commit_info$author$date)
   
