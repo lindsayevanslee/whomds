@@ -17,6 +17,7 @@ Imports:
     dplyr,
     eRm,
     foreign,
+    geomnet,
     GGally,
     ggplot2,
     grDevices,
