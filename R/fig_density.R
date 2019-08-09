@@ -6,7 +6,7 @@
 #' @param var_facet a string (length 1) of the column name for the variable to create a \code{ggplot2::facet_grid()} with. Default is NULL.
 #' @param cutoffs a numeric vector of the cut-offs for the score categorization. Default is NULL.
 #' @param x_lab a string (length 1) of x-axis label. Default is "Score".
-#' @param pal a string specifying either a manual color to use for the color aesthetic, or as the name of a palette to pass to \code{RColorBrewer::brewer.pal()} with the name of the color palette to use. Default is \code{"Paired"}
+#' @param pal a string specifying either a manual color to use for the color aesthetic, a character vector explictly specifying the colors to use for the color scale, or as the name of a palette to pass to \code{RColorBrewer::brewer.pal()} with the name of the color palette to use for the color scale. Default is \code{"Paired"}
 #' @param adjust a numeric value to pass to \code{adjust} argument of \code{ggplot2::geom_density()}. Default is 2.
 #' @param size a numeric value to pass to \code{size} argument of \code{ggplot2::geom_density()}. Default is 1.5.
 #' 
@@ -34,25 +34,36 @@ fig_density <- function(df, score, var_color = NULL, var_facet = NULL,
   #convert to tibble
   if (!tibble::is_tibble(df)) df <- df %>% as_tibble()
   
-
+  
   #Initialize plot
   if (is.null(var_color)) {
     plot_density <- ggplot(df, aes(x = !!rlang::sym(score))) 
-      
+    
   } else {
     plot_density <- ggplot(df, aes(x = !!rlang::sym(score), 
                                    color = !!rlang::sym(var_color))) 
   }
   
   #set colors
-  if (pal %in% rownames(RColorBrewer::brewer.pal.info)) {
+  if (length(pal) == 1) {
+    if (pal %in% rownames(RColorBrewer::brewer.pal.info)) {
+      #if length == 1 and pal in palettes -> brewer scale
+      plot_density <- plot_density +
+        geom_density(adjust = adjust, size = size) +
+        scale_color_brewer(palette = pal)
+    } else {
+      #if length == 1 and pal not in palettes -> color aesthetic
+      plot_density <- plot_density +
+        geom_density(adjust = adjust, size = size, color = pal)
+    }
+  } else {
+    #if length != 1 -> manual color scale
     plot_density <- plot_density +
       geom_density(adjust = adjust, size = size) +
-      scale_color_brewer(palette = pal)
-  } else {
-    plot_density <- plot_density +
-      geom_density(adjust = adjust, size = size, color = pal)
+      scale_color_manual(values = pal)
   }
+  
+  
   
   
   #Continue plot with formatting
@@ -94,6 +105,6 @@ fig_density <- function(df, score, var_color = NULL, var_facet = NULL,
       facet_grid(stats::formula(paste("~", var_facet)))
   }
   
- 
+  
   return(plot_density)
 }

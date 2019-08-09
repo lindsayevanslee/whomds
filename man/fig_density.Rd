@@ -21,7 +21,7 @@ fig_density(df, score, var_color = NULL, var_facet = NULL,
 
 \item{x_lab}{a string (length 1) of x-axis label. Default is "Score".}
 
-\item{pal}{a string specifying either a manual color to use for the color aesthetic, or as the name of a palette to pass to \code{RColorBrewer::brewer.pal()} with the name of the color palette to use. Default is \code{"Paired"}}
+\item{pal}{a string specifying either a manual color to use for the color aesthetic, a character vector explictly specifying the colors to use for the color scale, or as the name of a palette to pass to \code{RColorBrewer::brewer.pal()} with the name of the color palette to use for the color scale. Default is \code{"Paired"}}
 
 \item{adjust}{a numeric value to pass to \code{adjust} argument of \code{ggplot2::geom_density()}. Default is 2.}
 
