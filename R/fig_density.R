@@ -40,6 +40,9 @@ fig_density <- function(df, score, var_color = NULL, var_facet = NULL,
     plot_density <- ggplot(df, aes(x = !!rlang::sym(score))) 
     
   } else {
+    
+    if (!is.factor(pull(df, var_color))) stop("var_color must be a factor")
+    
     plot_density <- ggplot(df, aes(x = !!rlang::sym(score), 
                                    color = !!rlang::sym(var_color))) 
   }
