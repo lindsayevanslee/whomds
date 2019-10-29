@@ -33,7 +33,7 @@ rasch_rescale_children <- function(df, df_nest, vars_group, vars_id) {
   }
   
    df_final <- df_final  %>% 
-    dplyr::mutate(MetricRescaled = scales::rescale(pull(., Metric), c(0, 100))) %>% 
+    dplyr::mutate(MetricRescaled = scales::rescale(Metric, c(0, 100))) %>% 
     dplyr::filter_at(vars(vars_id), any_vars(. != "MAX")) %>% 
     dplyr::filter_at(vars(vars_id), any_vars(. !="MIN"))
   
