@@ -34,7 +34,7 @@ rasch_testlet <- function(df, vars_metric, testlet_strategy, max_values, resp_op
     if (!all(new_testlet_vars %in% helper_varslist(vars_metric))) stop("You input a string that is not included in the variable list.")
     
     #create testlet
-    if (!is.null(new_testlet_name) & !identical(new_testlet_name,"")) {
+    if (!is.null(new_testlet_name) & !identical(new_testlet_name,"") & !is.na(new_testlet_name)) {
       new_testlet <- new_testlet_name
     } else {
       new_testlet <- paste(new_testlet_vars,collapse="_")
