@@ -16,7 +16,7 @@ rasch_rescale_children(df, df_nest, vars_group, vars_id)
 \item{vars_id}{a string with column name uniquely identifying individuals}
 }
 \value{
-a tibble with the data \code{df} or unnested \code{df_nest} and new columns "Metric" and "MetricRescaled" with the original and rescaled person abilities, ranging from 0 to 100, and filter out any rows with an artificial minimum or maximum
+a tibble with the data \code{df} or unnested \code{df_nest} and new columns "person_pars" and "rescaled" with the original and rescaled person abilities, ranging from 0 to 100, and filter out any rows with an artificial minimum or maximum
 }
 \description{
 Rescale score from Rasch Analysis for children to range from 0 to 100
