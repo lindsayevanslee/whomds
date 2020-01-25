@@ -21,7 +21,7 @@
 #' @import dplyr
 #'
 #' @examples 
-#' fig_poppyramid(chile_adults, "edad", "sex")
+#' fig_poppyramid(df_adults, "age", "sex")
 fig_poppyramid <- function(df, var_age, var_sex, x_axis = c("n", "pct"), age_plus = 100, age_by = 5){
   
   #make sure x_axis contains acceptable answers

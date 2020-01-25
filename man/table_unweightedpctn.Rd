@@ -28,10 +28,10 @@ A tibble with percent and N for each level of each variable in \code{vars_demo}
 Compute unweighted percent and N for multiple variables, disaggregated
 }
 \examples{
-table_unweightedpctn(chile_adults, vars_demo = c("sex", "age_cat", "work_cat", "edu_cat"))
-table_unweightedpctn(chile_adults, vars_demo = c("sex", "age_cat", "work_cat", "edu_cat"), 
+table_unweightedpctn(df_adults, vars_demo = c("sex", "age_cat", "work_cat", "edu_cat"))
+table_unweightedpctn(df_adults, vars_demo = c("sex", "age_cat", "work_cat", "edu_cat"), 
 group_by_var = "performance_cat")
-table_unweightedpctn(chile_adults, vars_demo = c("sex", "age_cat", "work_cat", "edu_cat"), 
+table_unweightedpctn(df_adults, vars_demo = c("sex", "age_cat", "work_cat", "edu_cat"), 
 group_by_var = "performance_cat", spread_by_group_by_var = TRUE)
 }
 \seealso{

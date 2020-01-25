@@ -16,7 +16,7 @@
 #' @import rlang
 #' 
 #' @examples
-#' table_basicstats(chile_adults, "enc_id", "age_cat")
+#' table_basicstats(df_adults, "HHID", "age_cat")
 table_basicstats <- function(df, hh_id, group_by_var) {
   
   #convert to tibble

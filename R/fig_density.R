@@ -21,11 +21,11 @@
 #' @import dplyr
 #'
 #' @examples
-#' fig_density(chile_adults, score = "PerformanceScorePredicted", cutoffs = c(19.1, 34.4, 49.6), 
+#' fig_density(df_adults, score = "disability_score", cutoffs = c(19.1, 34.4, 49.6), 
 #' x_lab = "Disability score")
-#' fig_density(chile_adults, score = "PerformanceScorePredicted", var_color = "sex", 
+#' fig_density(df_adults, score = "disability_score", var_color = "sex", 
 #' cutoffs = c(19.1, 34.4, 49.6), x_lab = "Disability score")
-#' fig_density(chile_adults, score = "PerformanceScorePredicted", var_color = "sex", 
+#' fig_density(df_adults, score = "disability_score", var_color = "sex", 
 #' var_facet = "age_cat",  cutoffs = c(19.1, 34.4, 49.6), x_lab = "Disability score")
 fig_density <- function(df, score, var_color = NULL, var_facet = NULL,
                         cutoffs = NULL, x_lab = "Score", 

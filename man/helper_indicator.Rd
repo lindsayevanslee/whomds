@@ -25,8 +25,8 @@ a data frame with new columns that are the indicators from \code{vars_indicators
 Create indicators from data frame
 }
 \examples{
-helper_indicator(df = chile_adults, 
-vars_indicators = c("fa1", "fa2", "fa3"), 
+helper_indicator(df = df_adults, 
+vars_indicators = c("EF1", "EF2", "EF3"), 
 mapvalues_from = 1:5, 
 mapvalues_to = c(0,0,0,1,1))
 }

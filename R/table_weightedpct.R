@@ -32,11 +32,11 @@
 #' @seealso See \code{vignette("programming", package = "dplyr")} for more about non-standard evaluation (NSE)
 #'
 #' @examples
-#' table_weightedpct(chile_adults, 
-#'     vars_ids = c("VARUNIT_N","enc_id"),
-#'     vars_strata = "VARSTRAT_N",
-#'     vars_weights = "Factor_Persona",
-#'     formula_vars = paste0("fa",1:10),
+#' table_weightedpct(df_adults, 
+#'     vars_ids = c("HHID", "PSU"),
+#'     vars_strata = "strata",
+#'     vars_weights = "weight",
+#'     formula_vars = paste0("EF",1:10),
 #'     formula_vars_levels = 1:5,
 #'     by_vars = "sex")
 table_weightedpct <- function(df, vars_ids, vars_strata, vars_weights, 

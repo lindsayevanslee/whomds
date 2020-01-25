@@ -32,7 +32,7 @@ A population pyramid gives an image of the age and sex distribution of a populat
 The function divides the \code{var_age} variable into intervals of width \code{age_by}.
 }
 \examples{
-fig_poppyramid(chile_adults, "edad", "sex")
+fig_poppyramid(df_adults, "age", "sex")
 }
 \seealso{
 Other figure functions: \code{\link{fig_LID}},

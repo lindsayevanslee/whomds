@@ -52,11 +52,11 @@ If \code{willfilter} is NULL, the table is not filtered or transmuted. If \code{
 The function performs the following actions with the table after results are calculated in the following order (if applicable): filter, add totals, spread, arrange, transmute
 }
 \examples{
-table_weightedpct(chile_adults, 
-    vars_ids = c("VARUNIT_N","enc_id"),
-    vars_strata = "VARSTRAT_N",
-    vars_weights = "Factor_Persona",
-    formula_vars = paste0("fa",1:10),
+table_weightedpct(df_adults, 
+    vars_ids = c("HHID", "PSU"),
+    vars_strata = "strata",
+    vars_weights = "weight",
+    formula_vars = paste0("EF",1:10),
     formula_vars_levels = 1:5,
     by_vars = "sex")
 }

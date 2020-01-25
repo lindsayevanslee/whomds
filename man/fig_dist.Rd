@@ -36,11 +36,11 @@ Plot a distribution of a score
 Plots a histogram of a score that ranges between 0 and 100, with the fill determined by some set categorization of the score. This is the function used to plot the distributions of disability scores resulting from the WHO Model Disability Survey.
 }
 \examples{
-fig_dist(chile_adults, score = "PerformanceScorePredicted", score_cat = "performance_cat", 
+fig_dist(df_adults, score = "disability_score", score_cat = "performance_cat", 
 cutoffs = c(19.1, 34.4, 49.6), x_lab = "Disability score")
-fig_dist(chile_adults, score = "PerformanceScorePredicted", score_cat = "performance_cat", 
+fig_dist(df_adults, score = "disability_score", score_cat = "performance_cat", 
 cutoffs = c(19.1, 34.4, 49.6), x_lab = "Disability score", y_max = 2000)
-fig_dist(chile_adults, score = "PerformanceScorePredicted", score_cat = "performance_cat", 
+fig_dist(df_adults, score = "disability_score", score_cat = "performance_cat", 
 cutoffs = c(19.1, 34.4, 49.6), x_lab = "Disability score", y_max = 0.2, pcent=TRUE)
 }
 \seealso{

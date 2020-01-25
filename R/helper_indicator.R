@@ -9,8 +9,8 @@
 #' @return a data frame with new columns that are the indicators from \code{vars_indicators}, with the same names pasted with \code{"_ind"}.
 #' @export
 #'
-#' @examples helper_indicator(df = chile_adults, 
-#' vars_indicators = c("fa1", "fa2", "fa3"), 
+#' @examples helper_indicator(df = df_adults, 
+#' vars_indicators = c("EF1", "EF2", "EF3"), 
 #' mapvalues_from = 1:5, 
 #' mapvalues_to = c(0,0,0,1,1))
 helper_indicator <- function(df, vars_indicators, mapvalues_from , mapvalues_to, make_factor = TRUE) {
