@@ -3,7 +3,7 @@
 \docType{data}
 \name{chile_adults}
 \alias{chile_adults}
-\title{Example of WHO Model Disability Survey data for adults}
+\title{Example of WHO Model Disability Survey data for adults from Chile}
 \format{A tibble with 12256 rows and 136 variables:
 \describe{
   \item{enc_id}{household number}
