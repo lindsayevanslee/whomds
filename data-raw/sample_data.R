@@ -93,10 +93,7 @@ df_children <- df_adults %>%
         age_cat == "Age5to9" ~ sample(5:9, 1),
         age_cat == "Age10to17" ~ sample(10:17, 1)
       ),
-      age_cat = plyr::mapvalues(age_cat, 
-                                from = c("Age2to4", "Age5to9", "Age10to17"), 
-                                to = c("2-4", "5-9", "10-17")),
-      age_cat = ordered(age_cat, levels = c("2-4", "5-9", "10-17"))
+      age_cat = ordered(age_cat, levels = c("Age2to4", "Age5to9", "Age10to17"))
       )
     
   ) %>% print()
