@@ -53,7 +53,7 @@ df_adults <- tibble(HHID = 1:2500,
                     strata = sample(c("A", "B", "C"), size = 2500, replace = TRUE),
                     PSU = sample(1:20, size = 2500, replace = TRUE),
                     weight = sample(seq(800, 1200, by = 50), size = 2500, replace = TRUE),
-                    sex = sample(c("Male", "Female"), size = 2500, replace = TRUE), 
+                    sex = factor(sample(c("Male", "Female"), size = 2500, replace = TRUE)), 
                     age = sample(18:100, size = 2500, prob = rbeta(83, 2, 5), replace = TRUE),
                     age_cat = cut(
                       age,
@@ -81,7 +81,7 @@ df_adults <- tibble(HHID = 1:2500,
 
 df_children <- df_adults %>% 
   select(HHID:weight) %>% 
-  mutate(sex = sample(c("Male", "Female"), size = 2500, replace = TRUE)) %>% 
+  mutate(sex = factor(sample(c("Male", "Female"), size = 2500, replace = TRUE))) %>% 
   bind_cols(
     chile_children %>% 
       sample_n(2500) %>% 
@@ -95,7 +95,9 @@ df_children <- df_adults %>%
       ),
       age_cat = plyr::mapvalues(age_cat, 
                                 from = c("Age2to4", "Age5to9", "Age10to17"), 
-                                to = c("2-4", "5-9", "10-17")))
+                                to = c("2-4", "5-9", "10-17")),
+      age_cat = ordered(age_cat, levels = c("2-4", "5-9", "10-17"))
+      )
     
   ) %>% print()
 
