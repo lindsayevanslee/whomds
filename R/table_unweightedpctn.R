@@ -20,9 +20,9 @@
 #' @examples
 #' table_unweightedpctn(df_adults, vars_demo = c("sex", "age_cat", "work_cat", "edu_cat"))
 #' table_unweightedpctn(df_adults, vars_demo = c("sex", "age_cat", "work_cat", "edu_cat"), 
-#' group_by_var = "performance_cat")
+#' group_by_var = "disability_cat")
 #' table_unweightedpctn(df_adults, vars_demo = c("sex", "age_cat", "work_cat", "edu_cat"), 
-#' group_by_var = "performance_cat", spread_by_group_by_var = TRUE)
+#' group_by_var = "disability_cat", spread_by_group_by_var = TRUE)
 table_unweightedpctn <- function(df, vars_demo, 
                                  group_by_var=NULL, 
                                  spread_by_group_by_var = FALSE, 
@@ -156,7 +156,7 @@ table_unweightedpctn <- function(df, vars_demo,
         #if summing along group_by_var... (total col)
         if (group_by_var_sums_to_100) {
           
-          # table_unweightedpctn(df_adults, vars_demo = c("sex", "age_cat", "work_cat", "edu_cat"), add_totals = TRUE, group_by_var = "performance_cat", spread_by_group_by_var = TRUE, group_by_var_sums_to_100 = FALSE)
+          # table_unweightedpctn(df_adults, vars_demo = c("sex", "age_cat", "work_cat", "edu_cat"), add_totals = TRUE, group_by_var = "disability_cat", spread_by_group_by_var = TRUE, group_by_var_sums_to_100 = FALSE)
           
           final_tab <- final_tab %>% 
             tibble::add_column(Total_pct = (final_tab %>% 
@@ -171,7 +171,7 @@ table_unweightedpctn <- function(df, vars_demo,
         } 
         #if not summing along group_by_var... (total row)
         else {
-          # table_unweightedpctn(df_adults, vars_demo = c("sex", "age_cat", "work_cat", "edu_cat"), add_totals = TRUE, group_by_var = "performance_cat", spread_by_group_by_var = TRUE, group_by_var_sums_to_100 = TRUE)
+          # table_unweightedpctn(df_adults, vars_demo = c("sex", "age_cat", "work_cat", "edu_cat"), add_totals = TRUE, group_by_var = "disability_cat", spread_by_group_by_var = TRUE, group_by_var_sums_to_100 = TRUE)
           
           
           final_tab <- final_tab %>%
@@ -198,7 +198,7 @@ table_unweightedpctn <- function(df, vars_demo,
         #if summing along group_by_var... 
         if (group_by_var_sums_to_100) {
           
-          # table_unweightedpctn(df_adults, vars_demo = c("sex", "age_cat", "work_cat", "edu_cat"), add_totals = TRUE, group_by_var = "performance_cat", spread_by_group_by_var = FALSE, group_by_var_sums_to_100 = TRUE)
+          # table_unweightedpctn(df_adults, vars_demo = c("sex", "age_cat", "work_cat", "edu_cat"), add_totals = TRUE, group_by_var = "disability_cat", spread_by_group_by_var = FALSE, group_by_var_sums_to_100 = TRUE)
           
           final_tab <-  final_tab %>% 
             group_by(item, !!sym(group_by_var)) %>% 
@@ -213,7 +213,7 @@ table_unweightedpctn <- function(df, vars_demo,
         }
         #if not summing along group_by_var...
         else {
-          # table_unweightedpctn(df_adults, vars_demo = c("sex", "age_cat", "work_cat", "edu_cat"), add_totals = TRUE, group_by_var = "performance_cat", spread_by_group_by_var = FALSE, group_by_var_sums_to_100 = FALSE)
+          # table_unweightedpctn(df_adults, vars_demo = c("sex", "age_cat", "work_cat", "edu_cat"), add_totals = TRUE, group_by_var = "disability_cat", spread_by_group_by_var = FALSE, group_by_var_sums_to_100 = FALSE)
           
           final_tab <-  final_tab %>% 
             group_by(item, demo) %>% 

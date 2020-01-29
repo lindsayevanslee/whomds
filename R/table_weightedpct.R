@@ -173,7 +173,7 @@ table_weightedpct <- function(df, vars_ids, vars_strata, vars_weights,
   }
   
   
-  #transmute, if willfilter==FALSE (collapse response options) -  (if spread_key is performance_cat, then can't use transmute here to collapse response options)
+  #transmute, if willfilter==FALSE (collapse response options) -  (if spread_key is disability_cat, then can't use transmute here to collapse response options)
   if (!is.null(willfilter) & !isTRUE(willfilter)) prevtab <- prevtab %>% transmute(!!!exprs)
   
   
