@@ -78,7 +78,9 @@ df_adults <- tibble(HHID = 1:2500,
         capacity_score = CapacityScore,
         disability_score = PerformanceScorePredicted,
         disability_cat = performance_cat)
-  )
+  ) %>% 
+  mutate(disability_cat = ordered(disability_cat, levels = c("No", "Mild", "Moderate", "Severe")),
+         capacity_cat = ordered(capacity_cat, levels = c("No", "Mild", "Moderate", "Severe")))
 
 
 df_children <- df_adults %>% 
