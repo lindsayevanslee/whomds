@@ -45,9 +45,9 @@ A Rasch model can be used with the function `rasch_mds()`, like so:
 library(whomds)
 
 start <- rasch_mds(
-  df = chile_adults, 
-  vars_metric = paste0("fa", 1:12),
-  vars_id = "enc_id", 
+  df = df_adults, 
+  vars_metric = paste0("EF", 1:12),
+  vars_id = "HHID", 
   vars_DIF = c("sex", "age_cat"),
   resp_opts = 1:5, 
   max_NA = 2,
@@ -65,7 +65,7 @@ start <- rasch_mds(
 
 ## More information
 
-An extensive guide on using the package is available. Please email me at leel@who.int for access. In the future, this will be included as vignettes.
+An extensive guide on using the package is available. Please email me at leel@who.int for access. Some of the information is already included in vignettes for this package. In the future, all information in the guide will be included as vignettes.
 
 The package is still very much in development mode, so there is much work that needs to be done. If you notice any bugs or have any suggestions, please email me or submit an issue here on GitHub.
 
