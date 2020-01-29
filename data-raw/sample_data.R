@@ -63,8 +63,10 @@ df_adults <- tibble(HHID = 1:2500,
                       include.lowest = TRUE,
                       ordered_result = TRUE
                     ),
-                    work_cat = sample(c("Y", "N"), size = 2500, prob = c(0.6, 0.4), replace = TRUE),
-                    edu_cat = sample(c("None", "Elementary", "Secondary", "University"), size = 2500, prob = c(0.2, 0.4, 0.25, 0.15), replace = TRUE)) %>%
+                    work_cat = factor(sample(c("Y", "N"), size = 2500, prob = c(0.6, 0.4), replace = TRUE)),
+                    edu_cat = ordered(sample(c("None", "Elementary", "Secondary", "University"), 
+                                             size = 2500, prob = c(0.2, 0.4, 0.25, 0.15), replace = TRUE),
+                                      levels = c("None", "Elementary", "Secondary", "University"))) %>%
   bind_cols(
     chile_adults %>% 
       sample_n(2500) %>% 

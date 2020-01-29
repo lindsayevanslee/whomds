@@ -12,7 +12,7 @@
   \item{weight}{survey weights}
   \item{sex}{sex, Male or Female}
   \item{age}{age in years}
-  \item{age_cat}{age catgory, one of "2-4", "5-9",  or"10-17"}
+  \item{age_cat}{age catgory, one of "Age2to4", "Age5to9", or "Age10to17"}
   \item{child....}{survey item from MDS Children questionnaire"}
 }}
 \usage{

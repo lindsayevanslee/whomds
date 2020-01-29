@@ -1,3 +1,4 @@
+######### manual information for old data files used from Chile implementation
 
 # # #' Example of WHO Model Disability Survey data for adults from Costa Rica
 # # #'
