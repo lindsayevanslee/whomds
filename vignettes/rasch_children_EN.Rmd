@@ -1,0 +1,183 @@
+---
+title: "Rasch Analysis for MDS data from children"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Rasch Analysis for MDS data from children}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE}
+library(knitr)
+
+opts_chunk$set(warning=FALSE, 
+               message=FALSE, 
+               eval=FALSE, 
+               out.width = "80%",
+               fig.align = "center",
+               collapse = TRUE,
+               comment = "#>")
+
+```
+
+
+As already mentioned, a different process must be used to calculate disability scores for children. Children at different ages are incredibly different, and thus have different items pertaining to them in the questionnaire. 
+
+In the Capacity section of the children questionnaire, items are applied to all children aged 2 to 17, without age-specific filters.  In this case, a multigroup analysis must be performed. This is essentially the same as performing a Rasch Model as for adults, however we alert the program to the fact that we have very different groups responding to the questionnaire--that is, different age groups. We use the age groups 2 to 4, 5 to 9, and 10 to 17.
+
+In the Performance section of the children questionnaire, there is a set of common questions for all children and a set of questions with age-specific filters. In this case, a multigroup analysis is first performed on all the common items, as with the Capacity questions. Then this multigroup model is used to calibrate an additional score using all of the age-specific questions. This is called "anchoring"--we are anchoring the results of the age-specific questions on the results from the common set of questions. This must be done in order to make the disability scores obtained for children comparable across age groups.
+
+# Structure
+
+The `whomds` package also contains functions to perform Rasch Anaylsis for children. 
+
+To perform Rasch Analysis for children, only one function needs to be used: `rasch_mds_children()`. This is a wrapper function, like `rasch_mds()` for adults. `rasch_mds_children()` utilizes all the other `rasch_*()` functions to perform the analysis. These other `rasch_*()` functions used for children are: 
+
+* `rasch_df_nest()`
+* `rasch_drop()`
+* `rasch_factor()`
+* `rasch_model_children()`
+* `rasch_quality_children()`
+* `rasch_quality_children_print()`
+* `rasch_recode()`
+* `rasch_rescale_children()`
+* `rasch_split()`
+* `rasch_split_age()`
+* `rasch_testlet()`
+
+You only need to use the function `rasch_mds_children()`. But if you wanted to perform your analysis in a more customized way, you could work with the internal functions directly.
+
+## Output
+
+After each iteration of the Rasch Model, the codes above produce a variety of files that will tell you how well the data fit the assumptions of the model at this iteration. The most important files are the ones below. We will explain each in detail below.
+
+
+* Local item dependence spreadsheets and plots:
+    + `LID_plot_Multigroup.pdf` and `LID_above_0.2_Multigroup.csv` - shows correlated items for multigroup model
+    + `LID_plotAge2to4.pdf` and `LID_above_0.2_Age2to4.csv` - shows correlated items for ages 2 to 4 for anchored model
+    + `LID_plotAge5to9.pdf` and `LID_above_0.2_Age5to9.csv` - shows correlated items for ages 5 to 9 for anchored model
+    + `LID_plotAge10to17.pdf` and `LID_above_0.2_Age10to17.csv` - shows correlated items for ages 10 to 17 for anchored model
+* Scree plots:
+    + `ScreePlot_Multigroup_PCM2.pdf` - scree plot for multigroup model
+    + `ScreePlot_Anchored_PCM2_Age2to4.pdf` - scree plot for ages 2 to 4 for anchored model
+    + `ScreePlot_Anchored_PCM2_Age5to9.pdf` - scree plot for ages 5 to 9 for anchored model
+    + `ScreePlot_Anchored_PCM2_Age10to17.pdf` - scree plot for ages 10 to 17 for anchored model
+* Locations of persons and items:
+    + `WrightMap_multigroup.pdf` - locations of persons and items for multigroup model
+    + `WrightMap_anchored_Age2to4.pdf` - locations of persons and items for ages 2 to 4 for anchored model
+    + `WrightMap_anchored_Age5to9.pdf` - locations of persons and items for ages 5 to 9 for anchored model
+    + `WrightMap_anchored_Age10to17.pdf` - locations of persons and items for 10 to 17 for anchored model
+* Item fit:
+    + `PCM2_itemfit_multigroup.xlsx` - item fit for multigroup model
+    + `PCM2_itemfit_anchored.xlsx` - item fit for anchored model
+* Model fit:
+    + `PCM2_WLE_multigroup.txt` - reliability of model for multigroup model
+    + `PCM2_WLE_anchored.txt` - reliability of model for anchored model
+
+
+## Arguments of `rasch_mds_children()`
+
+In this section we will examine each argument of the function `rasch_mds_children()`. The help file for the function also describes the arguments. Help files for functions in `R` can be accessed by writing `?` before the function name, like so:
+
+```{r rasch-mds-children-help}
+?rasch_mds_children
+```
+
+Below is an example of a use of the function `rasch_mds_children()`:
+
+```{r rasch-mds-children-example}
+rasch_mds_children(df = df_children, 
+                   vars_id = "HHID",
+                   vars_group = "age_cat",
+                   vars_metric_common = paste0("child", c(1:10)),
+                   vars_metric_grouped = list(
+                     "Age2to4" = paste0("child", c(12,15,16,19,20,24,25)),
+                     "Age5to9" = paste0("child", c(11,13,14,17,18,20,21,22,23,24,25,27)),
+                     "Age10to17" = paste0("child", c(11,13,14,17,18,20,21,22,23,25,26,27))),
+                   TAM_model = "PCM2",
+                   resp_opts = 1:5,
+                   has_at_least_one = 4:5,
+                   max_NA = 10,
+                   print_results = TRUE,
+                   path_parent = "~/Desktop/",
+                   model_name = "Start",
+                   testlet_strategy = NULL,
+                   recode_strategy = NULL,
+                   drop_vars = NULL,
+                   split_strategy = NULL,
+                   comment = "Initial run")
+
+```
+
+The first argument is `df`. This argument is for the data. The data object should be individual survey data, with one row per individual. Here the data is stored in an object `df_children`, which is a data set included in the `whomds` package. To find out more about `df_children` please look at its help file by running: `?df_children`
+
+The next argument is `vars_id`, which is the name of the column used to uniquely identify individuals. Here the ID column is called `HHID`. 
+
+The next argument is `vars_group`, which is a string with the column name identifying groups, specifically age groups in this case. Here the age group column is `age_cat`.
+
+The next two arguments specify the variables used to build the metric.
+
+`vars_metric_common` is a character vector with the names of the items that every individual in the same answers.
+
+`vars_metric_grouped` is a named list of character vectors with the items to use in the Rasch Analysis per group from the variable specified in `vars_group`. The list should have names corresponding to the different groups (for example, `Age2to4`, `Age5to9` and `Age10to17`), and contain character vectors of the corrsponding items for each group. 
+
+If only `vars_metric_common` is specified, then a multigroup analysis will be performed. If `vars_metric_common` and `vars_metric_grouped` are both specified, then an anchored analysis will be performed. `vars_metric_grouped` cannot be specified on its own.
+
+The next argument is `TAM_model`. This is a string that identifies which Item Response Theory model to use. This value is passed to the function from the `TAM` package used to calculate the Rasch Model. The default is `"PCM2"`, which specifies the Rasch Model.
+
+The next argument is `resp_opts`. This is a numeric vector with the possible response options for `vars_metric_common` and `vars_metric_grouped`. In this survey, the questions have response options 1 to 5. So here `resp_opts` is equal to a numeric vector of length 5 with the values `1`, `2`, `3`, `4` and `5`. 
+
+The next argument is `has_at_least_one`. This is a numeric vector with the response options that a respondent must have at least one of in order to be included in the metric calculation. This argument is required because often Rasch Analysis of children data is more difficult because of the extreme skewness of the responses. For this reason, it is often advisable to build a scale only with the respondents on the more severe end of the disability continuum, for example only with those respondents who answered 4 or 5 to at least one question. By specifying `has_at_least_one`, the function will only build a scale among those who answered `has_at_least_one` in at least one question from `vars_metric_common` and `vars_metric_grouped`. The default is `4:5`, which means the scale will be created only with children who answered 4 or 5 to at least one question in `vars_metric_common` and `vars_metric_grouped`.  The scores created can be reunited with the excluded children post-hoc.
+
+The next argument is `max_NA`. This is a numeric value for the maximum number of missing values allowed for an individual to be still be considered in the analysis. Rasch Analysis can handle individuals having a few missing values, but too many will cause problems in the analysis. In general all individuals in the sample should have fewer than 15% missing values. Here `max_NA` is set to `10`, meaning individuals are allowed to have a maximum of ten missing values out of the questions in `vars_metric_common` and `vars_metric_grouped` to still be included in the analysis.
+
+The next argument is `print_results`, which is either `TRUE` or `FALSE`. When it is `TRUE`, files will be saved onto your computer with results from the Rasch iteration. When it is `FALSE`, files will not be saved.
+
+The next argument is `path_parent`. This is a string with the path to the folder where the results of multiple models will be saved, assuming `print_results` is `TRUE`. The folder in `path_parent` will then contain separate folders with the names specified in `model_name` at each iteration. In the function call above, all results will be saved on the Desktop. Note that when writing paths for `R`, the slashes should all be: `/` (NOT `\`). Be sure to include a final `/` on the end of the path.
+
+The next argument is `model_name`. This is equal to a string where you give a name of the model you are running. This name will be used as the name of the folder where all the output will be saved on your computer, if `print_results` is `TRUE`. The name you give should be short but informative. For example, you may call your first run "Start", as it is called here, if you create a testlet in your second run perhaps you can call it "Testlet1", etc. Choose whatever will be meaningful to you.
+
+The next arguments are `testlet_strategy`, `recode_strategy`, `drop_vars` and `split_strategy`. These are arguments that control how the data is used in each iteration of the Rasch Model. These are specified in the same way as for adult models, as described in the above sections. Here they are all set to `NULL`, which means they are not used in the iteration of Rasch Analysis shown here.
+
+The last argument is `comment`. This is equal to a string where you can write some free-text information about the current iteration so that when you are looking at the results later you can remember what you did and why you did it. It is better to be more detailed, because you will forget why you chose to run the model in this particular way. This comment will be saved in a file `Comment.txt`. Here the comment is just `"Initial run"`. 
+
+
+
+# Example
+
+## Differences from adult models
+
+We have already discussed differences in the command required to compute the Rasch Model for children. To run this model, a different `R` package is available: `TAM`. This package can be more complicated to use than `eRm` (the package used for adults), but it allows for greater flexibility, and thus allows us to compute the multigroup and anchored analyses that we require.
+
+With the `TAM` package, we are also able to compute different types of models. By default the `whomds` package computes results using the Partial Credit Model (the normal polytomous Rasch Model). The PCM is specified in `TAM` with the argument `TAM_model` set to `"PCM2"`.
+
+Another option for `TAM_model` is `"GPCM"`, which tells the program to calculate a Generalized Partial Credit Model (GPCM). The GPCM differs from the PCM in that relaxes the uniform discriminating power of items. In other words, the GPCM allows for some items to be better able to identify people's abilities than other items. 
+
+We focus on PCM because we can obtain the scale we seek with this model.
+
+## Improving model quality
+
+As mentioned previously, generally the distribution of children's answers is much more heavily skewed towards the "no disability" end of the scale, so it is harder to build a quality metric. **Your model will be greatly improved if you only build it among children who indicate having some sort of level of problems in at least one of the domains.** This is why the default for the argument `has_at_least_one` of `rasch_children()` is `4:5`. We recommend keeping this default. 
+
+Collapsing response options may also improve the quality of your scale. We also recommend trying to build a scale where all items are recoded to 0,1,1,2,2--in other words, collapse the 2nd and 3rd response options and the 3rd and the 4th response options.
+
+## Important output to examine
+
+The output from the iterations of the Rasch Model for children using the WHO codes is very similar to that of the adult models. However, for the anchored models (for Performance) in particular, for most types of files there is a separate file for each age group. The quality of the model may vary across age groups, and all the information must be assessed simultaneously in order to determine how to adjust the data.
+
+There are a couple of key differences we will highlight. In order to assess the model fit (targeting) of the model, open the file `PCM2_WLE.txt` and analyze the number after `"WLE Reliability = "`. WLE stands for "weighted likelihood estimator", and it corresponds to the PSI we used to assess model fit for the adult models. Similarly, for good model fit, we would like to see this number be at least greater than 0.7, ideally greater than 0.8 or more.
+
+The person-item map is also different for the children model. The `TAM` package works with another package called `WrightMap` to produce, aptly called, Wright Maps. These are very similar to the person item maps we used previously, except the type of thresholds displayed are different. The Wright Map displays the "Thurstonian Thresholds", and these thresholds by definition will never be disordered. Hence is reasonable to generally ignore recoding response options for the children, unless you would like to collapse empty response options or attempt to improve the spread of the threshold locations to better target the persons' abilities.
+
+As with adults, the new rescaled scores for children are located in the file `Data_final.csv`.
+
+# Best practices
+
+Here we will discuss some general principles about how to implement the Rasch Model for your data. 
+
+* **It is easiest to run the model with a large sample and few items.** Samples of less than 200 people can be problematic, especially if there are a large number of items (20+) and responses to the items are not distributed evenly.
+* In general, **minimal data adjustment is best**. Always try to see if you can make as few adjustments to your data as possible. This means the outcome of your analysis will better support your original survey instrument.
+* **Try to make testlets only among items that are conceptually similar.** It is easier to justify combining items that are very similar (for instance, "feeling depressed" and "feeling anxious") than items that are extremely different (for instance, "walking 100m" and "remembering important things"). If you have high correlation among items that are very conceptually different, this may point to other problems with the survey instrument that should likely be addressed.
+* When recoding, **try to collapse only adjacent thresholds** For instance, if you see that thresholds are disordered in the pattern 2, 1, 3, 4, it is natural to try to collapse thresholds 2 and 1 because they are adjacent. It would not make sense to collapse thresholds 2 and 4 because they are not adjacent.
+* When recoding, **leave the first response option alone and do not recode it**. This first response option represents an answer in the MDS of "no problems" or "no difficulty", and it is best to leave this response option alone as a baseline. There is a larger conceptual difference between having "no problems" and "few problems" than there is between having "few problems" and "some problems", so it makes less sense to collapse the first two response options than it does to collapse the 2nd and 3rd response options.
+* **It is normal to have to run many iterations of the model** in order to find a solution that works best, especially if you have many items in your instrument.

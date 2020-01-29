@@ -1,0 +1,107 @@
+---
+title: "Getting started with WHO package for Rasch Analysis"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Getting started with WHO package for Rasch Analysis}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE}
+library(knitr)
+
+opts_chunk$set(warning=FALSE, 
+               message=FALSE, 
+               eval=FALSE, 
+               out.width = "80%",
+               fig.align = "center",
+               collapse = TRUE,
+               comment = "#>")
+
+```
+
+# Introduction
+
+WHO performs the Rasch Analysis for the Model Disability Survey using the software `R`. `R` is an open source, statistical programming software. How to program in `R` is beyond the scope of this guide. However the codes we will discuss as follows have been written in such a way to require minimal programming knowledge, and this guide tries to make the instructions for how to use them as simple as possible.
+
+To learn about `R`, please see the references provided at the end of this guide. 
+
+To use the package provided by WHO, `R` must be installed from the [Comprehensive R Archive Network (CRAN)](https://cran.r-project.org). We also recommend installing [RStudio](https://www.rstudio.com/products/rstudio/download/), a very popular integrated development environment (IDE), for `R`. One can think of the relationship between `R` and `RStudio` like a car: `R` is the engine of the car, while `RStudio` is the dashboard and controls. `RStudio` cannot be run without `R`, but it makes `R` easier to use. Both are free to install and use indefinitely.
+
+# What is a package and how do I install one?
+
+A "package" is a collection of `R` functions, data and code with a specific purpose and in a well-defined format. There are thousands of packages for `R` that have been written by `R` users. People write packages in order to share codes they have written that make specific tasks easier. WHO has written a package in order to make analysis of the data from the MDS easier. The package written by WHO is called `whomds`. It is currently in the development phase, so the way to download it is currently a bit different than for most other packages that are no longer in the development phase. To install `whomds`, first the package `devtools` must be installed by running the following code in the console:
+
+```{r install-devtools}
+install.packages("devtools")
+```
+
+`devtools` contains the function necessary to install the WHO package. Once `devtools` is installed, then `whomds` can be installed by running the following code in the console:
+
+```{r install-whomds}
+devtools::install_github("lindsayevanslee/whomds")
+```
+
+If the above command does not work, there is another way to install the package manually. Go to the web page for this package on Github at the link: [https://github.com/lindsayevanslee/whomds](https://github.com/lindsayevanslee/whomds). On the right, click the green button that says "Clone or download", and then click "Download ZIP". Unzip the .zip file that is downloaded, and then in `R` type the following command, but typing your own path to the folder that you just unzipped:
+
+```{r install-whomds-manually}
+devtools::install("C:/Users/leel/Downloads/whomds-master") #use path to unzipped folder downloaded from Github
+```
+
+
+# Opening `whomds`
+
+Once `whomds` is installed, it can be opened with the following code:
+
+```{r open-whomds}
+library(whomds)
+```
+
+`whomds` contains three kinds of functions:
+
+* `table_*()` functions - produce different fit-for-purpose tables
+* `fig_*()` functions - produce different fit-for-purpose figures
+* `rasch_*()` functions - used when performing Rasch Analysis
+
+In this section we will focus on the `rasch_*()` functions.
+
+There are two sets of `rasch_*()` functions in the `whomds` package: one set for adults, and one set for children. The reason different functions are needed for each group is that the type of Rasch Analysis performed for each group is different. The Rasch Analysis performed for adults is straightforward; the whole adult population can be considered in one group. The Rasch Analysis for children requires a more complicated analysis, because children at different ages are very different, and they can perform vastly different types of activities. First we will describe the analysis of adults, and then describe the analysis of children.
+
+
+## Package dependencies
+
+The package `whomds` depends on several other packages to run properly. When `whomds` is installed, all of the other packages it uses will also be installed. Be sure that these other packages are installed correctly by investigating any errors that arise during installation.
+
+The additional packages are:
+
+* `colorspace`
+* `dplyr`
+* `eRm`
+* `foreign`
+* `geomnet`
+* `GGally`
+* `ggplot2`
+* `grDevices`
+* `grid`
+* `httr`
+* `igraph`
+* `intergraph`
+* `lordif`
+* `lubridate`
+* `nFactors`
+* `openxlsx`
+* `plyr`
+* `polycor`
+* `psych`
+* `purrr`
+* `RColorBrewer`
+* `readr`
+* `rlang`
+* `scales`
+* `srvyr`
+* `stringr`
+* `survey` 
+* `TAM`
+* `tibble`
+* `tidyr`
+* `WrightMap`

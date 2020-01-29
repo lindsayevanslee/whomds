@@ -1,0 +1,300 @@
+---
+title: "After Rasch Analysis: Descriptive Analysis"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{After Rasch Analysis: Descriptive Analysis}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE}
+library(knitr)
+library(tidyr)
+library(dplyr)
+library(whomds)
+
+opts_chunk$set(warning=FALSE, 
+               message=FALSE, 
+               eval=FALSE, 
+               out.width = "80%",
+               fig.align = "center",
+               collapse = TRUE,
+               comment = "#>")
+
+```
+
+After calculating the disability scores using Rasch Analysis, you are now ready to analyze the results of the survey by calculating descriptive statistics. The `whomds` package contains functions to create tables and figures of descriptive statistics. This section will go over these functions.
+
+# Tables
+
+Descriptive statistics functions included in the `whomds` package are:
+
+* `table_weightedpct()` - produces weighted tables of N or %
+* `table_unweightedpctn()` - produces unweighted tables of N and % 
+* `table_basicstats()` - computes basic statistics of the number of members per group per household.
+
+The arguments of each of these codes will be described below.
+
+
+## `table_weightedpct()`
+
+`whomds` contains a function called `table_weightedpct()` which calculates weighted results tables from the survey, disaggregated by specified variables. The arguments of this function are passed to functions in the package `dplyr`. 
+
+Below are the arguments of the function:
+
+* `df` - the data frame with all the variables of interest
+* `vars_ids` - variable names of the survey cluster ids
+* `vars_strata` - variable names of the survey strata
+* `vars_weights` - variable names of the weights
+* `formula_vars` - vector of the column names of variables you would like to print results for
+* `...` - captures expressions for filtering or transmuting the data. See the description of the argument `willfilter` below for more details
+* `formula_vars_levels` - numeric vector of the factor levels of the variables in `formula_vars`. By default, the function assumes the variables have two levels: 0 and 1
+* `by_vars` - the variables to disaggregate by
+* `pct` - a logical variable indicating whether or not to calculate weighted percentages. Default is `TRUE` for weighted percentages. Set to `FALSE` for weighted N.
+* `willfilter` - a variable that tells the function whether or not to filter the data by a particular value. 
+    + For example, if your `formula_vars` have response options of 0 and 1 but you only want to show the values for 1, then you would say `willfilter = TRUE`. Then at the end of your argument list you write an expression for the filter. In this case, you would say `resp==1`. 
+    + If you set `willfilter = FALSE`, then the function will assume you want to "transmute" the data, in other words manipulate the columns in some way, which for us often means to collapse response options. For example, if your `formula_vars` have 5 response options, but you only want to show results for the sum of options `"Agree"` and `"StronglyAgree"`, (after setting `spread_key="resp"` to spread the table by the response options) you could set `willfilter=FALSE`, and then directly after write the expression for the transmutation, giving it a new column name--in this case the expression would be `NewColName=Agree+AgreeStrongly`. Also write the names of the other columns you would like to keep in the final table.
+    + If you leave `willfilter` as its default of `NULL`, then the function will not filter or transmute data.
+* `add_totals` - a logical variable determining whether to create total rows or columns (as appropriate) that demonstrate the margin that sums to 100. Keep as the default `FALSE` to not include totals.
+* `spread_key` - the variable to spread the table horizontally by. Keep as the default `NULL` to not spread the table horizontally.
+* `spread_value` - the variable to fill the table with after a horizontal spread. By default this argument is `"prop"`, which is a value created internally by the function, and generally does not need to be changed.
+* `arrange_vars` - the list of variables to arrange the table by. Keep as default `NULL` to leave the arrangement as is.
+* `include_SE` - a logical variable indicating whether to include the standard errors in the table. Keep as the default `FALSE` to not include standard errors. As of this version of `whomds`, does not work when adding totals (`add_totals` is `TRUE`), spreading (`spread_key` is not `NULL`) or transmutting (`willfilter` is `FALSE`).
+    
+Here are some examples of how `table_weightedpct()` would be used in practice. Not all arguments are explicitly set in each example, which means they are kept as their default values.
+
+### Example 1: long table, one level of disaggregation
+
+Let's say we want to print a table of the percentage of people in each disability level who gave each response option for a set of questions about the general environment. We would set the arguments of `table_weightedpct()` like this, and the first few rows of the table would look like this:
+
+```{r table-weightedpct-example1, eval=TRUE}
+table_weightedpct(
+  df = df_adults,
+  vars_ids = "PSU",
+  vars_strata = "strata",
+  vars_weights = "weight",
+  formula_vars = paste0("EF", 1:12),
+  formula_vars_levels = 1:5,
+  by_vars = "disability_cat",
+  spread_key = NULL,
+  spread_value = "prop",
+  arrange_vars = NULL,
+  willfilter = NULL
+  )
+```
+
+The outputted table has 4 columns: the variable we disaggregated the data by (`disability_cat`, in other words the disability level), the item (`item`), the response option (`resp`), and the proportion (`prop`). 
+
+### Example 2: wide table, one level of disaggregation
+
+This long table from the above example is great for data analysis, but not great for reading with the bare eye. If we want to make it nicer, we convert it to "wide format" by "spreading" by a particular variable. Perhaps we want to spread by `disability_cat`. Our call to `table_weightedpct()` would now look like this, and the outputted table would be:
+
+```{r table-weightedpct-example2, eval=TRUE}
+table_weightedpct(
+  df = df_adults,
+  vars_ids = "PSU",
+  vars_strata = "strata",
+  vars_weights = "weight",
+  formula_vars = paste0("EF", 1:12),
+  formula_vars_levels = 1:5,
+  by_vars = "disability_cat",
+  spread_key = "disability_cat",
+  spread_value = "prop",
+  arrange_vars = NULL,
+  willfilter = NULL
+  )
+```
+
+Now we can see our `prop` column has been spread horizontally for each level of `disability_cat`.
+
+### Example 3: wide table, one level of disaggregation, filtered
+
+Perhaps, though, we are only interested in the proportions of the most extreme response option of 5. We could now add a filter to our call to `table_weightedpct()` like so:
+
+```{r table-weightedpct-example3, eval=TRUE}
+table_weightedpct(
+  df = df_adults,
+  vars_ids = "PSU",
+  vars_strata = "strata",
+  vars_weights = "weight",
+  formula_vars = paste0("EF", 1:12),
+  formula_vars_levels = 1:5,
+  by_vars = "disability_cat",
+  spread_key = "disability_cat",
+  spread_value = "prop",
+  arrange_vars = NULL,
+  willfilter = TRUE,
+  resp == 5
+  )
+```
+
+Now you can see only the proportions for the response option of 5 are given. 
+
+### Example 4: wide table, multiple levels of disaggregation, filtered
+
+With `table_weightedpct()`, we can also add more levels of disaggregation by editing the argument `by_vars`. Here we will produce the same table as in Example 3 above but now disaggregated by disability level and sex:
+
+```{r table-weightedpct-example4, eval=TRUE}
+table_weightedpct(
+  df = df_adults,
+  vars_ids = "PSU",
+  vars_strata = "strata",
+  vars_weights = "weight",
+  formula_vars = paste0("EF", 1:12),
+  formula_vars_levels = 1:5,
+  by_vars = c("disability_cat", "sex"),
+  spread_key = "disability_cat",
+  spread_value = "prop",
+  arrange_vars = NULL,
+  willfilter = TRUE,
+  resp == 5
+  )
+```
+
+### Example 5: wide table, multiple levels of disaggregation, transmuted
+
+Perhaps we are still interested not only in response option 5, but the sum of 4 and 5 together. We can do this by "transmuting" our table. To do this, we first choose to "spread" by `resp` by setting `spread_key="resp"`. This will convert the table to a wide format as in Example 2, but now each column will represent a response option. Then we set the transmutation by setting `willfilter=FALSE`, and adding expressions for the transmutation on the next line. We name all the columns we would like to keep and give an expression for how to create the new column of the sum of proportions for response options 4 and 5, here called `problems`:
+
+```{r table-weightedpct-example5, eval=TRUE}
+table_weightedpct(
+  df = df_adults,
+  vars_ids = "PSU",
+  vars_strata = "strata",
+  vars_weights = "weight",
+  formula_vars = paste0("EF", 1:12),
+  formula_vars_levels = 1:5,
+  by_vars = c("disability_cat", "sex"),
+  spread_key = "resp",
+  spread_value = "prop",
+  arrange_vars = NULL,
+  willfilter = FALSE,
+  disability_cat, sex, item, problems = `4`+`5`
+  )
+```
+
+If we would like to spread the table again so that `disability_cat` represents the columns again, we can feed this table into another function that will perform the spread. The function to spread tables is called, naturally, `spread()`, and it is in the `tidyr` package. To perform a second spread, write the code like this:
+
+```{r table-weightedpct-example5b, eval=TRUE}
+table_weightedpct(
+  df = df_adults,
+  vars_ids = "PSU",
+  vars_strata = "strata",
+  vars_weights = "weight",
+  formula_vars = paste0("EF", 1:12),
+  formula_vars_levels = 1:5,
+  by_vars = c("disability_cat", "sex"),
+  spread_key = "resp",
+  spread_value = "prop",
+  arrange_vars = NULL,
+  willfilter = FALSE,
+  disability_cat, sex, item, problems = `4`+`5`
+  ) %>% 
+    spread(key = disability_cat, value = problems)
+```
+
+The `key` argument of the function `spread()` tells `R` which variable to use as the columns, and `value` tells `R` what to fill the columns with. The operator `%>%` is commonly referred to as a "pipe". It feeds the object before it into the first argument of the function after it. For example, if you have an object `x` and a function `f`, writing `x %>% f()` would be the equivalent as writing `f(x)`. People use "pipes" because they make long sequences of code easier to read.
+
+## `table_unweightedpctn()`
+
+`whomds` contains a function called `table_unweightedpctn()` that produces unweighted tables of N and %. This is generally used for demographic tables. Its arguments are as follows:
+
+* `df` - the data frame with all the variables of interest
+* `vars_demo` - vector with the names of the demographic variables for which the N and % will be calculated
+* `group_by_var` - name of the variable in which the statistics should be stratified (e.g. `"disability_cat"`)
+* `spread_by_group_by_var` - logical determining whether to spread the table by the variable given in `group_by_var`. Default is `FALSE`.
+* `group_by_var_sums_to_100` - logical determining whether percentages sum to 100 along the margin of `group_by_var`, if applicable. Default is `FALSE`.
+* `add_totals` - a logical variable determining whether to create total rows or columns (as appropriate) that demonstrate the margin that sums to 100. Keep as the default `FALSE` to not include totals.
+
+Here is an example of how it is used:
+
+```{r table-unweightedpctn-example, eval=TRUE}
+table_unweightedpctn(df_adults, 
+                     vars_demo = c("sex", "age_cat", "work_cat", "edu_cat"), 
+                     group_by_var = "disability_cat", 
+                     spread_by_group_by_var = TRUE)
+```
+
+
+## `table_basicstats()`
+
+The function `table_basicstats()` computes basic statistics of the number of member per group per household. Its arguments are: 
+
+* `df` - a data frame of household data where the rows represent members of the households in the sample
+* `hh_id`	- string (length 1) indicating the name of the variable in `df` uniquely identifying households
+* `group_by_var` - string (length 1) with name of variable in `df` to group results by
+
+Here is an example of how it is used:
+
+```{r table-basicstats-example, eval=TRUE}
+table_basicstats(df_adults, "HHID", "age_cat")
+```
+
+
+# Figures
+
+Descriptive statistics figure functions included in the `whomds` package are:
+
+* `fig_poppyramid()` -  produces a population pyramid figure for the sample
+* `fig_dist()` - produces a plot of the distribution of a score
+* `fig_density()` - produces a plot of the density of a score
+
+The arguments of each of these codes will be described below.
+
+## `fig_poppyramid()`
+
+`whomds` contains a function called `fig_poppyramid()` that produces a population pyramid figure for the sample. This function takes as arguments:
+
+* `df` - the data where each row is a member of the household from the household roster
+* `var_age` - the name of the column in `df` with the persons' ages
+* `var_sex` - the name of the column in `df` with he persons' sexes
+* `x_axis` - a string indicating whether to use absolute numbers or sample percentage on the x-axis. Choices are `"n"` (default) or `"pct"`.
+* `age_plus` - a numeric value indicating the age that is the first value of the oldest age group. Default is 100, for the last age group to be 100+
+* `age_by` - a numeric value indicating the width of each age group, in years. Default is 5.
+
+Running this function produces a figure like the one below:
+
+```{r plot-pop-pyramid, eval=TRUE, echo=FALSE}
+include_graphics("Images/pop_pyramid.png")
+```
+
+
+## `fig_dist()` 
+
+`whomds` contains a function called `fig_dist()` that produces a plot of the distribution of a score. WHO uses this function to show the distribution of the disability scores calculated with Rasch Analysis. Its arguments are:
+
+* `df` - data frame with the score of interest
+* `score` - character variable of score variable name ranging from 0 to 100; ex. `"disability_score"`
+* `score_cat` - character variable of score categorization variable name, ex. `"disability_cat"`
+* `cutoffs` - a numeric vector of the cut-offs for the score categorization
+* `x_lab` - a string giving the x-axis label. Default is `"Score"`
+* `y_max` - maximum value to use on the y-axis. If left as the default `NULL`, the function will calculate a suitable maximum automatically.
+* `pcent` - logical variable indicating whether to use percent on the y-axis or frequency. Leave as default `FALSE` for frequency and give `TRUE` for percent.
+* `pal` - a string specifying the type of color palette to use, passed to the function `RColorBrewer::brewer.pal()`. Default is `"Blues"`.
+* `binwidth` - a numeric value giving the width of the bins in the histograph. Default is 5.
+
+Running this function produces a figure like the one below.
+
+```{r plot-distribution, eval=TRUE, echo=FALSE}
+include_graphics("Images/distribution.png")
+```
+
+## `fig_density()`
+
+`whomds` contains a function similar to `fig_dist()` called `fig_density()` that produces a plot of the density of a score. WHO uses this function to show the density distribution of the disability scores calculated with Rasch Analysis. Its arguments are:
+
+* `df` - data frame with the score of interest
+* `score` - character variable of score variable name ranging from 0 to 100; ex. `"disability_score"`
+* `var_color` - a character variable of the column name to set color of density lines by. Use this variable if you could like to print the densities of different groups onto the same plot. Default is `NULL`.
+* `var_facet` - a character variable of the column name for the variable to create a `ggplot2::facet_grid()` with, which will plot densities of different groups in side-by-side plots. Default is `NULL`.
+* `cutoffs` - a numeric vector of the cut-offs for the score categorization
+* `x_lab` - a string giving the x-axis label. Default is `"Score"`
+* `pal` - a string specifying either a manual color to use for the color aesthetic, a character vector explictly specifying the colors to use for the color scale, or as the name of a palette to pass to `RColorBrewer::brewer.pal() ` with the name of the color palette to use for the color scale. Default is `"Paired"`
+* `adjust` - a numeric value to pass to `adjust` argument of `ggplot2::geom_density()`, which controls smoothing of the density function. Default is 2.
+* `size` - a numeric value to pass to `size` argument of `ggplot2::geom_density()`, which controls the thickness of the lines. Default is 1.5.
+
+Running this function produces a figure like the one below.
+
+```{r plot-density, eval=TRUE, echo=FALSE}
+include_graphics("Images/density.png")
+```
+
