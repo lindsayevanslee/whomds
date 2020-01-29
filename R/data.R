@@ -2,7 +2,7 @@
 #'
 #' An dummy data set of data from the WHO Model Disability Survey.
 #'
-#' @format A tibble with 2500 rows and 92 variables:
+#' @format A tibble with 2500 rows and 90 variables:
 #' \describe{
 #'   \item{HHID}{household number}
 #'   \item{strata}{survey strata}
@@ -16,8 +16,6 @@
 #'   \item{F....}{survey item from "Functioning" section}
 #'   \item{C....}{survey item from "Capacity" section}
 #'   \item{EF....}{survey item from "Environmental factors" section}
-#'   \item{capacity_score}{metric scale of capacity, from Rasch analysis}
-#'   \item{capacity_cat}{capacity level, as defined by WHO cutoffs of capacity_score}
 #'   \item{disability_score}{metric scale of performance, from Rasch analysis}
 #'   \item{disability_cat}{performance level, as definted by WHO cutoffs of disability_score}
 #' }

@@ -47,40 +47,63 @@ rm(list=setdiff(ls(), c("chile_adults", "chile_children")))
 
 
 #anonymized
-
 set.seed(1992)
-df_adults <- tibble(HHID = 1:2500,
-                    strata = sample(c("A", "B", "C"), size = 2500, replace = TRUE),
-                    PSU = sample(1:20, size = 2500, replace = TRUE),
-                    weight = sample(seq(800, 1200, by = 50), size = 2500, replace = TRUE),
-                    sex = factor(sample(c("Male", "Female"), size = 2500, replace = TRUE)), 
-                    age = sample(18:100, size = 2500, prob = rbeta(83, 2, 5), replace = TRUE),
-                    age_cat = cut(
-                      age,
-                      breaks = c(18, 25, 40, 65, 100),
-                      labels = c("18-24", "25-39", "40-64", "64-100"),
-                      right = FALSE,
-                      include.lowest = TRUE,
-                      ordered_result = TRUE
-                    ),
-                    work_cat = factor(sample(c("Y", "N"), size = 2500, prob = c(0.6, 0.4), replace = TRUE)),
-                    edu_cat = ordered(sample(c("None", "Elementary", "Secondary", "University"), 
-                                             size = 2500, prob = c(0.2, 0.4, 0.25, 0.15), replace = TRUE),
-                                      levels = c("None", "Elementary", "Secondary", "University"))) %>%
+df_adults <- 
+  #randomly generate demographic and survey variables
+  tibble(HHID = 1:2500,
+         strata = sample(c("A", "B", "C"), size = 2500, replace = TRUE),
+         PSU = sample(1:20, size = 2500, replace = TRUE),
+         weight = sample(seq(800, 1200, by = 50), size = 2500, replace = TRUE),
+         sex = factor(sample(c("Male", "Female"), size = 2500, replace = TRUE)), 
+         age = sample(18:100, size = 2500, prob = rbeta(83, 2, 5), replace = TRUE),
+         age_cat = cut(
+           age,
+           breaks = c(18, 25, 40, 65, 100),
+           labels = c("18-24", "25-39", "40-64", "64-100"),
+           right = FALSE,
+           include.lowest = TRUE,
+           ordered_result = TRUE
+         ),
+         work_cat = factor(sample(c("Y", "N"), size = 2500, prob = c(0.6, 0.4), replace = TRUE)),
+         edu_cat = ordered(sample(c("None", "Elementary", "Secondary", "University"), 
+                                  size = 2500, prob = c(0.2, 0.4, 0.25, 0.15), replace = TRUE),
+                           levels = c("None", "Elementary", "Secondary", "University"))) %>%
+  #combine with raw data from Chile, randomly selected
   bind_cols(
     chile_adults %>% 
       sample_n(2500) %>% 
-      select(d1:d47, c2:c25, fa1:fa12, CapacityScore, capacity_cat, PerformanceScorePredicted, performance_cat) %>% 
+      select(d1:d47, c2:c25, fa1:fa12
+             # , CapacityScore, capacity_cat, PerformanceScorePredicted, performance_cat
+      ) %>% 
       rename_at(.vars = vars(d1:d47), .funs = list(~ str_replace_all(., "d", "F"))) %>% 
       rename_at(.vars = vars(c2:c25), .funs = list(~ str_replace_all(., "c", "C"))) %>% 
-      rename_at(.vars = vars(fa1:fa12), .funs = list(~ str_replace_all(., "fa", "EF"))) %>% 
-      rename(
-        capacity_score = CapacityScore,
-        disability_score = PerformanceScorePredicted,
-        disability_cat = performance_cat)
+      rename_at(.vars = vars(fa1:fa12), .funs = list(~ str_replace_all(., "fa", "EF"))) 
+    # %>% 
+    # rename(
+    #   capacity_score = CapacityScore,
+    #   disability_score = PerformanceScorePredicted,
+    #   disability_cat = performance_cat)) %>% 
+    # mutate(disability_cat = ordered(disability_cat, levels = c("No", "Mild", "Moderate", "Severe"))
+    # , capacity_cat = ordered(capacity_cat, levels = c("No", "Mild", "Moderate", "Severe")
+    # )
   ) %>% 
-  mutate(disability_cat = ordered(disability_cat, levels = c("No", "Mild", "Moderate", "Severe")),
-         capacity_cat = ordered(capacity_cat, levels = c("No", "Mild", "Moderate", "Severe")))
+  #combine with disability score calculated from example in guidebook
+  left_join(
+    read_csv("/Users/lindsaylee/Dropbox/WHO/MDS/32 Data Analyses Training at WHO/Guide book/ExampleRasch_EF/Testlet1_Recode4/Data_final.csv") %>% 
+      select(HHID, rescaled) %>% 
+      rename(disability_score = rescaled)
+  ) %>% 
+  #calculate disability_cat based on score
+  mutate(disability_cat = case_when(
+    disability_score == 0 ~ "No",
+    disability_score < mean(disability_score, na.rm = TRUE) - sd(disability_score, na.rm = TRUE) ~ "No",
+    disability_score < mean(disability_score, na.rm = TRUE) & disability_score >= mean(disability_score, na.rm = TRUE) - sd(disability_score, na.rm = TRUE) ~ "Mild",
+    disability_score < mean(disability_score, na.rm = TRUE) + sd(disability_score, na.rm = TRUE) & disability_score >= mean(disability_score, na.rm = TRUE) ~ "Moderate",
+    disability_score >= mean(disability_score, na.rm = TRUE) + sd(disability_score, na.rm = TRUE) ~ "Severe",
+    TRUE ~ NA_character_
+  )
+  ) %>% 
+  mutate(disability_cat = ordered(disability_cat, levels = c("No", "Mild", "Moderate", "Severe")))
 
 
 df_children <- df_adults %>% 
