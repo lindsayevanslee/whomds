@@ -21,11 +21,11 @@
 #' @import dplyr
 #'
 #' @examples
-#' fig_dist(df_adults, score = "disability_score", score_cat = "performance_cat", 
+#' fig_dist(df_adults, score = "disability_score", score_cat = "disability_cat", 
 #' cutoffs = c(19.1, 34.4, 49.6), x_lab = "Disability score")
-#' fig_dist(df_adults, score = "disability_score", score_cat = "performance_cat", 
+#' fig_dist(df_adults, score = "disability_score", score_cat = "disability_cat", 
 #' cutoffs = c(19.1, 34.4, 49.6), x_lab = "Disability score", y_max = 2000)
-#' fig_dist(df_adults, score = "disability_score", score_cat = "performance_cat", 
+#' fig_dist(df_adults, score = "disability_score", score_cat = "disability_cat", 
 #' cutoffs = c(19.1, 34.4, 49.6), x_lab = "Disability score", y_max = 0.2, pcent=TRUE)
 fig_dist <- function(df, score, score_cat, cutoffs,
                         x_lab = "Score", y_max = NULL, pcent=FALSE, pal = "Blues", binwidth = 5){
