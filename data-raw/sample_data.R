@@ -64,28 +64,21 @@ df_adults <-
            include.lowest = TRUE,
            ordered_result = TRUE
          ),
-         work_cat = factor(sample(c("Y", "N"), size = 2500, prob = c(0.6, 0.4), replace = TRUE)),
+         # work_cat = factor(sample(c("Y", "N"), size = 2500, prob = c(0.6, 0.4), replace = TRUE)),
          edu_cat = ordered(sample(c("None", "Elementary", "Secondary", "University"), 
                                   size = 2500, prob = c(0.2, 0.4, 0.25, 0.15), replace = TRUE),
                            levels = c("None", "Elementary", "Secondary", "University"))) %>%
-  #combine with raw data from Chile, randomly selected
+  #combine with raw data from Chile, randomly selected, and work_cat variable
   bind_cols(
     chile_adults %>% 
       sample_n(2500) %>% 
       select(d1:d47, c2:c25, fa1:fa12
+             , work_cat
              # , CapacityScore, capacity_cat, PerformanceScorePredicted, performance_cat
       ) %>% 
       rename_at(.vars = vars(d1:d47), .funs = list(~ str_replace_all(., "d", "F"))) %>% 
       rename_at(.vars = vars(c2:c25), .funs = list(~ str_replace_all(., "c", "C"))) %>% 
       rename_at(.vars = vars(fa1:fa12), .funs = list(~ str_replace_all(., "fa", "EF"))) 
-    # %>% 
-    # rename(
-    #   capacity_score = CapacityScore,
-    #   disability_score = PerformanceScorePredicted,
-    #   disability_cat = performance_cat)) %>% 
-    # mutate(disability_cat = ordered(disability_cat, levels = c("No", "Mild", "Moderate", "Severe"))
-    # , capacity_cat = ordered(capacity_cat, levels = c("No", "Mild", "Moderate", "Severe")
-    # )
   ) %>% 
   #combine with disability score calculated from example in guidebook
   left_join(
@@ -103,7 +96,12 @@ df_adults <-
     TRUE ~ NA_character_
   )
   ) %>% 
-  mutate(disability_cat = ordered(disability_cat, levels = c("No", "Mild", "Moderate", "Severe")))
+  #fix remaining factors
+  mutate(disability_cat = ordered(disability_cat, levels = c("No", "Mild", "Moderate", "Severe"))
+         , work_cat = factor(work_cat, levels = 0:1, labels = c("N", "Y"))
+         ) %>% 
+  #put in the desired order
+  select(HHID:edu_cat, work_cat, disability_score, disability_cat, everything())
 
 
 df_children <- df_adults %>% 
