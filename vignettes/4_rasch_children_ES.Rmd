@@ -1,0 +1,185 @@
+---
+title: "Análisis Rasch con los datos de niños de MDS"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Análisis Rasch con los datos de niños de MDS}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE}
+library(knitr)
+
+opts_chunk$set(warning=FALSE, 
+               message=FALSE, 
+               eval=FALSE, 
+               out.width = "80%",
+               fig.align = "center",
+               collapse = TRUE,
+               comment = "#>")
+
+```
+
+Como ya se mencionó, se debe utilizar un proceso diferente para calcular los puntajes de discapacidad para los niños. Los niños de diferentes edades son increíblemente diferentes y, por lo tanto, tienen diferentes ítems pertenecientes a ellos en el cuestionario.
+
+En la sección de Capacidad del cuestionario para niños, los ítems se aplican a todos los niños de 2 a 17 años, sin filtros específicos para cada edad. En este caso, se debe realizar un análisis multigrupo. Esto es esencialmente lo mismo que realizar un modelo de Rasch para adultos, sin embargo, alertamos al programa al hecho de que tenemos grupos muy diferentes que responden al cuestionario, es decir, diferentes grupos de edad. Usamos los grupos de edad 2 a 4, 5 a 9, y 10 a 17.
+
+En la sección Desempeño del cuestionario para niños, hay un conjunto de preguntas comunes para todos los niños y un conjunto de preguntas con filtros específicos para cada grupo de edad. En este caso, primero se realiza un análisis multigrupo en todos los ítems comunes, como en las preguntas de Capacidad. Luego, este modelo multigrupo se usa para calibrar una puntuación adicional utilizando todas las preguntas específicas de la edad. Esto se llama "anclaje": estamos anclando los resultados de las preguntas específicas por edad en los resultados del conjunto común de preguntas. Esto debe hacerse para que los puntajes de discapacidad obtenidos para los niños sean comparables en todos los grupos de edad.
+
+# Estructura
+
+El paquete `whomds` también contiene funciones para realizar Rasch Anaylsis para niños.
+
+Para realizar el Análisis Rasch para niños, solo se necesita usar una función: `rasch_mds_children()`. Esta es una función de envoltorio, como `rasch_mds()` para adultos. `rasch_mds_children()` utiliza todas las demás funciones `rasch_*()` para realizar el análisis. Estas otras funciones `rasch_*()` usadas para niños son:
+
+* `rasch_df_nest()`
+* `rasch_drop()`
+* `rasch_factor()`
+* `rasch_model_children()`
+* `rasch_quality_children()`
+* `rasch_quality_children_print()`
+* `rasch_recode()`
+* `rasch_rescale_children()`
+* `rasch_split()`
+* `rasch_split_age()`
+* `rasch_testlet()`
+
+Solo necesitas usar la función `rasch_mds_children()`. Pero si desea realizar su análisis de una manera más personalizada, puede trabajar directamente con las funciones internas.
+
+# Salida
+
+Después de cada iteración del Modelo Rasch, los códigos anteriores producen una variedad de archivos que le dirán qué tan bien los datos se ajustan a las suposiciones del modelo en esta iteración. Los archivos más importantes son los de abajo. Vamos a explicar cada uno en detalle a continuación.
+
+
+* Hojas de cálculo y gráficos de dependencia local de ítems:
+    + `LID_plot_Multigroup.pdf` y `LID_above_0.2_Multigroup.csv` - muestra ítems correlacionados para el modelo multigrupo
+    + `LID_plotAge2to4.pdf` y `LID_above_0.2_Age2to4.csv` - muestra ítems correlacionados para edades de 2 a 4 para el modelo anclado
+    + `LID_plotAge5to9.pdf` y `LID_above_0.2_Age5to9.csv` - muestra ítems correlacionados para edades de 5 a 9 para el modelo anclado
+    + `LID_plotAge10to17.pdf` y `LID_above_0.2_Age10to17.csv` - muestra ítems correlacionados para edades de 10 a 17 para el modelo anclado
+* Gráficos scree:
+    + `ScreePlot_Multigroup_PCM2.pdf` - gráfico scree para el modelo multigrupo
+    + `ScreePlot_Anchored_PCM2_Age2to4.pdf` - gráfico scree para para edades de 2 a 4 para el modelo anclado
+    + `ScreePlot_Anchored_PCM2_Age5to9.pdf` - gráfico scree para para edades de 5 a 9 para el modelo anclado
+    + `ScreePlot_Anchored_PCM2_Age10to17.pdf` - gráfico scree para para edades de 10 a 17 para el modelo anclado
+* Ubicaciones de personas e ítems:
+    + `WrightMap_multigroup.pdf` - ubicaciones de personas e ítems para for multigroup model
+    + `WrightMap_anchored_Age2to4.pdf` - ubicaciones de personas e ítems para edades de 2 a 4 para el modelo anclado
+    + `WrightMap_anchored_Age5to9.pdf` - ubicaciones de personas e ítems para edades de 5 a 9 para el modelo anclado
+    + `WrightMap_anchored_Age10to17.pdf` - ubicaciones de personas e ítems para edades de 10 a 17 para el modelo anclado
+* Ajuste de ítems:
+    + `PCM2_itemfit_multigroup.xlsx` - ajuste de ítems para el modelo multigrupo
+    + `PCM2_itemfit_anchored.xlsx` - ajuste de ítems para el modelo anclado
+* Ajuste al modelo:
+    + `PCM2_WLE_multigroup.txt` - fiabilidad del modelo multigrupo
+    + `PCM2_WLE_anchored.txt` - fiabilidad del modelo anclado
+
+
+# Argumentos de `rasch_mds_children()`
+
+En esta sección examinaremos cada argumento de la función `rasch_mds_children()`. El archivo de ayuda para la función también describe los argumentos. Se puede acceder a los archivos de ayuda para las funciones en `R` escribiendo `?` antes del nombre de la función, de esta manera:
+
+```{r rasch-mds-children-help}
+?rasch_mds_children
+```
+
+A continuación se muestra un ejemplo de uso de la función `rasch_mds_children()`:
+
+```{r rasch-mds-children-example}
+rasch_mds_children(df = df_children, 
+                   vars_id = "HHID",
+                   vars_group = "age_cat",
+                   vars_metric_common = paste0("child", c(1:10)),
+                    vars_metric_grouped = list(
+                     "Age2to4" = paste0("child", c(12,15,16,19,20,24,25)),
+                     "Age5to9" = paste0("child", c(11,13,14,17,18,20,21,22,23,24,25,27)),
+                     "Age10to17" = paste0("child", c(11,13,14,17,18,20,21,22,23,25,26,27))),
+                   TAM_model = "PCM2",
+                   resp_opts = 1:5,
+                   has_at_least_one = 4:5,
+                   max_NA = 10,
+                   print_results = TRUE,
+                   path_parent = "~/Desktop/",
+                   model_name = "Start",
+                   testlet_strategy = NULL,
+                   recode_strategy = NULL,
+                   drop_vars = NULL,
+                   split_strategy = NULL,
+                   comment = "Initial run")
+
+```
+
+
+El primer argumento es `df`. Este argumento es para los datos. El objeto de datos debe ser datos de encuestas individuales, con una fila por persona. Aquí los datos se almacenan en un objeto `df_children`, que es un base de datos incluido en el paquete` whomds`. Para obtener más información sobre `df_children`, consulta su archivo de ayuda ejecutando:`?df_children`
+
+El siguiente argumento es `vars_id`, que es el nombre de la columna utilizada para identificar de forma única a los individuos. Aquí la columna de ID se llama `HHID`.
+
+El siguiente argumento es `vars_group`, que es una cadena con el nombre de la columna que identifica grupos, específicamente grupos de edad en este caso. Aquí la columna del grupo de edad es `age_cat`.
+
+Los siguientes dos argumentos especifican las variables utilizadas para construir la métrica.
+
+`vars_metric_common` es un vector de caracteres con los nombres de los ítems a los que cada individuo responde.
+
+`vars_metric_grouped` es una lista nombrada de vectores de caracteres con los ítems a usar en el Análisis de Rasch por grupo de la variable especificada en `vars_group`. La lista debe tener nombres correspondientes a los diferentes grupos (por ejemplo, `Age2to4`,` Age5to9` y `Age10to17`), y contener vectores de caracteres de los elementos correspondientes para cada grupo.
+
+Si solo se especifica `vars_metric_common`, entonces se realizará un análisis multigrupo. Si se especifican `vars_metric_common` y `vars_metric_grouped`, entonces se realizará un análisis anclado. `vars_metric_grouped` no se puede especificar por sí solo.
+
+El siguiente argumento es `TAM_model`. Esta es una cadena que identifica qué modelo de IRT utilizar. Este valor se pasa a la función del paquete `TAM` utilizado para calcular el modelo de Rasch. El valor predeterminado es `"PCM2"`, que especifica el modelo de Rasch.
+
+El siguiente argumento es `resp_opts`. Este es un vector numérico con las posibles opciones de respuesta para `vars_metric_common` y `vars_metric_grouped`. En esta encuesta, las preguntas `EF1` a `EF12` tienen las opciones de respuesta 1 a 5. Entonces, `resp_opts` es igual a un vector numérico de longitud 5 con los valores `1`, `2`,` 3`, `4` y `5`.
+
+El siguiente argumento es `has_at_least_one`. Este es un vector numérico con las opciones de respuesta que un encuestado debe tener al menos una para ser incluido en el cálculo de la métrica. Este argumento es necesario porque a menudo el análisis de Rasch de los datos de los niños es más difícil debido a la extrema asimetría de las respuestas. Por esta razón, a menudo es aconsejable construir una escala solo con los encuestados en el extremo más grave del continuo de discapacidad, por ejemplo, solo con los encuestados que respondieron 4 o 5 a al menos una pregunta. Al especificar `has_at_least_one`, la función solo construirá una escala entre aquellos que respondieron `has_at_least_one` en al menos una pregunta de `vars_metric_common` y `vars_metric_grouped` El valor predeterminado es `4:5`, lo que significa que la escala se creará solo con hijos que respondieron 4 o 5 a al menos una pregunta en `vars_metric_common` y `vars_metric_grouped`. Los puntajes creados pueden reunirse con los niños excluidos post-hoc.
+
+El siguiente argumento es `max_NA`. Este es un valor numérico para el número máximo de valores faltantes permitidos para que una persona aún se tenga en cuenta en el análisis. El Análisis de Rasch puede manejar a personas que tienen algunos valores faltantes, pero demasiados causarán problemas en el análisis. En general, todos los individuos en la muestra deben tener menos del 15% de valores faltantes. Aquí `max_NA` es `10`, lo que significa que se permite que los individuos tengan un máximo de dos valores faltantes de las preguntas en `vars_metric_common` y `vars_metric_grouped` para que aún se incluyan en el análisis.
+
+El siguiente argumento es `print_results`, que es `TRUE` o `FALSE`. Cuando es `TRUE`, los archivos se guardarán en su computadora con los resultados de la iteración Rasch. Cuando es `FALSE`, los archivos no se guardarán.
+
+El siguiente argumento es `path_parent`. Esta es una cadena con la ruta a la carpeta donde se guardarán los resultados de múltiples modelos, asumiendo que `print_results` es `TRUE`. La carpeta en `path_parent` contendrá carpetas separadas con los nombres especificados en `model_name` en cada iteración. En la ejecución de la función anterior, todos los resultados se guardarán en el Desktop. Ten en cuenta que al escribir rutas para `R`, todas las barras deberían ser: `/ `(NO `\`). Asegúrate de incluir un `/` final en el final de la ruta.
+
+El siguiente argumento es `model_name`. Esto es igual a una cadena donde le das un nombre del modelo que estás ejecutando. Este nombre se usará como el nombre de la carpeta donde se guardará toda la salida en su computadora, si `print_results` es `TRUE`. El nombre que le des debe ser corto pero informativo. Por ejemplo, puede llamar a su primera ejecución "Start", como se llama aquí. Si creas un testlet en su segunda ejecución, quizás puedas llamarlo "Testlet1", etc. Elije lo que sea significativo para tí.
+
+Los siguientes argumentos son `testlet_strategy`, `recode_strategy`, `drop_vars` y `split_strategy`. Estos son argumentos que controlan cómo se usan los datos en cada iteración del Modelo Rasch. Estos se especifican de la misma manera que en los modelos para adultos, como se describe en las secciones anteriores. Aquí están todos configurados en `NULL`, lo que significa que no se usan en la iteración del Análisis Rasch que se muestra aquí.
+
+El último argumento es `comment`. Esto es igual a una cadena en la que puedes escribir cierta información de texto libre sobre la iteración actual para que cuando veas los resultados más adelante puedas recordar lo que hiciste y por qué lo hiciste. Es mejor ser más detallado, porque olvidarás por qué eligiste ejecutar el modelo de esta manera en particular. Este comentario se guardará en un archivo `Comment.txt`. Aquí el comentario es solo `"Initial run"`.
+
+
+# Ejemplo
+
+## Diferencias de modelos adultos
+
+Ya hemos discutido las diferencias en el comando requerido para calcular el modelo de Rasch para niños. Para ejecutar este modelo, hay un paquete `R` diferente disponible: `TAM`. Este paquete puede ser más complicado de usar que `eRm` (el paquete utilizado para adultos), pero permite una mayor flexibilidad y, por lo tanto, nos permite calcular los análisis multigrupo y anclados que requerimos.
+
+Con el paquete `TAM`, también podemos calcular diferentes tipos de modelos. Por defecto, el paquete `whomds` calcula los resultados utilizando el modelo de crédito parcial (el modelo de Rasch politomérico). El PCM se especifica en `TAM` con el argumento `TAM_model` igual a `"PCM2"`.
+
+Otra opción para `TAM_model` es `"GPCM"`, que le dice al programa que calcule un Modelo de crédito parcial generalizado (GPCM). El GPCM se diferencia del PCM en que relaja el poder de discriminación uniforme de los artículos. Es decir, el GPCM permite que algunos ítems puedan identificar mejor las capacidades de las personas que otros ítems.
+
+Nos enfocamos en PCM porque podemos obtener la escala que buscamos con este modelo.
+
+
+## Mejorando la calidad del modelo
+
+Como se mencionó anteriormente, en general, la distribución de las respuestas de los niños está mucho más inclinada hacia el final de la escala "sin discapacidad", por lo que es más difícil construir una métrica de calidad. **Su modelo mejorará enormemente si solo lo construye entre niños que indican tener algún tipo de nivel de problemas en al menos uno de los dominios.** Esta es la razón por la cual el valor predeterminado para el argumento `has_at_least_one` de `rasch_children()` es `4:5`. Recomendamos mantener este valor predeterminado.
+
+Colapsando opciones de respuesta también puede mejorar la calidad de su escala. También recomendamos intentar construir una escala donde todos los ítems se recodifiquen a 0,1,1,2,2; en otras palabras, contraiga las opciones de respuesta 2a y 3a y las opciones de respuesta 3a y 4a.
+
+
+## Salida importante para examinar
+
+El resultado de las iteraciones del Modelo de Rasch para niños que utilizan los códigos de la OMS es muy similar al de los modelos para adultos. Sin embargo, para los modelos anclados (para Desempeño) en particular, para la mayoría de los tipos de archivos hay un archivo separado para cada grupo de edad. La calidad del modelo puede variar según los grupos de edad, y toda la información debe evaluarse simultáneamente para determinar cómo ajustar los datos.
+
+Hay un par de diferencias clave que vamos a destacar. Para evaluar el ajuste del modelo (_targeting_) del modelo, abra el archivo `PCM2_WLE.txt` y analice el número después de `"WLE Reliability = "`. WLE significa "estimador de probabilidad ponderada" (en inglés _weighted likelihood estimator_), y corresponde al PSI que usamos para evaluar el ajuste del modelo para los modelos adultos. De manera similar, para un buen ajuste del modelo, nos gustaría ver que este número sea al menos mayor que 0.7, idealmente mayor que 0.8 o más.
+
+El mapa persona-ítem también es diferente para el modelo de los niños. El paquete `TAM` utiliza otro paquete llamado` WrightMap` para producir _Wright Maps_. Estos son muy similares a los mapas de persona-ítem que utilizamos anteriormente, excepto que el tipo de umbrales que se muestran son diferentes. El _Wright Map_ muestra los "Umbrales Thurstonianos", y estos umbrales por definición nunca serán desordenados. Por lo tanto, es razonable no recodificar las opciones de respuesta para los niños, a menos que desee contraer las opciones de respuesta vacías o intentar mejorar la distribución de las ubicaciones de umbral para orientar mejor las capacidades de las personas.
+
+Al igual que con los adultos, los nuevos puntajes reescalados para niños se encuentran en el archivo `Data_final.csv`.
+
+
+# Mejores prácticas
+
+Aquí discutiremos algunos principios generales sobre cómo implementar el Modelo Rasch para tus datos.
+
+* **Es más fácil ejecutar el modelo con una muestra grande y pocos ítems.** Las muestras de menos de 200 personas pueden ser problemáticas, especialmente si hay una gran cantidad de ítems (20+) y las respuestas a los ítems no son distribuido uniformemente
+* En general, **el mínimo ajuste de datos es el mejor**. Siempre trata de ver si puedes hacer el mínimo ajuste posible a sus datos. Esto significa que el resultado de su análisis respaldará mejor su instrumento de encuesta original.
+* **Trata de hacer testlets solo entre ítems que son conceptualmente similares.** Es más fácil justificar la combinación de ítems que son muy similares (por ejemplo, "sentirse deprimido" y "sentirse ansioso") que los ítems que son extremadamente diferentes (para ejemplo, "caminar 100m" y "recordar cosas importantes"). Si tienes una alta correlación entre los ítems que son muy diferentes conceptualmente, esto puede indicar otros problemas con el instrumento de la encuesta que probablemente deberían abordarse.
+* Al recodificar, **intenta combinar solo umbrales adyacentes** Por ejemplo, si ves que los umbrales están desordenados en el patrón 2, 1, 3, 4, es natural tratar de contraer los umbrales 2 y 1 porque son adyacentes. No tendría sentido colapsar los umbrales 2 y 4 porque no son adyacentes.
+* Al recodificar, **dejaa la primera opción de respuesta sola y no recodifícala**. Esta primera opción de respuesta representa una respuesta en el MDS de "no hay problemas" o "no hay dificultad", y es mejor dejar esta opción de respuesta sola como referencia. Hay una diferencia conceptual más grande entre "no tener problemas" y "pocos problemas" que entre tener "pocos problemas" y "algunos problemas", por lo que tiene menos sentido combinar las dos primeras opciones de respuesta que combinar las opciones de segunda y tercera respuesta.
+* **Es normal tener que ejecutar muchas iteraciones del modelo** para encontrar una solución que funcione mejor, especialmente si tienes muchos ítems en su cuestionario.
