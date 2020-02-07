@@ -47,7 +47,7 @@ To perform Rasch Analysis for children, only one function needs to be used: `ras
 
 You only need to use the function `rasch_mds_children()`. But if you wanted to perform your analysis in a more customized way, you could work with the internal functions directly.
 
-## Output
+# Output
 
 After each iteration of the Rasch Model, the codes above produce a variety of files that will tell you how well the data fit the assumptions of the model at this iteration. The most important files are the ones below. We will explain each in detail below.
 
@@ -75,7 +75,7 @@ After each iteration of the Rasch Model, the codes above produce a variety of fi
     + `PCM2_WLE_anchored.txt` - reliability of model for anchored model
 
 
-## Arguments of `rasch_mds_children()`
+# Arguments of `rasch_mds_children()`
 
 In this section we will examine each argument of the function `rasch_mds_children()`. The help file for the function also describes the arguments. Help files for functions in `R` can be accessed by writing `?` before the function name, like so:
 
@@ -140,7 +140,6 @@ The next argument is `model_name`. This is equal to a string where you give a na
 The next arguments are `testlet_strategy`, `recode_strategy`, `drop_vars` and `split_strategy`. These are arguments that control how the data is used in each iteration of the Rasch Model. These are specified in the same way as for adult models, as described in the above sections. Here they are all set to `NULL`, which means they are not used in the iteration of Rasch Analysis shown here.
 
 The last argument is `comment`. This is equal to a string where you can write some free-text information about the current iteration so that when you are looking at the results later you can remember what you did and why you did it. It is better to be more detailed, because you will forget why you chose to run the model in this particular way. This comment will be saved in a file `Comment.txt`. Here the comment is just `"Initial run"`. 
-
 
 
 # Example
