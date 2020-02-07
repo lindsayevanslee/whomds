@@ -11,6 +11,7 @@ vignette: >
 library(knitr)
 library(tidyr)
 library(dplyr)
+library(geomnet)
 library(ggplot2)
 library(whomds)
 
@@ -162,7 +163,6 @@ Goal 1, in other words, gives us the disability scores we are looking for. Goal 
 
 Goal 3 has to do with the psychometric properties of the survey instrument we are using. With Rasch Analysis, in addition to calculating the interval scale, we are simultaneously performing an analysis of the validity and reliability of the scale. If our data fit the model property, then we can be certain that the scores that we obtain for people and for items are valid (i.e., they are measuring what we intend for them to measure) and reliable (i.e., the survey instrument would give consistent results if the survey was repeated).
 
-
 ## Output
 
 As already mentioned above, one of our aims is to obtain the person ability estimates. This means that an output of the Rasch analysis will be a latent trait continuum (shown below)...
@@ -182,10 +182,10 @@ include_graphics("Images/continuum_person.png")
 include_graphics("Images/continuum_personitem.png")
 ```
 
-
 "Latent trait continuum" is another phrase to describe the scale. "Latent trait" refers to an underlying characteristic of the population that the survey instrument is measuring (in our case, disability). "Continuum" is simply another word for "scale", emphasizing that people can be placed at any point between the end points (0 and 100) of the scale.
 
 The figure above is illustrating a toy example analyzing the strength of people and the difficulty of each item (questions Q1 to Q10) in regards to strength. The strongest person is on the left side of the continuum, while the weakest person is on the right side of the continuum. We can see that items Q9 and Q10 are the easiest; they are located on the same end of the continuum as the weakest person. The probability that the strongest people on the left end of the continuum get the questions "correct" is very high. Questions Q1 and Q2 are the hardest; only the strongest people, located on the same end of the continuum, have a reasonable probability of getting these questions "correct." 
+
 
 
 # What is Rasch Analysis?
@@ -237,7 +237,6 @@ ggplot(df,aes(x=x,y=y)) +
   geom_vline(xintercept=0)
 
 ```
-
 ## The Rasch Model - Polytomous
 
 The polytomous Rasch Model (more than 2 response options) is an extension of the dichotomous version. It is also known as the **Partial Credit Model**. The main equation for this model is:
@@ -281,7 +280,6 @@ ggplot(df.long,aes(x=x,y=y,color=Threshold)) +
   geom_vline(xintercept=0)
 
 ```
-
 
 # How do you do Rasch Analysis?
 
