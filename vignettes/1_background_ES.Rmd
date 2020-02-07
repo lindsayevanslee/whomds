@@ -30,8 +30,6 @@ opts_chunk$set(warning=FALSE,
 
 # Introducción
 
-<!-- eventually put data analysis infographic here -->
-
 ## Antecedentes
 
 En 2011, el proyecto de la Encuesta Modelo sobre la Discapacidad (MDS, por sus siglas en inglés) fue iniciado por la OMS y el Banco Mundial (BM) en 2011.

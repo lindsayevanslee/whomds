@@ -30,8 +30,6 @@ opts_chunk$set(warning=FALSE,
 
 # Introduction
 
-<!-- eventually put data analysis infographic here -->
-
 ## Background
 
 In light of calls for sound and comprehensive disability data the Model Disability Survey (MDS) project was initiated by WHO and the World Bank (WB) in 2011. 
