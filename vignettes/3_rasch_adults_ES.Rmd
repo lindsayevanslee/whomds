@@ -214,20 +214,20 @@ Después de ejecutar este comando, se guardarán varios archivos en la carpeta q
 Primero revisaremos la dependencia local del artículo de los artículos. Podemos verificar esto mirando los archivos `LID_plot.pdf` y` LID_above_0.2.csv`. `LID_above_0.2.csv` da las correlaciones de los residuos que están por encima de 0.2, y `LID_plot.pdf` es una visualización de estas correlaciones. De estos archivos, podemos ver que los elementos `EF11` y `EF12` están correlacionados. El valor de la correlación es aproximadamente 0.47. Estos dos elementos tienen que ver con la forma en que se facilita o dificulta el trabajo (`EF11`) y la escuela (`EF12`). Conceptualmente, tiene sentido que las respuestas de las personas a estas dos preguntas estén relacionadas. Nos ocuparemos de esta correlación en la próxima iteración del modelo.
 
 ```{r adult-start-LID, echo=FALSE, eval=TRUE}
-include_graphics("ExampleRasch_EF/Start/LID_plot.pdf")
+include_graphics("Images/ExampleRasch_EF/Start/LID_plot.png")
 ```
 
 
 A continuación, investigaremos la unidimensionalidad del modelo analizando el archivo `parallel_analysis_scree.pdf`. Esto es lo que se conoce como una "gráfico scree". Un gráfico scree muestra los valores propios (_eigenvalues_) de nuestro modelo e indica cuántas dimensiones subyacentes tenemos en nuestro cuestionario. Con este gráfico, esperamos ver una disminución muy marcada después del primer valor propio a la izquierda, y que el segundo valor propio caiga por debajo de la línea verde del _"Parallel Analysis"_. Esto significaría que tenemos una dimensión subyacente que es muy sólida en nuestros datos, y cualquier otra dimensión que se calcule tendrá muy poca influencia en el modelo. En nuestro gráfico, vemos una disminución muy marcada después del primer valor propio, y la línea verde cruza la línea negra después del segundo factor. Esto es suficiente para confirmar la unidimensionalidad para el modelo.
 
 ```{r adult-start-scree, echo=FALSE, eval=TRUE}
-include_graphics("ExampleRasch_EF/Start/parallel_analysis_scree.pdf")
+include_graphics("Images/ExampleRasch_EF/Start/parallel_analysis_scree.png")
 ```
 
 Otro archivo importante que podemos examinar es el `PImap.pdf`. Este es el "Mapa persona-ítem", y muestra personas y ítems en el mismo continuo. El eje horizontal en la parte inferior de la figura es este continuo, etiquetado como la "dimensión latente". La parte superior de la figura está etiquetada como "distribución de parámetros de persona". Esta es la distribución de las puntuaciones de las personas en el continuo. Puede mostrarle si, por ejemplo, tiene más personas en un extremo de la escala u otro.
 
 ```{r adult-start-PI, echo=FALSE, eval=TRUE}
-include_graphics("ExampleRasch_EF/Start/PImap.pdf")
+include_graphics("Images/ExampleRasch_EF/Start/PImap.png")
 ```
 
 La parte más grande de esta figura muestra dónde se ubican los umbrales para cada elemento en el continuo. Los umbrales están etiquetados con números: el primer umbral está etiquetado como "1", el segundo está etiquetado como "2", y así sucesivamente. El punto negro es el promedio de las ubicaciones de todos estos umbrales. Las estrellas en el lado derecho de la figura indican si los umbrales están o no fuera de orden. Por ejemplo, puedes ver para `EF1`, los umbrales están ordenados 2, 4, 1, 3 que están claramente fuera de orden. De hecho, en este caso, todos los elementos tienen umbrales fuera de orden. Es probable que esto sea algo de lo que tengamos que ocuparnos más adelante, pero primero nos encargaremos de la dependencia del artículo.
@@ -322,7 +322,7 @@ A continuación, verificamos el gráfico scree en el archivo `parallel_analysis_
 A continuación, verificamos el mapa persona-ítem en `PImap.pdf`. Podemos ver en este archivo que todos los elementos aún están desordenados, por lo que es probable que esto sea lo próximo que tengamos que cuidar en la próxima iteración del modelo.
 
 ```{r adult-t1r1-PI, echo=FALSE, eval=TRUE}
-include_graphics("ExampleRasch_EF/Testlet1_Recode1/PImap.pdf")
+include_graphics("Images/ExampleRasch_EF/Testlet1_Recode1/PImap.png")
 ```
 
 Finalmente verificaremos el ajuste del ítem y el ajuste general del modelo en `item_fit.csv` y `Targeting.csv`, respectivamente. Podemos ver que todos estos valores siguen siendo buenos: cada ítem aún tiene estadísticas de infit y outfit entre 0.5 y 1.5, y el PSI aún es 0.82.
@@ -357,7 +357,7 @@ testlet1_recode2 <- rasch_mds(
 Podemos ver en el nuevo mapa persona-ítem que esta estrategia no funcionó para ninguno de los ítems. Así que intentaremos una nueva estrategia en la próxima iteración.
 
 ```{r adult-t1r2-PI, echo=FALSE, eval=TRUE}
-include_graphics("ExampleRasch_EF/Testlet1_Recode2/PImap.pdf")
+include_graphics("Images/ExampleRasch_EF/Testlet1_Recode2/PImap.png")
 ```
 
 También podemos verificar los otros archivos para ver si alguna otra suposición del Modelo Rasch ha sido violada con esta estrategia de recodificación. Pero debido a que estamos cambiando nuestra estrategia completamente en la próxima iteración, no es necesario prestar demasiada atención a los otros archivos para esta iteración.
@@ -392,7 +392,7 @@ testlet1_recode3 <- rasch_mds(
 ¡Podemos ver con esta estrategia de recodificación que los umbrales ahora están ordenados para la mayoría de los artículos! El único elemento para el que no funcionó es `EF6`, para lo cual tendremos que probar una estrategia diferente en la próxima iteración.
 
 ```{r adult-t1r3-PI, echo=FALSE, eval=TRUE}
-include_graphics("ExampleRasch_EF/Testlet1_Recode3/PImap.pdf")
+include_graphics("Images/ExampleRasch_EF/Testlet1_Recode3/PImap.png")
 ```
 
 Avanzamos en nuestro desordenamiento de umbrales, pero debemos asegurarnos de que las otras suposiciones del Modelo Rasch no se hayan violado con esta nueva estrategia. Verificamos `LID_plot.pdf` y vemos que todavía hemos logrado la independencia del elemento. También verificamos el gráfico scree en `parallel_analysis_scree.pdf` para ver si todavía tenemos unidimensionalidad. Finalmente, también verificamos `item_fit.csv` y `Targeting.csv` y vemos que los valores también son aceptables en estos archivos. Así que procederemos con una estrategia de recodificación alterada en la siguiente iteración.
@@ -428,7 +428,7 @@ testlet1_recode4 <- rasch_mds(
 Después de ejecutar este modelo, vemos que se ha resuelto el desorden para `EF6`. ¡Todos los artículos individuales ahora tienen umbrales ordenados!
 
 ```{r adult-t1r4-PI, echo=FALSE, eval=TRUE}
-include_graphics("ExampleRasch_EF/Testlet1_Recode4/PImap.pdf")
+include_graphics("Images/ExampleRasch_EF/Testlet1_Recode4/PImap.png")
 ```
 
 
