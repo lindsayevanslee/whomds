@@ -1,8 +1,8 @@
 ---
-title: "Background on disability measurement"
+title: "1 - Background on disability measurement"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Background on disability measurement}
+  %\VignetteIndexEntry{1 - Background on disability measurement}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

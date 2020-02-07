@@ -1,8 +1,8 @@
 ---
-title: "After Rasch Analysis: Descriptive Analysis"
+title: "6 - After Rasch Analysis: Descriptive Analysis"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{After Rasch Analysis: Descriptive Analysis}
+  %\VignetteIndexEntry{6 - After Rasch Analysis: Descriptive Analysis}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

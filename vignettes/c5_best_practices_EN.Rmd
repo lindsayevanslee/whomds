@@ -1,8 +1,8 @@
 ---
-title: "Best practices with Rasch Analysis"
+title: "5 - Best practices with Rasch Analysis"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Best practices with Rasch Analysis}
+  %\VignetteIndexEntry{5 - Best practices with Rasch Analysis}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

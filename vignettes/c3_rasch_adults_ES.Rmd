@@ -1,8 +1,8 @@
 ---
-title: "Análisis Rasch con los datos de adultos de MDS"
+title: "3 - Análisis Rasch con los datos de adultos de MDS"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Análisis Rasch con los datos de adultos de MDS}
+  %\VignetteIndexEntry{3 - Análisis Rasch con los datos de adultos de MDS}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

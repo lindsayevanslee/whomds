@@ -1,8 +1,8 @@
 ---
-title: "Empezar con el paquete de OMS para Análisis Rasch"
+title: "2 - Empezar con el paquete de OMS para Análisis Rasch"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Empezar con el paquete de OMS para Análisis Rasch}
+  %\VignetteIndexEntry{2 - Empezar con el paquete de OMS para Análisis Rasch}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

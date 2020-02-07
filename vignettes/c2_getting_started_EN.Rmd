@@ -1,8 +1,8 @@
 ---
-title: "Getting started with WHO package for Rasch Analysis"
+title: "2 - Getting started with WHO package for Rasch Analysis"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Getting started with WHO package for Rasch Analysis}
+  %\VignetteIndexEntry{2 - Getting started with WHO package for Rasch Analysis}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

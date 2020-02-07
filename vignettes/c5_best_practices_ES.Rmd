@@ -1,8 +1,8 @@
 ---
-title: "Mejores prácticas con Análisis Rasch"
+title: "5 - Mejores prácticas con Análisis Rasch"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Mejores prácticas con Análisis Rasch}
+  %\VignetteIndexEntry{5 - Mejores prácticas con Análisis Rasch}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
