@@ -63,16 +63,10 @@ start <- rasch_mds(
 ## More information
 
 An extensive guide on using the package is available. Please email me at
-<leel@who.int> for access. Some of the information is already included
-in vignettes for this package. In the future, all information in the
-guide will be included as vignettes.
+<lindsayevanslee@gmail.com> for access. Some of the information is
+already included in vignettes for this package. In the future, all
+information in the guide will be included as vignettes.
 
 The package is still very much in development mode, so there is much
 work that needs to be done. If you notice any bugs or have any
 suggestions, please email me or submit an issue here on GitHub.
-
-### Who am I
-
-I am a technical officer in the Disability Programme at the WHO and
-responsible for work related to the MDS. Please email me at
-<leel@who.int> if you have questions or comments.
