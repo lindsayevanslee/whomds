@@ -23,9 +23,28 @@ opts_chunk$set(warning=FALSE,
 
 ```
 
+# Joining scores with original data
+
+After you have finished with Rasch Analysis, the score is outputted in the file `Data_final.csv` in the column called `rescaled`. This file will only contain the individuals included in the analysis. Any individual who had too many missing values (`NA`) will not be in this file. It is often advisable to merge the original data with all individuals with the new scores. Any individual who did not have a score calculated will have an `NA` in this column.
+
+This merge can be accomplished with the following code. First, open the library called `tidyverse` to access the necessary functions. Next, read in the `Data_final.csv` file and select only the columns you need: `ID` (or whatever the name of the individual ID column is in your data) and `rescaled`. The code below assumes that the file is in your working directory. You will have to include the full path to the file if it is not currently in your working directory. Finally, you can create an object `merged_data` that merges your original data, here represented with the object `original_data`, with the new score in a column renamed to `"DisabilityScore"` with the following code:
+
+```{r join-example}
+library(tidyverse)
+new_score <- read_csv("Data_final.csv") %>% 
+  select(c("ID", "rescaled"))
+merged_data <- original_data %>% 
+  left_join(new_score) %>% 
+  rename("DisabilityScore" = "rescaled")
+```
+
+The sample data included in the `whomds` package called `df_adults` already has a Rasch score merged with it, in the column `disability_score`.
+
+# Descriptive analysis 
+
 After calculating the disability scores using Rasch Analysis, you are now ready to analyze the results of the survey by calculating descriptive statistics. The `whomds` package contains functions to create tables and figures of descriptive statistics. This section will go over these functions.
 
-# Tables
+## Tables
 
 Descriptive statistics functions included in the `whomds` package are:
 
@@ -36,7 +55,7 @@ Descriptive statistics functions included in the `whomds` package are:
 The arguments of each of these codes will be described below.
 
 
-## `table_weightedpct()`
+### `table_weightedpct()`
 
 `whomds` contains a function called `table_weightedpct()` which calculates weighted results tables from the survey, disaggregated by specified variables. The arguments of this function are passed to functions in the package `dplyr`. 
 
@@ -63,7 +82,7 @@ Below are the arguments of the function:
     
 Here are some examples of how `table_weightedpct()` would be used in practice. Not all arguments are explicitly set in each example, which means they are kept as their default values.
 
-### Example 1: long table, one level of disaggregation
+#### Example 1: long table, one level of disaggregation
 
 Let's say we want to print a table of the percentage of people in each disability level who gave each response option for a set of questions about the general environment. We would set the arguments of `table_weightedpct()` like this, and the first few rows of the table would look like this:
 
@@ -85,7 +104,7 @@ table_weightedpct(
 
 The outputted table has 4 columns: the variable we disaggregated the data by (`disability_cat`, in other words the disability level), the item (`item`), the response option (`resp`), and the proportion (`prop`). 
 
-### Example 2: wide table, one level of disaggregation
+#### Example 2: wide table, one level of disaggregation
 
 This long table from the above example is great for data analysis, but not great for reading with the bare eye. If we want to make it nicer, we convert it to "wide format" by "spreading" by a particular variable. Perhaps we want to spread by `disability_cat`. Our call to `table_weightedpct()` would now look like this, and the outputted table would be:
 
@@ -107,7 +126,7 @@ table_weightedpct(
 
 Now we can see our `prop` column has been spread horizontally for each level of `disability_cat`.
 
-### Example 3: wide table, one level of disaggregation, filtered
+#### Example 3: wide table, one level of disaggregation, filtered
 
 Perhaps, though, we are only interested in the proportions of the most extreme response option of 5. We could now add a filter to our call to `table_weightedpct()` like so:
 
@@ -130,7 +149,7 @@ table_weightedpct(
 
 Now you can see only the proportions for the response option of 5 are given. 
 
-### Example 4: wide table, multiple levels of disaggregation, filtered
+#### Example 4: wide table, multiple levels of disaggregation, filtered
 
 With `table_weightedpct()`, we can also add more levels of disaggregation by editing the argument `by_vars`. Here we will produce the same table as in Example 3 above but now disaggregated by disability level and sex:
 
@@ -151,7 +170,7 @@ table_weightedpct(
   )
 ```
 
-### Example 5: wide table, multiple levels of disaggregation, transmuted
+#### Example 5: wide table, multiple levels of disaggregation, transmuted
 
 Perhaps we are still interested not only in response option 5, but the sum of 4 and 5 together. We can do this by "transmuting" our table. To do this, we first choose to "spread" by `resp` by setting `spread_key="resp"`. This will convert the table to a wide format as in Example 2, but now each column will represent a response option. Then we set the transmutation by setting `willfilter=FALSE`, and adding expressions for the transmutation on the next line. We name all the columns we would like to keep and give an expression for how to create the new column of the sum of proportions for response options 4 and 5, here called `problems`:
 
@@ -194,7 +213,7 @@ table_weightedpct(
 
 The `key` argument of the function `spread()` tells `R` which variable to use as the columns, and `value` tells `R` what to fill the columns with. The operator `%>%` is commonly referred to as a "pipe". It feeds the object before it into the first argument of the function after it. For example, if you have an object `x` and a function `f`, writing `x %>% f()` would be the equivalent as writing `f(x)`. People use "pipes" because they make long sequences of code easier to read.
 
-## `table_unweightedpctn()`
+### `table_unweightedpctn()`
 
 `whomds` contains a function called `table_unweightedpctn()` that produces unweighted tables of N and %. This is generally used for demographic tables. Its arguments are as follows:
 
@@ -215,7 +234,7 @@ table_unweightedpctn(df_adults,
 ```
 
 
-## `table_basicstats()`
+### `table_basicstats()`
 
 The function `table_basicstats()` computes basic statistics of the number of member per group per household. Its arguments are: 
 
@@ -230,7 +249,7 @@ table_basicstats(df_adults, "HHID", "age_cat")
 ```
 
 
-# Figures
+## Figures
 
 Descriptive statistics figure functions included in the `whomds` package are:
 
@@ -240,7 +259,7 @@ Descriptive statistics figure functions included in the `whomds` package are:
 
 The arguments of each of these codes will be described below.
 
-## `fig_poppyramid()`
+### `fig_poppyramid()`
 
 `whomds` contains a function called `fig_poppyramid()` that produces a population pyramid figure for the sample. This function takes as arguments:
 
@@ -258,7 +277,7 @@ include_graphics("Images/pop_pyramid.png")
 ```
 
 
-## `fig_dist()` 
+### `fig_dist()` 
 
 `whomds` contains a function called `fig_dist()` that produces a plot of the distribution of a score. WHO uses this function to show the distribution of the disability scores calculated with Rasch Analysis. Its arguments are:
 
@@ -278,7 +297,7 @@ Running this function produces a figure like the one below.
 include_graphics("Images/distribution.png")
 ```
 
-## `fig_density()`
+### `fig_density()`
 
 `whomds` contains a function similar to `fig_dist()` called `fig_density()` that produces a plot of the density of a score. WHO uses this function to show the density distribution of the disability scores calculated with Rasch Analysis. Its arguments are:
 
@@ -298,3 +317,8 @@ Running this function produces a figure like the one below.
 include_graphics("Images/density.png")
 ```
 
+
+
+## Descriptive statistics templates
+
+WHO also provides a template for calculating many descriptive statistics tables for use in survey reports, also written in `R`. If you would like a template for your country, please contact us (see DESCRIPTION for contact info).
