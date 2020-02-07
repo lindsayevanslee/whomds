@@ -3,6 +3,7 @@
 language: R
 sudo: false
 cache: packages
+cran: https://stat.ethz.ch/CRAN
 os:
   - linux
   - osx
