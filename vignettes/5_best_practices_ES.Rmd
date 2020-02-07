@@ -1,0 +1,30 @@
+---
+title: "Mejores prácticas con Análisis Rasch"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Mejores prácticas con Análisis Rasch}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE}
+library(knitr)
+
+opts_chunk$set(warning=FALSE, 
+               message=FALSE, 
+               eval=FALSE, 
+               out.width = "80%",
+               fig.align = "center",
+               collapse = TRUE,
+               comment = "#>")
+
+```
+
+Aquí discutiremos algunos principios generales sobre cómo implementar el Modelo Rasch para tus datos.
+
+* **Es más fácil ejecutar el modelo con una muestra grande y pocos ítems.** Las muestras de menos de 200 personas pueden ser problemáticas, especialmente si hay una gran cantidad de ítems (20+) y las respuestas a los ítems no son distribuido uniformemente
+* En general, **el mínimo ajuste de datos es el mejor**. Siempre trata de ver si puedes hacer el mínimo ajuste posible a sus datos. Esto significa que el resultado de su análisis respaldará mejor su instrumento de encuesta original.
+* **Trata de hacer testlets solo entre ítems que son conceptualmente similares.** Es más fácil justificar la combinación de ítems que son muy similares (por ejemplo, "sentirse deprimido" y "sentirse ansioso") que los ítems que son extremadamente diferentes (para ejemplo, "caminar 100m" y "recordar cosas importantes"). Si tienes una alta correlación entre los ítems que son muy diferentes conceptualmente, esto puede indicar otros problemas con el instrumento de la encuesta que probablemente deberían abordarse.
+* Al recodificar, **intenta combinar solo umbrales adyacentes** Por ejemplo, si ves que los umbrales están desordenados en el patrón 2, 1, 3, 4, es natural tratar de contraer los umbrales 2 y 1 porque son adyacentes. No tendría sentido colapsar los umbrales 2 y 4 porque no son adyacentes.
+* Al recodificar, **dejaa la primera opción de respuesta sola y no recodifícala**. Esta primera opción de respuesta representa una respuesta en el MDS de "no hay problemas" o "no hay dificultad", y es mejor dejar esta opción de respuesta sola como referencia. Hay una diferencia conceptual más grande entre "no tener problemas" y "pocos problemas" que entre tener "pocos problemas" y "algunos problemas", por lo que tiene menos sentido combinar las dos primeras opciones de respuesta que combinar las opciones de segunda y tercera respuesta.
+* **Es normal tener que ejecutar muchas iteraciones del modelo** para encontrar una solución que funcione mejor, especialmente si tienes muchos ítems en su cuestionario.
