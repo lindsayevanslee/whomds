@@ -62,10 +62,15 @@ start <- rasch_mds(
 
 ## More information
 
-An extensive guide on using the package is available. Please email me at
-<lindsayevanslee@gmail.com> for access. Some of the information is
-already included in vignettes for this package. In the future, all
-information in the guide will be included as vignettes.
+An extensive guide on using the package is available from a series of
+vignettes, in both English and Spanish. You can browse the vignettes by
+using:
+
+``` r
+browseVignettes("whomds")
+```
+
+## Caveat
 
 The package is still very much in development mode, so there is much
 work that needs to be done. If you notice any bugs or have any
