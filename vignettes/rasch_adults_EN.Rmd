@@ -21,8 +21,6 @@ opts_chunk$set(warning=FALSE,
 
 ```
 
-
-
 # Structure
 
 To perform Rasch Analysis for adults, only one function needs to be used: `rasch_mds()`. This is referred to as a "wrapper function." A wrapper function is a function that makes it easier to use other functions. In our case, `rasch_mds()` utilizes all the other `rasch_*()` functions to perform the analysis. These other `rasch_*()` functions used for adults are: 
@@ -40,7 +38,7 @@ To perform Rasch Analysis for adults, only one function needs to be used: `rasch
 You only need to use the function `rasch_mds()`. But if you wanted to perform your analysis in a more customized way, you could work with the internal functions directly.
 
 
-## Output
+# Output
 
 After each iteration of the Rasch Model, the codes above produce a variety of files that will tell you how well the data fit the assumptions of the model at this iteration. The most important files are the ones below. We will explain each in detail through our example.
 
@@ -53,7 +51,7 @@ After each iteration of the Rasch Model, the codes above produce a variety of fi
 * `Targeting.csv` - reliability of model
 
 
-## Arguments of `rasch_mds()`
+# Arguments of `rasch_mds()`
 
 In this section we will examine each argument of the function `rasch_mds()`. The help file for the function also describes the arguments. Help files for functions in `R` can be accessed by writing `?` before the function name, like so:
 
@@ -104,11 +102,11 @@ The next arguments are `testlet_strategy`, `recode_strategy`, `drop_vars` and `s
 
 The last argument is `comment`. This is equal to a string where you can write some free-text information about the current iteration so that when you are looking at the results later you can remember what you did and why you did it. It is better to be more detailed, because you will forget why you chose to run the model in this particular way. This comment will be saved in a file `Comment.txt`. Here the comment is just `"Initial run"`. 
 
-## Adjusting the data
+# Adjusting the data
 
 Next, we will discuss the arguments that give instructions about how to adjust the data. These parts may not be entirely meaningful now, but will become more so after we go through an example.
 
-### Making testlets
+## Making testlets
 
 If you want to create testlets--that is, sum up items into super items in order to fix item dependence--then pass a strategy for making testlets to the argument `testlet_strategy`. `testlet_strategy` is a list with one element of the list per testlet that you want to create. Each element of the list must be a character vector of column names to use for the testlet. Optionally, you can name the elements of the list to give custom names to the new testlets. Otherwise, the new testlets will be the original column names separated by "_". 
 
@@ -125,7 +123,7 @@ rasch_mds(
 ```
 
 
-### Recoding
+## Recoding
 
 If you want to recode response options--that is, change response options in order to create stochastic ordering--then pass a strategy for the recoding to the argument `recode_strategy`. `recode_strategy` takes the form of a named list, with one element of the list per recode strategy. The names of the list are the groups of column names to use for each recoding strategy, separated only by ",". Each element of the list is a numeric vector giving the new response options to map the variables to. 
 
@@ -143,7 +141,7 @@ rasch_mds(
 
 
 
-### Dropping variables
+## Dropping variables
 
 If you want to drop any items from your analysis--perhaps in the event of extremely poor fit--then set `drop_vars` as a character vector of the column names to drop from the analysis. 
 
@@ -156,7 +154,7 @@ rasch_mds(
 )
 ```
 
-### Splitting
+## Splitting
 
 If you want to split items by subgroups--perhaps in the event of high differential item functioning (DIF)--then you give the instructions for your split strategy in the argument `split_strategy`. 
 
@@ -177,7 +175,6 @@ rasch_mds(
 ```
 
 However, because we expect a certain amount of DIF when measuring disability--especially by sex and age--we rarely use this option. To not perform any splitting, leave `split_strategy` as its default value of `NULL.`
-
 
 
 # Example 
@@ -273,7 +270,7 @@ After running this model, we get an error:
       arguments must have same length ")
 ```
 
-This error is a bit strange looking. But sometimes errors like this will arise because of too many NAs in the data or if there are not enough people endorsing all possible response options. Let's look at the file `response_freq.csv` in order to see how the response options are distributed. We can see in this file that there are many endorsements for all response options for all questions except for our new testlet `workschool`, which only has 1 person with an answer of 7, and no one with the maximum possible answer of 8. Perhaps this is what is causing the problem.
+This error is a bit strange looking. But sometimes errors like this will arise because of too many NAs in the data or if there are not enough people endorsing all possible response options. Let's look at the file `response_freq.csv` in order to see how the response options are distributed. We can see in this file that there are many endorsements for all response options for all questions except for our new testlet `workschool`, which only has 1 person with an answer of 6, and no one with the possible answers of 5, 7 or 8. Perhaps this is what is causing the problem.
 
 ### More on recoding
 
@@ -318,7 +315,7 @@ The difference between the Testlet1 model and this model is that we have now add
 
 After we run the command, we see the model is able to be calculated as normal.
 
-First we check `LID_plot.pdf` to see if we have been able to remove the item correlation. In this file, we see the message "No LID found!", which means our testlet strategy was effective!
+First we check `LID_plot.pdf` to see if we have been able to remove the item correlation. In this file, we see the message "No LID found", which means our testlet strategy was effective!
 
 Next, we check the scree plot in the file `parallel_analysis_scree.pdf` to make sure our unidimensionality was maintained. Indeed, it looks very similar to the initial model, which is what we hope for.
 
@@ -439,7 +436,6 @@ We will also check the other files to make sure our other Rasch Model assumption
 
 All of our Rasch Model assumptions have been reasonably attained, so this means we can stop! We have finished our Rasch Analysis for this set of questions. The data with the scores is in the file `Data_final.csv`. We will discuss what to do with these scores in later sections.
 
-
 # Best practices
 
 Here we will discuss some general principles about how to implement the Rasch Model for your data. 
@@ -450,5 +446,3 @@ Here we will discuss some general principles about how to implement the Rasch Mo
 * When recoding, **try to collapse only adjacent thresholds** For instance, if you see that thresholds are disordered in the pattern 2, 1, 3, 4, it is natural to try to collapse thresholds 2 and 1 because they are adjacent. It would not make sense to collapse thresholds 2 and 4 because they are not adjacent.
 * When recoding, **leave the first response option alone and do not recode it**. This first response option represents an answer in the MDS of "no problems" or "no difficulty", and it is best to leave this response option alone as a baseline. There is a larger conceptual difference between having "no problems" and "few problems" than there is between having "few problems" and "some problems", so it makes less sense to collapse the first two response options than it does to collapse the 2nd and 3rd response options.
 * **It is normal to have to run many iterations of the model** in order to find a solution that works best, especially if you have many items in your instrument.
-
-
