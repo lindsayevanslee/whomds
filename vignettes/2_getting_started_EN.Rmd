@@ -49,7 +49,7 @@ devtools::install("C:/Users/leel/Downloads/whomds-master") #use path to unzipped
 ```
 
 
-# Opening `whomds`
+# Using `whomds`
 
 Once `whomds` is installed, it can be opened with the following code:
 
