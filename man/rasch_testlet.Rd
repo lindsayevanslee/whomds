@@ -31,29 +31,35 @@ Create testlets of survey items for a Rasch Model
 If high local item dependence is observed (i.e., residual correlation) is observed between items, it may be desirable to combine them into a testlet. This code creates the testlets as desired.
 }
 \seealso{
-Other rasch functions: \code{\link{rasch_DIF}},
-  \code{\link{rasch_df_nest}}, \code{\link{rasch_drop}},
-  \code{\link{rasch_factor}},
-  \code{\link{rasch_mds_children}},
-  \code{\link{rasch_mds}},
-  \code{\link{rasch_model_children}},
-  \code{\link{rasch_model}},
-  \code{\link{rasch_quality_children_print}},
-  \code{\link{rasch_quality_children}},
-  \code{\link{rasch_rawscore}}, \code{\link{rasch_recode}},
-  \code{\link{rasch_rescale_children}},
-  \code{\link{rasch_rescale}},
-  \code{\link{rasch_split_age}}, \code{\link{rasch_split}}
+Other rasch functions: 
+\code{\link{rasch_DIF}()},
+\code{\link{rasch_df_nest}()},
+\code{\link{rasch_drop}()},
+\code{\link{rasch_factor}()},
+\code{\link{rasch_mds_children}()},
+\code{\link{rasch_mds}()},
+\code{\link{rasch_model_children}()},
+\code{\link{rasch_model}()},
+\code{\link{rasch_quality_children_print}()},
+\code{\link{rasch_quality_children}()},
+\code{\link{rasch_rawscore}()},
+\code{\link{rasch_recode}()},
+\code{\link{rasch_rescale_children}()},
+\code{\link{rasch_rescale}()},
+\code{\link{rasch_split_age}()},
+\code{\link{rasch_split}()}
 
-Other children analysis functions: \code{\link{rasch_df_nest}},
-  \code{\link{rasch_drop}},
-  \code{\link{rasch_mds_children}},
-  \code{\link{rasch_model_children}},
-  \code{\link{rasch_quality_children_print}},
-  \code{\link{rasch_quality_children}},
-  \code{\link{rasch_recode}},
-  \code{\link{rasch_rescale_children}},
-  \code{\link{rasch_split_age}}, \code{\link{rasch_split}}
+Other children analysis functions: 
+\code{\link{rasch_df_nest}()},
+\code{\link{rasch_drop}()},
+\code{\link{rasch_mds_children}()},
+\code{\link{rasch_model_children}()},
+\code{\link{rasch_quality_children_print}()},
+\code{\link{rasch_quality_children}()},
+\code{\link{rasch_recode}()},
+\code{\link{rasch_rescale_children}()},
+\code{\link{rasch_split_age}()},
+\code{\link{rasch_split}()}
 }
 \concept{children analysis functions}
 \concept{rasch functions}

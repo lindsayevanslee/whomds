@@ -4,8 +4,17 @@
 \alias{fig_dist}
 \title{Plot a distribution of a score}
 \usage{
-fig_dist(df, score, score_cat, cutoffs, x_lab = "Score", y_max = NULL,
-  pcent = FALSE, pal = "Blues", binwidth = 5)
+fig_dist(
+  df,
+  score,
+  score_cat,
+  cutoffs,
+  x_lab = "Score",
+  y_max = NULL,
+  pcent = FALSE,
+  pal = "Blues",
+  binwidth = 5
+)
 }
 \arguments{
 \item{df}{a data frame where each row is an individual, containing at least a score column (between 0 and 100) and a categorization of that score}
@@ -44,7 +53,9 @@ fig_dist(df_adults, score = "disability_score", score_cat = "disability_cat",
 cutoffs = c(19.1, 34.4, 49.6), x_lab = "Disability score", y_max = 0.2, pcent=TRUE)
 }
 \seealso{
-Other figure functions: \code{\link{fig_LID}},
-  \code{\link{fig_density}}, \code{\link{fig_poppyramid}}
+Other figure functions: 
+\code{\link{fig_LID}()},
+\code{\link{fig_density}()},
+\code{\link{fig_poppyramid}()}
 }
 \concept{figure functions}

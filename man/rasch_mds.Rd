@@ -4,10 +4,22 @@
 \alias{rasch_mds}
 \title{Top-level function to perform Rasch Analysis on WHO Model Disability Survey data}
 \usage{
-rasch_mds(df, vars_metric, vars_id, vars_DIF = NULL, resp_opts = 1:5,
-  max_NA = 2, print_results = TRUE, path_parent = NULL,
-  model_name = NULL, testlet_strategy = NULL, recode_strategy = NULL,
-  drop_vars = NULL, split_strategy = NULL, comment = NULL)
+rasch_mds(
+  df,
+  vars_metric,
+  vars_id,
+  vars_DIF = NULL,
+  resp_opts = 1:5,
+  max_NA = 2,
+  print_results = TRUE,
+  path_parent = NULL,
+  model_name = NULL,
+  testlet_strategy = NULL,
+  recode_strategy = NULL,
+  drop_vars = NULL,
+  split_strategy = NULL,
+  comment = NULL
+)
 }
 \arguments{
 \item{df}{a data frame of individual survey data, where each row is an individual}
@@ -53,18 +65,22 @@ Top-level function to perform Rasch Analysis on WHO Model Disability Survey data
 This function combines all of the separate analyses of model fit necessary to assess the quality of the Rasch Model. It is designed to require minimal intervention from the user. Users wishing to have more control over the analysis can use the other Rasch functions in this package separately.
 }
 \seealso{
-Other rasch functions: \code{\link{rasch_DIF}},
-  \code{\link{rasch_df_nest}}, \code{\link{rasch_drop}},
-  \code{\link{rasch_factor}},
-  \code{\link{rasch_mds_children}},
-  \code{\link{rasch_model_children}},
-  \code{\link{rasch_model}},
-  \code{\link{rasch_quality_children_print}},
-  \code{\link{rasch_quality_children}},
-  \code{\link{rasch_rawscore}}, \code{\link{rasch_recode}},
-  \code{\link{rasch_rescale_children}},
-  \code{\link{rasch_rescale}},
-  \code{\link{rasch_split_age}}, \code{\link{rasch_split}},
-  \code{\link{rasch_testlet}}
+Other rasch functions: 
+\code{\link{rasch_DIF}()},
+\code{\link{rasch_df_nest}()},
+\code{\link{rasch_drop}()},
+\code{\link{rasch_factor}()},
+\code{\link{rasch_mds_children}()},
+\code{\link{rasch_model_children}()},
+\code{\link{rasch_model}()},
+\code{\link{rasch_quality_children_print}()},
+\code{\link{rasch_quality_children}()},
+\code{\link{rasch_rawscore}()},
+\code{\link{rasch_recode}()},
+\code{\link{rasch_rescale_children}()},
+\code{\link{rasch_rescale}()},
+\code{\link{rasch_split_age}()},
+\code{\link{rasch_split}()},
+\code{\link{rasch_testlet}()}
 }
 \concept{rasch functions}

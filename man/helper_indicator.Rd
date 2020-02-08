@@ -4,8 +4,13 @@
 \alias{helper_indicator}
 \title{Create indicators from data frame}
 \usage{
-helper_indicator(df, vars_indicators, mapvalues_from, mapvalues_to,
-  make_factor = TRUE)
+helper_indicator(
+  df,
+  vars_indicators,
+  mapvalues_from,
+  mapvalues_to,
+  make_factor = TRUE
+)
 }
 \arguments{
 \item{df}{a data frame}

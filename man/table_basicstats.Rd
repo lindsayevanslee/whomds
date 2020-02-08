@@ -26,7 +26,8 @@ Includes a call to \code{tidyr::complete()}, which causes the function to be a b
 table_basicstats(df_adults, "HHID", "age_cat")
 }
 \seealso{
-Other table functions: \code{\link{table_unweightedpctn}},
-  \code{\link{table_weightedpct}}
+Other table functions: 
+\code{\link{table_unweightedpctn}()},
+\code{\link{table_weightedpct}()}
 }
 \concept{table functions}

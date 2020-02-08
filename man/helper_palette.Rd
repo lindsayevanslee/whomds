@@ -4,8 +4,17 @@
 \alias{helper_palette}
 \title{Color palette for the MDS}
 \usage{
-helper_palette(n, h = c(-100, 100), c. = c(60, 100), l = c(15, 95),
-  power = c(2, 0.9), fixup = TRUE, gamma = NULL, alpha = 1, ...)
+helper_palette(
+  n,
+  h = c(-100, 100),
+  c. = c(60, 100),
+  l = c(15, 95),
+  power = c(2, 0.9),
+  fixup = TRUE,
+  gamma = NULL,
+  alpha = 1,
+  ...
+)
 }
 \arguments{
 \item{n}{the number of colors (\eqn{\ge 1}{>= 1}) to be in the palette.}
@@ -28,7 +37,7 @@ before correction?}
 \item{alpha}{numeric vector of values in the range \code{[0, 1]} for alpha
 transparency channel (0 means transparent and 1 means opaque).}
 
-\item{...}{Other arguments passed to \code{\link{hex}}.}
+\item{...}{Other arguments passed to \code{\link[colorspace]{hex}}.}
 }
 \value{
 \code{n} hex codes from the color palette
@@ -40,7 +49,8 @@ Color palette for the MDS
 Generated with \code{colorspace::choose_palette()}
 }
 \seealso{
-Other helper functions: \code{\link{helper_checkrow}},
-  \code{\link{helper_varslist}}
+Other helper functions: 
+\code{\link{helper_checkrow}()},
+\code{\link{helper_varslist}()}
 }
 \concept{helper functions}

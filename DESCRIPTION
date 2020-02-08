@@ -46,7 +46,7 @@ Imports:
     WrightMap
 Depends: R (>= 3.2.5)
 BugReports: https://github.com/lindsayevanslee/whomds
-RoxygenNote: 6.1.1
+RoxygenNote: 7.0.2
 Suggests: 
     covr,
     testthat,

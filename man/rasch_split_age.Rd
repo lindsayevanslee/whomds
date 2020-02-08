@@ -27,29 +27,35 @@ a named list with:
 Split all survey items by age category for a Rasch Model if they are not discrete
 }
 \seealso{
-Other rasch functions: \code{\link{rasch_DIF}},
-  \code{\link{rasch_df_nest}}, \code{\link{rasch_drop}},
-  \code{\link{rasch_factor}},
-  \code{\link{rasch_mds_children}},
-  \code{\link{rasch_mds}},
-  \code{\link{rasch_model_children}},
-  \code{\link{rasch_model}},
-  \code{\link{rasch_quality_children_print}},
-  \code{\link{rasch_quality_children}},
-  \code{\link{rasch_rawscore}}, \code{\link{rasch_recode}},
-  \code{\link{rasch_rescale_children}},
-  \code{\link{rasch_rescale}}, \code{\link{rasch_split}},
-  \code{\link{rasch_testlet}}
+Other rasch functions: 
+\code{\link{rasch_DIF}()},
+\code{\link{rasch_df_nest}()},
+\code{\link{rasch_drop}()},
+\code{\link{rasch_factor}()},
+\code{\link{rasch_mds_children}()},
+\code{\link{rasch_mds}()},
+\code{\link{rasch_model_children}()},
+\code{\link{rasch_model}()},
+\code{\link{rasch_quality_children_print}()},
+\code{\link{rasch_quality_children}()},
+\code{\link{rasch_rawscore}()},
+\code{\link{rasch_recode}()},
+\code{\link{rasch_rescale_children}()},
+\code{\link{rasch_rescale}()},
+\code{\link{rasch_split}()},
+\code{\link{rasch_testlet}()}
 
-Other children analysis functions: \code{\link{rasch_df_nest}},
-  \code{\link{rasch_drop}},
-  \code{\link{rasch_mds_children}},
-  \code{\link{rasch_model_children}},
-  \code{\link{rasch_quality_children_print}},
-  \code{\link{rasch_quality_children}},
-  \code{\link{rasch_recode}},
-  \code{\link{rasch_rescale_children}},
-  \code{\link{rasch_split}}, \code{\link{rasch_testlet}}
+Other children analysis functions: 
+\code{\link{rasch_df_nest}()},
+\code{\link{rasch_drop}()},
+\code{\link{rasch_mds_children}()},
+\code{\link{rasch_model_children}()},
+\code{\link{rasch_quality_children_print}()},
+\code{\link{rasch_quality_children}()},
+\code{\link{rasch_recode}()},
+\code{\link{rasch_rescale_children}()},
+\code{\link{rasch_split}()},
+\code{\link{rasch_testlet}()}
 }
 \concept{children analysis functions}
 \concept{rasch functions}

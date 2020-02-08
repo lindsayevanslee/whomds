@@ -4,9 +4,17 @@
 \alias{fig_density}
 \title{Plot a density of a score}
 \usage{
-fig_density(df, score, var_color = NULL, var_facet = NULL,
-  cutoffs = NULL, x_lab = "Score", pal = "Paired", adjust = 2,
-  size = 1.5)
+fig_density(
+  df,
+  score,
+  var_color = NULL,
+  var_facet = NULL,
+  cutoffs = NULL,
+  x_lab = "Score",
+  pal = "Paired",
+  adjust = 2,
+  size = 1.5
+)
 }
 \arguments{
 \item{df}{a data frame where each row is an individual, containing at least a score column (between 0 and 100)}
@@ -45,7 +53,9 @@ fig_density(df_adults, score = "disability_score", var_color = "sex",
 var_facet = "age_cat",  cutoffs = c(19.1, 34.4, 49.6), x_lab = "Disability score")
 }
 \seealso{
-Other figure functions: \code{\link{fig_LID}},
-  \code{\link{fig_dist}}, \code{\link{fig_poppyramid}}
+Other figure functions: 
+\code{\link{fig_LID}()},
+\code{\link{fig_dist}()},
+\code{\link{fig_poppyramid}()}
 }
 \concept{figure functions}

@@ -4,8 +4,12 @@
 \alias{helper_checkrow}
 \title{Check a vector for particular values}
 \usage{
-helper_checkrow(row, check_type = c("all_equal", "all_not_equal",
-  "any_in"), check_value, na_rm = TRUE)
+helper_checkrow(
+  row,
+  check_type = c("all_equal", "all_not_equal", "any_in"),
+  check_value,
+  na_rm = TRUE
+)
 }
 \arguments{
 \item{row}{a vector of data}
@@ -33,7 +37,8 @@ df <- data.frame(v1 = 1:5, v2 = rep(1,5), v3 = c(1,rep(2,4)))
 apply(df, 1, function(r) whomds:::helper_checkrow(r, check_type = "all_equal", check_value = 1))
 }
 \seealso{
-Other helper functions: \code{\link{helper_palette}},
-  \code{\link{helper_varslist}}
+Other helper functions: 
+\code{\link{helper_palette}()},
+\code{\link{helper_varslist}()}
 }
 \concept{helper functions}

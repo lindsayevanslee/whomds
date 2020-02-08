@@ -4,10 +4,23 @@
 \alias{table_weightedpct}
 \title{Calculate table of percentages or N of response distribution for survey items, survey weighted, disaggregated}
 \usage{
-table_weightedpct(df, vars_ids, vars_strata, vars_weights, formula_vars,
-  ..., formula_vars_levels = 0:1, by_vars = NULL, pct = TRUE,
-  willfilter = NULL, add_totals = FALSE, spread_key = NULL,
-  spread_value = "prop", arrange_vars = NULL, include_SE = FALSE)
+table_weightedpct(
+  df,
+  vars_ids,
+  vars_strata,
+  vars_weights,
+  formula_vars,
+  ...,
+  formula_vars_levels = 0:1,
+  by_vars = NULL,
+  pct = TRUE,
+  willfilter = NULL,
+  add_totals = FALSE,
+  spread_key = NULL,
+  spread_value = "prop",
+  arrange_vars = NULL,
+  include_SE = FALSE
+)
 }
 \arguments{
 \item{df}{a data frame of individual survey data, where each row is an individual}
@@ -63,7 +76,8 @@ table_weightedpct(df_adults,
 \seealso{
 See \code{vignette("programming", package = "dplyr")} for more about non-standard evaluation (NSE)
 
-Other table functions: \code{\link{table_basicstats}},
-  \code{\link{table_unweightedpctn}}
+Other table functions: 
+\code{\link{table_basicstats}()},
+\code{\link{table_unweightedpctn}()}
 }
 \concept{table functions}

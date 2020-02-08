@@ -4,8 +4,14 @@
 \alias{fig_poppyramid}
 \title{Print a population pyramid}
 \usage{
-fig_poppyramid(df, var_age, var_sex, x_axis = c("n", "pct"),
-  age_plus = 100, age_by = 5)
+fig_poppyramid(
+  df,
+  var_age,
+  var_sex,
+  x_axis = c("n", "pct"),
+  age_plus = 100,
+  age_by = 5
+)
 }
 \arguments{
 \item{df}{a data frame of individual survey data, where each row is an individual}
@@ -35,7 +41,9 @@ The function divides the \code{var_age} variable into intervals of width \code{a
 fig_poppyramid(df_adults, "age", "sex")
 }
 \seealso{
-Other figure functions: \code{\link{fig_LID}},
-  \code{\link{fig_density}}, \code{\link{fig_dist}}
+Other figure functions: 
+\code{\link{fig_LID}()},
+\code{\link{fig_density}()},
+\code{\link{fig_dist}()}
 }
 \concept{figure functions}

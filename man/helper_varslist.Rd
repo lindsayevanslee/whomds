@@ -16,7 +16,8 @@ a character vector of all unique items from \code{vars_list}
 Convert list to vector with unique elements
 }
 \seealso{
-Other helper functions: \code{\link{helper_checkrow}},
-  \code{\link{helper_palette}}
+Other helper functions: 
+\code{\link{helper_checkrow}()},
+\code{\link{helper_palette}()}
 }
 \concept{helper functions}

@@ -4,8 +4,14 @@
 \alias{rasch_model}
 \title{Run the Rasch Model and print diagnositic results}
 \usage{
-rasch_model(df, vars_metric, vars_id, print_results = TRUE,
-  path_output = NULL, LIDcutoff = 0.2)
+rasch_model(
+  df,
+  vars_metric,
+  vars_id,
+  print_results = TRUE,
+  path_output = NULL,
+  LIDcutoff = 0.2
+)
 }
 \arguments{
 \item{df}{a data frame of individual survey data, where each row is an individual}
@@ -42,18 +48,22 @@ Run the Rasch Model and print diagnositic results
 The Rasch Model is calculated using the function \code{eRm::PCM()}.
 }
 \seealso{
-Other rasch functions: \code{\link{rasch_DIF}},
-  \code{\link{rasch_df_nest}}, \code{\link{rasch_drop}},
-  \code{\link{rasch_factor}},
-  \code{\link{rasch_mds_children}},
-  \code{\link{rasch_mds}},
-  \code{\link{rasch_model_children}},
-  \code{\link{rasch_quality_children_print}},
-  \code{\link{rasch_quality_children}},
-  \code{\link{rasch_rawscore}}, \code{\link{rasch_recode}},
-  \code{\link{rasch_rescale_children}},
-  \code{\link{rasch_rescale}},
-  \code{\link{rasch_split_age}}, \code{\link{rasch_split}},
-  \code{\link{rasch_testlet}}
+Other rasch functions: 
+\code{\link{rasch_DIF}()},
+\code{\link{rasch_df_nest}()},
+\code{\link{rasch_drop}()},
+\code{\link{rasch_factor}()},
+\code{\link{rasch_mds_children}()},
+\code{\link{rasch_mds}()},
+\code{\link{rasch_model_children}()},
+\code{\link{rasch_quality_children_print}()},
+\code{\link{rasch_quality_children}()},
+\code{\link{rasch_rawscore}()},
+\code{\link{rasch_recode}()},
+\code{\link{rasch_rescale_children}()},
+\code{\link{rasch_rescale}()},
+\code{\link{rasch_split_age}()},
+\code{\link{rasch_split}()},
+\code{\link{rasch_testlet}()}
 }
 \concept{rasch functions}

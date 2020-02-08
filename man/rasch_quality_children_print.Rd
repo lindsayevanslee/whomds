@@ -4,8 +4,14 @@
 \alias{rasch_quality_children_print}
 \title{Print results of analysis of Rasch Model quality}
 \usage{
-rasch_quality_children_print(df_nest, vars_metric, vars_group, TAM_model,
-  LIDcutoff = 0.2, path_output)
+rasch_quality_children_print(
+  df_nest,
+  vars_metric,
+  vars_group,
+  TAM_model,
+  LIDcutoff = 0.2,
+  path_output
+)
 }
 \arguments{
 \item{df_nest}{a nested tibble that contains the column \code{df_split} with the data split by the categories in the column \code{vars_group}}
@@ -27,29 +33,35 @@ does not return anything to the environment, but prints files to the folder spec
 Print results of analysis of Rasch Model quality
 }
 \seealso{
-Other rasch functions: \code{\link{rasch_DIF}},
-  \code{\link{rasch_df_nest}}, \code{\link{rasch_drop}},
-  \code{\link{rasch_factor}},
-  \code{\link{rasch_mds_children}},
-  \code{\link{rasch_mds}},
-  \code{\link{rasch_model_children}},
-  \code{\link{rasch_model}},
-  \code{\link{rasch_quality_children}},
-  \code{\link{rasch_rawscore}}, \code{\link{rasch_recode}},
-  \code{\link{rasch_rescale_children}},
-  \code{\link{rasch_rescale}},
-  \code{\link{rasch_split_age}}, \code{\link{rasch_split}},
-  \code{\link{rasch_testlet}}
+Other rasch functions: 
+\code{\link{rasch_DIF}()},
+\code{\link{rasch_df_nest}()},
+\code{\link{rasch_drop}()},
+\code{\link{rasch_factor}()},
+\code{\link{rasch_mds_children}()},
+\code{\link{rasch_mds}()},
+\code{\link{rasch_model_children}()},
+\code{\link{rasch_model}()},
+\code{\link{rasch_quality_children}()},
+\code{\link{rasch_rawscore}()},
+\code{\link{rasch_recode}()},
+\code{\link{rasch_rescale_children}()},
+\code{\link{rasch_rescale}()},
+\code{\link{rasch_split_age}()},
+\code{\link{rasch_split}()},
+\code{\link{rasch_testlet}()}
 
-Other children analysis functions: \code{\link{rasch_df_nest}},
-  \code{\link{rasch_drop}},
-  \code{\link{rasch_mds_children}},
-  \code{\link{rasch_model_children}},
-  \code{\link{rasch_quality_children}},
-  \code{\link{rasch_recode}},
-  \code{\link{rasch_rescale_children}},
-  \code{\link{rasch_split_age}}, \code{\link{rasch_split}},
-  \code{\link{rasch_testlet}}
+Other children analysis functions: 
+\code{\link{rasch_df_nest}()},
+\code{\link{rasch_drop}()},
+\code{\link{rasch_mds_children}()},
+\code{\link{rasch_model_children}()},
+\code{\link{rasch_quality_children}()},
+\code{\link{rasch_recode}()},
+\code{\link{rasch_rescale_children}()},
+\code{\link{rasch_split_age}()},
+\code{\link{rasch_split}()},
+\code{\link{rasch_testlet}()}
 }
 \concept{children analysis functions}
 \concept{rasch functions}

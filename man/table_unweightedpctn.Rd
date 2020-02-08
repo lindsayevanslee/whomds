@@ -4,9 +4,14 @@
 \alias{table_unweightedpctn}
 \title{Compute unweighted percent and N for multiple variables, disaggregated}
 \usage{
-table_unweightedpctn(df, vars_demo, group_by_var = NULL,
-  spread_by_group_by_var = FALSE, group_by_var_sums_to_100 = FALSE,
-  add_totals = FALSE)
+table_unweightedpctn(
+  df,
+  vars_demo,
+  group_by_var = NULL,
+  spread_by_group_by_var = FALSE,
+  group_by_var_sums_to_100 = FALSE,
+  add_totals = FALSE
+)
 }
 \arguments{
 \item{df}{a data frame of individual survey data, where each row is an individual}
@@ -35,7 +40,8 @@ table_unweightedpctn(df_adults, vars_demo = c("sex", "age_cat", "work_cat", "edu
 group_by_var = "disability_cat", spread_by_group_by_var = TRUE)
 }
 \seealso{
-Other table functions: \code{\link{table_basicstats}},
-  \code{\link{table_weightedpct}}
+Other table functions: 
+\code{\link{table_basicstats}()},
+\code{\link{table_weightedpct}()}
 }
 \concept{table functions}

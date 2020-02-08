@@ -3,7 +3,6 @@
 \docType{package}
 \name{whomds}
 \alias{whomds}
-\alias{whomds-package}
 \title{whomds: A package for calculating results from WHO Model Disability Survey}
 \description{
 The whomds package provides three categories of important functions:
