@@ -6,7 +6,6 @@ costa_rica <- haven::read_sav("/Users/lindsaylee/Dropbox/WHO/MDS/09 national and
 
 # usethis::use_data(costa_rica, overwrite = TRUE)
 
-
 #chile
 load("/Users/lindsaylee/Dropbox/WHO/MDS/09 national and regional surveys/Chile 2014/04 Syntax/DescriptiveAnalysis/chile.RData")
 
