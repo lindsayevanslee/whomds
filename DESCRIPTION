@@ -9,7 +9,7 @@ Description: The Model Disability Survey (MDS) is a World Health Organization (W
     Disability and Health. This package provides fit-for-purpose functions 
     for calculating and presenting the results from this survey, as used by 
     the WHO.
-License: GPL-3
+License: GPL-3 + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Imports: 
