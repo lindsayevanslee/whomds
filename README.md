@@ -32,7 +32,7 @@ You can install the development version from
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("lindsayevanslee/whomds")
+devtools::install_github("lindsayevanslee/whomds", build_vignettes = TRUE)
 ```
 
 ## Example
