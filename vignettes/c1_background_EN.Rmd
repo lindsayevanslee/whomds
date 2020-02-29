@@ -11,7 +11,6 @@ vignette: >
 library(knitr)
 library(tidyr)
 library(dplyr)
-library(geomnet)
 library(ggplot2)
 library(whomds)
 
@@ -289,18 +288,8 @@ Overall, the basic technique is to **fit our data to the Rasch Model**, taking n
 
 Rasch Analysis is an **iterative process**, meaning it must be performed multiple times in order to reach a result. The process is shown in the figure below.
 
-``` {r iteration, echo=FALSE, eval=TRUE, out.width = NULL}
-iteration <- tibble(from=c("Run model", "Test model\nassumptions","Adjust data"),
-                    to=c("Adjust data","Run model", "Test model\nassumptions"))
-
-ggplot(data=iteration, aes(from_id=from, to_id=to, fontsize = 3)) +
-  geomnet::geom_net(color="#0099ff", size=25,
-           layout.alg = "fruchtermanreingold",
-           directed=TRUE, arrowsize = 1.5, arrowgap = 0.75,
-           labelon = TRUE, labelcolour = "white") +
-  scale_x_continuous(limits=c(-0.5,1.5)) +
-  scale_y_continuous(limits=c(-0.5,1.5)) +
-  geomnet::theme_net()
+``` {r iteration, echo=FALSE, eval=TRUE}
+include_graphics("Images/iteration_EN.png")
 ```
 
 The next question naturally is: what are the Rasch assumptions that we are testing?

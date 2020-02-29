@@ -11,7 +11,6 @@ vignette: >
 library(knitr)
 library(tidyr)
 library(dplyr)
-library(geomnet)
 library(ggplot2)
 library(whomds)
 
@@ -293,18 +292,8 @@ En general, la técnica básica es **ajustar nuestros datos al Modelo Rasch**, t
 El análisis de Rasch es un **proceso iterativo**, lo que significa que debe realizarse varias veces para alcanzar un resultado. El proceso se muestra en la siguiente figura.
 
 
-``` {r iteration, echo=FALSE, eval=TRUE, out.width = NULL}
-iteration <- tibble(from=c("Ejecutar modelo", "Probar suposiciones","Ajustar datos"),
-                    to=c("Ajustar datos","Ejecutar modelo", "Probar suposiciones"))
-
-ggplot(data=iteration, aes(from_id=from, to_id=to)) +
-  geomnet::geom_net(color="#0099ff", size=40,
-           layout.alg = "fruchtermanreingold",
-           directed=TRUE, arrowsize = 1.5, arrowgap = 0.75,
-           labelon = TRUE, labelcolour = "white", fontsize = 3) +
-  scale_x_continuous(limits=c(-0.5,1.5)) +
-  scale_y_continuous(limits=c(-0.5,1.5)) +
-  geomnet::theme_net()
+``` {r iteration, echo=FALSE, eval=TRUE}
+include_graphics("Images/iteration_ES.png")
 ```
 
 La siguiente pregunta, naturalmente, es: ¿cuáles son los suposiciones de Rasch que estamos probando?

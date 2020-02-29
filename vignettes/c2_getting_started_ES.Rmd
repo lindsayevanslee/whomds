@@ -78,7 +78,6 @@ Los paquetes adicionales son:
 * `dplyr`
 * `eRm`
 * `foreign`
-* `geomnet`
 * `GGally`
 * `ggplot2`
 * `grDevices`
