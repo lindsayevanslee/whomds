@@ -234,6 +234,7 @@ ggplot(df,aes(x=x,y=y)) +
   geom_vline(xintercept=0)
 
 ```
+
 ## The Rasch Model - Polytomous
 
 The polytomous Rasch Model (more than 2 response options) is an extension of the dichotomous version. It is also known as the **Partial Credit Model**. The main equation for this model is:
