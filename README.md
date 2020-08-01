@@ -27,6 +27,13 @@ information, please go to <http://www.who.int/disabilities/data/mds/en/>
 
 ## Installation
 
+It is expected the package will soon be uploaded to CRAN. Once available
+there, you can install with:
+
+``` r
+install.packages("whomds")
+```
+
 You can install the development version from
 [GitHub](https://github.com/) with:
 
@@ -70,8 +77,6 @@ using:
 browseVignettes("whomds")
 ```
 
-## Caveat
+## Contact
 
-The package is still very much in development mode, so there is much
-work that needs to be done. If you notice any bugs or have any
-suggestions, please email me or submit an issue here on GitHub.
+Please contact the package maintainer with any questions or comments.

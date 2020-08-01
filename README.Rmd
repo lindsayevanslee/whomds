@@ -31,6 +31,12 @@ The Model Disability Survey (MDS) is a World Health Organization (WHO) general p
 
 ## Installation
 
+It is expected the package will soon be uploaded to CRAN. Once available there, you can install with:
+
+``` r
+install.packages("whomds")
+```
+
 You can install the development version from [GitHub](https://github.com/) with:
 
 ``` r
@@ -72,7 +78,7 @@ browseVignettes("whomds")
 ```
 
 
-## Caveat
+## Contact
 
-The package is still very much in development mode, so there is much work that needs to be done. If you notice any bugs or have any suggestions, please email me or submit an issue here on GitHub.
+Please contact the package maintainer with any questions or comments.
 
