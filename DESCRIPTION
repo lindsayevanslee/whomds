@@ -1,6 +1,6 @@
 Package: whomds
 Type: Package
-Title: Calculate results from WHO Model Disability Survey data
+Title: Calculate Results from WHO Model Disability Survey Data
 Version: 0.0.0.9007
 Authors@R: c(person("Lindsay", "Lee", email = "lindsayevanslee@gmail.com", role = c("aut","cre")), person("Carolina", "Fellinghauer", email = "carolina.fellinghauer@data-fittery.ch", role = c("ctb")),  person("World Health Organization", email = "disability@who.int", role = "cph"))
 Description: The Model Disability Survey (MDS) is a World Health Organization (WHO) general population survey
