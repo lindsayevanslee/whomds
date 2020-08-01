@@ -6,7 +6,7 @@
 #' @param formula_vars a character vector of variables to calculate the percentages of each level for
 #' @param ... captures expressions to pass to \code{dplyr::filter()} or \code{dplyr::transmute()}, depending on the value of argument \code{willfilter}. See Details.
 #' @param formula_vars_levels a vector of the levels of the the \code{formula_vars}
-#' @param by_vars a character vector of variables to disaggregate results by. Default is \code{NULL} for no disaggregation.
+#' @param by_vars a character vector of variables to disaggregate results by. Default is \code{NULL} for no disaggregation. The columns listed must not include NAs.
 #' @param pct a logical variable indicating whether or not to calculate weighted percentages. Default is \code{TRUE} for weighted percentages. Set to \code{FALSE} for weighted N.
 #' @param willfilter a logical variable that tells the function whether or not to filter or transmute the data. Leave as default \code{NULL} to not filter or transmute. Set as \code{TRUE} to filter and \code{FALSE} to transmute. See Details.
 #' @param spread_key a string with variable name to pass to \code{key} argument of \code{tidyr::spread()}. Default is \code{NULL}.
@@ -57,6 +57,17 @@ table_weightedpct <- function(df, vars_ids, vars_strata, vars_weights,
     if(!is.null(spread_key)) stop("For testing of include_SE, spread_key must be NULL")
   }
   
+  #check for NAs in by_vars
+  if (!is.null(by_vars)) {
+    any_NAs <- df %>% 
+      select(!!by_vars) %>% 
+      filter_all(is.na) %>% 
+      nrow() %>% 
+      `>`(., 0)
+  } else any_NAs <- FALSE
+  
+  if(any_NAs) stop("Remove NAs from by_vars columns first.")
+  
   
   #convert to tibble
   if (!tibble::is_tibble(df)) df <- df %>% as_tibble()
@@ -79,14 +90,11 @@ table_weightedpct <- function(df, vars_ids, vars_strata, vars_weights,
   
   
   #create survey design object
-  if (is.null(vars_ids)) expr_ids <- "NULL"
-  else expr_ids <- paste0("c(", paste0(vars_ids, collapse = ","), ")")
+  if (is.null(vars_ids)) expr_ids <- "NULL" else expr_ids <- paste0("c(", paste0(vars_ids, collapse = ","), ")")
   
-  if (is.null(vars_strata)) expr_strata <- "NULL"
-  else expr_strata <- paste0("c(", paste0(vars_strata, collapse = ","), ")")
+  if (is.null(vars_strata)) expr_strata <- "NULL" else expr_strata <- paste0("c(", paste0(vars_strata, collapse = ","), ")")
   
-  if (is.null(vars_weights)) expr_weights <- "NULL"
-  else expr_weights <- paste0("c(", paste0(vars_weights, collapse = ","), ")")
+  if (is.null(vars_weights)) expr_weights <- "NULL" else expr_weights <- paste0("c(", paste0(vars_weights, collapse = ","), ")")
   
   des <-
     df %>%
@@ -126,9 +134,7 @@ table_weightedpct <- function(df, vars_ids, vars_strata, vars_weights,
         dplyr::select(-prop_se)
     }
     
-  } 
-  #if wanting weighted N
-  else {
+  } else { #if wanting weighted N
     
     prevtab <- des %>%
       group_by_at(c(by_vars, "item", "resp")) %>%

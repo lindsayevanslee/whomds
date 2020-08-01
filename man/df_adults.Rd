@@ -4,7 +4,8 @@
 \name{df_adults}
 \alias{df_adults}
 \title{Example of WHO Model Disability Survey data for adults}
-\format{A tibble with 2500 rows and 90 variables:
+\format{
+A tibble with 2500 rows and 90 variables:
 \describe{
   \item{HHID}{household number}
   \item{strata}{survey strata}
@@ -103,7 +104,8 @@
   \item{EF10}{...do the crowds in your surroundings make it easy or hard for you to live there?}
   \item{EF11}{...does your workplace make it easy or hard for you to work or learn (if not currently working, NA)?}
   \item{EF12}{...does your educational institution make it easy or hard for you to work or learn (if not currently studying, NA)?}
-}}
+}
+}
 \usage{
 df_adults
 }

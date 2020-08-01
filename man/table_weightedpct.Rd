@@ -37,7 +37,7 @@ table_weightedpct(
 
 \item{formula_vars_levels}{a vector of the levels of the the \code{formula_vars}}
 
-\item{by_vars}{a character vector of variables to disaggregate results by. Default is \code{NULL} for no disaggregation.}
+\item{by_vars}{a character vector of variables to disaggregate results by. Default is \code{NULL} for no disaggregation. The columns listed must not include NAs.}
 
 \item{pct}{a logical variable indicating whether or not to calculate weighted percentages. Default is \code{TRUE} for weighted percentages. Set to \code{FALSE} for weighted N.}
 

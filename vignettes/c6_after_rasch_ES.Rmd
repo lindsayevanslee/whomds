@@ -86,8 +86,12 @@ Aquí hay algunos ejemplos de cómo se usaría `table_weightedpct()` en la prác
 Digamos que queremos imprimir una tabla del porcentaje de personas en cada nivel de discapacidad que dieron cada opción de respuesta para un conjunto de preguntas sobre el entorno general. Escribiríamos los argumentos de `table_weightedpct()` de esta manera, y las primeras filas de la tabla se verían así:
 
 ```{r table-weightedpct-example1, eval=TRUE}
+#Quitar NAs de la columna utilizada para el argumento by_vars
+df_adults_noNA <- df_adults %>% 
+  filter(!is.na(disability_cat))
+
 table_weightedpct(
-  df = df_adults,
+  df = df_adults_noNA,
   vars_ids = "PSU",
   vars_strata = "strata",
   vars_weights = "weight",
@@ -109,7 +113,7 @@ Esta larga tabla del ejemplo anterior es excelente para el análisis de datos, p
 
 ```{r table-weightedpct-example2, eval=TRUE}
 table_weightedpct(
-  df = df_adults,
+  df = df_adults_noNA,
   vars_ids = "PSU",
   vars_strata = "strata",
   vars_weights = "weight",
@@ -131,7 +135,7 @@ Quizás, sin embargo, solo nos interesan las proporciones de la opción de respu
 
 ```{r table-weightedpct-example3, eval=TRUE}
 table_weightedpct(
-  df = df_adults,
+  df = df_adults_noNA,
   vars_ids = "PSU",
   vars_strata = "strata",
   vars_weights = "weight",
@@ -154,7 +158,7 @@ Con `table_weightedpct()`, también podemos agregar más niveles de desagregaci�
 
 ```{r table-weightedpct-example4, eval=TRUE}
 table_weightedpct(
-  df = df_adults,
+  df = df_adults_noNA,
   vars_ids = "PSU",
   vars_strata = "strata",
   vars_weights = "weight",
@@ -175,7 +179,7 @@ Quizás todavía estamos interesados no solo en la opción de respuesta 5, sino 
 
 ```{r table-weightedpct-example5, eval=TRUE}
 table_weightedpct(
-  df = df_adults,
+  df = df_adults_noNA,
   vars_ids = "PSU",
   vars_strata = "strata",
   vars_weights = "weight",
@@ -194,7 +198,7 @@ Si nos gustaría extender la tabla nuevamente para que `disability_cat` represen
 
 ```{r table-weightedpct-example5b, eval=TRUE}
 table_weightedpct(
-  df = df_adults,
+  df = df_adults_noNA,
   vars_ids = "PSU",
   vars_strata = "strata",
   vars_weights = "weight",
@@ -226,7 +230,7 @@ El argumento `key` de la función `spread()` le dice a `R` qué variable usar co
 Aquí hay un ejemplo de cómo se usa:
 
 ```{r table-unweightedpctn-example, eval=TRUE}
-table_unweightedpctn(df_adults, 
+table_unweightedpctn(df_adults_noNA, 
                      vars_demo = c("sex", "age_cat", "work_cat", "edu_cat"), 
                      group_by_var = "disability_cat", 
                      spread_by_group_by_var = TRUE)
@@ -244,7 +248,7 @@ La función `table_basicstats()` calcula estadísticas básicas del número de m
 Aquí hay un ejemplo de cómo se usa:
 
 ```{r table-basicstats-example, eval=TRUE}
-table_basicstats(df_adults, "HHID", "age_cat")
+table_basicstats(df_adults_noNA, "HHID", "age_cat")
 ```
 
 

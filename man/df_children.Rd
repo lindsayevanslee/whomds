@@ -4,7 +4,8 @@
 \name{df_children}
 \alias{df_children}
 \title{Example of WHO Model Disability Survey data for children}
-\format{A tibble with 2500 rows and 42 variables:
+\format{
+A tibble with 2500 rows and 42 variables:
 \describe{
   \item{HHID}{household number}
   \item{strata}{survey strata}
@@ -50,7 +51,8 @@
   \item{child33}{...controling his or her behavior?}
   \item{child34}{...completing a task?}
   \item{child35}{...getting along with other children?}
-}}
+}
+}
 \usage{
 df_children
 }
