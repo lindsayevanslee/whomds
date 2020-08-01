@@ -175,4 +175,4 @@ Al igual que con los adultos, los nuevos puntajes reescalados para niños se enc
 
 # Mejores prácticas
 
-Lea el vignette [Mejores prácticas con Análisis Rasch](5_best_practices_ES.html) para aprender más sobre principios generales para usar.
+Lea el vignette [Mejores prácticas con Análisis Rasch](c5_best_practices_ES.html) para aprender más sobre principios generales para usar.

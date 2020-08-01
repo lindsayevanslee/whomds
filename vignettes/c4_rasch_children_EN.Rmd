@@ -172,4 +172,4 @@ As with adults, the new rescaled scores for children are located in the file `Da
 
 # Best practices
 
-Go to the [Best Practices in Rasch Analysis](5_best_practices_EN.html) vignette to read more about general rules to follow.
+Go to the [Best Practices in Rasch Analysis](c5_best_practices_EN.html) vignette to read more about general rules to follow.

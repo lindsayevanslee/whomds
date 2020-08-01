@@ -438,5 +438,5 @@ Todas nuestras suposiciones del Modelo Rasch se han alcanzado razonablemente, ¡
 
 # Mejores prácticas
 
-Lea el vignette [Mejores prácticas con Análisis Rasch](5_best_practices_ES.html) para aprender más sobre principios generales para usar.
+Lea el vignette [Mejores prácticas con Análisis Rasch](c5_best_practices_ES.html) para aprender más sobre principios generales para usar.
 
