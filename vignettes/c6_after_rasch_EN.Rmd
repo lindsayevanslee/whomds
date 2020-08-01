@@ -19,7 +19,9 @@ opts_chunk$set(warning=FALSE,
                out.width = "80%",
                fig.align = "center",
                collapse = TRUE,
-               comment = "#>")
+               comment = "#>",
+               survey.lonely.psu = "adjust")
+
 
 ```
 
