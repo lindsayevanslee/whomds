@@ -21,13 +21,15 @@ helper_indicator <- function(df, vars_indicators, mapvalues_from , mapvalues_to,
     bind_cols(
       df %>% 
         select(!!vars_indicators) %>% 
-        rename_at(vars(vars_indicators), 
-                  funs(paste0(., "_ind")))
+        rename_at(vars(all_of(vars_indicators)), 
+                  list(~ paste0(., "_ind")))
     ) %>%
-    mutate_at(vars(vars_indicators_new), 
-              funs(plyr::mapvalues(., from = mapvalues_from, to = mapvalues_to, warn_missing = TRUE))) 
+    mutate_at(vars(all_of(vars_indicators_new)), 
+              list(~ plyr::mapvalues(., from = mapvalues_from, to = mapvalues_to, warn_missing = TRUE))) 
   
-  if (make_factor) df_new <- df_new %>% mutate_at(vars(vars_indicators_new), funs(factor))
+  if (make_factor) df_new <- df_new %>% 
+    mutate_at(vars(all_of(vars_indicators_new)), 
+              list( ~ factor(.)))
   
   return(df_new)
   
