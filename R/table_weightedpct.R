@@ -81,7 +81,8 @@ table_weightedpct <- function(df, vars_ids, vars_strata, vars_weights,
       factor_key = TRUE,
       na.rm = TRUE
     ) %>%
-    mutate(resp = ordered(resp, levels = formula_vars_levels),
+    # mutate(resp = ordered(resp, levels = formula_vars_levels),
+    mutate(resp = factor(resp, levels = formula_vars_levels),
            item = ordered(item))
 
 
