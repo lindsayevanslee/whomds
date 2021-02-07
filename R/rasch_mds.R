@@ -77,20 +77,20 @@ rasch_mds <- function(df,
   
   #recode non-resp_opts to NA, make vars_id character
   to_NA <- df %>% 
-    select(vars_metric) %>% 
+    select(all_of(vars_metric)) %>% 
     unlist() %>% 
     unique() %>% 
     setdiff(c(resp_opts, NA))
   
   df <- df %>%
-    mutate_at(vars(vars_metric),
+    mutate_at(vars(all_of(vars_metric)),
               list(~ plyr::mapvalues(., from = to_NA, to = rep(NA, length(to_NA)), warn_missing = FALSE
               ))) %>% 
-    mutate_at(vars(vars_id), list(as.character))
+    mutate_at(vars(all_of(vars_id)), list(as.character))
   
   #remove people with too many NAs
   rm_rows <- df %>% 
-    select(vars_metric) %>% 
+    select(all_of(vars_metric)) %>% 
     is.na() %>% 
     rowSums()
   rm_rows <- rm_rows > max_NA
@@ -100,7 +100,7 @@ rasch_mds <- function(df,
   
   #convert values to start at 0 (explictly convert first to numeric, in case df has factor columns)
   df <- df %>%
-    mutate_at(vars(vars_metric),
+    mutate_at(vars(all_of(vars_metric)),
               list(~ as.numeric(as.character(.)) - 1))
   
   
@@ -159,7 +159,7 @@ rasch_mds <- function(df,
   # PRINT RESPONSE FREQUENCIES -------
   if (print_results) {
     df %>% 
-      select(vars_metric) %>% 
+      select(all_of(vars_metric)) %>% 
       purrr::map(~ table(resp = ., useNA = "always")) %>% 
       purrr::map(~ as_tibble(.)) %>% 
       bind_rows(.id = "Q") %>% 
