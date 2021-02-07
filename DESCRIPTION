@@ -19,6 +19,7 @@ Imports:
     foreign,
     GGally,
     ggplot2,
+    GPArotation,
     grDevices,
     grid,
     httr,
