@@ -230,6 +230,15 @@ rasch_mds <- function(df,
     vars_metric <- split_result[["vars_metric"]]
     max_values <- split_result[["max_values"]]
     
+    if (print_results) {
+      
+      split_strategy %>% 
+        tibble::enframe(name = "split_category", value = "variable_to_split") %>% 
+        tidyr::unnest(cols = c(split_category, variable_to_split)) %>% 
+        readr::write_csv(file = paste0(path_output, "/split_strategy.csv"))
+      
+    }
+    
     message("Splitting variables completed.")
   }
   
