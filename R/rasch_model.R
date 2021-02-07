@@ -141,7 +141,7 @@ rasch_model <- function(df, vars_metric, vars_id, print_results = TRUE, path_out
   LIDforgraph <- LID
   
   
-  LID_results <- ((LIDforgraph >= 0.01)*1 - diag(length(vars_metric))) %>% 
+  LID_results <- ((LIDforgraph >= LIDcutoff)*1 - diag(length(vars_metric))) %>% 
     data.frame() 
   LID_results[upper.tri(LID_results)] <- 0
   LID_results <- LID_results %>%   
