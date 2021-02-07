@@ -20,7 +20,7 @@ fig_LID <- function(LIDforgraph, LIDcutoff = 0.2, path_output, extra_file_label 
                                                    diag=FALSE,
                                                    mode="upper")
   
-  #remove verticies not connected to other verticies
+  #remove vertices not connected to other vertices
   comp.no <- which(igraph::components(fullgraph)$csize>1)
   igraph::V(fullgraph)$comp <- igraph::components(fullgraph)$membership
   
