@@ -125,6 +125,14 @@ rasch_mds <- function(df,
     testlet_strategy <- testlet_result[["testlet_strategy"]]
     max_values <- testlet_result[["max_values"]]
     
+    if (print_results) {
+      testlet_strategy %>% 
+        tibble::enframe(name = "testlet", value = "original_var") %>% 
+        tidyr::unnest(original_var) %>% 
+        readr::write_csv(file = paste0(path_output, "/testlet_strategy.csv"))
+      
+    }
+    
     message("Testlet creation completed.")
     
   }
