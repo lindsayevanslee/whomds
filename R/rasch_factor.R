@@ -26,12 +26,12 @@ rasch_factor <- function(df, vars_metric, print_results = TRUE, path_output = NU
   
   # create data frame with ordered factors
   df_ordered <- df %>% 
-    select(vars_metric) %>% 
+    select(all_of(vars_metric)) %>% 
     mutate_all(funs(ordered)) %>% 
     as.data.frame()
   
   df_numeric <- df %>% 
-    select(vars_metric) %>% 
+    select(all_of(vars_metric)) %>% 
     as.data.frame()
   
   
