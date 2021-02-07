@@ -184,6 +184,14 @@ rasch_mds <- function(df,
     vars_metric <- drop_result[["vars_metric"]]
     max_values <- drop_result[["max_values"]]
     
+    if (print_results) {
+      
+      tibble::tibble(dropped_var = drop_vars) %>% 
+        readr::write_csv(file = paste0(path_output, "/drop_vars.csv"))
+      
+      
+    }
+    
     message("Dropping variables completed.")
     
   }
