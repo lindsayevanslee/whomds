@@ -147,6 +147,30 @@ rasch_mds <- function(df,
     df <- recode_result[["df"]]
     max_values <- recode_result[["max_values"]]
     
+    if (print_results) {
+      
+      recode_strategy %>% 
+        tibble::enframe(name = "variable", value = "recoded") %>% 
+        tidyr::separate(col = variable,
+                        #programmatically determine number of columns to separate into
+                        into = pull(., "variable") %>% 
+                          str_split(",") %>% 
+                          map_dbl(length) %>% 
+                          max() %>% 
+                          `:`(1,.) %>% 
+                          paste0("var",.),
+                        sep = ",") %>% 
+        tidyr::pivot_longer(cols = starts_with("var"),
+                            values_to = "variable") %>% 
+        dplyr::filter(!is.na(variable)) %>%
+        dplyr::rowwise() %>% 
+        dplyr::mutate(original = list(0:(length(recoded) - 1))) %>% 
+        tidyr::unnest(cols = c(original, recoded)) %>% 
+        dplyr::select(variable, original, recoded) %>% 
+        readr::write_csv(file = paste0(path_output, "/recode_strategy.csv"))     
+      
+    }
+    
     message("Recoding variables completed.")
     
   }
