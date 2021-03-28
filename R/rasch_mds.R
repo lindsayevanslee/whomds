@@ -154,8 +154,8 @@ rasch_mds <- function(df,
         tidyr::separate(col = variable,
                         #programmatically determine number of columns to separate into
                         into = pull(., "variable") %>% 
-                          str_split(",") %>% 
-                          map_dbl(length) %>% 
+                          stringr::str_split(",") %>% 
+                          purrr::map_dbl(length) %>% 
                           max() %>% 
                           `:`(1,.) %>% 
                           paste0("var",.),
@@ -199,13 +199,13 @@ rasch_mds <- function(df,
   # PRINT RESPONSE FREQUENCIES -------
   if (print_results) {
     df %>% 
-      select(all_of(vars_metric)) %>% 
+      dplyr::select(all_of(vars_metric)) %>% 
       purrr::map(~ table(resp = ., useNA = "always")) %>% 
       purrr::map(~ as_tibble(.)) %>% 
       bind_rows(.id = "Q") %>% 
       tidyr::spread(Q,n) %>% 
-      mutate(resp = as.numeric(resp)) %>% 
-      arrange(resp) %>% 
+      dplyr::mutate(resp = as.numeric(resp)) %>% 
+      dplyr::arrange(resp) %>% 
       readr::write_csv(paste0(path_output, "/response_freq.csv"))
     
   }
