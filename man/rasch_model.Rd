@@ -24,7 +24,7 @@ rasch_model(
 
 \item{path_output}{a string with the path to the output folder. Default is NULL.}
 
-\item{LIDcutoff}{a numeric value between 0 and 1 indicating the cut-off for significant local item dependence}
+\item{LIDcutoff}{either a numeric value between 0 and 1 indicating the cut-off for significant local item dependence, or the string "christensen" to use the cut-off suggested by Christensen et al. 2017 (see reference). If "christensen" cut-off fails, defaults to 0.2.}
 }
 \value{
 a list with results from the Rasch Model:
@@ -46,6 +46,9 @@ Run the Rasch Model and print diagnostic results
 }
 \details{
 The Rasch Model is calculated using the function \code{eRm::PCM()}.
+}
+\references{
+Christensen, K. B., Makransky, G., & Horton, M. (2017). Critical Values for Yen’s Q 3 : Identification of Local Dependence in the Rasch Model Using Residual Correlations.  Applied Psychological Measurement, 41(3), 178-194. \url{http://doi.org/10.1177/0146621616677520}
 }
 \seealso{
 Other rasch functions: 

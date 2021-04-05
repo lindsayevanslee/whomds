@@ -1,7 +1,7 @@
 #' Run the Rasch Model and print diagnostic results
 #'
 #' @param path_output a string with the path to the output folder. Default is NULL.
-#' @param LIDcutoff a numeric value between 0 and 1 indicating the cut-off for significant local item dependence
+#' @param LIDcutoff either a numeric value between 0 and 1 indicating the cut-off for significant local item dependence, or the string "christensen" to use the cut-off suggested by Christensen et al. 2017 (see reference). If "christensen" cut-off fails, defaults to 0.2.
 #' @inheritParams rasch_mds
 #'
 #' @details The Rasch Model is calculated using the function \code{eRm::PCM()}. 
@@ -21,6 +21,8 @@
 #' \item{disordered_results}{a string listing items with disordered thresholds}
 #' 
 #' @family rasch functions
+#' 
+#' @references Christensen, K. B., Makransky, G., & Horton, M. (2017). Critical Values for Yen’s Q 3 : Identification of Local Dependence in the Rasch Model Using Residual Correlations.  Applied Psychological Measurement, 41(3), 178-194. \url{http://doi.org/10.1177/0146621616677520}
 #' 
 #' @export
 #' 
@@ -140,7 +142,22 @@ rasch_model <- function(df, vars_metric, vars_id, print_results = TRUE, path_out
   
   LIDforgraph <- LID
   
-  
+  if (LIDcutoff == "christensen") {
+    
+    LIDcutoff <- mean(LID[(LID < 1)]) + 0.2
+    
+    if (is.na(LIDcutoff) | is.null(LIDcutoff) | is.nan(LIDcutoff)) {
+      
+      warning("Christensen LID cut-off did not work. Defaulting to 0.2")
+      LIDcutoff <- 0.2
+      
+    }
+    
+  } else if (is.character(LIDcutoff)) {
+    warning("Unknown specification for LIDcutoff. Defaulting to 0.2")
+    LIDcutoff <- 0.2
+      
+    }
   
   LID_results <- ((LIDforgraph >= LIDcutoff)*1 - diag(length(vars_metric))) %>% 
     data.frame() 
