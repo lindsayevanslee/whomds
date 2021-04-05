@@ -15,7 +15,7 @@ fig_LID(
 \arguments{
 \item{LIDforgraph}{a square matrix of item correlations}
 
-\item{LIDcutoff}{a numeric value between 0 and 1 for the cut-off for signicant correlation}
+\item{LIDcutoff}{a numeric value between 0 and 1 for the cut-off for significant correlation}
 
 \item{path_output}{a string with the path to the output folder}
 

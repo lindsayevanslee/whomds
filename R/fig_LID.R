@@ -1,7 +1,7 @@
 #' Print a graph showing significant correlations between survey items
 #'
 #' @param LIDforgraph a square matrix of item correlations
-#' @param LIDcutoff a numeric value between 0 and 1 for the cut-off for signicant correlation
+#' @param LIDcutoff a numeric value between 0 and 1 for the cut-off for significant correlation
 #' @param path_output a string with the path to the output folder
 #' @param extra_file_label a string to tack on to the end of names of files outputted and the title of the plot. Default is NULL.
 #' @param vertex_print_grey a character vector with the names of vertices to print in \code{"lightgrey"}, with all others printed in \code{"skyblue"}. If left as default NULL, all vertices will be printed in \code{"lightgrey"}.
