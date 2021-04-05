@@ -19,9 +19,8 @@ Imports:
     dplyr,
     eRm,
     foreign,
-    GGally,
+    ggraph,
     ggplot2,
-    GPArotation,
     grDevices,
     grid,
     httr,
@@ -44,6 +43,7 @@ Imports:
     survey, 
     TAM,
     tibble,
+    tidygraph,
     tidyr,
     WrightMap
 Depends: R (>= 3.2.5)

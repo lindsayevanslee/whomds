@@ -47,12 +47,25 @@ fig_LID <- function(LIDforgraph, LIDcutoff = 0.2, path_output, extra_file_label 
   if (all(igraph::components(fullgraph)$csize == 1)) {
     
     final_plot <- ggplot2::ggplot() + 
-      ggplot2::ggtitle(paste("No LID found below cut-off", LIDcutoff))
+      ggplot2::ggtitle(paste("No LID found below cut-off", LIDcutoff)) 
 
   } else {
     
-    final_plot <- GGally::ggnet2(finalgraph, label = TRUE, color = vertex_color) + 
-      ggplot2::ggtitle(title_label)
+    # final_plot <- GGally::ggnet2(finalgraph, label = TRUE, color = vertex_color) + 
+    #   ggplot2::ggtitle(title_label)
+    
+    final_plot <- finalgraph %>% 
+      tidygraph::as_tbl_graph() %>% 
+      tidygraph::activate(nodes) %>% 
+      dplyr::mutate(vert_clr = vertex_color) %>% 
+      ggraph::ggraph(layout = "fr") +
+      ggraph::geom_edge_link() +
+      ggraph::geom_node_point(aes(color = vert_clr), size = 20) +
+      ggplot2::scale_color_manual(values = vertex_color) + 
+      ggraph::geom_node_text(aes(label = name)) +
+      ggplot2::ggtitle(title_label) + 
+      ggplot2::theme(legend.position = "none",
+                     panel.background = ggplot2::element_rect(fill = "white"))
 
   }
   
