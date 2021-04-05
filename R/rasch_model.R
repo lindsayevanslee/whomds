@@ -1,4 +1,4 @@
-#' Run the Rasch Model and print diagnositic results
+#' Run the Rasch Model and print diagnostic results
 #'
 #' @param path_output a string with the path to the output folder. Default is NULL.
 #' @param LIDcutoff a numeric value between 0 and 1 indicating the cut-off for significant local item dependence
@@ -139,6 +139,7 @@ rasch_model <- function(df, vars_metric, vars_id, print_results = TRUE, path_out
   LID <- stats::cor(Residuals_PCM_Recoded, use="pairwise.complete", method="pearson")
   
   LIDforgraph <- LID
+  
   
   
   LID_results <- ((LIDforgraph >= LIDcutoff)*1 - diag(length(vars_metric))) %>% 

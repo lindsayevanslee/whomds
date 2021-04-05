@@ -2,7 +2,7 @@
 % Please edit documentation in R/rasch_model.R
 \name{rasch_model}
 \alias{rasch_model}
-\title{Run the Rasch Model and print diagnositic results}
+\title{Run the Rasch Model and print diagnostic results}
 \usage{
 rasch_model(
   df,
@@ -42,7 +42,7 @@ a list with results from the Rasch Model:
 \item{disordered_results}{a string listing items with disordered thresholds}
 }
 \description{
-Run the Rasch Model and print diagnositic results
+Run the Rasch Model and print diagnostic results
 }
 \details{
 The Rasch Model is calculated using the function \code{eRm::PCM()}.
