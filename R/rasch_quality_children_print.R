@@ -2,9 +2,8 @@
 #'
 #' @inheritParams rasch_mds
 #' @inheritParams rasch_mds_children
-#' @inheritParams rasch_model
 #' @inheritParams rasch_model_children
-#' @inheritParams rasch_factor
+#' @inheritParams fig_LID
 #'
 #' @return does not return anything to the environment, but prints files to the folder specified in \code{path_output}
 #' @export

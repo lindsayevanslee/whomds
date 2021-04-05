@@ -22,9 +22,9 @@ rasch_quality_children_print(
 
 \item{TAM_model}{a string with the type of IRT model to use, passed to \code{irtmodel} argument of \code{TAM::tam()}. Default is \code{"PCM2"}}
 
-\item{LIDcutoff}{a numeric value between 0 and 1 indicating the cut-off for significant local item dependence}
+\item{LIDcutoff}{a numeric value between 0 and 1 for the cut-off for significant correlation}
 
-\item{path_output}{a string with the path to the output folder. Default is NULL.}
+\item{path_output}{a string with the path to the output folder}
 }
 \value{
 does not return anything to the environment, but prints files to the folder specified in \code{path_output}
