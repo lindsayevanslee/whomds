@@ -21,6 +21,7 @@ Imports:
     foreign,
     ggraph,
     ggplot2,
+    GPArotation,
     grDevices,
     grid,
     httr,
