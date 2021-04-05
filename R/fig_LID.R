@@ -36,7 +36,7 @@ fig_LID <- function(LIDforgraph, LIDcutoff = 0.2, path_output, extra_file_label 
   } else {
     # plot_file_label <- paste0(path_output,"/LID_plot_", extra_file_label,".pdf")
     spreadsheet_file_label <- paste0(path_output,"/LID_above_", LIDcutoff, "_", extra_file_label,".csv")
-    title_label <- paste("Local Dependencies", extra_file_label)
+    title_label <- paste("Local Dependencies below cut-off", LIDcutoff, extra_file_label)
   }
   
   #save vector for colors
@@ -47,7 +47,7 @@ fig_LID <- function(LIDforgraph, LIDcutoff = 0.2, path_output, extra_file_label 
   if (all(igraph::components(fullgraph)$csize == 1)) {
     
     final_plot <- ggplot2::ggplot() + 
-      ggplot2::ggtitle("No LID found")
+      ggplot2::ggtitle(paste("No LID found below cut-off", LIDcutoff))
 
   } else {
     
