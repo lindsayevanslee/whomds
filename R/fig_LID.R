@@ -32,7 +32,7 @@ fig_LID <- function(LIDforgraph, LIDcutoff = 0.2, path_output, extra_file_label 
   if (is.null(extra_file_label)) {
     # plot_file_label <- paste0(path_output,"/LID_plot.pdf")
     spreadsheet_file_label <- paste0(path_output,"/LID_above_", LIDcutoff,".csv")
-    title_label <- "Local Dependencies"
+    title_label <- paste("Local Dependencies below cut-off", LIDcutoff)
   } else {
     # plot_file_label <- paste0(path_output,"/LID_plot_", extra_file_label,".pdf")
     spreadsheet_file_label <- paste0(path_output,"/LID_above_", LIDcutoff, "_", extra_file_label,".csv")
