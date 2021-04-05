@@ -181,7 +181,7 @@ table_unweightedpctn <- function(df, vars_demo,
               df %>%
                 bind_rows(
                   df %>%
-                    summarize_at(vars(-item, -demo), funs(sum(., na.rm = TRUE))) %>%
+                    summarize_at(vars(-item, -demo), list(~ sum(., na.rm = TRUE))) %>%
                     tibble::add_column(item = unique(df$item), demo = "Total", .before = 1)
                 )
             }) 

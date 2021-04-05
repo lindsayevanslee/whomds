@@ -24,9 +24,9 @@ rasch_rawscore <- function(df, vars_metric, vars_id, max_values) {
     
     df_max <- t(max_values) %>% 
       as_tibble() %>% 
-      rename_all(funs(pull(max_values,var))) %>% 
+      rename_all(list(~ pull(max_values, var))) %>% 
       slice(2) %>% 
-      mutate_all(funs(as.numeric)) %>% 
+      mutate_all(list(~ as.numeric(.))) %>% 
       mutate(!!rlang::sym(vars_id) := "MAX",
              RawScore = max_value)
     

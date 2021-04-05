@@ -35,7 +35,7 @@ rasch_DIF <- function(df, vars_metric, vars_DIF, residuals_PCM, split_strategy =
   residuals_PCM <- residuals_PCM %>% 
     as.data.frame() %>%
     tibble::rownames_to_column("person") %>% 
-    rename_at(vars(vars_metric), funs(paste0(.,"_Res")))
+    rename_at(vars(vars_metric), list(~ paste0(.,"_Res")))
   
   vars_metric_res <- colnames(residuals_PCM)[-1] #list of names of variable residuals
   

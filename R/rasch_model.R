@@ -75,7 +75,7 @@ rasch_model <- function(df, vars_metric, vars_id, print_results = TRUE, path_out
     as_tibble() %>% 
     select(var, contains("MSQ")) %>% 
     mutate_at(vars(contains("MSQ")),
-              funs(case_when(
+              list(~ case_when(
                 . > 1.1 ~ "Overfit",
                 . < 0.9 ~ "Underfit",
                 TRUE ~ "OK"

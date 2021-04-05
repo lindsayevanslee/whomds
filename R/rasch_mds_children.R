@@ -98,10 +98,13 @@ rasch_mds_children <- function(df,
   
   df <- df %>%
     mutate_at(vars(helper_varslist(vars_metric)),
-              dplyr::funs(plyr::mapvalues, .args = list(
-                from = to_NA, to = rep(NA, length(to_NA)), warn_missing = FALSE
-              ))) %>% 
-    mutate_at(vars(vars_id), funs(as.character))
+              list(~ plyr::mapvalues(., 
+                                     from = to_NA, 
+                                     to = rep(NA, length(to_NA)), 
+                                     warn_missing = FALSE)
+                   )
+              ) %>% 
+    mutate_at(vars(vars_id), list(~ as.character(.)))
   
   #remove people with too many NAs
   rm_rows <- df %>% 
