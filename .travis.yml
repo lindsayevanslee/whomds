@@ -1,13 +1,12 @@
 # R for travis: see documentation at https://docs.travis-ci.com/user/languages/r
 
 language: R
-sudo: false
 cache: packages
 cran: https://stat.ethz.ch/CRAN
 os:
   - linux
   - osx
-    osx_image: xcode12.5 
+osx_image: xcode12.5 
 after_success:
     - Rscript -e 'covr::codecov(type = "all")'
 notifications:
