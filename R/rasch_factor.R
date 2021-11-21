@@ -17,6 +17,9 @@
 #' @family rasch functions
 #' 
 #' @export
+#' 
+#' @importFrom GPArotation GPForth
+#' @importFrom psych fa factor.residuals vgQ.bimin
 rasch_factor <- function(df, vars_metric, print_results = TRUE, path_output = NULL) {
   #----------------------------
   #convert to tibble
