@@ -49,6 +49,8 @@ if (getRversion() >= "2.15.1") {
       "model_results",
       "multigroup_xsi", 
       "n_threshold",
+      "name",
+      "nodes",
       "nperHH",
       "original",
       "original_var",
@@ -76,6 +78,7 @@ if (getRversion() >= "2.15.1") {
       "variable",
       "variable_to_split",
       "vars_id",
+      "vert_clr",
       "WLE_anchored"
     )
   )
