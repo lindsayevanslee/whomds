@@ -17,8 +17,6 @@
 #' @family rasch functions
 #' 
 #' @export
-#' 
-#' @import GPArotation
 rasch_factor <- function(df, vars_metric, print_results = TRUE, path_output = NULL) {
   #----------------------------
   #convert to tibble
@@ -56,7 +54,7 @@ rasch_factor <- function(df, vars_metric, print_results = TRUE, path_output = NU
   fa_bifactor <- try(psych::fa(cor_poly$correlations,n_group_factors+1,rotate="bifactor"), silent=TRUE)    # bi-factor model
   fa_onefactor <- psych::fa(cor_poly$correlations,1,rotate="bifactor")                   # single factor model
   
-  if (any(class(fa_bifactor)=="try-error")) message("Bi-factor model unable to be computed--it is likely there are not 2 factors") 
+  if (any(class(fa_bifactor)=="try-error")) message("Bi-factor model unable to be computed") 
   
   #------------------------------------
   # local dependency based on polychoric correlations of the items

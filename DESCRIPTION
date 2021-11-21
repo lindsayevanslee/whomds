@@ -33,7 +33,6 @@ Imports:
     openxlsx,
     plyr,
     polycor,
-    psych,
     purrr,
     RColorBrewer,
     readr,
@@ -47,7 +46,8 @@ Imports:
     tidygraph,
     tidyr,
     WrightMap
-Depends: R (>= 3.2.5)
+Depends: R (>= 3.2.5),
+    psych
 BugReports: https://github.com/lindsayevanslee/whomds
 RoxygenNote: 7.1.1
 Suggests: 
