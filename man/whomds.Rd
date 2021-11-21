@@ -26,5 +26,5 @@ These functions are used to complete an iteration of Rasch Analysis for WHO Mode
 }
 
 \references{
-WHO Model Disability Survey: \url{http://www.who.int/disabilities/data/mds/en/}
+WHO Model Disability Survey: \url{https://www.who.int/health-topics/disability}
 }

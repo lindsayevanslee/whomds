@@ -48,7 +48,7 @@ Run the Rasch Model and print diagnostic results
 The Rasch Model is calculated using the function \code{eRm::PCM()}.
 }
 \references{
-Christensen, K. B., Makransky, G., & Horton, M. (2017). Critical Values for Yen’s Q 3 : Identification of Local Dependence in the Rasch Model Using Residual Correlations.  Applied Psychological Measurement, 41(3), 178-194. \url{http://doi.org/10.1177/0146621616677520}
+Christensen, K. B., Makransky, G., & Horton, M. (2017). Critical Values for Yen’s Q 3 : Identification of Local Dependence in the Rasch Model Using Residual Correlations.  Applied Psychological Measurement, 41(3), 178-194. \doi{10.1177/0146621616677520}
 }
 \seealso{
 Other rasch functions: 

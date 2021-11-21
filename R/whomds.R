@@ -15,7 +15,7 @@
 #' These functions are used to complete an iteration of Rasch Analysis for WHO Model Disability Survey (MDS). They begin with \code{rasch_*}
 #'
 #'
-#' @references WHO Model Disability Survey: \url{http://www.who.int/disabilities/data/mds/en/}
+#' @references WHO Model Disability Survey: \url{https://www.who.int/health-topics/disability}
 #'
 #' @docType package
 #' @name whomds

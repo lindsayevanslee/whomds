@@ -6,11 +6,11 @@
 <!-- badges: start -->
 
 [![Build
-Status](https://travis-ci.com/lindsayevanslee/whomds.svg?branch=master)](https://travis-ci.com/lindsayevanslee/whomds)
+Status](https://travis-ci.com/lindsayevanslee/whomds.svg?branch=master)](https://app.travis-ci.com/lindsayevanslee/whomds)
 [![AppVeyor build
 status](https://ci.appveyor.com/api/projects/status/github/lindsayevanslee/whomds?branch=master&svg=true)](https://ci.appveyor.com/project/lindsayevanslee/whomds)
-[![codecov](https://codecov.io/gh/lindsayevanslee/whomds/branch/master/graph/badge.svg)](https://codecov.io/gh/lindsayevanslee/whomds)
-[![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+[![codecov](https://codecov.io/gh/lindsayevanslee/whomds/branch/master/graph/badge.svg)](https://app.codecov.io/gh/lindsayevanslee/whomds)
+[![lifecycle](https://lifecycle.r-lib.org/articles/figures/lifecycle-stable.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
 <!-- badges: end -->
 
 ## Introduction
@@ -23,7 +23,7 @@ The Model Disability Survey (MDS) is a World Health Organization (WHO)
 general population survey instrument to assess the distribution of
 disability within a country or region, grounded in the International
 Classification of Functioning, Disability and Health. For more
-information, please go to <http://www.who.int/disabilities/data/mds/en/>
+information, please go to <https://www.who.int/health-topics/disability>
 
 ## Installation
 
