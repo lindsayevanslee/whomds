@@ -10,13 +10,6 @@
 #' @details If all values of \code{row} are NA, then an NA is returned.
 #'
 #' @family helper functions
-#'
-#' @examples
-#' x <- 1:5
-#' whomds:::helper_checkrow(row = x, check_type = "all_equal", check_value = 1)
-#'
-#' df <- data.frame(v1 = 1:5, v2 = rep(1,5), v3 = c(1,rep(2,4)))
-#' apply(df, 1, function(r) whomds:::helper_checkrow(r, check_type = "all_equal", check_value = 1))
 helper_checkrow <- function(row,
                             check_type = c("all_equal", "all_not_equal", "any_in"),
                             check_value,

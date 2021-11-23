@@ -12,6 +12,3 @@ Prints a message stating whether or not installed package is same as most update
 \description{
 Compares build date of installed package against the date of the last commit from GitHub (\url{https://github.com/lindsayevanslee/whomds})
 }
-\examples{
-\dontrun{whomds:::helper_installation()}
-}

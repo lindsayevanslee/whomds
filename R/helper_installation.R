@@ -3,8 +3,6 @@
 #' @description Compares build date of installed package against the date of the last commit from GitHub (\url{https://github.com/lindsayevanslee/whomds})
 #'
 #' @return Prints a message stating whether or not installed package is same as most updated version from Github
-#'
-#' @examples \dontrun{whomds:::helper_installation()}
 helper_installation <- function() {
   
   #capture last commit time
