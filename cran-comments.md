@@ -2,43 +2,14 @@
 
 This is a resubmission. In this version I addressed the following comments from CRAN:
 
-* Added reference links to the Description field of DESCRIPTION
+* Removed examples from unexported functions helper_checkrow() and helper_installation()
 
-* Referred only to the file LICENSE in the License field of DESCRIPTION
+* Made writing results to the user's machine the non-default behavior for all relevant functions (via parameter print_results = FALSE). Checked examples, tests and vignettes for export behavior, and none was found.
 
-Additionally, further improvements were made:
+Additionally I made the following improvements:
 
-* Implement ability to calculate a specific version of a cutoff (parameter LIDcutoff) in rasch_model.R
+* Corrected a typo in the documentation for rasch_split()
 
-* Change which functions' parameters are inherited for documentation in rasch_quality_children_print.R
-
-* Updated dplyr::select statements in rasch_mds.R and rasch_factor.R to suppress tidyverse message about ambiguous column selection
-
-* Updated rasch_mds.R to export files that indicate the specifications for the parameters testlet_strategy, recod_strategy, split_strategy, and drop_vars
-
-* Fixed a bug in rasch_model.R where local item independence (LID) results were not printing according to specified cut-off (parameter LIDcutoff)
-
-* Added psych package to Depends field of DESCRIPTION, because necessary internal function was not able to be found when calling rasch_factor() if psych was in Imports
-
-* Imported necessary function from GPArotation in rasch_factor()
-
-* Change package used to print figure outputted by fig_LID.R
-
-* Replaced deprecated dplyr::funs() with list(~....) throughout package functions
-
-* Updated title in figures outputted by fig_LID.R
-
-* Updated rasch_mds.R to explicitly call packages for several tidyverse functions
-
-* Fixed typo in documentation title in rasch_model.R
-
-* Fixed typo in fig_LID.R documentation
-
-* Fixed a typo in a comment in fig_LID.R
-
-* Added more objects to whomds.R to suppress "no visible binding for global variable..." NOTE
-
-* Updated URLs in startup message, README and rasch_model(), and whomds.R
 
 ## Test environments
 * macOS Big Sur 11.6 (local install), R 4.0.3
