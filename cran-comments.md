@@ -10,6 +10,8 @@ Additionally I made the following improvements:
 
 * Corrected a typo in the documentation for rasch_split()
 
+* Updated image link for travis-ci status icon
+
 
 ## Test environments
 * macOS Big Sur 11.6 (local install), R 4.0.3

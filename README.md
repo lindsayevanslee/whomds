@@ -6,7 +6,7 @@
 <!-- badges: start -->
 
 [![Build
-Status](https://travis-ci.com/lindsayevanslee/whomds.svg?branch=master)](https://app.travis-ci.com/lindsayevanslee/whomds)
+Status](https://app.travis-ci.com/lindsayevanslee/whomds.svg?branch=master)](https://app.travis-ci.com/lindsayevanslee/whomds)
 [![AppVeyor build
 status](https://ci.appveyor.com/api/projects/status/github/lindsayevanslee/whomds?branch=master&svg=true)](https://ci.appveyor.com/project/lindsayevanslee/whomds)
 [![codecov](https://codecov.io/gh/lindsayevanslee/whomds/branch/master/graph/badge.svg)](https://app.codecov.io/gh/lindsayevanslee/whomds)
