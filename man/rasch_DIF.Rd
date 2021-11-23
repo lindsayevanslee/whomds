@@ -10,7 +10,7 @@ rasch_DIF(
   vars_DIF,
   residuals_PCM,
   split_strategy = NULL,
-  print_results = TRUE,
+  print_results = FALSE,
   path_output = NULL,
   breaks = 6
 )
@@ -26,7 +26,7 @@ rasch_DIF(
 
 \item{split_strategy}{a named list giving the strategy to take for spliting variables by categories, passed to \code{rasch_split()}. One element of the list per variable to split by. Each element of the list must be a character vector of column names to split. The names of the list are the variables to split each group of variables by. Default is NULL, to not split items.}
 
-\item{print_results}{a logical value indicating whether or not to print various files displaying results from the Rasch Model. Default is TRUE, to print the files.}
+\item{print_results}{a logical value indicating whether or not to print various files displaying results from the Rasch Model. Default is FALSE, to not print the files.}
 
 \item{path_output}{a string with the path to the output folder. Default is NULL.}
 

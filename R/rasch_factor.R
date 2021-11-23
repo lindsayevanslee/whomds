@@ -20,7 +20,7 @@
 #' 
 #' @importFrom GPArotation GPForth
 #' @importFrom psych fa factor.residuals vgQ.bimin
-rasch_factor <- function(df, vars_metric, print_results = TRUE, path_output = NULL) {
+rasch_factor <- function(df, vars_metric, print_results = FALSE, path_output = NULL) {
   #----------------------------
   #convert to tibble
   if (!tibble::is_tibble(df)) df <- df %>% as_tibble()

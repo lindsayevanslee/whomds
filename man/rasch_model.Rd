@@ -8,7 +8,7 @@ rasch_model(
   df,
   vars_metric,
   vars_id,
-  print_results = TRUE,
+  print_results = FALSE,
   path_output = NULL,
   LIDcutoff = 0.2
 )
@@ -20,7 +20,7 @@ rasch_model(
 
 \item{vars_id}{a string with column name uniquely identifying individuals}
 
-\item{print_results}{a logical value indicating whether or not to print various files displaying results from the Rasch Model. Default is TRUE, to print the files.}
+\item{print_results}{a logical value indicating whether or not to print various files displaying results from the Rasch Model. Default is FALSE, to not print the files.}
 
 \item{path_output}{a string with the path to the output folder. Default is NULL.}
 

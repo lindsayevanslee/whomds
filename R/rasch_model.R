@@ -27,7 +27,7 @@
 #' @export
 #' 
 #' @import eRm
-rasch_model <- function(df, vars_metric, vars_id, print_results = TRUE, path_output = NULL, LIDcutoff = 0.2) {
+rasch_model <- function(df, vars_metric, vars_id, print_results = FALSE, path_output = NULL, LIDcutoff = 0.2) {
 
   #convert to tibble
   if (!tibble::is_tibble(df)) df <- df %>% as_tibble()

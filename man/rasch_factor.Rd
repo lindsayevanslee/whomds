@@ -4,14 +4,14 @@
 \alias{rasch_factor}
 \title{Calculate a factor analysis for a Rasch Model}
 \usage{
-rasch_factor(df, vars_metric, print_results = TRUE, path_output = NULL)
+rasch_factor(df, vars_metric, print_results = FALSE, path_output = NULL)
 }
 \arguments{
 \item{df}{a data frame of individual survey data, where each row is an individual}
 
 \item{vars_metric}{a character vector of items to use in the Rasch Analysis}
 
-\item{print_results}{a logical value indicating whether or not to print various files displaying results from the Rasch Model. Default is TRUE, to print the files.}
+\item{print_results}{a logical value indicating whether or not to print various files displaying results from the Rasch Model. Default is FALSE, to not print the files.}
 
 \item{path_output}{a string with the path to the output folder. Default is NULL.}
 }

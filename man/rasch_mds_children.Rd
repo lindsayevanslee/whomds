@@ -15,7 +15,7 @@ rasch_mds_children(
   resp_opts = 1:5,
   has_at_least_one = 4:5,
   max_NA = 10,
-  print_results = TRUE,
+  print_results = FALSE,
   path_parent = NULL,
   model_name = NULL,
   testlet_strategy = NULL,
@@ -46,7 +46,7 @@ rasch_mds_children(
 
 \item{max_NA}{a numeric value for the maximum number of NAs allowed per individual among \code{vars_metric}. Default is 2.}
 
-\item{print_results}{a logical value indicating whether or not to print various files displaying results from the Rasch Model. Default is TRUE, to print the files.}
+\item{print_results}{a logical value indicating whether or not to print various files displaying results from the Rasch Model. Default is FALSE, to not print the files.}
 
 \item{path_parent}{a string with the path to the folder where results from multiple models will be outputted. Default is NULL}
 

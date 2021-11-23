@@ -6,7 +6,7 @@
 #' @param vars_DIF a string with the column names to use for analyzing differential item functioning (DIF). Default is NULL, to skip analysis of DIF.
 #' @param resp_opts a numeric vector of possible response options for \code{vars_metric}. Must begin with 1. Default is 1:5
 #' @param max_NA a numeric value for the maximum number of NAs allowed per individual among \code{vars_metric}. Default is 2.
-#' @param print_results a logical value indicating whether or not to print various files displaying results from the Rasch Model. Default is TRUE, to print the files.
+#' @param print_results a logical value indicating whether or not to print various files displaying results from the Rasch Model. Default is FALSE, to not print the files.
 #' @param path_parent a string with the path to the folder where results from multiple models will be outputted. Default is NULL
 #' @param model_name a string with a name for the model, which is used to create a new folder for model output. Default is NULL.
 #' @param testlet_strategy a list giving the strategy to take for creating testlets, passed to \code{rasch_testlet()}. One element of the list per testlet to create. Each element of the list must be a character vector of column names to use for the testlet. Optionally, name the element of the list to give the name of the new testlet. Otherwise, the new testlet will be the original column names separated by "_". Default is NULL, to not create testlets.
@@ -35,7 +35,7 @@ rasch_mds <- function(df,
                       vars_DIF = NULL,
                       resp_opts = 1:5,
                       max_NA = 2,
-                      print_results = TRUE,
+                      print_results = FALSE,
                       path_parent = NULL,
                       model_name = NULL,
                       testlet_strategy = NULL, 

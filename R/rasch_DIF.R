@@ -18,7 +18,7 @@
 #' @import dplyr
 #' 
 #' @note Currently the calculation of the class intervals is quite slow. Reducing the number of breaks can improve speed.
-rasch_DIF <- function(df, vars_metric, vars_DIF, residuals_PCM, split_strategy = NULL, print_results = TRUE, path_output = NULL, breaks = 6) {
+rasch_DIF <- function(df, vars_metric, vars_DIF, residuals_PCM, split_strategy = NULL, print_results = FALSE, path_output = NULL, breaks = 6) {
   
   #convert to tibble
   if (!tibble::is_tibble(df)) df <- df %>% as_tibble()
