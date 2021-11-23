@@ -25,7 +25,7 @@ a named list with:
 Split survey items by categories for a Rasch Model
 }
 \details{
-If significant differential item functioning (DIF) is observed, it may be desirable to split variables based on the charactersitic for which DIF is observed. For example, if men and women have significantly different patterns of responses to items, then it may be desirable to split items by sex. This function performs that variable splitting.
+If significant differential item functioning (DIF) is observed, it may be desirable to split variables based on the characteristic for which DIF is observed. For example, if men and women have significantly different patterns of responses to items, then it may be desirable to split items by sex. This function performs that variable splitting.
 }
 \seealso{
 Other rasch functions: 

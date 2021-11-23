@@ -4,7 +4,7 @@
 #' @inheritParams rasch_mds
 #' @inheritParams rasch_testlet
 #' 
-#' @details If significant differential item functioning (DIF) is observed, it may be desirable to split variables based on the charactersitic for which DIF is observed. For example, if men and women have significantly different patterns of responses to items, then it may be desirable to split items by sex. This function performs that variable splitting.
+#' @details If significant differential item functioning (DIF) is observed, it may be desirable to split variables based on the characteristic for which DIF is observed. For example, if men and women have significantly different patterns of responses to items, then it may be desirable to split items by sex. This function performs that variable splitting.
 #'
 #' @return a named list with:
 #' \item{df}{new \code{df} after splitting the desired variables}
