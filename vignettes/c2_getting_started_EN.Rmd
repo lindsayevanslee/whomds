@@ -30,22 +30,10 @@ To use the package provided by WHO, `R` must be installed from the [Comprehensiv
 
 # What is a package and how do I install one?
 
-A "package" is a collection of `R` functions, data and code with a specific purpose and in a well-defined format. There are thousands of packages for `R` that have been written by `R` users. People write packages in order to share codes they have written that make specific tasks easier. WHO has written a package in order to make analysis of the data from the MDS easier. The package written by WHO is called `whomds`. It is currently in the development phase, so the way to download it is currently a bit different than for most other packages that are no longer in the development phase. To install `whomds`, first the package `devtools` must be installed by running the following code in the console:
+A "package" is a collection of `R` functions, data and code with a specific purpose and in a well-defined format. There are thousands of packages for `R` that have been written by `R` users. People write packages in order to share codes they have written that make specific tasks easier. WHO has written a package in order to make analysis of the data from the MDS easier. The package written by WHO is called `whomds`. To install the package, run the following code in the console:
 
-```{r install-devtools}
-install.packages("devtools")
-```
-
-`devtools` contains the function necessary to install the WHO package. Once `devtools` is installed, then `whomds` can be installed by running the following code in the console:
-
-```{r install-whomds}
-devtools::install_github("lindsayevanslee/whomds")
-```
-
-If the above command does not work, there is another way to install the package manually. Go to the web page for this package on Github at the link: [https://github.com/lindsayevanslee/whomds](https://github.com/lindsayevanslee/whomds). On the right, click the green button that says "Clone or download", and then click "Download ZIP". Unzip the .zip file that is downloaded, and then in `R` type the following command, but typing your own path to the folder that you just unzipped:
-
-```{r install-whomds-manually}
-devtools::install("C:/Users/leel/Downloads/whomds-master") #use path to unzipped folder downloaded from Github
+```{r install-cran}
+install.packages("whomds")
 ```
 
 

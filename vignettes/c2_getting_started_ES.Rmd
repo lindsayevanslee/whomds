@@ -30,22 +30,10 @@ Para usar el paquete provisto por la OMS, `R` debe instalarse en el [Comprehensi
 
 # ¿Qué es un paquete y cómo instalo uno?
 
-Un "paquete" es una colección de funciones, datos y código `R` con un propósito específico y en un formato bien definido. Hay miles de paquetes para `R` que han sido escritos por usuarios de `R`. Las personas escriben paquetes para compartir los códigos que han escrito que facilitan las tareas específicas. La OMS ha escrito un paquete para facilitar el análisis de los datos del MDS. El paquete escrito por la OMS se llama `whomds`. Actualmente se encuentra en la fase de desarrollo, por lo que la forma de descargarlo es un poco diferente a la de la mayoría de los otros paquetes que ya no están en la fase de desarrollo. Para instalar `whomds`, primero se debe instalar el paquete `devtools` ejecutando el siguiente código en la consola:
+Un "paquete" es una colección de funciones, datos y código `R` con un propósito específico y en un formato bien definido. Hay miles de paquetes para `R` que han sido escritos por usuarios de `R`. Las personas escriben paquetes para compartir los códigos que han escrito que facilitan las tareas específicas. La OMS ha escrito un paquete para facilitar el análisis de los datos del MDS. El paquete escrito por la OMS se llama `whomds`. Se puede instalar `whomds` ejecutando el siguiente código en la consola:
 
-```{r install-devtools}
-install.packages("devtools")
-```
-
-`devtools` contiene la función necesaria para instalar el paquete de OMS. Una vez que se haya instalado `devtools`, entonces se puede instalar `whomds` ejecutando el siguiente código en la consola:
-
-```{r install-whomds}
-devtools::install_github("lindsayevanslee/whomds")
-```
-
-Si el comando anterior no funciona, hay otra forma de instalar el paquete manualmente. Va a la página web de este paquete en Github en el enlace: [https://github.com/lindsayevanslee/whomds](https://github.com/lindsayevanslee/whomds). A la derecha, haz clic en el botón verde que dice "Clone or download" y luego haz clic en "Download ZIP". Descomprima el archivo .zip que se ha descargado, y luego escribe el siguiente comando en `R`, pero escribe tu propia ruta a la carpeta que acabas de descomprimir:
-
-```{r install-whomds-manually}
-devtools::install("C:/Users/leel/Downloads/whomds-master") #utiliza tu propia ruta a la carpeta descomprimida
+```{r install-cran}
+install.packages("whomds")
 ```
 
 

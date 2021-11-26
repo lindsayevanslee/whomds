@@ -27,8 +27,7 @@ information, please go to <https://www.who.int/health-topics/disability>
 
 ## Installation
 
-It is expected the package will soon be uploaded to CRAN. Once available
-there, you can install with:
+You can install the release version of the package from CRAN with:
 
 ``` r
 install.packages("whomds")
