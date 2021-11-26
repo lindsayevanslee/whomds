@@ -1,16 +1,13 @@
-## Resubmission
+## Update
 
-This is a resubmission. In this version I addressed the following comments from CRAN:
+This is an updated package version. In this version I addressed the following feedback from CRAN:
 
-* Removed examples from unexported functions helper_checkrow() and helper_installation()
+* Updated DESCRIPTION to list GPL-3 license and put WHO license info in LICENSE.note
 
-* Made writing results to the user's machine the non-default behavior for all relevant functions (via parameter print_results = FALSE). Checked examples, tests and vignettes for export behavior, and none was found.
+I also made the following minor changes:
 
-Additionally I made the following improvements:
-
-* Corrected a typo in the documentation for rasch_split()
-
-* Updated image link for travis-ci status icon
+* Referred to package installation from CRAN
+* Added NEWS.md file
 
 
 ## Test environments
