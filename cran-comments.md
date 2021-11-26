@@ -54,16 +54,12 @@ There were 3 NOTEs when testing on macOS and ubuntu through travis-ci and on Win
 There was 1 NOTE when run through win-builder:
 
 * checking CRAN incoming feasibility ... NOTE
-  "Maintainer: 'Lindsay Lee <lindsayevanslee@gmail.com>' New submission"
-  
-  "Non-FOSS package license (file LICENSE)"
-  
-  This is the license that has been checked by the World Health Organization legal department.
-  
-  "Possibly mis-spelled words in DESCRIPTION:   Andrich (12:25) MDS (6:43) Rasch (12:5)" 
-  
-  "Andrich" is an author name in one of the included references,  "MDS" is an abbreviation of the survey whose data will be analyzed with this package, and "Rasch" is the name of the method this package implements. 
 
+  "Maintainer: 'Lindsay Lee <lindsayevanslee@gmail.com>'
+
+  Days since last update: 3"
+  
+  I am releasing updates so soon at CRAN's request.
 
 
 ## Downstream dependencies 
