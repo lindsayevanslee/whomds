@@ -1,8 +1,8 @@
 #' Calculate table of percentages or N of response distribution for survey items, survey weighted, disaggregated
 #'
-#' @param vars_ids a character vector of cluster ids, passed to a \code{survey::svydesign} object
-#' @param vars_strata a character vector of strata ids, passed to a \code{survey::svydesign} object
-#' @param vars_weights a character vector of survey weight ids, passed to a \code{survey::svydesign} object
+#' @param vars_ids a character vector of cluster ids, passed to \code{srvyr::as_survey_design()}
+#' @param vars_strata a character vector of strata ids, passed to \code{srvyr::as_survey_design()}
+#' @param vars_weights a character vector of survey weight ids, passed to \code{srvyr::as_survey_design()}
 #' @param formula_vars a character vector of variables to calculate the percentages of each level for
 #' @param ... captures expressions to pass to \code{dplyr::filter()} or \code{dplyr::transmute()}, depending on the value of argument \code{willfilter}. See Details.
 #' @param formula_vars_levels a vector of the levels of the the \code{formula_vars}

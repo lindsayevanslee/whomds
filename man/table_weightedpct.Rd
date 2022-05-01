@@ -25,11 +25,11 @@ table_weightedpct(
 \arguments{
 \item{df}{a data frame of individual survey data, where each row is an individual}
 
-\item{vars_ids}{a character vector of cluster ids, passed to a \code{survey::svydesign} object}
+\item{vars_ids}{a character vector of cluster ids, passed to \code{srvyr::as_survey_design()}}
 
-\item{vars_strata}{a character vector of strata ids, passed to a \code{survey::svydesign} object}
+\item{vars_strata}{a character vector of strata ids, passed to \code{srvyr::as_survey_design()}}
 
-\item{vars_weights}{a character vector of survey weight ids, passed to a \code{survey::svydesign} object}
+\item{vars_weights}{a character vector of survey weight ids, passed to \code{srvyr::as_survey_design()}}
 
 \item{formula_vars}{a character vector of variables to calculate the percentages of each level for}
 
