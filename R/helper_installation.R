@@ -5,6 +5,10 @@
 #' @return Prints a message stating whether or not installed package is same as most updated version from Github
 helper_installation <- function() {
   
+  #check packages httr and lubridate are installed
+  rlang::check_installed("httr", reason = "to use helper_installation()")
+  rlang::check_installed("lubridate", reason = "to use helper_installation()")
+  
   #capture last commit time
   commit <- httr::content(httr::GET(url = "https://api.github.com/repos/lindsayevanslee/whomds/git/refs/heads/master"))
   commit_info <- httr::content(httr::GET(url = commit$object$url))

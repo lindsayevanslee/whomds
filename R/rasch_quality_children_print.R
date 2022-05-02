@@ -28,13 +28,13 @@ rasch_quality_children_print <- function(df_nest, vars_metric, vars_group, TAM_m
       }
       
       utils::capture.output(summary(df_nest$mod_multigroup[[r]]), file = paste0(path_output, "/", TAM_model,"_summary_multigroup.txt"))
-      openxlsx::write.xlsx(df_nest$itemfit_multigroup[[r]], file = paste0(path_output, "/", TAM_model,"_itemfit_multigroup.xlsx"), row.names = TRUE, keepNA = TRUE)
-      openxlsx::write.xlsx(df_nest$cor_multigroup[[r]], file = paste0(path_output, "/", TAM_model,"_residual_correlation_multigroup.xlsx"), row.names = TRUE, keepNA = TRUE)
-      openxlsx::write.xlsx(df_nest$xsithresh_multigroup[[r]], file = paste0(path_output, "/", TAM_model,"_xsi_thresholds_multigroup.xlsx"), row.names = TRUE, keepNA = TRUE)
-      openxlsx::write.xlsx(df_nest$eigen_multigroup[[r]], file = paste0(path_output, "/", TAM_model,"_eigenvalues_multigroup.xlsx"), row.names = TRUE, keepNA = TRUE)
-      openxlsx::write.xlsx(df_nest$PCA_multigroup[[r]], file = paste0(path_output, "/", TAM_model,"_first_vector_loadings_multigroup.xlsx"), row.names = TRUE, keepNA = TRUE)
+      utils::write.csv(df_nest$itemfit_multigroup[[r]], file = paste0(path_output, "/", TAM_model,"_itemfit_multigroup.csv"))
+      utils::write.csv(df_nest$cor_multigroup[[r]], file = paste0(path_output, "/", TAM_model,"_residual_correlation_multigroup.csv"))
+      utils::write.csv(df_nest$xsithresh_multigroup[[r]], file = paste0(path_output, "/", TAM_model,"_xsi_thresholds_multigroup.csv"))
+      utils::write.csv(df_nest$eigen_multigroup[[r]], file = paste0(path_output, "/", TAM_model,"_eigenvalues_multigroup.csv"))
+      utils::write.csv(df_nest$PCA_multigroup[[r]], file = paste0(path_output, "/", TAM_model,"_first_vector_loadings_multigroup.csv"))
       utils::capture.output(df_nest$WLE_multigroup[[r]],file = paste0(path_output, "/", TAM_model,"_WLE_multigroup.txt"))
-      openxlsx::write.xlsx(df_nest$EAP_multigroup[[r]], file = paste0(path_output, "/", TAM_model,"_EAP_reliability_multigroup.xlsx"), row.names = TRUE, keepNA = TRUE)
+      utils::write.csv(df_nest$EAP_multigroup[[r]], file = paste0(path_output, "/", TAM_model,"_EAP_reliability_multigroup.csv"))
       
       #save Thurstonian thresholds (always ordered) and save
       utils::write.csv(df_nest$tthresh_multigroup[[r]],
@@ -135,12 +135,12 @@ rasch_quality_children_print <- function(df_nest, vars_metric, vars_group, TAM_m
   
   if (length(vars_metric) > 1) {
     
-    openxlsx::write.xlsx(df_nest$itemfit_anchored, file = paste0(path_output, "/", TAM_model,"_itemfit_anchored.xlsx"), row.names = TRUE, keepNA = TRUE)
-    openxlsx::write.xlsx(df_nest$cor_anchored, file = paste0(path_output, "/", TAM_model,"_residual_correlation_anchored.xlsx"), row.names = TRUE, keepNA = TRUE)
-    openxlsx::write.xlsx(df_nest$xsithresh_anchored, file = paste0(path_output, "/", TAM_model,"_xsi_thresholds_anchored.xlsx"), row.names = TRUE, keepNA = TRUE)
-    openxlsx::write.xlsx(df_nest$eigen_anchored, file = paste0(path_output, "/", TAM_model,"_eigenvalues_anchored.xlsx"), row.names = TRUE, keepNA = TRUE)
-    openxlsx::write.xlsx(df_nest$PCA_anchored, file = paste0(path_output, "/", TAM_model,"_first_vector_loadings_anchored.xlsx"), row.names = TRUE, keepNA = TRUE)
+    utils::write.csv(df_nest$itemfit_anchored, file = paste0(path_output, "/", TAM_model,"_itemfit_anchored.csv"))
+    utils::write.csv(df_nest$cor_anchored, file = paste0(path_output, "/", TAM_model,"_residual_correlation_anchored.csv"))
+    utils::write.csv(df_nest$xsithresh_anchored, file = paste0(path_output, "/", TAM_model,"_xsi_thresholds_anchored.csv"))
+    utils::write.csv(df_nest$eigen_anchored, file = paste0(path_output, "/", TAM_model,"_eigenvalues_anchored.csv"))
+    utils::write.csv(df_nest$PCA_anchored, file = paste0(path_output, "/", TAM_model,"_first_vector_loadings_anchored.csv"))
     utils::capture.output(df_nest$WLE_anchored,file = paste0(path_output, "/", TAM_model,"_WLE_anchored.txt"))
-    openxlsx::write.xlsx(df_nest$EAP_anchored, file = paste0(path_output, "/", TAM_model,"_EAP_reliability_anchored.xlsx"), row.names = TRUE, keepNA = TRUE)
+    utils::write.csv(df_nest$EAP_anchored, file = paste0(path_output, "/", TAM_model,"_EAP_reliability_anchored.csv"))
   }
 }
