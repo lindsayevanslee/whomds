@@ -47,7 +47,7 @@ table_weightedpct(
 
 \item{spread_key}{a string with variable name to pass to \code{key} argument of \code{tidyr::spread()}. Default is \code{NULL}.}
 
-\item{spread_value}{a string with variable name to pass to \code{value} argument of \code{tidyr::spread()}. Default is "prop" (the columm of percentages created within the function)}
+\item{spread_value}{a string with variable name to pass to \code{value} argument of \code{tidyr::spread()}. Default is "prop" (the column of percentages created within the function)}
 
 \item{arrange_vars}{a character vector with variables to pass to \code{dplyr::arrange()}. Default is NULL.}
 

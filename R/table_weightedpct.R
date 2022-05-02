@@ -10,7 +10,7 @@
 #' @param pct a logical variable indicating whether or not to calculate weighted percentages. Default is \code{TRUE} for weighted percentages. Set to \code{FALSE} for weighted N.
 #' @param willfilter a logical variable that tells the function whether or not to filter or transmute the data. Leave as default \code{NULL} to not filter or transmute. Set as \code{TRUE} to filter and \code{FALSE} to transmute. See Details.
 #' @param spread_key a string with variable name to pass to \code{key} argument of \code{tidyr::spread()}. Default is \code{NULL}.
-#' @param spread_value a string with variable name to pass to \code{value} argument of \code{tidyr::spread()}. Default is "prop" (the columm of percentages created within the function)
+#' @param spread_value a string with variable name to pass to \code{value} argument of \code{tidyr::spread()}. Default is "prop" (the column of percentages created within the function)
 #' @param arrange_vars a character vector with variables to pass to \code{dplyr::arrange()}. Default is NULL.
 #' @param include_SE a logical variable indicating whether to include the standard errors in the table. Default is FALSE. Currently does not work when adding totals, spreading or transmutting.
 #' @inheritParams rasch_mds
