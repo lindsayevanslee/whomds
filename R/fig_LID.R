@@ -6,7 +6,7 @@
 #' @param extra_file_label a string to tack on to the end of names of files outputted and the title of the plot. Default is NULL.
 #' @param vertex_print_grey a character vector with the names of vertices to print in \code{"lightgrey"}, with all others printed in \code{"skyblue"}. If left as default NULL, all vertices will be printed in \code{"lightgrey"}.
 #'
-#' @return Returns a ggplot graph showing the items with correlation > \code{LIDcutoff} and prints a csv of the corresponding correlations
+#' @return Returns a ggplot graph showing the items with correlation >= \code{LIDcutoff} and prints a csv of the corresponding correlations
 #' 
 #' @details This function could be applied to visualize any kind of correlations. But within the context of the Rasch Analysis used for the WHO Model Disability Survey, the  residual correlations are used when analyzing item dependence.
 #' @export
@@ -32,11 +32,11 @@ fig_LID <- function(LIDforgraph, LIDcutoff = 0.2, path_output, extra_file_label 
   if (is.null(extra_file_label)) {
     # plot_file_label <- paste0(path_output,"/LID_plot.pdf")
     spreadsheet_file_label <- paste0(path_output,"/LID_above_", LIDcutoff,".csv")
-    title_label <- paste("Local Dependencies below cut-off", LIDcutoff)
+    title_label <- paste("Local Dependencies above cut-off", LIDcutoff)
   } else {
     # plot_file_label <- paste0(path_output,"/LID_plot_", extra_file_label,".pdf")
     spreadsheet_file_label <- paste0(path_output,"/LID_above_", LIDcutoff, "_", extra_file_label,".csv")
-    title_label <- paste("Local Dependencies below cut-off", LIDcutoff, extra_file_label)
+    title_label <- paste("Local Dependencies above cut-off", LIDcutoff, extra_file_label)
   }
   
   #save vector for colors
@@ -47,7 +47,7 @@ fig_LID <- function(LIDforgraph, LIDcutoff = 0.2, path_output, extra_file_label 
   if (all(igraph::components(fullgraph)$csize == 1)) {
     
     final_plot <- ggplot2::ggplot() + 
-      ggplot2::ggtitle(paste("No LID found below cut-off", LIDcutoff)) 
+      ggplot2::ggtitle(paste("No LID found above cut-off", LIDcutoff)) 
 
   } else {
     

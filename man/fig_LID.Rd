@@ -24,7 +24,7 @@ fig_LID(
 \item{vertex_print_grey}{a character vector with the names of vertices to print in \code{"lightgrey"}, with all others printed in \code{"skyblue"}. If left as default NULL, all vertices will be printed in \code{"lightgrey"}.}
 }
 \value{
-Returns a ggplot graph showing the items with correlation > \code{LIDcutoff} and prints a csv of the corresponding correlations
+Returns a ggplot graph showing the items with correlation >= \code{LIDcutoff} and prints a csv of the corresponding correlations
 }
 \description{
 Print a graph showing significant correlations between survey items
