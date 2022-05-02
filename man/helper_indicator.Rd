@@ -21,7 +21,7 @@ helper_indicator(
 
 \item{mapvalues_to}{vector to pass to \code{plyr::mapvalues()} argument \code{to}}
 
-\item{make_factor}{a logical indicating whethre resulting indicators should be factors. Default is \code{TRUE}.}
+\item{make_factor}{a logical indicating whether resulting indicators should be factors. Default is \code{TRUE}.}
 }
 \value{
 a data frame with new columns that are the indicators from \code{vars_indicators}, with the same names pasted with \code{"_ind"}.

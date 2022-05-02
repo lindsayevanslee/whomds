@@ -4,7 +4,7 @@
 #' @param vars_indicators a character vector of the variables from \code{df} to create indicators for
 #' @param mapvalues_from vector to pass to \code{plyr::mapvalues()} argument \code{from}
 #' @param mapvalues_to vector to pass to \code{plyr::mapvalues()} argument \code{to}
-#' @param make_factor a logical indicating whethre resulting indicators should be factors. Default is \code{TRUE}.
+#' @param make_factor a logical indicating whether resulting indicators should be factors. Default is \code{TRUE}.
 #'
 #' @return a data frame with new columns that are the indicators from \code{vars_indicators}, with the same names pasted with \code{"_ind"}.
 #' @export
@@ -14,6 +14,9 @@
 #' mapvalues_from = 1:5, 
 #' mapvalues_to = c(0,0,0,1,1))
 helper_indicator <- function(df, vars_indicators, mapvalues_from , mapvalues_to, make_factor = TRUE) {
+  
+  #check package plyr is installed
+  rlang::check_installed("plyr", reason = "to use helper_indicator()")
   
   vars_indicators_new <- paste0(vars_indicators, "_ind")
   
