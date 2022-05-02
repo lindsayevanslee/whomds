@@ -72,7 +72,7 @@ fig_density <- function(df, score, var_color = NULL, var_facet = NULL,
   #Continue plot with formatting
   plot_density <- plot_density + 
     scale_x_continuous(limits = c(min(0, min(cutoffs)), 100)) +
-    labs(x = "Score") +
+    labs(x = x_lab) +
     theme(
       panel.background = element_rect(fill = "transparent"), # bg of the panel
       panel.grid.major = element_line(colour = "grey90"),
