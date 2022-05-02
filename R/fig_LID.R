@@ -99,7 +99,7 @@ fig_LID <- function(LIDforgraph, LIDcutoff = 0.2, path_output, extra_file_label 
   LIDforgraph[is.na(LIDforgraph)] <- 0
   LIDforgraph[which(LIDforgraph < LIDcutoff)] <- 0
   
-  utils::write.csv(LIDforgraph, spreadsheet_file_label, row.names=TRUE)
+  utils::write.csv(LIDforgraph, spreadsheet_file_label)
   
   
   return(final_plot)

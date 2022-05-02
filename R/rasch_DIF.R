@@ -189,9 +189,9 @@ rasch_DIF <- function(df, vars_metric, vars_DIF, residuals_PCM, split_strategy =
   
   if (print_results) {
     
-    utils::write.csv(df_DIF_class, file = paste0(path_output,"/Anova_Residuals.csv"), row.names = FALSE)
+    readr::write_csv(df_DIF_class, file = paste0(path_output,"/Anova_Residuals.csv"))
     
-    utils::write.csv(tab_aov_DIF, file = paste0(path_output, "/DIF_rumm.csv"), row.names = FALSE)
+    readr::write_csv(tab_aov_DIF, file = paste0(path_output, "/DIF_rumm.csv"))
     
   }
   

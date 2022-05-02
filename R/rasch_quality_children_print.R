@@ -38,8 +38,7 @@ rasch_quality_children_print <- function(df_nest, vars_metric, vars_group, TAM_m
       
       #save Thurstonian thresholds (always ordered) and save
       utils::write.csv(df_nest$tthresh_multigroup[[r]],
-                paste0(path_output, "/ThurstonianThresholds_multigroup.csv"),
-                row.names = TRUE)
+                paste0(path_output, "/ThurstonianThresholds_multigroup.csv"))
       
       
       #generate matrix for color of symbols
@@ -96,8 +95,7 @@ rasch_quality_children_print <- function(df_nest, vars_metric, vars_group, TAM_m
       
       #save Thurstonian thresholds (always ordered)
       utils::write.csv(df_nest$tthresh_anchored[[r]],
-                paste0(path_output, "/ThurstonianThresholds_anchored",age_name, ".csv"),
-                row.names = TRUE)
+                paste0(path_output, "/ThurstonianThresholds_anchored",age_name, ".csv"))
       
       
       #generate matrix for color of symbols

@@ -234,7 +234,7 @@ rasch_model <- function(df, vars_metric, vars_id, print_results = FALSE, path_ou
     utils::write.csv(Residuals_PCM_Recoded,file=paste0(path_output,"/Residuals_PCM.csv"))
     
     #data with abilities
-    utils::write.csv(data_persons, paste0(path_output,"/DatawAbilities.csv"),row.names = FALSE)
+    readr::write_csv(data_persons, paste0(path_output,"/DatawAbilities.csv"))
     
     #person parameters
     utils::write.csv(Person_Abilities, file=paste0(path_output,"/PersonPara.csv"))
