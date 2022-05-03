@@ -34,7 +34,7 @@ rasch_mds_children(
 
 \item{vars_metric_common}{a character vector the common items among all individuals}
 
-\item{vars_metric_grouped}{a named list of character vectors with the items to use in the Rasch Analysis per group. The list should have names corresponding to the different groups, and contain character vectors of the corrsponding items for each group.}
+\item{vars_metric_grouped}{a named list of character vectors with the items to use in the Rasch Analysis per group. The list should have names corresponding to the different groups, and contain character vectors of the corresponding items for each group.}
 
 \item{TAM_model}{a string with the type of IRT model to use, passed to \code{irtmodel} argument of \code{TAM::tam()}. Default is \code{"PCM2"}}
 
@@ -58,7 +58,7 @@ rasch_mds_children(
 
 \item{drop_vars}{a character vector of column names to drop from the Rasch Analysis. Default is NULL, to not drop items.}
 
-\item{split_strategy}{a named list giving the strategy to take for spliting variables by categories, passed to \code{rasch_split()}. One element of the list per variable to split by. Each element of the list must be a character vector of column names to split. The names of the list are the variables to split each group of variables by. Default is NULL, to not split items.}
+\item{split_strategy}{a named list giving the strategy to take for splitting variables by categories, passed to \code{rasch_split()}. One element of the list per variable to split by. Each element of the list must be a character vector of column names to split. The names of the list are the variables to split each group of variables by. Default is NULL, to not split items.}
 
 \item{comment}{a string giving a comment describing the analysis, printed to a txt file. Default is NULL, to not print a comment.}
 }

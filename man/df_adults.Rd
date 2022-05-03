@@ -110,6 +110,6 @@ A tibble with 2500 rows and 90 variables:
 df_adults
 }
 \description{
-An dummy data set of data from the WHO Model Disability Survey. All survey variables and demographic characterstics (except work status) are randomly generated. Responses to the survey questions and work status are from randomly selected rows of the 2014 Chilean implementation of the MDS, ENDIS II (2014).
+An dummy data set of data from the WHO Model Disability Survey. All survey variables and demographic characteristics (except work status) are randomly generated. Responses to the survey questions and work status are from randomly selected rows of the 2014 Chilean implementation of the MDS, ENDIS II (2014).
 }
 \keyword{datasets}

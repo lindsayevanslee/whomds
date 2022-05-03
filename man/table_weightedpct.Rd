@@ -43,7 +43,7 @@ table_weightedpct(
 
 \item{willfilter}{a logical variable that tells the function whether or not to filter or transmute the data. Leave as default \code{NULL} to not filter or transmute. Set as \code{TRUE} to filter and \code{FALSE} to transmute. See Details.}
 
-\item{add_totals}{logical determinging whether to create total rows or columns (as appropriate) that demonstrate the margin that sums to 100. Default is FALSE.}
+\item{add_totals}{logical determining whether to create total rows or columns (as appropriate) that demonstrate the margin that sums to 100. Default is FALSE.}
 
 \item{spread_key}{a string with variable name to pass to \code{key} argument of \code{tidyr::spread()}. Default is \code{NULL}.}
 
@@ -51,7 +51,7 @@ table_weightedpct(
 
 \item{arrange_vars}{a character vector with variables to pass to \code{dplyr::arrange()}. Default is NULL.}
 
-\item{include_SE}{a logical variable indicating whether to include the standard errors in the table. Default is FALSE. Currently does not work when adding totals, spreading or transmutting.}
+\item{include_SE}{a logical variable indicating whether to include the standard errors in the table. Default is FALSE. Currently does not work when adding totals, spreading or transmuting.}
 }
 \value{
 a tibble of weighted response percentages or N's

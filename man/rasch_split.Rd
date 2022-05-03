@@ -11,7 +11,7 @@ rasch_split(df, vars_metric, split_strategy, max_values)
 
 \item{vars_metric}{a character vector of items to use in the Rasch Analysis}
 
-\item{split_strategy}{a named list giving the strategy to take for spliting variables by categories, passed to \code{rasch_split()}. One element of the list per variable to split by. Each element of the list must be a character vector of column names to split. The names of the list are the variables to split each group of variables by. Default is NULL, to not split items.}
+\item{split_strategy}{a named list giving the strategy to take for splitting variables by categories, passed to \code{rasch_split()}. One element of the list per variable to split by. Each element of the list must be a character vector of column names to split. The names of the list are the variables to split each group of variables by. Default is NULL, to not split items.}
 
 \item{max_values}{a tibble with two columns, \code{var} equivalent to \code{vars_metric} and \code{max_val} with their corresponding maximum possible values}
 }
