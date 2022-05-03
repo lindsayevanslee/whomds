@@ -71,6 +71,7 @@ Los paquetes adicionales son:
 * `grDevices`
 * `igraph`
 * `nFactors`
+* `plyr`
 * `polycor`
 * `purrr`
 * `RColorBrewer`
