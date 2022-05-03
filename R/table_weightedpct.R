@@ -157,12 +157,12 @@ table_weightedpct <- function(df, vars_ids, vars_strata, vars_weights,
   if (add_totals) {
     prevtab <- prevtab %>% 
       group_by_at(c(by_vars, "item")) %>% 
-      nest() %>% 
+      tidyr::nest() %>% 
       mutate(data = purrr::map(data, function(df) {
         df %>% 
           add_row(resp := "Total", prop = sum(df$prop, na.rm = TRUE))
       })) %>% 
-      unnest()
+      tidyr::unnest(cols = c(data))
     
   }
   

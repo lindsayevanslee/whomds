@@ -207,7 +207,7 @@ table_unweightedpctn <- function(df, vars_demo,
               df %>% 
                 add_row(demo = "Total", pct = sum(df$pct, na.rm = TRUE), n = sum(df$n, na.rm = TRUE))
             })) %>% 
-            unnest()
+            unnest(cols = data)
           
 
         }
@@ -222,7 +222,7 @@ table_unweightedpctn <- function(df, vars_demo,
               df %>% 
                 add_row(!!sym(group_by_var) := "Total", pct = sum(df$pct, na.rm = TRUE), n = sum(df$n, na.rm = TRUE))
             })) %>% 
-            unnest()
+            unnest(cols = data)
           
         }
         
@@ -239,7 +239,7 @@ table_unweightedpctn <- function(df, vars_demo,
           df %>% 
             add_row(demo := "Total", pct = sum(df$pct, na.rm = TRUE), n = sum(df$n, na.rm = TRUE))
         })) %>% 
-        unnest()
+        unnest(cols = data)
       
     }
 

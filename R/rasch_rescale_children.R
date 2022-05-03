@@ -23,7 +23,7 @@ rasch_rescale_children <- function(df, df_nest, vars_group, vars_id) {
         return(df_age)
       })) %>% 
       dplyr::select(c(vars_group, "df_split")) %>% 
-      tidyr::unnest()
+      tidyr::unnest(cols = c(df_split))
   }
   #Multigroup
   else {

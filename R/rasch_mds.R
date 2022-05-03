@@ -128,7 +128,7 @@ rasch_mds <- function(df,
     if (print_results) {
       testlet_strategy %>% 
         tibble::enframe(name = "testlet", value = "original_var") %>% 
-        tidyr::unnest(original_var) %>% 
+        tidyr::unnest(cols = original_var) %>% 
         readr::write_csv(file = paste0(path_output, "/testlet_strategy.csv"))
       
     }
