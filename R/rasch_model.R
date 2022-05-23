@@ -165,7 +165,7 @@ rasch_model <- function(df, vars_metric, vars_id, print_results = FALSE, path_ou
   LID_results <- LID_results %>%   
     tibble::rownames_to_column("var1") %>% 
     as_tibble() %>% 
-    tidyr::gather(key = "var2", value = "LID", -var1) %>% 
+    tidyr::pivot_longer(!var1, names_to = "var2", values_to = "LID") %>% 
     filter(LID == 1) %>% 
     select(-LID) %>% 
     tidyr::unite(col = "vars", var1, var2, sep = " & ") %>% 

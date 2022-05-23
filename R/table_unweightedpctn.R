@@ -2,7 +2,7 @@
 #'
 #' @param vars_demo a character vector of names of variables to calculate percent and N for
 #' @param group_by_var a string (length 1) with the name of the variable from \code{df} to disaggregate by
-#' @param spread_by_group_by_var logical determining whether to pass \code{group_by_var} to \code{tidyr::spread()} to give a wide-format tab. Default is FALSE.
+#' @param spread_by_group_by_var logical determining whether to pass \code{group_by_var} to \code{tidyr::pivot_wider()} to give a wide-format tab. Default is FALSE.
 #' @param group_by_var_sums_to_100 logical determining whether percentages sum to 100 along the margin of \code{group_by_var}, if applicable. Default is FALSE.
 #' @param add_totals logical determining whether to create total rows or columns (as appropriate) that demonstrate the margin that sums to 100. Default is FALSE.
 #' @inheritParams rasch_mds
@@ -102,12 +102,12 @@ table_unweightedpctn <- function(df, vars_demo,
              !!sym_group_by_var := ordered(!!sym_group_by_var, levels=unique(!!sym_group_by_var))) %>% 
       select(item, demo, !!sym_group_by_var, pct, n)
     
-    #spread, if applicable
+    #pivot, if applicable
     if (spread_by_group_by_var) {
       final_tab <- final_tab %>% 
         transmute(item, demo, !!sym_group_by_var,
                   pct_n = paste0(pct, "_", n)) %>% 
-        tidyr::spread(!!sym_group_by_var, pct_n)
+        tidyr::pivot_wider(names_from = !!sym_group_by_var, values_from = pct_n)
       
       #separate pct and n
       for (col in colnames(final_tab)[-(1:2)]) {
@@ -150,7 +150,7 @@ table_unweightedpctn <- function(df, vars_demo,
     #if grouping...
     if (!is.null(group_by_var)) {
       
-      #if spreading...
+      #if pivoting...
       if (spread_by_group_by_var) {
         
         #if summing along group_by_var... (total col)

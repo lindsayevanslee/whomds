@@ -203,7 +203,7 @@ rasch_mds <- function(df,
       purrr::map(~ table(resp = ., useNA = "always")) %>% 
       purrr::map(~ as_tibble(.)) %>% 
       bind_rows(.id = "Q") %>% 
-      tidyr::spread(Q,n) %>% 
+      tidyr::pivot_wider(names_from = Q, values_from = n) %>% 
       dplyr::mutate(resp = as.numeric(resp)) %>% 
       dplyr::arrange(resp) %>% 
       readr::write_csv(paste0(path_output, "/response_freq.csv"))

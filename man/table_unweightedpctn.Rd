@@ -20,7 +20,7 @@ table_unweightedpctn(
 
 \item{group_by_var}{a string (length 1) with the name of the variable from \code{df} to disaggregate by}
 
-\item{spread_by_group_by_var}{logical determining whether to pass \code{group_by_var} to \code{tidyr::spread()} to give a wide-format tab. Default is FALSE.}
+\item{spread_by_group_by_var}{logical determining whether to pass \code{group_by_var} to \code{tidyr::pivot_wider()} to give a wide-format tab. Default is FALSE.}
 
 \item{group_by_var_sums_to_100}{logical determining whether percentages sum to 100 along the margin of \code{group_by_var}, if applicable. Default is FALSE.}
 

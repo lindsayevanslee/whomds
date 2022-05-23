@@ -32,7 +32,7 @@ rasch_split_age <- function (df, vars_group, vars_metric, vars_id, max_values) {
   #if there are overlapping variables, make the split
   if (length(vars_metric_overlap_all) != 0) {
     
-    #initialize list to store spread data with new discrete variables by age group
+    #initialize list to store pivot data with new discrete variables by age group
     df_split <- vector("list", length(vars_metric_overlap_all)) 
     names(df_split) <- vars_metric_overlap_all
     
@@ -44,16 +44,16 @@ rasch_split_age <- function (df, vars_group, vars_metric, vars_id, max_values) {
       subtbl <- df %>% 
         select(vars_id, vars_group, var)
       
-      #spread variables to create three discrete variables
-      subtbl_spread <- subtbl %>% 
-        tidyr::spread(key = !!quo(vars_group), value = !!quo(var)) %>%
+      #pivot variables to create three discrete variables
+      subtbl_pivot <- subtbl %>% 
+        tidyr::pivot_wider(names_from = !!quo(vars_group), values_from = !!quo(var)) %>%
         rename_at(vars(levels_age_group), list(~ paste0(var,"_",.)))
       
       #give error if number of rows isn't maintained
-      if (nrow(subtbl_spread) != nrow(df)) stop(paste0("Spread table for ", var, " has nrow that doesn't match nrow(df). Check what's going on."))
+      if (nrow(subtbl_pivot) != nrow(df)) stop(paste0("Pivoted table for ", var, " has nrow that doesn't match nrow(df). Check what's going on."))
       
-      #save spread data in list
-      df_split[[var]] <- subtbl_spread
+      #save pivot data in list
+      df_split[[var]] <- subtbl_pivot
       
     }
     

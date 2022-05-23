@@ -45,9 +45,9 @@ table_weightedpct(
 
 \item{add_totals}{logical determining whether to create total rows or columns (as appropriate) that demonstrate the margin that sums to 100. Default is FALSE.}
 
-\item{spread_key}{a string with variable name to pass to \code{key} argument of \code{tidyr::spread()}. Default is \code{NULL}.}
+\item{spread_key}{a string with variable name to pass to \code{names_from} argument of \code{tidyr::pivot_wider()}. Default is \code{NULL}.}
 
-\item{spread_value}{a string with variable name to pass to \code{value} argument of \code{tidyr::spread()}. Default is "prop" (the column of percentages created within the function)}
+\item{spread_value}{a string with variable name to pass to \code{values_from} argument of \code{tidyr::pivot_wider()}. Default is "prop" (the column of percentages created within the function)}
 
 \item{arrange_vars}{a character vector with variables to pass to \code{dplyr::arrange()}. Default is NULL.}
 
