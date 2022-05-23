@@ -273,7 +273,7 @@ rasch_mds_children <- function(df,
                                      vars_id = vars_id)
   
   # PRINT DATA ---------
-  if (print_results) df_final %>% readr::write_csv(path = paste0(path_output, "/Data_final.csv"))
+  if (print_results) df_final %>% readr::write_csv(file = paste0(path_output, "/Data_final.csv"))
   
   
   # RETURN DATA WITH SCORE ----------
