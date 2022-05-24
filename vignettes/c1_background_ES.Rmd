@@ -268,7 +268,7 @@ y1 <- exp(x-tao[2])/(1+exp(x-tao[2]))
 y2 <- exp(x-tao[3])/(1+exp(x-tao[3]))
 df <- tibble(x,y0,y1,y2)
 df.long <- df %>%
-  gather(Threshold,y,-x)
+  pivot_longer(!x, names_to = "Threshold", values_to = "y")
 
 ggplot(df.long,aes(x=x,y=y,color=Threshold)) + 
   geom_point()+

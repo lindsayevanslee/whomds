@@ -197,7 +197,7 @@ table_weightedpct(
   )
 ```
 
-If we would like to spread the table again so that `disability_cat` represents the columns again, we can feed this table into another function that will perform the spread. The function to spread tables is called, naturally, `spread()`, and it is in the `tidyr` package. To perform a second spread, write the code like this:
+If we would like to modify the table again so that `disability_cat` represents the columns again, we can feed this table into another function that will perform the pivot The function to pivot tables is called `pivot_wider()`, and it is in the `tidyr` package. To perform a second pivot, write the code like this:
 
 ```{r table-weightedpct-example5b, eval=TRUE}
 table_weightedpct(
@@ -214,10 +214,10 @@ table_weightedpct(
   willfilter = FALSE,
   disability_cat, sex, item, problems = `4`+`5`
   ) %>% 
-    spread(key = disability_cat, value = problems)
+    pivot_wider(names_from = disability_cat, values_from = problems)
 ```
 
-The `key` argument of the function `spread()` tells `R` which variable to use as the columns, and `value` tells `R` what to fill the columns with. The operator `%>%` is commonly referred to as a "pipe". It feeds the object before it into the first argument of the function after it. For example, if you have an object `x` and a function `f`, writing `x %>% f()` would be the equivalent as writing `f(x)`. People use "pipes" because they make long sequences of code easier to read.
+The `names_from` argument of the function `pivot_wider()` tells `R` which variable to use as the columns, and `values_from` tells `R` what to fill the columns with. The operator `%>%` is commonly referred to as a "pipe". It feeds the object before it into the first argument of the function after it. For example, if you have an object `x` and a function `f`, writing `x %>% f()` would be the equivalent as writing `f(x)`. People use "pipes" because they make long sequences of code easier to read.
 
 ### `table_unweightedpctn()`
 

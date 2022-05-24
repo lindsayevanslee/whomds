@@ -195,7 +195,7 @@ table_weightedpct(
   )
 ```
 
-Si nos gustaría extender la tabla nuevamente para que `disability_cat` represente las columnas nuevamente, podemos incluir esta tabla en otra función que realizará la extensión. La función para extender tablas se llama `spread()`, y está en el paquete `tidyr`. Para realizar una segunda extensión, escribe el código así:
+Si nos gustaría modificar la tabla nuevamente para que `disability_cat` represente las columnas nuevamente, podemos incluir esta tabla en otra función que realizará el "pivot". La función para extender tablas se llama `pivot_wider()`, y está en el paquete `tidyr`. Para realizar una segunda extensión, escribe el código así:
 
 ```{r table-weightedpct-example5b, eval=TRUE}
 table_weightedpct(
@@ -212,10 +212,10 @@ table_weightedpct(
   willfilter = FALSE,
   disability_cat, sex, item, problems = `4`+`5`
   ) %>% 
-    spread(key = disability_cat, value = problems)
+    pivot_wider(names_from = disability_cat, values_from = problems)
 ```
 
-El argumento `key` de la función `spread()` le dice a `R` qué variable usar como columnas, y `value` le dice a` R` con qué llenar las columnas. El operador `%>%` se conoce comúnmente como una _"pipe"_. Pone el objeto anterior en el primer argumento de la función posterior. Por ejemplo, si tiene un objeto `x` y una función `f`, escribir `x %>% f ()` sería el equivalente a escribir `f(x)`. Las personas usan _"pipes"_ porque hacen que las secuencias largas de código sean más fáciles de leer.
+El argumento `names_from` de la función `pivot_wider()` le dice a `R` qué variable usar como columnas, y `values_from` le dice a` R` con qué llenar las columnas. El operador `%>%` se conoce comúnmente como una _"pipe"_. Pone el objeto anterior en el primer argumento de la función posterior. Por ejemplo, si tiene un objeto `x` y una función `f`, escribir `x %>% f ()` sería el equivalente a escribir `f(x)`. Las personas usan _"pipes"_ porque hacen que las secuencias largas de código sean más fáciles de leer.
 
 ### `table_unweightedpctn()`
 
