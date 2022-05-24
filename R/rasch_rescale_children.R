@@ -19,10 +19,11 @@ rasch_rescale_children <- function(df, df_nest, vars_group, vars_id) {
     df_final <- df_nest %>% 
       dplyr::mutate(df_split = purrr::map2(df_split, WLE_anchored, function(df_age, WLE_age) {
         df_age <- df_age %>% 
-          tibble::add_column(person_pars = WLE_age$theta)
+          tibble::add_column(person_pars = WLE_age$theta) %>% 
+          dplyr::select(-!!rlang::sym(vars_group)) 
         return(df_age)
       })) %>% 
-      dplyr::select(c(vars_group, "df_split")) %>% 
+      dplyr::select(all_of(c(vars_group, "df_split"))) %>% 
       tidyr::unnest(cols = c(df_split))
   }
   #Multigroup
@@ -34,8 +35,8 @@ rasch_rescale_children <- function(df, df_nest, vars_group, vars_id) {
   
    df_final <- df_final  %>% 
     dplyr::mutate(rescaled = scales::rescale(person_pars, c(0, 100))) %>% 
-    dplyr::filter_at(vars(vars_id), any_vars(. != "MAX")) %>% 
-    dplyr::filter_at(vars(vars_id), any_vars(. !="MIN"))
+    dplyr::filter_at(dplyr::vars(dplyr::all_of(vars_id)), dplyr::any_vars(. != "MAX")) %>% 
+    dplyr::filter_at(dplyr::vars(dplyr::all_of(vars_id)), dplyr::any_vars(. !="MIN"))
   
   return(df_final)
   
