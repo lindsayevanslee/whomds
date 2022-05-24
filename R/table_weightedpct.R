@@ -75,7 +75,7 @@ table_weightedpct <- function(df, vars_ids, vars_strata, vars_weights,
   #convert data to long format using variables from formula_vars
   df <- df %>%
     tidyr::pivot_longer(
-      !!!rlang::syms(formula_vars),
+      c(!!!rlang::syms(formula_vars)),
       names_to = "item",
       values_to = "resp",
       values_drop_na = TRUE
