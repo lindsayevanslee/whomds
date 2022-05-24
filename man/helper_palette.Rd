@@ -22,6 +22,8 @@ helper_palette(
 \item{h}{hue value in the HCL or HSV color description, has to be in [0, 360]
 for HCL and in [0, 1] for HSV colors.}
 
+\item{c.}{chroma value in the HCL color description.}
+
 \item{l}{luminance value in the HCL color description.}
 
 \item{power}{control parameter determining how chroma and luminance should
@@ -36,8 +38,6 @@ before correction?}
 transparency channel (0 means transparent and 1 means opaque).}
 
 \item{...}{Other arguments passed to \code{\link[colorspace]{hex}}.}
-
-\item{.c}{chroma value in the HCL color description.}
 }
 \value{
 \code{n} hex codes from the color palette

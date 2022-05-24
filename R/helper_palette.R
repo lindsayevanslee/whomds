@@ -1,7 +1,7 @@
 #use this function for generating the color palette (from colorspace package)
 #' Color palette for the MDS
 #' 
-#' @param .c chroma value in the HCL color description.
+#' @param c. chroma value in the HCL color description.
 #' @inheritParams colorspace::heat_hcl
 #' 
 #' @details Generated with \code{colorspace::choose_palette()}
