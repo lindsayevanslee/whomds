@@ -177,7 +177,7 @@ rasch_model <- function(df, vars_metric, vars_id, print_results = FALSE, path_ou
   
   PCA <- try(stats::prcomp(LID,center=TRUE, retx=TRUE), silent=TRUE)
   Eigen_Value <- try(eigen(LID)$values, silent=TRUE)
-  if (!any(class(Eigen_Value)=="try-error")) {
+  if (!any(inherits(Eigen_Value, "try-error"))) {
     Percentage_Eigen_Value <- Eigen_Value/sum(Eigen_Value)*100
     Cumulative_Percentage_Eigen_Value <- cumsum(Percentage_Eigen_Value)
     Eigen_Value_Table <- cbind(Eigen_Value,Percentage_Eigen_Value,Cumulative_Percentage_Eigen_Value)
@@ -247,11 +247,11 @@ rasch_model <- function(df, vars_metric, vars_id, print_results = FALSE, path_ou
     grDevices::dev.off()
     
     #PCA
-    if (!any(class(Eigen_Value)=="try-error")) {
+    if (!any(inherits(Eigen_Value, "try-error"))) {
       utils::write.csv(Eigen_Value_Table, file= paste0(path_output,"/Original_Data_Eigenvalues.csv"))
       }
     
-    if (!any(class(PCA)=="try-error")) {
+    if (!any(inherits(PCA, "try-error"))) {
       utils::write.csv(PCA$rotation, file=paste0(path_output,"/Original_Data_PCA.csv"))
       
       grDevices::pdf(paste0(path_output,"/Original_Data_Screeplot.pdf"))

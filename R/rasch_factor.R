@@ -57,8 +57,7 @@ rasch_factor <- function(df, vars_metric, print_results = FALSE, path_output = N
   fa_bifactor <- try(psych::fa(cor_poly$correlations,n_group_factors+1,rotate="bifactor"), silent=TRUE)    # bi-factor model
   fa_onefactor <- psych::fa(cor_poly$correlations,1,rotate="bifactor")                   # single factor model
   
-  if (any(class(fa_bifactor)=="try-error")) message("Bi-factor model unable to be computed") 
-  
+  if (any(inherits(fa_bifactor, "try-error"))) message("Bi-factor model unable to be computed") 
   #------------------------------------
   # local dependency based on polychoric correlations of the items
   fa_resid <- psych::factor.residuals(cor_poly$correlations,fa_onefactor)
@@ -80,7 +79,7 @@ rasch_factor <- function(df, vars_metric, print_results = FALSE, path_output = N
     grDevices::dev.off()
     
     #bi-factor plot
-    if (!any(class(fa_bifactor)=="try-error")) { #if fa_bifactor was able to be computed
+    if (!any(inherits(fa_bifactor, "try-error"))) { #if fa_bifactor was able to be computed
       
       #create vector of possible colors
       col_factors <- RColorBrewer::brewer.pal(ncol(fa_bifactor$loadings),"Spectral")

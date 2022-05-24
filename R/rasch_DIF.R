@@ -98,8 +98,7 @@ rasch_DIF <- function(df, vars_metric, vars_DIF, residuals_PCM, split_strategy =
   sol <- bind_cols(what) %>% t() %>% as_tibble()
   k <- apply(sol,1,table)
   
-  
-  if(class(k)=="matrix"){
+  if (inherits(k, "matrix")){
     Grouping <- which.min(apply(k,2,var))
   } else {
     take_in <- which(lapply(k, length)==breaks)
@@ -141,8 +140,7 @@ rasch_DIF <- function(df, vars_metric, vars_DIF, residuals_PCM, split_strategy =
                                                )), ncol = 5), silent = TRUE)
                                              }
                                              
-                                             
-                                             if (class(result) != "try-error") {
+                                             if (!inherits(result, "try-error")) {
                                                colnames(result) <-
                                                  c("Df", "Sum Sq", "Mean Sq", "F value", "Pr(>F)")
                                                rownames(result) <-
