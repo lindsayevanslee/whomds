@@ -1,0 +1,18 @@
+pandoc: 2.7.3
+pkgdown: 2.0.3
+pkgdown_sha: ~
+articles:
+  c1_background_EN: c1_background_EN.html
+  c1_background_ES: c1_background_ES.html
+  c2_getting_started_EN: c2_getting_started_EN.html
+  c2_getting_started_ES: c2_getting_started_ES.html
+  c3_rasch_adults_EN: c3_rasch_adults_EN.html
+  c3_rasch_adults_ES: c3_rasch_adults_ES.html
+  c4_rasch_children_EN: c4_rasch_children_EN.html
+  c4_rasch_children_ES: c4_rasch_children_ES.html
+  c5_best_practices_EN: c5_best_practices_EN.html
+  c5_best_practices_ES: c5_best_practices_ES.html
+  c6_after_rasch_EN: c6_after_rasch_EN.html
+  c6_after_rasch_ES: c6_after_rasch_ES.html
+last_built: 2022-05-24T03:30Z
+
