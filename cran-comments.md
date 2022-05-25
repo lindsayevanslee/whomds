@@ -1,25 +1,19 @@
 ## Update
 
-This is an updated package version. In this version I addressed the following feedback from CRAN:
+This is an updated package version. Package was previously archived on CRAN after downstream dependency CDM was archived.
 
-* Updated DESCRIPTION to list GPL-3 license and put WHO license info in LICENSE.note
-
-I also made the following minor changes:
-
-* Referred to package installation from CRAN
-* Added NEWS.md file
+In this version I implemented the changes as described in NEWS.md
 
 
 ## Test environments
-* macOS Big Sur 11.6 (local install), R 4.0.3
-* ubuntu 16.04.7 LTS (on travis-ci), R 4.0.2
-* macOS Big Sur 10.16 (on travis-ci), R 4.1.2
-* Windows Server 2012 R2 x64 (on appveyor), R 4.1.2 Patched
+* macOS Monterey 12.3.1 (local install); R 4.2.0
+* macOS 11.6.5 (GitHub Actions); R 4.2.0
+* Microsoft Windows Server 2022 10.0.20348 (GitHub Actions); R 4.2.0 and R 3.6.3
+* ubuntu 18.04.6 (Github Actions);  R devel r82390, R 4.2.0, R 4.1.3, R 4.0.5, R 3.6.3
 * win-builder (devel and release)
 
-## R CMD check results
 
-* This is a new release.
+## R CMD check results
 
 There were no ERRORs or WARNINGs. 
 
@@ -27,23 +21,23 @@ There was 1 NOTE when run on macOS locally:
 
 * checking package dependencies ... NOTE
   
-  "Imports includes 29 non-default packages..."
+  "Imports includes 22 non-default packages..."
   
-  I have tried to be careful to minimize the dependencies.
+  I have tried to be careful to minimize the dependencies, and removed dependencies since the last version.
 
-There were 3 NOTEs when testing on macOS and ubuntu through travis-ci and on Windows through appveyor:
+There were 3 NOTEs when testing on macOS, windows, and ubuntu through GitHub Actions:
 
 * checking package dependencies ... NOTE
 
-  "Imports includes 29 non-default packages..."
+  "Imports includes 22 non-default packages..."
   
-  I have tried to be careful to minimize the dependencies.
+  I have tried to be careful to minimize the dependencies, and removed dependencies since the last version.
   
 * checking for hidden files and directories ... NOTE
   
-  "Found the following hidden files and directories: .travis.yml" 
+  "Found the following hidden files and directories: .github" 
   
-  File listed is included in .Rbuildignore
+  Folder listed is included in .Rbuildignore
   
 * checking top-level files ... NOTE
 
@@ -51,17 +45,27 @@ There were 3 NOTEs when testing on macOS and ubuntu through travis-ci and on Win
   
   All files listed are ones included in .Rbuildignore
     
-There was 1 NOTE when run through win-builder:
+There were 2 NOTEs when run through win-builder:
 
 * checking CRAN incoming feasibility ... NOTE
 
   "Maintainer: 'Lindsay Lee <lindsayevanslee@gmail.com>'
 
-  Days since last update: 3"
+  New submission
   
-  I am releasing updates so soon at CRAN's request.
+  Package was archived on CRAN
+  
+  Possibly misspelled words in DESCRIPTION"
+  
+  This package is an updated to the previously archived version. The words possibility-misspelled are names or acronyms.
+
+* checking examples ... [25s] NOTE
+
+  "Examples with CPU (user + system) or elapsed time > 10s"
+  
+  Example listed is needed to show how to use the function.
 
 
-## Downstream dependencies 
+## Reverse dependencies 
 
-* There are currently no downstream dependencies for this package.
+* There are currently no reverse dependencies for this package.

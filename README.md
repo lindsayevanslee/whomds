@@ -6,6 +6,8 @@
 <!-- badges: start -->
 
 [![R-CMD-check](https://github.com/lindsayevanslee/whomds/workflows/R-CMD-check/badge.svg)](https://github.com/lindsayevanslee/whomds/actions)
+[![CRAN
+status](https://www.r-pkg.org/badges/version/whomds)](https://CRAN.R-project.org/package=whomds)
 [![lifecycle](https://lifecycle.r-lib.org/articles/figures/lifecycle-stable.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
 [![Codecov test
 coverage](https://codecov.io/gh/lindsayevanslee/whomds/branch/master/graph/badge.svg)](https://app.codecov.io/gh/lindsayevanslee/whomds?branch=master)
@@ -76,4 +78,5 @@ browseVignettes("whomds")
 
 ## Contact
 
-Please contact the package maintainer with any questions or comments.
+Please contact the package maintainer with any questions or comments, or
+[submit an issue](https://github.com/lindsayevanslee/whomds/issues).
