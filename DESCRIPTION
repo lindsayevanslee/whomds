@@ -1,7 +1,7 @@
 Package: whomds
 Type: Package
 Title: Calculate Results from WHO Model Disability Survey Data
-Version: 1.0.1.9019
+Version: 1.0.1.9020
 Authors@R: c(person("Lindsay", "Lee", email = "lindsayevanslee@gmail.com", role = c("aut","cre")), person("Carolina", "Fellinghauer", email = "carolina.fellinghauer@data-fittery.ch", role = c("ctb")),  person("World Health Organization", email = "disability@who.int", role = "cph"))
 Description: The Model Disability Survey (MDS) <https://www.who.int/activities/collection-of-data-on-disability> is a World Health Organization (WHO) general population survey
     instrument to assess the distribution of disability within a country or 
@@ -38,7 +38,7 @@ Imports:
     tidygraph,
     tidyr,
     WrightMap
-Depends: R (>= 3.6.3),
+Depends: R (>= 3.6.0),
     psych
 BugReports: https://github.com/lindsayevanslee/whomds/issues
 RoxygenNote: 7.2.0
