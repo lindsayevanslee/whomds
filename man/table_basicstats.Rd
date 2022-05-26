@@ -23,7 +23,19 @@ Compute basic statistics of the number of members per group per household
 Includes a call to \code{tidyr::complete()}, which causes the function to be a bit slow.
 }
 \examples{
-table_basicstats(df_adults, "HHID", "age_cat")
+#create dummy table of household data, where each row represents one member
+df_hh <- data.frame(HHID = sample(
+  x = 1:300,
+  size = 1000,
+  replace = TRUE
+),
+age_cat = ordered(sample(
+  x = c("18-24", "25-39", "40-64", "64-100"),
+  size = 1000,
+  replace = TRUE
+)))
+                
+table_basicstats(df_hh, "HHID", "age_cat")
 }
 \seealso{
 Other table functions: 

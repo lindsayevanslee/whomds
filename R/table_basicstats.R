@@ -16,7 +16,19 @@
 #' @import rlang
 #' 
 #' @examples
-#' table_basicstats(df_adults, "HHID", "age_cat")
+#' #create dummy table of household data, where each row represents one member
+#' df_hh <- data.frame(HHID = sample(
+#'   x = 1:300,
+#'   size = 1000,
+#'   replace = TRUE
+#' ),
+#' age_cat = ordered(sample(
+#'   x = c("18-24", "25-39", "40-64", "64-100"),
+#'   size = 1000,
+#'   replace = TRUE
+#' )))
+#'                 
+#' table_basicstats(df_hh, "HHID", "age_cat")
 table_basicstats <- function(df, hh_id, group_by_var) {
   
   #convert to tibble
@@ -29,11 +41,11 @@ table_basicstats <- function(df, hh_id, group_by_var) {
     summarize(nperHH = n()) %>%
     tidyr::complete(!!sym_group_by_var, fill = list(nperHH=0)) %>%
     group_by_at(c(group_by_var)) %>%
-    summarize(mean = round(mean(nperHH),1),
-              sd=round(stats::sd(nperHH),1),
-              median = round(stats::median(nperHH),1),
-              min=round(min(nperHH),1),
-              max=round(max(nperHH),1)) %>%
+    summarize(mean = round(mean(nperHH), 1),
+              sd = round(stats::sd(nperHH), 1),
+              median = round(stats::median(nperHH), 1),
+              min = round(min(nperHH), 1),
+              max = round(max(nperHH), 1)) %>%
     transmute(!!sym_group_by_var,
               mean_sd = paste0(mean," (", sd, ")"),
               median,
