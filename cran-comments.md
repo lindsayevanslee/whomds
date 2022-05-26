@@ -1,8 +1,8 @@
-## Update
+## Resubmission
 
-This is an updated package version. Package was previously archived on CRAN after downstream dependency CDM was archived.
+This is a resubmission. In this version I have changed the example used in the documentation for table_basicstats() in order to reduce its runtime to <5s.
 
-In this version I implemented the changes as described in NEWS.md
+Package (v1.0.1) was previously archived on CRAN after downstream dependency CDM was archived. Changes since this archived version are summarized in NEWS.md.
 
 
 ## Test environments
@@ -45,7 +45,7 @@ There were 3 NOTEs when testing on macOS, windows, and ubuntu through GitHub Act
   
   All files listed are ones included in .Rbuildignore
     
-There were 2 NOTEs when run through win-builder:
+There was 1 NOTE when run through win-builder:
 
 * checking CRAN incoming feasibility ... NOTE
 
@@ -58,12 +58,6 @@ There were 2 NOTEs when run through win-builder:
   Possibly misspelled words in DESCRIPTION"
   
   This package is an updated to the previously archived version. The words possibility-misspelled are names or acronyms.
-
-* checking examples ... [25s] NOTE
-
-  "Examples with CPU (user + system) or elapsed time > 10s"
-  
-  Example listed is needed to show how to use the function.
 
 
 ## Reverse dependencies 

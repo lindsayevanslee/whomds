@@ -7,6 +7,7 @@
 - Fixed setting of x-axis labels in `fig_density()` (#2)
 - Changed some syntax that had been deprecated or superseded in tidyverse functions (#6, #11)
 - Updated broken URLs
+- Updated example used in documentation for `table_basicstats()`
 
 # whomds 1.0.1
 
