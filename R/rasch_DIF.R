@@ -110,7 +110,7 @@ rasch_DIF <- function(df, vars_metric, vars_DIF, residuals_PCM, split_strategy =
     slice(Grouping) %>% 
     t()
   
-  df_DIF_class <- bind_cols(class_intervals = class_intervals, 
+  df_DIF_class <- bind_cols(class_intervals = class_intervals[,1], 
                             select(residuals_PCM,-person), 
                             slice(df_DIF, rows))
   

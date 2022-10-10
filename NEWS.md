@@ -1,3 +1,7 @@
+# Unreleased
+
+- Fixed bug with related to printing of DIF results
+
 # whomds 1.1.0
 
 - Reduced number of packages in Imports by moving some to Suggests and removing others
