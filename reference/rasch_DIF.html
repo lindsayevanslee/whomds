@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">whomds</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0.9000</span>
       </span>
     </div>
 
@@ -96,46 +96,66 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">rasch_DIF</span><span class="op">(</span>
-  <span class="va">df</span>,
-  <span class="va">vars_metric</span>,
-  <span class="va">vars_DIF</span>,
-  <span class="va">residuals_PCM</span>,
-  split_strategy <span class="op">=</span> <span class="cn">NULL</span>,
-  print_results <span class="op">=</span> <span class="cn">FALSE</span>,
-  path_output <span class="op">=</span> <span class="cn">NULL</span>,
-  breaks <span class="op">=</span> <span class="fl">6</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">rasch_DIF</span><span class="op">(</span></span>
+<span>  <span class="va">df</span>,</span>
+<span>  <span class="va">vars_metric</span>,</span>
+<span>  <span class="va">vars_DIF</span>,</span>
+<span>  <span class="va">residuals_PCM</span>,</span>
+<span>  split_strategy <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  print_results <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  path_output <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  breaks <span class="op">=</span> <span class="fl">6</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>df</dt>
 <dd><p>a data frame of individual survey data, where each row is an individual</p></dd>
+
+
 <dt>vars_metric</dt>
 <dd><p>a character vector of items to use in the Rasch Analysis</p></dd>
+
+
 <dt>vars_DIF</dt>
 <dd><p>a string with the column names to use for analyzing differential item functioning (DIF). Default is NULL, to skip analysis of DIF.</p></dd>
+
+
 <dt>residuals_PCM</dt>
 <dd><p>a matrix giving the residuals of the person parameters from the Rasch Model. Row names are the numbers of the people and the columns are for each variable.</p></dd>
+
+
 <dt>split_strategy</dt>
 <dd><p>a named list giving the strategy to take for splitting variables by categories, passed to <code><a href="rasch_split.html">rasch_split()</a></code>. One element of the list per variable to split by. Each element of the list must be a character vector of column names to split. The names of the list are the variables to split each group of variables by. Default is NULL, to not split items.</p></dd>
+
+
 <dt>print_results</dt>
 <dd><p>a logical value indicating whether or not to print various files displaying results from the Rasch Model. Default is FALSE, to not print the files.</p></dd>
+
+
 <dt>path_output</dt>
 <dd><p>a string with the path to the output folder. Default is NULL.</p></dd>
+
+
 <dt>breaks</dt>
 <dd><p>a numeric value giving the number if class intervals. Default is 6.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>a list with results from the DIF analysis:</p>
+    
+
+<p>a list with results from the DIF analysis:</p>
 <dl><dt>df_DIF_class</dt>
 <dd><p>the person residuals from the Rasch Model, the assigned class intervals, and the variables used for DIF analysis</p></dd>
+
 <dt>tab_aov_DIF</dt>
 <dd><p>the results of the ANOVA used to analyze DIF</p></dd>
+
 <dt>DIF_results</dt>
 <dd><p>string of various that exhibit some form of DIF</p></dd>
+
 </dl></div>
     <div id="details">
     <h2>Details</h2>
@@ -178,7 +198,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">whomds</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0.9000</span>
       </span>
     </div>
 
@@ -96,28 +96,37 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">helper_checkrow</span><span class="op">(</span>
-  <span class="va">row</span>,
-  check_type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"all_equal"</span>, <span class="st">"all_not_equal"</span>, <span class="st">"any_in"</span><span class="op">)</span>,
-  <span class="va">check_value</span>,
-  na_rm <span class="op">=</span> <span class="cn">TRUE</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">helper_checkrow</span><span class="op">(</span></span>
+<span>  <span class="va">row</span>,</span>
+<span>  check_type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"all_equal"</span>, <span class="st">"all_not_equal"</span>, <span class="st">"any_in"</span><span class="op">)</span>,</span>
+<span>  <span class="va">check_value</span>,</span>
+<span>  na_rm <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>row</dt>
 <dd><p>a vector of data</p></dd>
+
+
 <dt>check_type</dt>
 <dd><p>a string indicating the type of check to do on <code>row</code>. Options are <code>"all_equal"</code>, <code>"all_not_equal"</code>, and <code>"any_in"</code>. A value of <code>"all_equal"</code> will check that all values in <code>row</code> equal <code>check_value</code>. A value of <code>"all_not_equal"</code> will check that all values of <code>row</code> are not equal to <code>check_value</code>. A value of <code>"any_in"</code> will check if any of the values in <code>check_value</code> are in <code>row</code>.</p></dd>
+
+
 <dt>check_value</dt>
 <dd><p>a vector of values to check against</p></dd>
+
+
 <dt>na_rm</dt>
 <dd><p>logical indicating whether or not to perform check after removing NAs, passed to argument <code>na.rm</code> of <code><a href="https://rdrr.io/r/base/any.html" class="external-link">any()</a></code> or <code><a href="https://rdrr.io/r/base/all.html" class="external-link">all()</a></code>. Default is TRUE.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>a logical vector with the result of the check</p>
+    
+
+<p>a logical vector with the result of the check</p>
     </div>
     <div id="details">
     <h2>Details</h2>
@@ -142,7 +151,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

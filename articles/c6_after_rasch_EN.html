@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">whomds</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0.9000</span>
       </span>
     </div>
 
@@ -127,12 +127,12 @@
 <p>After you have finished with Rasch Analysis, the score is outputted in the file <code>Data_final.csv</code> in the column called <code>rescaled</code>. This file will only contain the individuals included in the analysis. Any individual who had too many missing values (<code>NA</code>) will not be in this file. It is often advisable to merge the original data with all individuals with the new scores. Any individual who did not have a score calculated will have an <code>NA</code> in this column.</p>
 <p>This merge can be accomplished with the following code. First, open the library called <code>tidyverse</code> to access the necessary functions. Next, read in the <code>Data_final.csv</code> file and select only the columns you need: <code>ID</code> (or whatever the name of the individual ID column is in your data) and <code>rescaled</code>. The code below assumes that the file is in your working directory. You will have to include the full path to the file if it is not currently in your working directory. Finally, you can create an object <code>merged_data</code> that merges your original data, here represented with the object <code>original_data</code>, with the new score in a column renamed to <code>"DisabilityScore"</code> with the following code:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org" class="external-link">tidyverse</a></span><span class="op">)</span>
-<span class="va">new_score</span> <span class="op">&lt;-</span> <span class="fu">read_csv</span><span class="op">(</span><span class="st">"Data_final.csv"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu">select</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ID"</span>, <span class="st">"rescaled"</span><span class="op">)</span><span class="op">)</span>
-<span class="va">merged_data</span> <span class="op">&lt;-</span> <span class="va">original_data</span> <span class="op">%&gt;%</span> 
-  <span class="fu">left_join</span><span class="op">(</span><span class="va">new_score</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu">rename</span><span class="op">(</span><span class="st">"DisabilityScore"</span> <span class="op">=</span> <span class="st">"rescaled"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org" class="external-link">tidyverse</a></span><span class="op">)</span></span>
+<span><span class="va">new_score</span> <span class="op">&lt;-</span> <span class="fu">read_csv</span><span class="op">(</span><span class="st">"Data_final.csv"</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">select</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ID"</span>, <span class="st">"rescaled"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">merged_data</span> <span class="op">&lt;-</span> <span class="va">original_data</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">left_join</span><span class="op">(</span><span class="va">new_score</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">rename</span><span class="op">(</span><span class="st">"DisabilityScore"</span> <span class="op">=</span> <span class="st">"rescaled"</span><span class="op">)</span></span></code></pre></div>
 <p>The sample data included in the <code>whomds</code> package called <code>df_adults</code> already has a Rasch score merged with it, in the column <code>disability_score</code>.</p>
 </div>
 <div class="section level2">
@@ -202,38 +202,38 @@
 </h5>
 <p>Let’s say we want to print a table of the percentage of people in each disability level who gave each response option for a set of questions about the general environment. We would set the arguments of <code><a href="../reference/table_weightedpct.html">table_weightedpct()</a></code> like this, and the first few rows of the table would look like this:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co">#Remove NAs from column used for argument by_vars</span>
-<span class="va">df_adults_noNA</span> <span class="op">&lt;-</span> <span class="va">df_adults</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">disability_cat</span><span class="op">)</span><span class="op">)</span>
-
-<span class="fu"><a href="../reference/table_weightedpct.html">table_weightedpct</a></span><span class="op">(</span>
-  df <span class="op">=</span> <span class="va">df_adults_noNA</span>,
-  vars_ids <span class="op">=</span> <span class="st">"PSU"</span>,
-  vars_strata <span class="op">=</span> <span class="st">"strata"</span>,
-  vars_weights <span class="op">=</span> <span class="st">"weight"</span>,
-  formula_vars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"EF"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">12</span><span class="op">)</span>,
-  formula_vars_levels <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">5</span>,
-  by_vars <span class="op">=</span> <span class="st">"disability_cat"</span>,
-  spread_key <span class="op">=</span> <span class="cn">NULL</span>,
-  spread_value <span class="op">=</span> <span class="st">"prop"</span>,
-  arrange_vars <span class="op">=</span> <span class="cn">NULL</span>,
-  willfilter <span class="op">=</span> <span class="cn">NULL</span>
-  <span class="op">)</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 236 × 4</span></span>
-<span class="co">#&gt; <span style="color: #949494;"># Groups:   disability_cat, item [48]</span></span>
-<span class="co">#&gt;    disability_cat item  resp   prop</span>
-<span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;ord&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;ord&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> No             EF1   1      42.1</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> No             EF1   2      15.8</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> No             EF1   3      15.2</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> No             EF1   4      12.4</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> No             EF1   5      14.6</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> No             EF10  1      44.2</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> No             EF10  2      10.5</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> No             EF10  3      22.8</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> No             EF10  4      11.6</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> No             EF10  5      10.9</span>
-<span class="co">#&gt; <span style="color: #949494;"># … with 226 more rows</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="co">#Remove NAs from column used for argument by_vars</span></span>
+<span><span class="va">df_adults_noNA</span> <span class="op">&lt;-</span> <span class="va">df_adults</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">disability_cat</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="../reference/table_weightedpct.html">table_weightedpct</a></span><span class="op">(</span></span>
+<span>  df <span class="op">=</span> <span class="va">df_adults_noNA</span>,</span>
+<span>  vars_ids <span class="op">=</span> <span class="st">"PSU"</span>,</span>
+<span>  vars_strata <span class="op">=</span> <span class="st">"strata"</span>,</span>
+<span>  vars_weights <span class="op">=</span> <span class="st">"weight"</span>,</span>
+<span>  formula_vars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"EF"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">12</span><span class="op">)</span>,</span>
+<span>  formula_vars_levels <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">5</span>,</span>
+<span>  by_vars <span class="op">=</span> <span class="st">"disability_cat"</span>,</span>
+<span>  spread_key <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  spread_value <span class="op">=</span> <span class="st">"prop"</span>,</span>
+<span>  arrange_vars <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  willfilter <span class="op">=</span> <span class="cn">NULL</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 236 × 4</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># Groups:   disability_cat, item [48]</span></span></span>
+<span><span class="co">#&gt;    disability_cat item  resp   prop</span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;ord&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;ord&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> No             EF1   1      42.1</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> No             EF1   2      15.8</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> No             EF1   3      15.2</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> No             EF1   4      12.4</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> No             EF1   5      14.6</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> No             EF10  1      44.2</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> No             EF10  2      10.5</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> No             EF10  3      22.8</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> No             EF10  4      11.6</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> No             EF10  5      10.9</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># … with 226 more rows</span></span></span></code></pre></div>
 <p>The outputted table has 4 columns: the variable we disaggregated the data by (<code>disability_cat</code>, in other words the disability level), the item (<code>item</code>), the response option (<code>resp</code>), and the proportion (<code>prop</code>).</p>
 </div>
 <div class="section level5">
@@ -241,34 +241,34 @@
 </h5>
 <p>This long table from the above example is great for data analysis, but not great for reading with the bare eye. If we want to make it nicer, we convert it to “wide format” by “spreading” by a particular variable. Perhaps we want to spread by <code>disability_cat</code>. Our call to <code><a href="../reference/table_weightedpct.html">table_weightedpct()</a></code> would now look like this, and the outputted table would be:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/table_weightedpct.html">table_weightedpct</a></span><span class="op">(</span>
-  df <span class="op">=</span> <span class="va">df_adults_noNA</span>,
-  vars_ids <span class="op">=</span> <span class="st">"PSU"</span>,
-  vars_strata <span class="op">=</span> <span class="st">"strata"</span>,
-  vars_weights <span class="op">=</span> <span class="st">"weight"</span>,
-  formula_vars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"EF"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">12</span><span class="op">)</span>,
-  formula_vars_levels <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">5</span>,
-  by_vars <span class="op">=</span> <span class="st">"disability_cat"</span>,
-  spread_key <span class="op">=</span> <span class="st">"disability_cat"</span>,
-  spread_value <span class="op">=</span> <span class="st">"prop"</span>,
-  arrange_vars <span class="op">=</span> <span class="cn">NULL</span>,
-  willfilter <span class="op">=</span> <span class="cn">NULL</span>
-  <span class="op">)</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 60 × 6</span></span>
-<span class="co">#&gt; <span style="color: #949494;"># Groups:   item [12]</span></span>
-<span class="co">#&gt;    item  resp     No  Mild Moderate Severe</span>
-<span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;ord&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> EF1   1      42.1 47.5     43.4   46.6 </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> EF1   2      15.8 15.3     17.2   11.9 </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> EF1   3      15.2 14.2     14.3   15.0 </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> EF1   4      12.4  9.62    11.2   10.4 </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> EF1   5      14.6 13.3     13.8   16.1 </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> EF10  1      44.2 49.9     49.3   49.7 </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> EF10  2      10.5 12.6     10.3    9.84</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> EF10  3      22.8 16.0     18.4   17.2 </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> EF10  4      11.6 11.9     14.6   13.3 </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> EF10  5      10.9  9.64     7.40   9.87</span>
-<span class="co">#&gt; <span style="color: #949494;"># … with 50 more rows</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/table_weightedpct.html">table_weightedpct</a></span><span class="op">(</span></span>
+<span>  df <span class="op">=</span> <span class="va">df_adults_noNA</span>,</span>
+<span>  vars_ids <span class="op">=</span> <span class="st">"PSU"</span>,</span>
+<span>  vars_strata <span class="op">=</span> <span class="st">"strata"</span>,</span>
+<span>  vars_weights <span class="op">=</span> <span class="st">"weight"</span>,</span>
+<span>  formula_vars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"EF"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">12</span><span class="op">)</span>,</span>
+<span>  formula_vars_levels <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">5</span>,</span>
+<span>  by_vars <span class="op">=</span> <span class="st">"disability_cat"</span>,</span>
+<span>  spread_key <span class="op">=</span> <span class="st">"disability_cat"</span>,</span>
+<span>  spread_value <span class="op">=</span> <span class="st">"prop"</span>,</span>
+<span>  arrange_vars <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  willfilter <span class="op">=</span> <span class="cn">NULL</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 60 × 6</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># Groups:   item [12]</span></span></span>
+<span><span class="co">#&gt;    item  resp     No  Mild Moderate Severe</span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;ord&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> EF1   1      42.1 47.5     43.4   46.6 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> EF1   2      15.8 15.3     17.2   11.9 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> EF1   3      15.2 14.2     14.3   15.0 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> EF1   4      12.4  9.62    11.2   10.4 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> EF1   5      14.6 13.3     13.8   16.1 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> EF10  1      44.2 49.9     49.3   49.7 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> EF10  2      10.5 12.6     10.3    9.84</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> EF10  3      22.8 16.0     18.4   17.2 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> EF10  4      11.6 11.9     14.6   13.3 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> EF10  5      10.9  9.64     7.40   9.87</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># … with 50 more rows</span></span></span></code></pre></div>
 <p>Now we can see our <code>prop</code> column has been spread horizontally for each level of <code>disability_cat</code>.</p>
 </div>
 <div class="section level5">
@@ -276,36 +276,36 @@
 </h5>
 <p>Perhaps, though, we are only interested in the proportions of the most extreme response option of 5. We could now add a filter to our call to <code><a href="../reference/table_weightedpct.html">table_weightedpct()</a></code> like so:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/table_weightedpct.html">table_weightedpct</a></span><span class="op">(</span>
-  df <span class="op">=</span> <span class="va">df_adults_noNA</span>,
-  vars_ids <span class="op">=</span> <span class="st">"PSU"</span>,
-  vars_strata <span class="op">=</span> <span class="st">"strata"</span>,
-  vars_weights <span class="op">=</span> <span class="st">"weight"</span>,
-  formula_vars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"EF"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">12</span><span class="op">)</span>,
-  formula_vars_levels <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">5</span>,
-  by_vars <span class="op">=</span> <span class="st">"disability_cat"</span>,
-  spread_key <span class="op">=</span> <span class="st">"disability_cat"</span>,
-  spread_value <span class="op">=</span> <span class="st">"prop"</span>,
-  arrange_vars <span class="op">=</span> <span class="cn">NULL</span>,
-  willfilter <span class="op">=</span> <span class="cn">TRUE</span>,
-  <span class="va">resp</span> <span class="op">==</span> <span class="fl">5</span>
-  <span class="op">)</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 12 × 6</span></span>
-<span class="co">#&gt; <span style="color: #949494;"># Groups:   item [12]</span></span>
-<span class="co">#&gt;    item  resp     No   Mild Moderate Severe</span>
-<span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;ord&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> EF1   5     14.6  13.3      13.8   16.1 </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> EF10  5     10.9   9.64      7.40   9.87</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> EF11  5      1.75  0.974     2.27   1.75</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> EF12  5      4.38 <span style="color: #BB0000;">NA</span>        <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>   </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> EF2   5      5.55  5.29      5.13   6.25</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> EF3   5      4.85  5.40      3.69   5.16</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> EF4   5      2.73  2.47      3.40   3.35</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> EF5   5     10.4  13.4       8.80  11.2 </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> EF6   5      4.08  3.08      1.96   2.56</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> EF7   5      4.29  3.28      2.72   4.68</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">11</span> EF8   5      2.28  1.29      1.19   2.41</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">12</span> EF9   5      5.20  3.59      4.89   5.26</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/table_weightedpct.html">table_weightedpct</a></span><span class="op">(</span></span>
+<span>  df <span class="op">=</span> <span class="va">df_adults_noNA</span>,</span>
+<span>  vars_ids <span class="op">=</span> <span class="st">"PSU"</span>,</span>
+<span>  vars_strata <span class="op">=</span> <span class="st">"strata"</span>,</span>
+<span>  vars_weights <span class="op">=</span> <span class="st">"weight"</span>,</span>
+<span>  formula_vars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"EF"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">12</span><span class="op">)</span>,</span>
+<span>  formula_vars_levels <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">5</span>,</span>
+<span>  by_vars <span class="op">=</span> <span class="st">"disability_cat"</span>,</span>
+<span>  spread_key <span class="op">=</span> <span class="st">"disability_cat"</span>,</span>
+<span>  spread_value <span class="op">=</span> <span class="st">"prop"</span>,</span>
+<span>  arrange_vars <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  willfilter <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  <span class="va">resp</span> <span class="op">==</span> <span class="fl">5</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 12 × 6</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># Groups:   item [12]</span></span></span>
+<span><span class="co">#&gt;    item  resp     No   Mild Moderate Severe</span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;ord&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> EF1   5     14.6  13.3      13.8   16.1 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> EF10  5     10.9   9.64      7.40   9.87</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> EF11  5      1.75  0.974     2.27   1.75</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> EF12  5      4.38 <span style="color: #BB0000;">NA</span>        <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> EF2   5      5.55  5.29      5.13   6.25</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> EF3   5      4.85  5.40      3.69   5.16</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> EF4   5      2.73  2.47      3.40   3.35</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> EF5   5     10.4  13.4       8.80  11.2 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> EF6   5      4.08  3.08      1.96   2.56</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> EF7   5      4.29  3.28      2.72   4.68</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">11</span> EF8   5      2.28  1.29      1.19   2.41</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">12</span> EF9   5      5.20  3.59      4.89   5.26</span></span></code></pre></div>
 <p>Now you can see only the proportions for the response option of 5 are given.</p>
 </div>
 <div class="section level5">
@@ -313,102 +313,102 @@
 </h5>
 <p>With <code><a href="../reference/table_weightedpct.html">table_weightedpct()</a></code>, we can also add more levels of disaggregation by editing the argument <code>by_vars</code>. Here we will produce the same table as in Example 3 above but now disaggregated by disability level and sex:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/table_weightedpct.html">table_weightedpct</a></span><span class="op">(</span>
-  df <span class="op">=</span> <span class="va">df_adults_noNA</span>,
-  vars_ids <span class="op">=</span> <span class="st">"PSU"</span>,
-  vars_strata <span class="op">=</span> <span class="st">"strata"</span>,
-  vars_weights <span class="op">=</span> <span class="st">"weight"</span>,
-  formula_vars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"EF"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">12</span><span class="op">)</span>,
-  formula_vars_levels <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">5</span>,
-  by_vars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"disability_cat"</span>, <span class="st">"sex"</span><span class="op">)</span>,
-  spread_key <span class="op">=</span> <span class="st">"disability_cat"</span>,
-  spread_value <span class="op">=</span> <span class="st">"prop"</span>,
-  arrange_vars <span class="op">=</span> <span class="cn">NULL</span>,
-  willfilter <span class="op">=</span> <span class="cn">TRUE</span>,
-  <span class="va">resp</span> <span class="op">==</span> <span class="fl">5</span>
-  <span class="op">)</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 24 × 7</span></span>
-<span class="co">#&gt; <span style="color: #949494;"># Groups:   sex, item [24]</span></span>
-<span class="co">#&gt;    sex    item  resp     No  Mild Moderate Severe</span>
-<span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;ord&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> Female EF1   5     13.2  14.7     13.1   15.4 </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> Female EF10  5     11.1   9.91     6.41   9.62</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> Female EF11  5      1.15  1.24     2.26   2.57</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> Female EF12  5      3.60 <span style="color: #BB0000;">NA</span>       <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>   </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> Female EF2   5      7.44  6.21     6.18   6.94</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> Female EF3   5      4.60  6.32     4.02   4.62</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> Female EF4   5      3.19  3.20     3.00   2.34</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> Female EF5   5      8.61 13.1      9.77  10.3 </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> Female EF6   5      3.25  3.76     2.29   2.89</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> Female EF7   5      4.44  4.12     2.76   2.34</span>
-<span class="co">#&gt; <span style="color: #949494;"># … with 14 more rows</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/table_weightedpct.html">table_weightedpct</a></span><span class="op">(</span></span>
+<span>  df <span class="op">=</span> <span class="va">df_adults_noNA</span>,</span>
+<span>  vars_ids <span class="op">=</span> <span class="st">"PSU"</span>,</span>
+<span>  vars_strata <span class="op">=</span> <span class="st">"strata"</span>,</span>
+<span>  vars_weights <span class="op">=</span> <span class="st">"weight"</span>,</span>
+<span>  formula_vars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"EF"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">12</span><span class="op">)</span>,</span>
+<span>  formula_vars_levels <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">5</span>,</span>
+<span>  by_vars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"disability_cat"</span>, <span class="st">"sex"</span><span class="op">)</span>,</span>
+<span>  spread_key <span class="op">=</span> <span class="st">"disability_cat"</span>,</span>
+<span>  spread_value <span class="op">=</span> <span class="st">"prop"</span>,</span>
+<span>  arrange_vars <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  willfilter <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  <span class="va">resp</span> <span class="op">==</span> <span class="fl">5</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 24 × 7</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># Groups:   sex, item [24]</span></span></span>
+<span><span class="co">#&gt;    sex    item  resp     No  Mild Moderate Severe</span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;ord&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> Female EF1   5     13.2  14.7     13.1   15.4 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> Female EF10  5     11.1   9.91     6.41   9.62</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> Female EF11  5      1.15  1.24     2.26   2.57</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> Female EF12  5      3.60 <span style="color: #BB0000;">NA</span>       <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> Female EF2   5      7.44  6.21     6.18   6.94</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> Female EF3   5      4.60  6.32     4.02   4.62</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> Female EF4   5      3.19  3.20     3.00   2.34</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> Female EF5   5      8.61 13.1      9.77  10.3 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> Female EF6   5      3.25  3.76     2.29   2.89</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> Female EF7   5      4.44  4.12     2.76   2.34</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># … with 14 more rows</span></span></span></code></pre></div>
 </div>
 <div class="section level5">
 <h5 id="example-5-wide-table-multiple-levels-of-disaggregation-transmuted">Example 5: wide table, multiple levels of disaggregation, transmuted<a class="anchor" aria-label="anchor" href="#example-5-wide-table-multiple-levels-of-disaggregation-transmuted"></a>
 </h5>
 <p>Perhaps we are still interested not only in response option 5, but the sum of 4 and 5 together. We can do this by “transmuting” our table. To do this, we first choose to “spread” by <code>resp</code> by setting <code>spread_key="resp"</code>. This will convert the table to a wide format as in Example 2, but now each column will represent a response option. Then we set the transmutation by setting <code>willfilter=FALSE</code>, and adding expressions for the transmutation on the next line. We name all the columns we would like to keep and give an expression for how to create the new column of the sum of proportions for response options 4 and 5, here called <code>problems</code>:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/table_weightedpct.html">table_weightedpct</a></span><span class="op">(</span>
-  df <span class="op">=</span> <span class="va">df_adults_noNA</span>,
-  vars_ids <span class="op">=</span> <span class="st">"PSU"</span>,
-  vars_strata <span class="op">=</span> <span class="st">"strata"</span>,
-  vars_weights <span class="op">=</span> <span class="st">"weight"</span>,
-  formula_vars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"EF"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">12</span><span class="op">)</span>,
-  formula_vars_levels <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">5</span>,
-  by_vars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"disability_cat"</span>, <span class="st">"sex"</span><span class="op">)</span>,
-  spread_key <span class="op">=</span> <span class="st">"resp"</span>,
-  spread_value <span class="op">=</span> <span class="st">"prop"</span>,
-  arrange_vars <span class="op">=</span> <span class="cn">NULL</span>,
-  willfilter <span class="op">=</span> <span class="cn">FALSE</span>,
-  <span class="va">disability_cat</span>, <span class="va">sex</span>, <span class="va">item</span>, problems <span class="op">=</span> <span class="va">`4`</span><span class="op">+</span><span class="va">`5`</span>
-  <span class="op">)</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 96 × 4</span></span>
-<span class="co">#&gt; <span style="color: #949494;"># Groups:   disability_cat, sex, item [96]</span></span>
-<span class="co">#&gt;    disability_cat sex    item  problems</span>
-<span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;ord&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;ord&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> No             Female EF1      27.2 </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> No             Female EF10     21.6 </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> No             Female EF11      6.44</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> No             Female EF12      6.69</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> No             Female EF2      11.6 </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> No             Female EF3       8.53</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> No             Female EF4       5.96</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> No             Female EF5      18.5 </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> No             Female EF6       8.12</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> No             Female EF7      11.1 </span>
-<span class="co">#&gt; <span style="color: #949494;"># … with 86 more rows</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/table_weightedpct.html">table_weightedpct</a></span><span class="op">(</span></span>
+<span>  df <span class="op">=</span> <span class="va">df_adults_noNA</span>,</span>
+<span>  vars_ids <span class="op">=</span> <span class="st">"PSU"</span>,</span>
+<span>  vars_strata <span class="op">=</span> <span class="st">"strata"</span>,</span>
+<span>  vars_weights <span class="op">=</span> <span class="st">"weight"</span>,</span>
+<span>  formula_vars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"EF"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">12</span><span class="op">)</span>,</span>
+<span>  formula_vars_levels <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">5</span>,</span>
+<span>  by_vars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"disability_cat"</span>, <span class="st">"sex"</span><span class="op">)</span>,</span>
+<span>  spread_key <span class="op">=</span> <span class="st">"resp"</span>,</span>
+<span>  spread_value <span class="op">=</span> <span class="st">"prop"</span>,</span>
+<span>  arrange_vars <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  willfilter <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  <span class="va">disability_cat</span>, <span class="va">sex</span>, <span class="va">item</span>, problems <span class="op">=</span> <span class="va">`4`</span><span class="op">+</span><span class="va">`5`</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 96 × 4</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># Groups:   disability_cat, sex, item [96]</span></span></span>
+<span><span class="co">#&gt;    disability_cat sex    item  problems</span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;ord&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;ord&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> No             Female EF1      27.2 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> No             Female EF10     21.6 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> No             Female EF11      6.44</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> No             Female EF12      6.69</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> No             Female EF2      11.6 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> No             Female EF3       8.53</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> No             Female EF4       5.96</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> No             Female EF5      18.5 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> No             Female EF6       8.12</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> No             Female EF7      11.1 </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># … with 86 more rows</span></span></span></code></pre></div>
 <p>If we would like to modify the table again so that <code>disability_cat</code> represents the columns again, we can feed this table into another function that will perform the pivot The function to pivot tables is called <code>pivot_wider()</code>, and it is in the <code>tidyr</code> package. To perform a second pivot, write the code like this:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/table_weightedpct.html">table_weightedpct</a></span><span class="op">(</span>
-  df <span class="op">=</span> <span class="va">df_adults_noNA</span>,
-  vars_ids <span class="op">=</span> <span class="st">"PSU"</span>,
-  vars_strata <span class="op">=</span> <span class="st">"strata"</span>,
-  vars_weights <span class="op">=</span> <span class="st">"weight"</span>,
-  formula_vars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"EF"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">12</span><span class="op">)</span>,
-  formula_vars_levels <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">5</span>,
-  by_vars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"disability_cat"</span>, <span class="st">"sex"</span><span class="op">)</span>,
-  spread_key <span class="op">=</span> <span class="st">"resp"</span>,
-  spread_value <span class="op">=</span> <span class="st">"prop"</span>,
-  arrange_vars <span class="op">=</span> <span class="cn">NULL</span>,
-  willfilter <span class="op">=</span> <span class="cn">FALSE</span>,
-  <span class="va">disability_cat</span>, <span class="va">sex</span>, <span class="va">item</span>, problems <span class="op">=</span> <span class="va">`4`</span><span class="op">+</span><span class="va">`5`</span>
-  <span class="op">)</span> <span class="op">%&gt;%</span> 
-    <span class="fu">pivot_wider</span><span class="op">(</span>names_from <span class="op">=</span> <span class="va">disability_cat</span>, values_from <span class="op">=</span> <span class="va">problems</span><span class="op">)</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 24 × 6</span></span>
-<span class="co">#&gt; <span style="color: #949494;"># Groups:   sex, item [24]</span></span>
-<span class="co">#&gt;    sex    item     No  Mild Moderate Severe</span>
-<span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;ord&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> Female EF1   27.2  25.0     22.2   25.2 </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> Female EF10  21.6  19.7     22.6   20.6 </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> Female EF11   6.44  5.19     5.98   8.61</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> Female EF12   6.69 <span style="color: #BB0000;">NA</span>       <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>   </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> Female EF2   11.6  11.2     11.4   13.8 </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> Female EF3    8.53 11.6      7.00   9.36</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> Female EF4    5.96  4.69     6.35   4.37</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> Female EF5   18.5  24.3     17.8   21.8 </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> Female EF6    8.12  8.72     5.06   5.33</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> Female EF7   11.1   7.58     9.06   8.69</span>
-<span class="co">#&gt; <span style="color: #949494;"># … with 14 more rows</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/table_weightedpct.html">table_weightedpct</a></span><span class="op">(</span></span>
+<span>  df <span class="op">=</span> <span class="va">df_adults_noNA</span>,</span>
+<span>  vars_ids <span class="op">=</span> <span class="st">"PSU"</span>,</span>
+<span>  vars_strata <span class="op">=</span> <span class="st">"strata"</span>,</span>
+<span>  vars_weights <span class="op">=</span> <span class="st">"weight"</span>,</span>
+<span>  formula_vars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"EF"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">12</span><span class="op">)</span>,</span>
+<span>  formula_vars_levels <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">5</span>,</span>
+<span>  by_vars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"disability_cat"</span>, <span class="st">"sex"</span><span class="op">)</span>,</span>
+<span>  spread_key <span class="op">=</span> <span class="st">"resp"</span>,</span>
+<span>  spread_value <span class="op">=</span> <span class="st">"prop"</span>,</span>
+<span>  arrange_vars <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  willfilter <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  <span class="va">disability_cat</span>, <span class="va">sex</span>, <span class="va">item</span>, problems <span class="op">=</span> <span class="va">`4`</span><span class="op">+</span><span class="va">`5`</span></span>
+<span>  <span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>    <span class="fu">pivot_wider</span><span class="op">(</span>names_from <span class="op">=</span> <span class="va">disability_cat</span>, values_from <span class="op">=</span> <span class="va">problems</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 24 × 6</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># Groups:   sex, item [24]</span></span></span>
+<span><span class="co">#&gt;    sex    item     No  Mild Moderate Severe</span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;ord&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> Female EF1   27.2  25.0     22.2   25.2 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> Female EF10  21.6  19.7     22.6   20.6 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> Female EF11   6.44  5.19     5.98   8.61</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> Female EF12   6.69 <span style="color: #BB0000;">NA</span>       <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> Female EF2   11.6  11.2     11.4   13.8 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> Female EF3    8.53 11.6      7.00   9.36</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> Female EF4    5.96  4.69     6.35   4.37</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> Female EF5   18.5  24.3     17.8   21.8 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> Female EF6    8.12  8.72     5.06   5.33</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> Female EF7   11.1   7.58     9.06   8.69</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># … with 14 more rows</span></span></span></code></pre></div>
 <p>The <code>names_from</code> argument of the function <code>pivot_wider()</code> tells <code>R</code> which variable to use as the columns, and <code>values_from</code> tells <code>R</code> what to fill the columns with. The operator <code>%&gt;%</code> is commonly referred to as a “pipe”. It feeds the object before it into the first argument of the function after it. For example, if you have an object <code>x</code> and a function <code>f</code>, writing <code>x %&gt;% f()</code> would be the equivalent as writing <code>f(x)</code>. People use “pipes” because they make long sequences of code easier to read.</p>
 </div>
 </div>
@@ -433,26 +433,27 @@
 </ul>
 <p>Here is an example of how it is used:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/table_unweightedpctn.html">table_unweightedpctn</a></span><span class="op">(</span><span class="va">df_adults_noNA</span>, 
-                     vars_demo <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"sex"</span>, <span class="st">"age_cat"</span>, <span class="st">"work_cat"</span>, <span class="st">"edu_cat"</span><span class="op">)</span>, 
-                     group_by_var <span class="op">=</span> <span class="st">"disability_cat"</span>, 
-                     spread_by_group_by_var <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 12 × 10</span></span>
-<span class="co">#&gt;    item    demo  No_pct  No_n Mild_pct Mild_n Moderate_pct Moderate_n Severe_pct</span>
-<span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;ord&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> sex     Fema…   52.5   287     53.5    250         49.9        376       49.1</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> sex     Male    47.5   260     46.5    217         50.1        377       50.9</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> age_cat 18-24    6.9    38      7.3     34          8.8         66        7.7</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> age_cat 25-39   19.7   108     16.1     75         19.7        148       16.4</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> age_cat 40-64   32.4   177     33.2    155         29.3        221       32.6</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> age_cat 64-1…   41     224     43.5    203         42.2        318       43.2</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> work_c… N       41.7   228     40.5    189         42          316       42.3</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> work_c… Y       58.3   319     59.5    278         58          437       57.7</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> edu_cat None    21.8   119     16.7     78         21.4        161       19  </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> edu_cat Elem…   37.8   207     38.8    181         39.7        299       41.3</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">11</span> edu_cat Seco…   25     137     28.7    134         23.2        175       25.1</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">12</span> edu_cat Univ…   15.4    84     15.8     74         15.7        118       14.6</span>
-<span class="co">#&gt; <span style="color: #949494;"># … with 1 more variable: Severe_n &lt;dbl&gt;</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/table_unweightedpctn.html">table_unweightedpctn</a></span><span class="op">(</span><span class="va">df_adults_noNA</span>, </span>
+<span>                     vars_demo <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"sex"</span>, <span class="st">"age_cat"</span>, <span class="st">"work_cat"</span>, <span class="st">"edu_cat"</span><span class="op">)</span>, </span>
+<span>                     group_by_var <span class="op">=</span> <span class="st">"disability_cat"</span>, </span>
+<span>                     spread_by_group_by_var <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 12 × 10</span></span></span>
+<span><span class="co">#&gt;    item     demo     No_pct  No_n Mild_…¹ Mild_n Moder…² Moder…³ Sever…⁴ Sever…⁵</span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;ord&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> sex      Female     52.5   287    53.5    250    49.9     376    49.1     209</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> sex      Male       47.5   260    46.5    217    50.1     377    50.9     217</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> age_cat  18-24       6.9    38     7.3     34     8.8      66     7.7      33</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> age_cat  25-39      19.7   108    16.1     75    19.7     148    16.4      70</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> age_cat  40-64      32.4   177    33.2    155    29.3     221    32.6     139</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> age_cat  64-100     41     224    43.5    203    42.2     318    43.2     184</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> work_cat N          41.7   228    40.5    189    42       316    42.3     180</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> work_cat Y          58.3   319    59.5    278    58       437    57.7     246</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> edu_cat  None       21.8   119    16.7     78    21.4     161    19        81</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> edu_cat  Element…   37.8   207    38.8    181    39.7     299    41.3     176</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">11</span> edu_cat  Seconda…   25     137    28.7    134    23.2     175    25.1     107</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">12</span> edu_cat  Univers…   15.4    84    15.8     74    15.7     118    14.6      62</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># … with abbreviated variable names ¹​Mild_pct, ²​Moderate_pct, ³​Moderate_n,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   ⁴​Severe_pct, ⁵​Severe_n</span></span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="table_basicstats">
@@ -469,15 +470,15 @@
 </ul>
 <p>Here is an example of how it is used:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/table_basicstats.html">table_basicstats</a></span><span class="op">(</span><span class="va">df_adults_noNA</span>, <span class="st">"HHID"</span>, <span class="st">"age_cat"</span><span class="op">)</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 5 × 4</span></span>
-<span class="co">#&gt;   age_cat mean_sd   median range</span>
-<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 18-24   0.1 (0.3)      0 0 - 1</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 25-39   0.2 (0.4)      0 0 - 1</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 40-64   0.3 (0.5)      0 0 - 1</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 64-100  0.4 (0.5)      0 0 - 1</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">5</span> Total   1 (0)          1 1 - 1</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/table_basicstats.html">table_basicstats</a></span><span class="op">(</span><span class="va">df_adults_noNA</span>, <span class="st">"HHID"</span>, <span class="st">"age_cat"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 5 × 4</span></span></span>
+<span><span class="co">#&gt;   age_cat mean_sd   median range</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 18-24   0.1 (0.3)      0 0 - 1</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 25-39   0.2 (0.4)      0 0 - 1</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 40-64   0.3 (0.5)      0 0 - 1</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 64-100  0.4 (0.5)      0 0 - 1</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> Total   1 (0)          1 1 - 1</span></span></code></pre></div>
 </div>
 </div>
 <div class="section level3">
@@ -603,7 +604,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer>

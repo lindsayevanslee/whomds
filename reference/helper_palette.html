@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">whomds</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0.9000</span>
       </span>
     </div>
 
@@ -96,51 +96,70 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">helper_palette</span><span class="op">(</span>
-  <span class="va">n</span>,
-  h <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">100</span>, <span class="fl">100</span><span class="op">)</span>,
-  c. <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">60</span>, <span class="fl">100</span><span class="op">)</span>,
-  l <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">15</span>, <span class="fl">95</span><span class="op">)</span>,
-  power <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">0.9</span><span class="op">)</span>,
-  fixup <span class="op">=</span> <span class="cn">TRUE</span>,
-  gamma <span class="op">=</span> <span class="cn">NULL</span>,
-  alpha <span class="op">=</span> <span class="fl">1</span>,
-  <span class="va">...</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">helper_palette</span><span class="op">(</span></span>
+<span>  <span class="va">n</span>,</span>
+<span>  h <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">100</span>, <span class="fl">100</span><span class="op">)</span>,</span>
+<span>  c. <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">60</span>, <span class="fl">100</span><span class="op">)</span>,</span>
+<span>  l <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">15</span>, <span class="fl">95</span><span class="op">)</span>,</span>
+<span>  power <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">0.9</span><span class="op">)</span>,</span>
+<span>  fixup <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  gamma <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  alpha <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>n</dt>
 <dd><p>the number of colors (\(\ge 1\)) to be in the palette.</p></dd>
+
+
 <dt>h</dt>
 <dd><p>hue value in the HCL or HSV color description, has to be in [0, 360]
 for HCL and in [0, 1] for HSV colors.</p></dd>
+
+
 <dt>c.</dt>
 <dd><p>chroma value in the HCL color description.</p></dd>
+
+
 <dt>l</dt>
 <dd><p>luminance value in the HCL color description.</p></dd>
+
+
 <dt>power</dt>
 <dd><p>control parameter determining how chroma and luminance should
 be increased (1 = linear, 2 = quadratic, etc.).</p></dd>
+
+
 <dt>fixup</dt>
 <dd><p>logical. Should the color be corrected to a valid RGB value
 before correction?</p></dd>
+
+
 <dt>gamma</dt>
 <dd><p>Deprecated.</p></dd>
+
+
 <dt>alpha</dt>
 <dd><p>numeric vector of values in the range <code>[0, 1]</code> for alpha
 transparency channel (0 means transparent and 1 means opaque).</p></dd>
+
+
 <dt>...</dt>
-<dd><p>Other arguments passed to <code><a href="https://colorspace.R-Forge.R-project.org//reference/hex.html" class="external-link">hex</a></code>.</p></dd>
+<dd><p>Other arguments passed to <code><a href="https://colorspace.R-Forge.R-project.org/reference/hex.html" class="external-link">hex</a></code>.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p><code>n</code> hex codes from the color palette</p>
+    
+
+<p><code>n</code> hex codes from the color palette</p>
     </div>
     <div id="details">
     <h2>Details</h2>
-    <p>Generated with <code><a href="https://colorspace.R-Forge.R-project.org//reference/choose_palette.html" class="external-link">colorspace::choose_palette()</a></code></p>
+    <p>Generated with <code><a href="https://colorspace.R-Forge.R-project.org/reference/choose_palette.html" class="external-link">colorspace::choose_palette()</a></code></p>
     </div>
     <div id="see-also">
     <h2>See also</h2>
@@ -161,7 +180,7 @@ transparency channel (0 means transparent and 1 means opaque).</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

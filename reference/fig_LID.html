@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">whomds</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0.9000</span>
       </span>
     </div>
 
@@ -96,31 +96,42 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">fig_LID</span><span class="op">(</span>
-  <span class="va">LIDforgraph</span>,
-  LIDcutoff <span class="op">=</span> <span class="fl">0.2</span>,
-  <span class="va">path_output</span>,
-  extra_file_label <span class="op">=</span> <span class="cn">NULL</span>,
-  vertex_print_grey <span class="op">=</span> <span class="cn">NULL</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">fig_LID</span><span class="op">(</span></span>
+<span>  <span class="va">LIDforgraph</span>,</span>
+<span>  LIDcutoff <span class="op">=</span> <span class="fl">0.2</span>,</span>
+<span>  <span class="va">path_output</span>,</span>
+<span>  extra_file_label <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  vertex_print_grey <span class="op">=</span> <span class="cn">NULL</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>LIDforgraph</dt>
 <dd><p>a square matrix of item correlations</p></dd>
+
+
 <dt>LIDcutoff</dt>
 <dd><p>a numeric value between 0 and 1 for the cut-off for significant correlation</p></dd>
+
+
 <dt>path_output</dt>
 <dd><p>a string with the path to the output folder</p></dd>
+
+
 <dt>extra_file_label</dt>
 <dd><p>a string to tack on to the end of names of files outputted and the title of the plot. Default is NULL.</p></dd>
+
+
 <dt>vertex_print_grey</dt>
 <dd><p>a character vector with the names of vertices to print in <code>"lightgrey"</code>, with all others printed in <code>"skyblue"</code>. If left as default NULL, all vertices will be printed in <code>"lightgrey"</code>.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>Returns a ggplot graph showing the items with correlation &gt;= <code>LIDcutoff</code> and prints a csv of the corresponding correlations</p>
+    
+
+<p>Returns a ggplot graph showing the items with correlation &gt;= <code>LIDcutoff</code> and prints a csv of the corresponding correlations</p>
     </div>
     <div id="details">
     <h2>Details</h2>
@@ -146,7 +157,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

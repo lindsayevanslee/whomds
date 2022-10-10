@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">whomds</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0.9000</span>
       </span>
     </div>
 
@@ -96,34 +96,49 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">table_unweightedpctn</span><span class="op">(</span>
-  <span class="va">df</span>,
-  <span class="va">vars_demo</span>,
-  group_by_var <span class="op">=</span> <span class="cn">NULL</span>,
-  spread_by_group_by_var <span class="op">=</span> <span class="cn">FALSE</span>,
-  group_by_var_sums_to_100 <span class="op">=</span> <span class="cn">FALSE</span>,
-  add_totals <span class="op">=</span> <span class="cn">FALSE</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">table_unweightedpctn</span><span class="op">(</span></span>
+<span>  <span class="va">df</span>,</span>
+<span>  <span class="va">vars_demo</span>,</span>
+<span>  group_by_var <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  spread_by_group_by_var <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  group_by_var_sums_to_100 <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  add_totals <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>df</dt>
 <dd><p>a data frame of individual survey data, where each row is an individual</p></dd>
+
+
 <dt>vars_demo</dt>
 <dd><p>a character vector of names of variables to calculate percent and N for</p></dd>
+
+
 <dt>group_by_var</dt>
 <dd><p>a string (length 1) with the name of the variable from <code>df</code> to disaggregate by</p></dd>
+
+
 <dt>spread_by_group_by_var</dt>
 <dd><p>logical determining whether to pass <code>group_by_var</code> to <code><a href="https://tidyr.tidyverse.org/reference/pivot_wider.html" class="external-link">tidyr::pivot_wider()</a></code> to give a wide-format tab. Default is FALSE.</p></dd>
+
+
 <dt>group_by_var_sums_to_100</dt>
 <dd><p>logical determining whether percentages sum to 100 along the margin of <code>group_by_var</code>, if applicable. Default is FALSE.</p></dd>
+
+
 <dt>add_totals</dt>
 <dd><p>logical determining whether to create total rows or columns (as appropriate) that demonstrate the margin that sums to 100. Default is FALSE.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A tibble with percent and N for each level of each variable in <code>vars_demo</code></p>
+    
+
+<p>A tibble with percent and N for each level of each variable in <code>vars_demo</code></p>
+
+
     </div>
     <div id="see-also">
     <h2>See also</h2>
@@ -134,7 +149,7 @@
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu">table_unweightedpctn</span><span class="op">(</span><span class="va">df_adults</span>, vars_demo <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"sex"</span>, <span class="st">"age_cat"</span>, <span class="st">"work_cat"</span>, <span class="st">"edu_cat"</span><span class="op">)</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">table_unweightedpctn</span><span class="op">(</span><span class="va">df_adults</span>, vars_demo <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"sex"</span>, <span class="st">"age_cat"</span>, <span class="st">"work_cat"</span>, <span class="st">"edu_cat"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 12 × 4</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    item     demo         pct     n</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;ord&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
@@ -150,8 +165,8 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> edu_cat  Elementary  39.8   996</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">11</span> edu_cat  Secondary   25.2   629</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">12</span> edu_cat  University  14.8   371</span>
-<span class="r-in"><span class="fu">table_unweightedpctn</span><span class="op">(</span><span class="va">df_adults</span>, vars_demo <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"sex"</span>, <span class="st">"age_cat"</span>, <span class="st">"work_cat"</span>, <span class="st">"edu_cat"</span><span class="op">)</span>, </span>
-<span class="r-in">group_by_var <span class="op">=</span> <span class="st">"disability_cat"</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">table_unweightedpctn</span><span class="op">(</span><span class="va">df_adults</span>, vars_demo <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"sex"</span>, <span class="st">"age_cat"</span>, <span class="st">"work_cat"</span>, <span class="st">"edu_cat"</span><span class="op">)</span>, </span></span>
+<span class="r-in"><span>group_by_var <span class="op">=</span> <span class="st">"disability_cat"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 48 × 5</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    item    demo   disability_cat   pct     n</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;ord&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;ord&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
@@ -166,24 +181,25 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> age_cat 18-24  No               6.9    38</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> age_cat 25-39  No              19.7   108</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 38 more rows</span></span>
-<span class="r-in"><span class="fu">table_unweightedpctn</span><span class="op">(</span><span class="va">df_adults</span>, vars_demo <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"sex"</span>, <span class="st">"age_cat"</span>, <span class="st">"work_cat"</span>, <span class="st">"edu_cat"</span><span class="op">)</span>, </span>
-<span class="r-in">group_by_var <span class="op">=</span> <span class="st">"disability_cat"</span>, spread_by_group_by_var <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">table_unweightedpctn</span><span class="op">(</span><span class="va">df_adults</span>, vars_demo <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"sex"</span>, <span class="st">"age_cat"</span>, <span class="st">"work_cat"</span>, <span class="st">"edu_cat"</span><span class="op">)</span>, </span></span>
+<span class="r-in"><span>group_by_var <span class="op">=</span> <span class="st">"disability_cat"</span>, spread_by_group_by_var <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 12 × 10</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    item    demo  No_pct  No_n Mild_pct Mild_n Moderate_pct Moderate_n Severe_pct</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;ord&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> sex     Fema…   52.5   287     53.5    250         49.9        376       49.1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> sex     Male    47.5   260     46.5    217         50.1        377       50.9</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> age_cat 18-24    6.9    38      7.3     34          8.8         66        7.7</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> age_cat 25-39   19.7   108     16.1     75         19.7        148       16.4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> age_cat 40-64   32.4   177     33.2    155         29.3        221       32.6</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> age_cat 64-1…   41     224     43.5    203         42.2        318       43.2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> work_c… N       41.7   228     40.5    189         42          316       42.3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> work_c… Y       58.3   319     59.5    278         58          437       57.7</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> edu_cat None    21.8   119     16.7     78         21.4        161       19  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> edu_cat Elem…   37.8   207     38.8    181         39.7        299       41.3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">11</span> edu_cat Seco…   25     137     28.7    134         23.2        175       25.1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">12</span> edu_cat Univ…   15.4    84     15.8     74         15.7        118       14.6</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 1 more variable: Severe_n &lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    item     demo     No_pct  No_n Mild_…¹ Mild_n Moder…² Moder…³ Sever…⁴ Sever…⁵</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;ord&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> sex      Female     52.5   287    53.5    250    49.9     376    49.1     209</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> sex      Male       47.5   260    46.5    217    50.1     377    50.9     217</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> age_cat  18-24       6.9    38     7.3     34     8.8      66     7.7      33</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> age_cat  25-39      19.7   108    16.1     75    19.7     148    16.4      70</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> age_cat  40-64      32.4   177    33.2    155    29.3     221    32.6     139</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> age_cat  64-100     41     224    43.5    203    42.2     318    43.2     184</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> work_cat N          41.7   228    40.5    189    42       316    42.3     180</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> work_cat Y          58.3   319    59.5    278    58       437    57.7     246</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> edu_cat  None       21.8   119    16.7     78    21.4     161    19        81</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> edu_cat  Element…   37.8   207    38.8    181    39.7     299    41.3     176</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">11</span> edu_cat  Seconda…   25     137    28.7    134    23.2     175    25.1     107</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">12</span> edu_cat  Univers…   15.4    84    15.8     74    15.7     118    14.6      62</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with abbreviated variable names ¹​Mild_pct, ²​Moderate_pct, ³​Moderate_n,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   ⁴​Severe_pct, ⁵​Severe_n</span></span>
 </code></pre></div>
     </div>
   </div>
@@ -198,7 +214,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">whomds</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0.9000</span>
       </span>
     </div>
 
@@ -96,43 +96,62 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">fig_density</span><span class="op">(</span>
-  <span class="va">df</span>,
-  <span class="va">score</span>,
-  var_color <span class="op">=</span> <span class="cn">NULL</span>,
-  var_facet <span class="op">=</span> <span class="cn">NULL</span>,
-  cutoffs <span class="op">=</span> <span class="cn">NULL</span>,
-  x_lab <span class="op">=</span> <span class="st">"Score"</span>,
-  pal <span class="op">=</span> <span class="st">"Paired"</span>,
-  adjust <span class="op">=</span> <span class="fl">2</span>,
-  size <span class="op">=</span> <span class="fl">1.5</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">fig_density</span><span class="op">(</span></span>
+<span>  <span class="va">df</span>,</span>
+<span>  <span class="va">score</span>,</span>
+<span>  var_color <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  var_facet <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  cutoffs <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  x_lab <span class="op">=</span> <span class="st">"Score"</span>,</span>
+<span>  pal <span class="op">=</span> <span class="st">"Paired"</span>,</span>
+<span>  adjust <span class="op">=</span> <span class="fl">2</span>,</span>
+<span>  size <span class="op">=</span> <span class="fl">1.5</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>df</dt>
 <dd><p>a data frame where each row is an individual, containing at least a score column (between 0 and 100)</p></dd>
+
+
 <dt>score</dt>
 <dd><p>a string (length 1) of the column name for the score variable to print the distribution of</p></dd>
+
+
 <dt>var_color</dt>
 <dd><p>a string (length 1) of the column name for the variable to set color of density lines by. Default is NULL.</p></dd>
+
+
 <dt>var_facet</dt>
 <dd><p>a string (length 1) of the column name for the variable to create a <code><a href="https://ggplot2.tidyverse.org/reference/facet_grid.html" class="external-link">ggplot2::facet_grid()</a></code> with. Default is NULL.</p></dd>
+
+
 <dt>cutoffs</dt>
 <dd><p>a numeric vector of the cut-offs for the score categorization. Default is NULL.</p></dd>
+
+
 <dt>x_lab</dt>
 <dd><p>a string (length 1) of x-axis label. Default is "Score".</p></dd>
+
+
 <dt>pal</dt>
 <dd><p>a string specifying either a manual color to use for the color aesthetic, a character vector explictly specifying the colors to use for the color scale, or as the name of a palette to pass to <code><a href="https://rdrr.io/pkg/RColorBrewer/man/ColorBrewer.html" class="external-link">RColorBrewer::brewer.pal()</a></code> with the name of the color palette to use for the color scale. Default is <code>"Paired"</code></p></dd>
+
+
 <dt>adjust</dt>
 <dd><p>a numeric value to pass to <code>adjust</code> argument of <code><a href="https://ggplot2.tidyverse.org/reference/geom_density.html" class="external-link">ggplot2::geom_density()</a></code>. Default is 2.</p></dd>
+
+
 <dt>size</dt>
 <dd><p>a numeric value to pass to <code>size</code> argument of <code><a href="https://ggplot2.tidyverse.org/reference/geom_density.html" class="external-link">ggplot2::geom_density()</a></code>. Default is 1.5.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A density figure</p>
+    
+
+<p>A density figure</p>
     </div>
     <div id="details">
     <h2>Details</h2>
@@ -148,16 +167,16 @@
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu">fig_density</span><span class="op">(</span><span class="va">df_adults</span>, score <span class="op">=</span> <span class="st">"disability_score"</span>, cutoffs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">19.1</span>, <span class="fl">34.4</span>, <span class="fl">49.6</span><span class="op">)</span>, </span>
-<span class="r-in">x_lab <span class="op">=</span> <span class="st">"Disability score"</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">fig_density</span><span class="op">(</span><span class="va">df_adults</span>, score <span class="op">=</span> <span class="st">"disability_score"</span>, cutoffs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">19.1</span>, <span class="fl">34.4</span>, <span class="fl">49.6</span><span class="op">)</span>, </span></span>
+<span class="r-in"><span>x_lab <span class="op">=</span> <span class="st">"Disability score"</span><span class="op">)</span></span></span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Removed 307 rows containing non-finite values (stat_density).</span>
 <span class="r-plt img"><img src="fig_density-1.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span class="fu">fig_density</span><span class="op">(</span><span class="va">df_adults</span>, score <span class="op">=</span> <span class="st">"disability_score"</span>, var_color <span class="op">=</span> <span class="st">"sex"</span>, </span>
-<span class="r-in">cutoffs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">19.1</span>, <span class="fl">34.4</span>, <span class="fl">49.6</span><span class="op">)</span>, x_lab <span class="op">=</span> <span class="st">"Disability score"</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">fig_density</span><span class="op">(</span><span class="va">df_adults</span>, score <span class="op">=</span> <span class="st">"disability_score"</span>, var_color <span class="op">=</span> <span class="st">"sex"</span>, </span></span>
+<span class="r-in"><span>cutoffs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">19.1</span>, <span class="fl">34.4</span>, <span class="fl">49.6</span><span class="op">)</span>, x_lab <span class="op">=</span> <span class="st">"Disability score"</span><span class="op">)</span></span></span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Removed 307 rows containing non-finite values (stat_density).</span>
 <span class="r-plt img"><img src="fig_density-2.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span class="fu">fig_density</span><span class="op">(</span><span class="va">df_adults</span>, score <span class="op">=</span> <span class="st">"disability_score"</span>, var_color <span class="op">=</span> <span class="st">"sex"</span>, </span>
-<span class="r-in">var_facet <span class="op">=</span> <span class="st">"age_cat"</span>,  cutoffs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">19.1</span>, <span class="fl">34.4</span>, <span class="fl">49.6</span><span class="op">)</span>, x_lab <span class="op">=</span> <span class="st">"Disability score"</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">fig_density</span><span class="op">(</span><span class="va">df_adults</span>, score <span class="op">=</span> <span class="st">"disability_score"</span>, var_color <span class="op">=</span> <span class="st">"sex"</span>, </span></span>
+<span class="r-in"><span>var_facet <span class="op">=</span> <span class="st">"age_cat"</span>,  cutoffs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">19.1</span>, <span class="fl">34.4</span>, <span class="fl">49.6</span><span class="op">)</span>, x_lab <span class="op">=</span> <span class="st">"Disability score"</span><span class="op">)</span></span></span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Removed 307 rows containing non-finite values (stat_density).</span>
 <span class="r-plt img"><img src="fig_density-3.png" alt="" width="700" height="433"></span>
 </code></pre></div>
@@ -174,7 +193,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

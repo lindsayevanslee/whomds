@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">whomds</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0.9000</span>
       </span>
     </div>
 
@@ -96,23 +96,32 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">rasch_rawscore</span><span class="op">(</span><span class="va">df</span>, <span class="va">vars_metric</span>, <span class="va">vars_id</span>, <span class="va">max_values</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">rasch_rawscore</span><span class="op">(</span><span class="va">df</span>, <span class="va">vars_metric</span>, <span class="va">vars_id</span>, <span class="va">max_values</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>df</dt>
 <dd><p>a data frame of individual survey data, where each row is an individual</p></dd>
+
+
 <dt>vars_metric</dt>
 <dd><p>a character vector of items to use in the Rasch Analysis</p></dd>
+
+
 <dt>vars_id</dt>
 <dd><p>a string with column name uniquely identifying individuals</p></dd>
+
+
 <dt>max_values</dt>
 <dd><p>a tibble with two columns, <code>var</code> equivalent to <code>vars_metric</code> and <code>max_val</code> with their corresponding maximum possible values</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>a tibble with a new column <code>RawScore</code> with the raw sum score of <code>vars_metric</code> for each individual, and artificial rows with individuals that attain the minimum and/or maximum if either is not attained in <code>df</code>. The artificial maximum row has value "MAX" in the <code>vars_id</code> column, and likewise the artificial minimum row has the value "MIN" in this column.</p>
+    
+
+<p>a tibble with a new column <code>RawScore</code> with the raw sum score of <code>vars_metric</code> for each individual, and artificial rows with individuals that attain the minimum and/or maximum if either is not attained in <code>df</code>. The artificial maximum row has value "MAX" in the <code>vars_id</code> column, and likewise the artificial minimum row has the value "MIN" in this column.</p>
     </div>
     <div id="see-also">
     <h2>See also</h2>
@@ -147,7 +156,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

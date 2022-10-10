@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">whomds</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0.9000</span>
       </span>
     </div>
 
@@ -96,37 +96,53 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">rasch_factor</span><span class="op">(</span><span class="va">df</span>, <span class="va">vars_metric</span>, print_results <span class="op">=</span> <span class="cn">FALSE</span>, path_output <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">rasch_factor</span><span class="op">(</span><span class="va">df</span>, <span class="va">vars_metric</span>, print_results <span class="op">=</span> <span class="cn">FALSE</span>, path_output <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>df</dt>
 <dd><p>a data frame of individual survey data, where each row is an individual</p></dd>
+
+
 <dt>vars_metric</dt>
 <dd><p>a character vector of items to use in the Rasch Analysis</p></dd>
+
+
 <dt>print_results</dt>
 <dd><p>a logical value indicating whether or not to print various files displaying results from the Rasch Model. Default is FALSE, to not print the files.</p></dd>
+
+
 <dt>path_output</dt>
 <dd><p>a string with the path to the output folder. Default is NULL.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>a named list with results from the factor analysis for a Rasch Model:</p>
+    
+
+<p>a named list with results from the factor analysis for a Rasch Model:</p>
 <dl><dt>cor_poly</dt>
 <dd><p>the matrix of polychoric correlations</p></dd>
+
 <dt>eigenvalues</dt>
 <dd><p>the eigenvalues</p></dd>
+
 <dt>parallel_analysis</dt>
 <dd><p>permutation parallel analysis distribution</p></dd>
+
 <dt>results_scree</dt>
 <dd><p>results of a scree analysis</p></dd>
+
 <dt>n_group_factors</dt>
 <dd><p>number of factors from the parallel analysis in the scree analysis</p></dd>
+
 <dt>fa_onefactor</dt>
 <dd><p>results from factor analysis with one factor</p></dd>
+
 <dt>fa_resid</dt>
 <dd><p>local dependency based on polychoric correlations of the items</p></dd>
+
 </dl></div>
     <div id="details">
     <h2>Details</h2>
@@ -165,7 +181,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

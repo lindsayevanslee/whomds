@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">whomds</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0.9000</span>
       </span>
     </div>
 
@@ -96,27 +96,38 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">rasch_recode</span><span class="op">(</span><span class="va">df</span>, <span class="va">vars_metric</span>, <span class="va">recode_strategy</span>, <span class="va">max_values</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">rasch_recode</span><span class="op">(</span><span class="va">df</span>, <span class="va">vars_metric</span>, <span class="va">recode_strategy</span>, <span class="va">max_values</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>df</dt>
 <dd><p>a data frame of individual survey data, where each row is an individual</p></dd>
+
+
 <dt>vars_metric</dt>
 <dd><p>a character vector of items to use in the Rasch Analysis</p></dd>
+
+
 <dt>recode_strategy</dt>
 <dd><p>a named list giving the strategy to take for recoding variables, passed to <code>rasch_recode()</code>. One element of the list per recode strategy. Each element of the list is a numeric vector giving the new values to map the variables to. The names of the list are the groups of column names to use for each recoding strategy, separated only by ",". Default is NULL, to not recode items.</p></dd>
+
+
 <dt>max_values</dt>
 <dd><p>a tibble with two columns, <code>var</code> equivalent to <code>vars_metric</code> and <code>max_val</code> with their corresponding maximum possible values</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>a named list with:</p>
+    
+
+<p>a named list with:</p>
 <dl><dt>df</dt>
 <dd><p>new <code>df</code> after recoding the desired variables</p></dd>
+
 <dt>max_values</dt>
 <dd><p>new <code>max_values</code> after recoding the desired variables</p></dd>
+
 </dl></div>
     <div id="see-also">
     <h2>See also</h2>
@@ -162,7 +173,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

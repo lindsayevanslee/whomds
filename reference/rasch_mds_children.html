@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">whomds</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0.9000</span>
       </span>
     </div>
 
@@ -96,71 +96,110 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">rasch_mds_children</span><span class="op">(</span>
-  <span class="va">df</span>,
-  <span class="va">vars_id</span>,
-  <span class="va">vars_group</span>,
-  <span class="va">vars_metric_common</span>,
-  vars_metric_grouped <span class="op">=</span> <span class="cn">NULL</span>,
-  TAM_model <span class="op">=</span> <span class="st">"PCM2"</span>,
-  vars_DIF <span class="op">=</span> <span class="cn">NULL</span>,
-  resp_opts <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">5</span>,
-  has_at_least_one <span class="op">=</span> <span class="fl">4</span><span class="op">:</span><span class="fl">5</span>,
-  max_NA <span class="op">=</span> <span class="fl">10</span>,
-  print_results <span class="op">=</span> <span class="cn">FALSE</span>,
-  path_parent <span class="op">=</span> <span class="cn">NULL</span>,
-  model_name <span class="op">=</span> <span class="cn">NULL</span>,
-  testlet_strategy <span class="op">=</span> <span class="cn">NULL</span>,
-  recode_strategy <span class="op">=</span> <span class="cn">NULL</span>,
-  drop_vars <span class="op">=</span> <span class="cn">NULL</span>,
-  split_strategy <span class="op">=</span> <span class="cn">NULL</span>,
-  comment <span class="op">=</span> <span class="cn">NULL</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">rasch_mds_children</span><span class="op">(</span></span>
+<span>  <span class="va">df</span>,</span>
+<span>  <span class="va">vars_id</span>,</span>
+<span>  <span class="va">vars_group</span>,</span>
+<span>  <span class="va">vars_metric_common</span>,</span>
+<span>  vars_metric_grouped <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  TAM_model <span class="op">=</span> <span class="st">"PCM2"</span>,</span>
+<span>  vars_DIF <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  resp_opts <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">5</span>,</span>
+<span>  has_at_least_one <span class="op">=</span> <span class="fl">4</span><span class="op">:</span><span class="fl">5</span>,</span>
+<span>  max_NA <span class="op">=</span> <span class="fl">10</span>,</span>
+<span>  print_results <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  path_parent <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  model_name <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  testlet_strategy <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  recode_strategy <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  drop_vars <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  split_strategy <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  comment <span class="op">=</span> <span class="cn">NULL</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>df</dt>
 <dd><p>a data frame of individual survey data, where each row is an individual</p></dd>
+
+
 <dt>vars_id</dt>
 <dd><p>a string with column name uniquely identifying individuals</p></dd>
+
+
 <dt>vars_group</dt>
 <dd><p>a string with the column name identifying grouping variable</p></dd>
+
+
 <dt>vars_metric_common</dt>
 <dd><p>a character vector the common items among all individuals</p></dd>
+
+
 <dt>vars_metric_grouped</dt>
 <dd><p>a named list of character vectors with the items to use in the Rasch Analysis per group. The list should have names corresponding to the different groups, and contain character vectors of the corresponding items for each group.</p></dd>
+
+
 <dt>TAM_model</dt>
 <dd><p>a string with the type of IRT model to use, passed to <code>irtmodel</code> argument of <code><a href="https://rdrr.io/pkg/TAM/man/tam.mml.html" class="external-link">TAM::tam()</a></code>. Default is <code>"PCM2"</code></p></dd>
+
+
 <dt>vars_DIF</dt>
 <dd><p>Currently does nothing. In the future, a string with the column names to use for analyzing differential item functioning (DIF). Default is NULL, to skip analysis of DIF.</p></dd>
+
+
 <dt>resp_opts</dt>
 <dd><p>a numeric vector of possible response options for <code>vars_metric</code>. Must begin with 1. Default is 1:5</p></dd>
+
+
 <dt>has_at_least_one</dt>
 <dd><p>a numeric vector with the response options that a respondent must have at least one of in order to be included in the metric calculation. See details for more information.</p></dd>
+
+
 <dt>max_NA</dt>
 <dd><p>a numeric value for the maximum number of NAs allowed per individual among <code>vars_metric</code>. Default is 2.</p></dd>
+
+
 <dt>print_results</dt>
 <dd><p>a logical value indicating whether or not to print various files displaying results from the Rasch Model. Default is FALSE, to not print the files.</p></dd>
+
+
 <dt>path_parent</dt>
 <dd><p>a string with the path to the folder where results from multiple models will be outputted. Default is NULL</p></dd>
+
+
 <dt>model_name</dt>
 <dd><p>a string with a name for the model, which is used to create a new folder for model output. Default is NULL.</p></dd>
+
+
 <dt>testlet_strategy</dt>
 <dd><p>a list giving the strategy to take for creating testlets, passed to <code><a href="rasch_testlet.html">rasch_testlet()</a></code>. One element of the list per testlet to create. Each element of the list must be a character vector of column names to use for the testlet. Optionally, name the element of the list to give the name of the new testlet. Otherwise, the new testlet will be the original column names separated by "_". Default is NULL, to not create testlets.</p></dd>
+
+
 <dt>recode_strategy</dt>
 <dd><p>a named list giving the strategy to take for recoding variables, passed to <code><a href="rasch_recode.html">rasch_recode()</a></code>. One element of the list per recode strategy. Each element of the list is a numeric vector giving the new values to map the variables to. The names of the list are the groups of column names to use for each recoding strategy, separated only by ",". Default is NULL, to not recode items.</p></dd>
+
+
 <dt>drop_vars</dt>
 <dd><p>a character vector of column names to drop from the Rasch Analysis. Default is NULL, to not drop items.</p></dd>
+
+
 <dt>split_strategy</dt>
 <dd><p>a named list giving the strategy to take for splitting variables by categories, passed to <code><a href="rasch_split.html">rasch_split()</a></code>. One element of the list per variable to split by. Each element of the list must be a character vector of column names to split. The names of the list are the variables to split each group of variables by. Default is NULL, to not split items.</p></dd>
+
+
 <dt>comment</dt>
 <dd><p>a string giving a comment describing the analysis, printed to a txt file. Default is NULL, to not print a comment.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>a tibble with new columns representing the original person abilities (<code>person_pars</code>) and the rescaled person abilities (<code>rescaled</code>). 
-If <code>print_results</code> is TRUE, prints files to the working directory with the results of the Rasch Model.</p>
+    
+
+<p>a tibble with new columns representing the original person abilities (<code>person_pars</code>) and the rescaled person abilities (<code>rescaled</code>).</p>
+
+
+<p>If <code>print_results</code> is TRUE, prints files to the working directory with the results of the Rasch Model.</p>
     </div>
     <div id="details">
     <h2>Details</h2>
@@ -211,7 +250,7 @@ If <code>print_results</code> is TRUE, prints files to the working directory wit
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">whomds</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0.9000</span>
       </span>
     </div>
 
@@ -164,25 +164,25 @@
 </h2>
 <p>In this section we will examine each argument of the function <code><a href="../reference/rasch_mds.html">rasch_mds()</a></code>. The help file for the function also describes the arguments. Help files for functions in <code>R</code> can be accessed by writing <code>?</code> before the function name, like so:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="op">?</span><span class="va">rasch_mds</span></code></pre></div>
+<code class="sourceCode R"><span><span class="op">?</span><span class="va">rasch_mds</span></span></code></pre></div>
 <p>Below is an example of a use of the function <code><a href="../reference/rasch_mds.html">rasch_mds()</a></code>:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/rasch_mds.html">rasch_mds</a></span><span class="op">(</span>
-  df <span class="op">=</span> <span class="va">df_adults</span>, 
-  vars_metric <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"EF"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">12</span><span class="op">)</span>,
-  vars_id <span class="op">=</span> <span class="st">"HHID"</span>, 
-  vars_DIF <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"sex"</span>, <span class="st">"age_cat"</span><span class="op">)</span>,
-  resp_opts <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, 
-  max_NA <span class="op">=</span> <span class="fl">2</span>,
-  print_results <span class="op">=</span> <span class="cn">TRUE</span>,
-  path_parent <span class="op">=</span> <span class="st">"/Users/lindsaylee/Desktop/"</span>,
-  model_name <span class="op">=</span> <span class="st">"Start"</span>,
-  testlet_strategy <span class="op">=</span> <span class="cn">NULL</span>,
-  recode_strategy <span class="op">=</span> <span class="cn">NULL</span>,
-  drop_vars <span class="op">=</span> <span class="cn">NULL</span>,
-  split_strategy <span class="op">=</span> <span class="cn">NULL</span>,
-  comment <span class="op">=</span> <span class="st">"Initial run"</span>
-<span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/rasch_mds.html">rasch_mds</a></span><span class="op">(</span></span>
+<span>  df <span class="op">=</span> <span class="va">df_adults</span>, </span>
+<span>  vars_metric <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"EF"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">12</span><span class="op">)</span>,</span>
+<span>  vars_id <span class="op">=</span> <span class="st">"HHID"</span>, </span>
+<span>  vars_DIF <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"sex"</span>, <span class="st">"age_cat"</span><span class="op">)</span>,</span>
+<span>  resp_opts <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, </span>
+<span>  max_NA <span class="op">=</span> <span class="fl">2</span>,</span>
+<span>  print_results <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  path_parent <span class="op">=</span> <span class="st">"/Users/lindsaylee/Desktop/"</span>,</span>
+<span>  model_name <span class="op">=</span> <span class="st">"Start"</span>,</span>
+<span>  testlet_strategy <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  recode_strategy <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  drop_vars <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  split_strategy <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  comment <span class="op">=</span> <span class="st">"Initial run"</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 <p>The first argument is <code>df</code>. This argument is for the data. The data object should be individual survey data, with one row per individual. Here the data is stored in an object <code>df_adults</code>, which is a dataset included in the <code>whomds</code> package. To find out more about <code>df_adults</code> please look at its help file by running: <code><a href="../reference/df_adults.html">?df_adults</a></code></p>
 <p>The second argument is <code>vars_metric</code>, which is equal to a character vector of the column names for the items to use in Rasch Analysis. Here it is equal to <code>paste0("EF", 1:12)</code>, which is a character vector of length 12 of the column names <code>EF1</code>, <code>EF2</code>, … <code>EF11</code>, and <code>EF12</code>.</p>
 <p>The next argument is <code>vars_id</code>, which is the name of the column used to uniquely identify individuals. Here the ID column is called <code>HHID</code>.</p>
@@ -205,13 +205,13 @@
 <p>If you want to create testlets–that is, sum up items into super items in order to fix item dependence–then pass a strategy for making testlets to the argument <code>testlet_strategy</code>. <code>testlet_strategy</code> is a list with one element of the list per testlet that you want to create. Each element of the list must be a character vector of column names to use for the testlet. Optionally, you can name the elements of the list to give custom names to the new testlets. Otherwise, the new testlets will be the original column names separated by "_".</p>
 <p>For example, imagine you wanted to make two testlets: one testlet from variables <code>EF4</code>, <code>EF6</code>, and <code>EF8</code> with a new name of <code>new</code>, and another testlet from <code>EF5</code> and <code>EF7</code>, without a new name specified. Then you would specify <code>testlet_strategy</code> as the following:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/rasch_mds.html">rasch_mds</a></span><span class="op">(</span>
-  <span class="va">...</span>, 
-  testlet_strategy <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>
-    new <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"EF4"</span>, <span class="st">"EF6"</span>, <span class="st">"EF8"</span><span class="op">)</span>,
-    <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"EF5"</span>, <span class="st">"EF7"</span><span class="op">)</span>
-  <span class="op">)</span>
-<span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/rasch_mds.html">rasch_mds</a></span><span class="op">(</span></span>
+<span>  <span class="va">...</span>, </span>
+<span>  testlet_strategy <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>    new <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"EF4"</span>, <span class="st">"EF6"</span>, <span class="st">"EF8"</span><span class="op">)</span>,</span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"EF5"</span>, <span class="st">"EF7"</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="recoding">Recoding<a class="anchor" aria-label="anchor" href="#recoding"></a>
@@ -219,13 +219,13 @@
 <p>If you want to recode response options–that is, change response options in order to create stochastic ordering–then pass a strategy for the recoding to the argument <code>recode_strategy</code>. <code>recode_strategy</code> takes the form of a named list, with one element of the list per recode strategy. The names of the list are the groups of column names to use for each recoding strategy, separated only by “,”. Each element of the list is a numeric vector giving the new response options to map the variables to.</p>
 <p>For example, if you wanted to collapse the last two response options of the variables <code>EF1</code> and <code>EF2</code>, and collapse the first two response options of <code>EF3</code>, then you would set <code>recode_strategy</code> as the following:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/rasch_mds.html">rasch_mds</a></span><span class="op">(</span>
-  <span class="va">...</span>, 
-  recode_strategy <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>
-    <span class="st">"EF1,EF2"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span>,<span class="fl">3</span><span class="op">)</span>,
-    <span class="st">"EF3"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span><span class="op">)</span>
-  <span class="op">)</span>
-<span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/rasch_mds.html">rasch_mds</a></span><span class="op">(</span></span>
+<span>  <span class="va">...</span>, </span>
+<span>  recode_strategy <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>    <span class="st">"EF1,EF2"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span>,<span class="fl">3</span><span class="op">)</span>,</span>
+<span>    <span class="st">"EF3"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="dropping-variables">Dropping variables<a class="anchor" aria-label="anchor" href="#dropping-variables"></a>
@@ -233,10 +233,10 @@
 <p>If you want to drop any items from your analysis–perhaps in the event of extremely poor fit–then set <code>drop_vars</code> as a character vector of the column names to drop from the analysis.</p>
 <p>For example, if the items <code>EF4</code> and <code>EF7</code> were extremely poorly fitting items, then they could be dropped from the analysis by setting <code>drop_vars</code> as the following:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/rasch_mds.html">rasch_mds</a></span><span class="op">(</span>
-  <span class="va">...</span>, 
-  drop_vars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"EF4"</span>, <span class="st">"EF7"</span><span class="op">)</span>
-<span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/rasch_mds.html">rasch_mds</a></span><span class="op">(</span></span>
+<span>  <span class="va">...</span>, </span>
+<span>  drop_vars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"EF4"</span>, <span class="st">"EF7"</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="splitting">Splitting<a class="anchor" aria-label="anchor" href="#splitting"></a>
@@ -246,13 +246,13 @@
 <p><code>split_strategy</code> takes the form of a named list. There is one element of the list per variable to split by. Each element of the list must be a character vector of column names to split. The names of the list are the variables to split each group of variables by.</p>
 <p>For example, if we wanted to split the variables <code>EF1</code> and <code>EF2</code> by <code>sex</code>, and split <code>EF3</code> by age category <code>age_cat</code>, then we would set <code>split_strategy</code> to be the following:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/rasch_mds.html">rasch_mds</a></span><span class="op">(</span>
-  <span class="va">...</span>, 
-  split_strategy <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>
-    sex <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"EF1"</span>, <span class="st">"EF2"</span><span class="op">)</span>,
-    age_cat <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"EF3"</span><span class="op">)</span>
-  <span class="op">)</span>
-<span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/rasch_mds.html">rasch_mds</a></span><span class="op">(</span></span>
+<span>  <span class="va">...</span>, </span>
+<span>  split_strategy <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>    sex <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"EF1"</span>, <span class="st">"EF2"</span><span class="op">)</span>,</span>
+<span>    age_cat <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"EF3"</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 <p>However, because we expect a certain amount of DIF when measuring disability–especially by sex and age–we rarely use this option. To not perform any splitting, leave <code>split_strategy</code> as its default value of <code>NULL.</code></p>
 </div>
 </div>
@@ -265,22 +265,22 @@
 </h3>
 <p>We will start by trying to run the model without performing any adjustments on our data. To run this model, run a command that is similar to this:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">start</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rasch_mds.html">rasch_mds</a></span><span class="op">(</span>
-  df <span class="op">=</span> <span class="va">df_adults</span>, 
-  vars_metric <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"EF"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">12</span><span class="op">)</span>,
-  vars_id <span class="op">=</span> <span class="st">"HHID"</span>, 
-  vars_DIF <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"sex"</span>, <span class="st">"age_cat"</span><span class="op">)</span>,
-  resp_opts <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, 
-  max_NA <span class="op">=</span> <span class="fl">2</span>,
-  print_results <span class="op">=</span> <span class="cn">TRUE</span>,
-  path_parent <span class="op">=</span> <span class="st">"/Users/lindsaylee/Desktop/"</span>,
-  model_name <span class="op">=</span> <span class="st">"Start"</span>,
-  testlet_strategy <span class="op">=</span> <span class="cn">NULL</span>,
-  recode_strategy <span class="op">=</span> <span class="cn">NULL</span>,
-  drop_vars <span class="op">=</span> <span class="cn">NULL</span>,
-  split_strategy <span class="op">=</span> <span class="cn">NULL</span>,
-  comment <span class="op">=</span> <span class="st">"Initial run"</span>
-<span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">start</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rasch_mds.html">rasch_mds</a></span><span class="op">(</span></span>
+<span>  df <span class="op">=</span> <span class="va">df_adults</span>, </span>
+<span>  vars_metric <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"EF"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">12</span><span class="op">)</span>,</span>
+<span>  vars_id <span class="op">=</span> <span class="st">"HHID"</span>, </span>
+<span>  vars_DIF <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"sex"</span>, <span class="st">"age_cat"</span><span class="op">)</span>,</span>
+<span>  resp_opts <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, </span>
+<span>  max_NA <span class="op">=</span> <span class="fl">2</span>,</span>
+<span>  print_results <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  path_parent <span class="op">=</span> <span class="st">"/Users/lindsaylee/Desktop/"</span>,</span>
+<span>  model_name <span class="op">=</span> <span class="st">"Start"</span>,</span>
+<span>  testlet_strategy <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  recode_strategy <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  drop_vars <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  split_strategy <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  comment <span class="op">=</span> <span class="st">"Initial run"</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 <p>The code you run may not be exactly the same, because for instance the directory you use for <code>path_parent</code> will be specific to your machine, and you may choose a different <code>model_name</code> and <code>comment</code> for your model.</p>
 <p>By running this command, in addition to printing results to your machine (because <code>print_results</code> is <code>TRUE</code>), you are also saving some output to an object in <code>R</code>’s global environment called <code>start</code>. This object is a list with three elements: one named <code>df</code>, one named <code>vars_metric</code>, and one named <code>df_results</code>. <code>df</code> contains the data with the transformed variables used to create the score and the rescaled scores. <code>vars_metric</code> is a character vector of the names of the <code>vars_metric</code> after transforming the variables. <code>df_results</code> is a data frame with one row and a column for each of the main statistics for assessing the assumptions of the Rasch Model. <code>df_results</code> from multiple models can be merged in order to create a data frame that allows you to quickly compare different models.</p>
 <p>It is not necessary to save the output of <code><a href="../reference/rasch_mds.html">rasch_mds()</a></code> to an object in the global environment, but it makes it easier to manipulate the resulting output in order to determine what adjustments to make to your data in the next iteration.</p>
@@ -301,25 +301,25 @@
 </h3>
 <p>With our next iteration of the model, we will try to address the high item dependence between items <code>EF11</code> and <code>EF12</code>. We will do this by creating a testlet between these two items. We do this by changing the argument <code>testlet_stratey</code> as shown below. We have given the new testlet the name <code>workschool</code>, but you could name it whatever you wished.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">testlet1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rasch_mds.html">rasch_mds</a></span><span class="op">(</span>
-  df <span class="op">=</span> <span class="va">df_adults</span>, 
-  vars_metric <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"EF"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">12</span><span class="op">)</span>,
-  vars_id <span class="op">=</span> <span class="st">"HHID"</span>, 
-  vars_DIF <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"sex"</span>, <span class="st">"age_cat"</span><span class="op">)</span>,
-  resp_opts <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, 
-  max_NA <span class="op">=</span> <span class="fl">2</span>,
-  print_results <span class="op">=</span> <span class="cn">TRUE</span>,
-  path_parent <span class="op">=</span> <span class="st">"/Users/lindsaylee/Desktop/"</span>,
-  model_name <span class="op">=</span> <span class="st">"Testlet1"</span>,
-  testlet_strategy <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>workschool <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"EF11"</span>, <span class="st">"EF12"</span><span class="op">)</span><span class="op">)</span>,
-  recode_strategy <span class="op">=</span> <span class="cn">NULL</span>,
-  drop_vars <span class="op">=</span> <span class="cn">NULL</span>,
-  split_strategy <span class="op">=</span> <span class="cn">NULL</span>,
-  comment <span class="op">=</span> <span class="st">"Testlet: EF11,EF12 (LID&gt;0.25)"</span>
-<span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">testlet1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rasch_mds.html">rasch_mds</a></span><span class="op">(</span></span>
+<span>  df <span class="op">=</span> <span class="va">df_adults</span>, </span>
+<span>  vars_metric <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"EF"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">12</span><span class="op">)</span>,</span>
+<span>  vars_id <span class="op">=</span> <span class="st">"HHID"</span>, </span>
+<span>  vars_DIF <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"sex"</span>, <span class="st">"age_cat"</span><span class="op">)</span>,</span>
+<span>  resp_opts <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, </span>
+<span>  max_NA <span class="op">=</span> <span class="fl">2</span>,</span>
+<span>  print_results <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  path_parent <span class="op">=</span> <span class="st">"/Users/lindsaylee/Desktop/"</span>,</span>
+<span>  model_name <span class="op">=</span> <span class="st">"Testlet1"</span>,</span>
+<span>  testlet_strategy <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>workschool <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"EF11"</span>, <span class="st">"EF12"</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  recode_strategy <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  drop_vars <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  split_strategy <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  comment <span class="op">=</span> <span class="st">"Testlet: EF11,EF12 (LID&gt;0.25)"</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 <p>After running this model, we get an error:</p>
-<pre><code><span class="co">#&gt; Error in tapply(1L:ncol(X01beta), mt_ind, function(xin) { :</span>
-<span class="co">#&gt;       arguments must have same length</span></code></pre>
+<pre><code><span><span class="co">#&gt; Error in tapply(1L:ncol(X01beta), mt_ind, function(xin) { :</span></span>
+<span><span class="co">#&gt;       arguments must have same length</span></span></code></pre>
 <p>This error is a bit strange looking. But sometimes errors like this will arise because of too many NAs in the data or if there are not enough people endorsing all possible response options. Let’s look at the file <code>response_freq.csv</code> in order to see how the response options are distributed. We can see in this file that there are many endorsements for all response options for all questions except for our new testlet <code>workschool</code>, which only has 1 person with an answer of 6, and no one with the possible answers of 5, 7 or 8. Perhaps this is what is causing the problem.</p>
 <div class="section level4">
 <h4 id="more-on-recoding">More on recoding<a class="anchor" aria-label="anchor" href="#more-on-recoding"></a>
@@ -338,22 +338,22 @@
 <p>At the next iteration, we will try to recode the response options of our testlet so that the model is able to run.</p>
 <p>We will run the command like below:</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">testlet1_recode1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rasch_mds.html">rasch_mds</a></span><span class="op">(</span>
-  df <span class="op">=</span> <span class="va">df_adults</span>, 
-  vars_metric <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"EF"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">12</span><span class="op">)</span>,
-  vars_id <span class="op">=</span> <span class="st">"HHID"</span>, 
-  vars_DIF <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"sex"</span>, <span class="st">"age_cat"</span><span class="op">)</span>,
-  resp_opts <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, 
-  max_NA <span class="op">=</span> <span class="fl">2</span>,
-  print_results <span class="op">=</span> <span class="cn">TRUE</span>,
-  path_parent <span class="op">=</span> <span class="st">"/Users/lindsaylee/Desktop/"</span>,
-  model_name <span class="op">=</span> <span class="st">"Testlet1_Recode1"</span>,
-  testlet_strategy <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>workschool <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"EF11"</span>, <span class="st">"EF12"</span><span class="op">)</span><span class="op">)</span>,
-  recode_strategy <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>workschool <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span>,<span class="fl">4</span>,<span class="fl">5</span>,<span class="fl">5</span>,<span class="fl">5</span>,<span class="fl">5</span><span class="op">)</span><span class="op">)</span>,
-  drop_vars <span class="op">=</span> <span class="cn">NULL</span>,
-  split_strategy <span class="op">=</span> <span class="cn">NULL</span>,
-  comment <span class="op">=</span> <span class="st">"Testlet: EF11,EF12 (LID&gt;0.25); Recode: workschool to 0,1,2,3,4,5,5,5,5"</span>
-<span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">testlet1_recode1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rasch_mds.html">rasch_mds</a></span><span class="op">(</span></span>
+<span>  df <span class="op">=</span> <span class="va">df_adults</span>, </span>
+<span>  vars_metric <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"EF"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">12</span><span class="op">)</span>,</span>
+<span>  vars_id <span class="op">=</span> <span class="st">"HHID"</span>, </span>
+<span>  vars_DIF <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"sex"</span>, <span class="st">"age_cat"</span><span class="op">)</span>,</span>
+<span>  resp_opts <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, </span>
+<span>  max_NA <span class="op">=</span> <span class="fl">2</span>,</span>
+<span>  print_results <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  path_parent <span class="op">=</span> <span class="st">"/Users/lindsaylee/Desktop/"</span>,</span>
+<span>  model_name <span class="op">=</span> <span class="st">"Testlet1_Recode1"</span>,</span>
+<span>  testlet_strategy <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>workschool <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"EF11"</span>, <span class="st">"EF12"</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  recode_strategy <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>workschool <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span>,<span class="fl">4</span>,<span class="fl">5</span>,<span class="fl">5</span>,<span class="fl">5</span>,<span class="fl">5</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  drop_vars <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  split_strategy <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  comment <span class="op">=</span> <span class="st">"Testlet: EF11,EF12 (LID&gt;0.25); Recode: workschool to 0,1,2,3,4,5,5,5,5"</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 <p>The difference between the Testlet1 model and this model is that we have now added a recoding strategy. We will recode the response options of the testlet <code>workschool</code> to 0,1,2,3,4,5,5,5,5. This means all response options will stay the same, except the response options 5 through 8 are combined.</p>
 <p>After we run the command, we see the model is able to be calculated as normal.</p>
 <p>First we check <code>LID_plot.pdf</code> to see if we have been able to remove the item correlation. In this file, we see the message “No LID found”, which means our testlet strategy was effective!</p>
@@ -368,23 +368,23 @@
 <p>Next we will try recoding items in order to create ordered thresholds. We are most worried about having the single items (everything that is not a testlet) ordered.</p>
 <p>There are various ways you can choose the recoding strategy. In general you want to do the minimum amount of recoding necessary to acheive ordered thresholds. We will try first to collapse the first two thresholds for all items that are not the testlet. We will see which items this works for, and try a new strategy at the next iteration for the items where it did not work.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">testlet1_recode2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rasch_mds.html">rasch_mds</a></span><span class="op">(</span>
-  df <span class="op">=</span> <span class="va">df_adults</span>, 
-  vars_metric <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"EF"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">12</span><span class="op">)</span>,
-  vars_id <span class="op">=</span> <span class="st">"HHID"</span>, 
-  vars_DIF <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"sex"</span>, <span class="st">"age_cat"</span><span class="op">)</span>,
-  resp_opts <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, 
-  max_NA <span class="op">=</span> <span class="fl">2</span>,
-  print_results <span class="op">=</span> <span class="cn">TRUE</span>,
-  path_parent <span class="op">=</span> <span class="st">"/Users/lindsaylee/Desktop/"</span>,
-  model_name <span class="op">=</span> <span class="st">"Testlet1_Recode2"</span>,
-  testlet_strategy <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>workschool <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"EF11"</span>, <span class="st">"EF12"</span><span class="op">)</span><span class="op">)</span>,
-  recode_strategy <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>workschool <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span>,<span class="fl">4</span>,<span class="fl">5</span>,<span class="fl">5</span>,<span class="fl">5</span>,<span class="fl">5</span><span class="op">)</span>,
-                         <span class="st">"EF1,EF2,EF3,EF4,EF5,EF6,EF7,EF8,EF9,EF10"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span><span class="op">)</span><span class="op">)</span>,
-  drop_vars <span class="op">=</span> <span class="cn">NULL</span>,
-  split_strategy <span class="op">=</span> <span class="cn">NULL</span>,
-  comment <span class="op">=</span> <span class="st">"Testlet: EF11,EF12 (LID&gt;0.25); Recode: workschool to 0,1,2,3,4,5,5,5,5, everything else 0,1,1,2,3"</span>
-<span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">testlet1_recode2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rasch_mds.html">rasch_mds</a></span><span class="op">(</span></span>
+<span>  df <span class="op">=</span> <span class="va">df_adults</span>, </span>
+<span>  vars_metric <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"EF"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">12</span><span class="op">)</span>,</span>
+<span>  vars_id <span class="op">=</span> <span class="st">"HHID"</span>, </span>
+<span>  vars_DIF <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"sex"</span>, <span class="st">"age_cat"</span><span class="op">)</span>,</span>
+<span>  resp_opts <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, </span>
+<span>  max_NA <span class="op">=</span> <span class="fl">2</span>,</span>
+<span>  print_results <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  path_parent <span class="op">=</span> <span class="st">"/Users/lindsaylee/Desktop/"</span>,</span>
+<span>  model_name <span class="op">=</span> <span class="st">"Testlet1_Recode2"</span>,</span>
+<span>  testlet_strategy <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>workschool <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"EF11"</span>, <span class="st">"EF12"</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  recode_strategy <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>workschool <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span>,<span class="fl">4</span>,<span class="fl">5</span>,<span class="fl">5</span>,<span class="fl">5</span>,<span class="fl">5</span><span class="op">)</span>,</span>
+<span>                         <span class="st">"EF1,EF2,EF3,EF4,EF5,EF6,EF7,EF8,EF9,EF10"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  drop_vars <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  split_strategy <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  comment <span class="op">=</span> <span class="st">"Testlet: EF11,EF12 (LID&gt;0.25); Recode: workschool to 0,1,2,3,4,5,5,5,5, everything else 0,1,1,2,3"</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 <p>We can see in the new person-item map that this strategy did not work for any of the items. So we will try a new strategy at the next iteration.</p>
 <p><img src="Images/ExampleRasch_EF/Testlet1_Recode2/PImap.png" width="80%" style="display: block; margin: auto;"></p>
 <p>We can also check the other files to see if any other Rasch Model assumptions have now been violated with this recoding strategy. But because we are changing our strategy completely at the next iteration, it is not necessary to pay too much attention to the other files for this iteration.</p>
@@ -395,23 +395,23 @@
 <p>From the person-item map for the Start model, we can see our items are disordered in a bit of a complicated way: many items have thresholds in order 2, 4, 1, 3 or in order 2, 3, 4, 1. Usually if an item has disordered thresholds in a fairly uncomplicated pattern (for example, 1, 2, 4, 3 or 2, 1, 3, 4) then then the recoding strategy is straightforward. For example, with disordering of 1, 2, 4, 3 it is clear that the respone options 3 and 4 should be collapsed. With disordering of 2, 1, 3, 4 then the response options of 1 and 2 should be collapsed.</p>
 <p>In our case, the disordering is fairly complicated so the recoding strategy is less straightforward and will likely have to be more extreme. At this iteration, we will try collapsing two sets of response options: we will collapse 1 with 2 and 3 with 4, as shown below.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">testlet1_recode3</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rasch_mds.html">rasch_mds</a></span><span class="op">(</span>
-  df <span class="op">=</span> <span class="va">df_adults</span>, 
-  vars_metric <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"EF"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">12</span><span class="op">)</span>,
-  vars_id <span class="op">=</span> <span class="st">"HHID"</span>, 
-  vars_DIF <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"sex"</span>, <span class="st">"age_cat"</span><span class="op">)</span>,
-  resp_opts <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, 
-  max_NA <span class="op">=</span> <span class="fl">2</span>,
-  print_results <span class="op">=</span> <span class="cn">TRUE</span>,
-  path_parent <span class="op">=</span> <span class="st">"/Users/lindsaylee/Desktop/"</span>,
-  model_name <span class="op">=</span> <span class="st">"Testlet1_Recode3"</span>,
-  testlet_strategy <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>workschool <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"EF11"</span>, <span class="st">"EF12"</span><span class="op">)</span><span class="op">)</span>,
-  recode_strategy <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>workschool <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span>,<span class="fl">4</span>,<span class="fl">5</span>,<span class="fl">5</span>,<span class="fl">5</span>,<span class="fl">5</span><span class="op">)</span>,
-                         <span class="st">"EF1,EF2,EF3,EF4,EF5,EF6,EF7,EF8,EF9,EF10"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span>,
-  drop_vars <span class="op">=</span> <span class="cn">NULL</span>,
-  split_strategy <span class="op">=</span> <span class="cn">NULL</span>,
-  comment <span class="op">=</span> <span class="st">"Testlet: EF11,EF12 (LID&gt;0.25); Recode: workschool to 0,1,2,3,4,5,5,5,5, everything else 0,1,1,2,2"</span>
-<span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">testlet1_recode3</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rasch_mds.html">rasch_mds</a></span><span class="op">(</span></span>
+<span>  df <span class="op">=</span> <span class="va">df_adults</span>, </span>
+<span>  vars_metric <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"EF"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">12</span><span class="op">)</span>,</span>
+<span>  vars_id <span class="op">=</span> <span class="st">"HHID"</span>, </span>
+<span>  vars_DIF <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"sex"</span>, <span class="st">"age_cat"</span><span class="op">)</span>,</span>
+<span>  resp_opts <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, </span>
+<span>  max_NA <span class="op">=</span> <span class="fl">2</span>,</span>
+<span>  print_results <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  path_parent <span class="op">=</span> <span class="st">"/Users/lindsaylee/Desktop/"</span>,</span>
+<span>  model_name <span class="op">=</span> <span class="st">"Testlet1_Recode3"</span>,</span>
+<span>  testlet_strategy <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>workschool <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"EF11"</span>, <span class="st">"EF12"</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  recode_strategy <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>workschool <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span>,<span class="fl">4</span>,<span class="fl">5</span>,<span class="fl">5</span>,<span class="fl">5</span>,<span class="fl">5</span><span class="op">)</span>,</span>
+<span>                         <span class="st">"EF1,EF2,EF3,EF4,EF5,EF6,EF7,EF8,EF9,EF10"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  drop_vars <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  split_strategy <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  comment <span class="op">=</span> <span class="st">"Testlet: EF11,EF12 (LID&gt;0.25); Recode: workschool to 0,1,2,3,4,5,5,5,5, everything else 0,1,1,2,2"</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 <p>We can see with this recoding strategy that the thresholds are now ordered for most of the items! The only item it did not work for is <code>EF6</code>, which we will have to try a different strategy for at the next iteration.</p>
 <p><img src="Images/ExampleRasch_EF/Testlet1_Recode3/PImap.png" width="80%" style="display: block; margin: auto;"></p>
 <p>We made progress on our threshold disordering, but we need to make sure that the other Rasch Model assumptions have not now been violated with this new strategy. We check <code>LID_plot.pdf</code> and see we still have achieved item independence. We also check the scree plot in <code>parallel_analysis_scree.pdf</code> to see if we still have unidimensionality. Finally, we also check <code>item_fit.csv</code> and <code>Targeting.csv</code> and see that the values are still acceptable in these files as well. So we will proceed with an altered recoding strategy in the next iteration.</p>
@@ -422,24 +422,24 @@
 <p>We still have two items that are disordered: <code>EF6</code> and <code>workschool</code>. We do not generally worry about testlets being disordered because they are not items originally included in the questionnaire. We could recode <code>workschool</code> if its item fit was very poor, but in our model it maintains good item fit based on the infit and outfit statistics, so we will not recode it.</p>
 <p>Therefore at this iteration we will just try to solve the disordering of <code>EF6</code>. We will try collapsing the middle three response options, as shown below.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">testlet1_recode4</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rasch_mds.html">rasch_mds</a></span><span class="op">(</span>
-  df <span class="op">=</span> <span class="va">df_adults</span>, 
-  vars_metric <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"EF"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">12</span><span class="op">)</span>,
-  vars_id <span class="op">=</span> <span class="st">"HHID"</span>, 
-  vars_DIF <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"sex"</span>, <span class="st">"age_cat"</span><span class="op">)</span>,
-  resp_opts <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, 
-  max_NA <span class="op">=</span> <span class="fl">2</span>,
-  print_results <span class="op">=</span> <span class="cn">TRUE</span>,
-  path_parent <span class="op">=</span> <span class="st">"/Users/lindsaylee/Desktop/"</span>,
-  model_name <span class="op">=</span> <span class="st">"Testlet1_Recode4"</span>,
-  testlet_strategy <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>workschool <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"EF11"</span>, <span class="st">"EF12"</span><span class="op">)</span><span class="op">)</span>,
-  recode_strategy <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>workschool <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span>,<span class="fl">4</span>,<span class="fl">5</span>,<span class="fl">5</span>,<span class="fl">5</span>,<span class="fl">5</span><span class="op">)</span>,
-                         <span class="st">"EF1,EF2,EF3,EF4,EF5,EF7,EF8,EF9,EF10"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span>,
-                         EF6 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span>,
-  drop_vars <span class="op">=</span> <span class="cn">NULL</span>,
-  split_strategy <span class="op">=</span> <span class="cn">NULL</span>,
-  comment <span class="op">=</span> <span class="st">"Testlet: EF11,EF12 (LID&gt;0.25); Recode: workschool to 0,1,2,3,4,5,5,5,5, everything else except EF6 to 0,1,1,2,2, EF6 to 0,1,1,1,2"</span>
-<span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">testlet1_recode4</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rasch_mds.html">rasch_mds</a></span><span class="op">(</span></span>
+<span>  df <span class="op">=</span> <span class="va">df_adults</span>, </span>
+<span>  vars_metric <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"EF"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">12</span><span class="op">)</span>,</span>
+<span>  vars_id <span class="op">=</span> <span class="st">"HHID"</span>, </span>
+<span>  vars_DIF <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"sex"</span>, <span class="st">"age_cat"</span><span class="op">)</span>,</span>
+<span>  resp_opts <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, </span>
+<span>  max_NA <span class="op">=</span> <span class="fl">2</span>,</span>
+<span>  print_results <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  path_parent <span class="op">=</span> <span class="st">"/Users/lindsaylee/Desktop/"</span>,</span>
+<span>  model_name <span class="op">=</span> <span class="st">"Testlet1_Recode4"</span>,</span>
+<span>  testlet_strategy <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>workschool <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"EF11"</span>, <span class="st">"EF12"</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  recode_strategy <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>workschool <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span>,<span class="fl">4</span>,<span class="fl">5</span>,<span class="fl">5</span>,<span class="fl">5</span>,<span class="fl">5</span><span class="op">)</span>,</span>
+<span>                         <span class="st">"EF1,EF2,EF3,EF4,EF5,EF7,EF8,EF9,EF10"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span>,</span>
+<span>                         EF6 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  drop_vars <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  split_strategy <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  comment <span class="op">=</span> <span class="st">"Testlet: EF11,EF12 (LID&gt;0.25); Recode: workschool to 0,1,2,3,4,5,5,5,5, everything else except EF6 to 0,1,1,2,2, EF6 to 0,1,1,1,2"</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 <p>After running this model, we see the disordering for <code>EF6</code> has been resolved! All single items now have ordered thresholds!</p>
 <p><img src="Images/ExampleRasch_EF/Testlet1_Recode4/PImap.png" width="80%" style="display: block; margin: auto;"></p>
 <p>We will also check the other files to make sure our other Rasch Model assumptions have been maintained. We check <code>LID_plot.pdf</code> and see we still have achieved item independence. We also check the scree plot in <code>parallel_analysis_scree.pdf</code> to see if we still have unidimensionality. Finally, we also check <code>item_fit.csv</code> and <code>Targeting.csv</code> and see that the values are still acceptable in these files as well.</p>
@@ -470,7 +470,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer>

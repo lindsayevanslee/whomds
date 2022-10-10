@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">whomds</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0.9000</span>
       </span>
     </div>
 
@@ -96,43 +96,62 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">fig_dist</span><span class="op">(</span>
-  <span class="va">df</span>,
-  <span class="va">score</span>,
-  <span class="va">score_cat</span>,
-  <span class="va">cutoffs</span>,
-  x_lab <span class="op">=</span> <span class="st">"Score"</span>,
-  y_max <span class="op">=</span> <span class="cn">NULL</span>,
-  pcent <span class="op">=</span> <span class="cn">FALSE</span>,
-  pal <span class="op">=</span> <span class="st">"Blues"</span>,
-  binwidth <span class="op">=</span> <span class="fl">5</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">fig_dist</span><span class="op">(</span></span>
+<span>  <span class="va">df</span>,</span>
+<span>  <span class="va">score</span>,</span>
+<span>  <span class="va">score_cat</span>,</span>
+<span>  <span class="va">cutoffs</span>,</span>
+<span>  x_lab <span class="op">=</span> <span class="st">"Score"</span>,</span>
+<span>  y_max <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  pcent <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  pal <span class="op">=</span> <span class="st">"Blues"</span>,</span>
+<span>  binwidth <span class="op">=</span> <span class="fl">5</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>df</dt>
 <dd><p>a data frame where each row is an individual, containing at least a score column (between 0 and 100) and a categorization of that score</p></dd>
+
+
 <dt>score</dt>
 <dd><p>a string (length 1) of the column name for the score variable to print the distribution of</p></dd>
+
+
 <dt>score_cat</dt>
 <dd><p>a string (length 1) of the column name for the categorization of the score variable</p></dd>
+
+
 <dt>cutoffs</dt>
 <dd><p>a numeric vector of the cut-offs for the score categorization</p></dd>
+
+
 <dt>x_lab</dt>
 <dd><p>a string (length 1) of x-axis label. Default is "Score".</p></dd>
+
+
 <dt>y_max</dt>
 <dd><p>a numeric value of the maximum limit on the y-axis. Default is NULL to use default value from <code>geom_histogram()</code></p></dd>
+
+
 <dt>pcent</dt>
 <dd><p>a logical value determining whether or not to display the distribution as percentages or frequency. Default is FALSE, to display as frequency.</p></dd>
+
+
 <dt>pal</dt>
 <dd><p>a string to pass to <code><a href="https://rdrr.io/pkg/RColorBrewer/man/ColorBrewer.html" class="external-link">RColorBrewer::brewer.pal()</a></code> with the name of the color palette to use</p></dd>
+
+
 <dt>binwidth</dt>
 <dd><p>a numeric value giving the width of the bins in the histograph. Default is 5.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A score distribution figure with fill based on categorization of the score</p>
+    
+
+<p>A score distribution figure with fill based on categorization of the score</p>
     </div>
     <div id="details">
     <h2>Details</h2>
@@ -148,16 +167,16 @@
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu">fig_dist</span><span class="op">(</span><span class="va">df_adults</span>, score <span class="op">=</span> <span class="st">"disability_score"</span>, score_cat <span class="op">=</span> <span class="st">"disability_cat"</span>, </span>
-<span class="r-in">cutoffs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">19.1</span>, <span class="fl">34.4</span>, <span class="fl">49.6</span><span class="op">)</span>, x_lab <span class="op">=</span> <span class="st">"Disability score"</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">fig_dist</span><span class="op">(</span><span class="va">df_adults</span>, score <span class="op">=</span> <span class="st">"disability_score"</span>, score_cat <span class="op">=</span> <span class="st">"disability_cat"</span>, </span></span>
+<span class="r-in"><span>cutoffs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">19.1</span>, <span class="fl">34.4</span>, <span class="fl">49.6</span><span class="op">)</span>, x_lab <span class="op">=</span> <span class="st">"Disability score"</span><span class="op">)</span></span></span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Removed 307 rows containing non-finite values (stat_bin).</span>
 <span class="r-plt img"><img src="fig_dist-1.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span class="fu">fig_dist</span><span class="op">(</span><span class="va">df_adults</span>, score <span class="op">=</span> <span class="st">"disability_score"</span>, score_cat <span class="op">=</span> <span class="st">"disability_cat"</span>, </span>
-<span class="r-in">cutoffs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">19.1</span>, <span class="fl">34.4</span>, <span class="fl">49.6</span><span class="op">)</span>, x_lab <span class="op">=</span> <span class="st">"Disability score"</span>, y_max <span class="op">=</span> <span class="fl">2000</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">fig_dist</span><span class="op">(</span><span class="va">df_adults</span>, score <span class="op">=</span> <span class="st">"disability_score"</span>, score_cat <span class="op">=</span> <span class="st">"disability_cat"</span>, </span></span>
+<span class="r-in"><span>cutoffs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">19.1</span>, <span class="fl">34.4</span>, <span class="fl">49.6</span><span class="op">)</span>, x_lab <span class="op">=</span> <span class="st">"Disability score"</span>, y_max <span class="op">=</span> <span class="fl">2000</span><span class="op">)</span></span></span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Removed 307 rows containing non-finite values (stat_bin).</span>
 <span class="r-plt img"><img src="fig_dist-2.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span class="fu">fig_dist</span><span class="op">(</span><span class="va">df_adults</span>, score <span class="op">=</span> <span class="st">"disability_score"</span>, score_cat <span class="op">=</span> <span class="st">"disability_cat"</span>, </span>
-<span class="r-in">cutoffs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">19.1</span>, <span class="fl">34.4</span>, <span class="fl">49.6</span><span class="op">)</span>, x_lab <span class="op">=</span> <span class="st">"Disability score"</span>, y_max <span class="op">=</span> <span class="fl">0.2</span>, pcent<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">fig_dist</span><span class="op">(</span><span class="va">df_adults</span>, score <span class="op">=</span> <span class="st">"disability_score"</span>, score_cat <span class="op">=</span> <span class="st">"disability_cat"</span>, </span></span>
+<span class="r-in"><span>cutoffs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">19.1</span>, <span class="fl">34.4</span>, <span class="fl">49.6</span><span class="op">)</span>, x_lab <span class="op">=</span> <span class="st">"Disability score"</span>, y_max <span class="op">=</span> <span class="fl">0.2</span>, pcent<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Removed 307 rows containing non-finite values (stat_bin).</span>
 <span class="r-plt img"><img src="fig_dist-3.png" alt="" width="700" height="433"></span>
 </code></pre></div>
@@ -174,7 +193,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

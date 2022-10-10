@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">whomds</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0.9000</span>
       </span>
     </div>
 
@@ -96,58 +96,83 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">rasch_model</span><span class="op">(</span>
-  <span class="va">df</span>,
-  <span class="va">vars_metric</span>,
-  <span class="va">vars_id</span>,
-  print_results <span class="op">=</span> <span class="cn">FALSE</span>,
-  path_output <span class="op">=</span> <span class="cn">NULL</span>,
-  LIDcutoff <span class="op">=</span> <span class="fl">0.2</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">rasch_model</span><span class="op">(</span></span>
+<span>  <span class="va">df</span>,</span>
+<span>  <span class="va">vars_metric</span>,</span>
+<span>  <span class="va">vars_id</span>,</span>
+<span>  print_results <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  path_output <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  LIDcutoff <span class="op">=</span> <span class="fl">0.2</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>df</dt>
 <dd><p>a data frame of individual survey data, where each row is an individual</p></dd>
+
+
 <dt>vars_metric</dt>
 <dd><p>a character vector of items to use in the Rasch Analysis</p></dd>
+
+
 <dt>vars_id</dt>
 <dd><p>a string with column name uniquely identifying individuals</p></dd>
+
+
 <dt>print_results</dt>
 <dd><p>a logical value indicating whether or not to print various files displaying results from the Rasch Model. Default is FALSE, to not print the files.</p></dd>
+
+
 <dt>path_output</dt>
 <dd><p>a string with the path to the output folder. Default is NULL.</p></dd>
+
+
 <dt>LIDcutoff</dt>
 <dd><p>either a numeric value between 0 and 1 indicating the cut-off for significant local item dependence, or the string "christensen" to use the cut-off suggested by Christensen et al. 2017 (see reference). If "christensen" cut-off fails, defaults to 0.2.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>a list with results from the Rasch Model:</p>
+    
+
+<p>a list with results from the Rasch Model:</p>
 <dl><dt>model</dt>
 <dd><p>the results from the Rasch Model</p></dd>
+
 <dt>df_score</dt>
 <dd><p>a tibble with the items used in the analysis and the person abilities</p></dd>
+
 <dt>thresholds</dt>
 <dd><p>the item thresholds (i.e., crossings)</p></dd>
+
 <dt>person_parameters</dt>
 <dd><p>person abilities</p></dd>
+
 <dt>PSI</dt>
 <dd><p>the person-separation index</p></dd>
+
 <dt>item_fit</dt>
 <dd><p>infit and outfit statistics per item</p></dd>
+
 <dt>residuals_PCM</dt>
 <dd><p>the standardized person residuals</p></dd>
+
 <dt>LID</dt>
 <dd><p>matrix with the item residual correlations</p></dd>
+
 <dt>targeting</dt>
 <dd><p>a matrix with information on the targeting of the model</p></dd>
+
 <dt>fit_results</dt>
 <dd><p>a string with results of the item fit</p></dd>
+
 <dt>LID_results</dt>
 <dd><p>a string with results of the local item dependency</p></dd>
+
 <dt>disordered_results</dt>
 <dd><p>a string listing items with disordered thresholds</p></dd>
+
 </dl></div>
     <div id="details">
     <h2>Details</h2>
@@ -190,7 +215,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

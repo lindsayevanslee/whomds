@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">whomds</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0.9000</span>
       </span>
     </div>
 
@@ -96,21 +96,28 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">rasch_rescale</span><span class="op">(</span><span class="va">df</span>, <span class="va">df_score</span>, <span class="va">vars_id</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">rasch_rescale</span><span class="op">(</span><span class="va">df</span>, <span class="va">df_score</span>, <span class="va">vars_id</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>df</dt>
 <dd><p>a data frame of individual survey data, where each row is an individual</p></dd>
+
+
 <dt>df_score</dt>
 <dd><p>a tibble resulting from <code><a href="rasch_model.html">rasch_model()</a></code> with the person abilities from the Rasch Model</p></dd>
+
+
 <dt>vars_id</dt>
 <dd><p>a string with column name uniquely identifying individuals</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>a tibble with the left join between <code>df</code> and <code>df_score</code> and new column "rescaled" with the rescaled person abilities, ranging from 0 to 100, and filter out any rows with an artificial minimum or maximum</p>
+    
+
+<p>a tibble with the left join between <code>df</code> and <code>df_score</code> and new column "rescaled" with the rescaled person abilities, ranging from 0 to 100, and filter out any rows with an artificial minimum or maximum</p>
     </div>
     <div id="see-also">
     <h2>See also</h2>
@@ -145,7 +152,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

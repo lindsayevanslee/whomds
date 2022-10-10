@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">whomds</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0.9000</span>
       </span>
     </div>
 
@@ -96,61 +96,92 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">table_weightedpct</span><span class="op">(</span>
-  <span class="va">df</span>,
-  <span class="va">vars_ids</span>,
-  <span class="va">vars_strata</span>,
-  <span class="va">vars_weights</span>,
-  <span class="va">formula_vars</span>,
-  <span class="va">...</span>,
-  formula_vars_levels <span class="op">=</span> <span class="fl">0</span><span class="op">:</span><span class="fl">1</span>,
-  by_vars <span class="op">=</span> <span class="cn">NULL</span>,
-  pct <span class="op">=</span> <span class="cn">TRUE</span>,
-  willfilter <span class="op">=</span> <span class="cn">NULL</span>,
-  add_totals <span class="op">=</span> <span class="cn">FALSE</span>,
-  spread_key <span class="op">=</span> <span class="cn">NULL</span>,
-  spread_value <span class="op">=</span> <span class="st">"prop"</span>,
-  arrange_vars <span class="op">=</span> <span class="cn">NULL</span>,
-  include_SE <span class="op">=</span> <span class="cn">FALSE</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">table_weightedpct</span><span class="op">(</span></span>
+<span>  <span class="va">df</span>,</span>
+<span>  <span class="va">vars_ids</span>,</span>
+<span>  <span class="va">vars_strata</span>,</span>
+<span>  <span class="va">vars_weights</span>,</span>
+<span>  <span class="va">formula_vars</span>,</span>
+<span>  <span class="va">...</span>,</span>
+<span>  formula_vars_levels <span class="op">=</span> <span class="fl">0</span><span class="op">:</span><span class="fl">1</span>,</span>
+<span>  by_vars <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  pct <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  willfilter <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  add_totals <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  spread_key <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  spread_value <span class="op">=</span> <span class="st">"prop"</span>,</span>
+<span>  arrange_vars <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  include_SE <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>df</dt>
 <dd><p>a data frame of individual survey data, where each row is an individual</p></dd>
+
+
 <dt>vars_ids</dt>
 <dd><p>a character vector of cluster ids, passed to <code><a href="http://gdfe.co/srvyr/reference/as_survey_design.html" class="external-link">srvyr::as_survey_design()</a></code></p></dd>
+
+
 <dt>vars_strata</dt>
 <dd><p>a character vector of strata ids, passed to <code><a href="http://gdfe.co/srvyr/reference/as_survey_design.html" class="external-link">srvyr::as_survey_design()</a></code></p></dd>
+
+
 <dt>vars_weights</dt>
 <dd><p>a character vector of survey weight ids, passed to <code><a href="http://gdfe.co/srvyr/reference/as_survey_design.html" class="external-link">srvyr::as_survey_design()</a></code></p></dd>
+
+
 <dt>formula_vars</dt>
 <dd><p>a character vector of variables to calculate the percentages of each level for</p></dd>
+
+
 <dt>...</dt>
 <dd><p>captures expressions to pass to <code><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">dplyr::filter()</a></code> or <code><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">dplyr::transmute()</a></code>, depending on the value of argument <code>willfilter</code>. See Details.</p></dd>
+
+
 <dt>formula_vars_levels</dt>
 <dd><p>a vector of the levels of the the <code>formula_vars</code></p></dd>
+
+
 <dt>by_vars</dt>
 <dd><p>a character vector of variables to disaggregate results by. Default is <code>NULL</code> for no disaggregation. The columns listed must not include NAs.</p></dd>
+
+
 <dt>pct</dt>
 <dd><p>a logical variable indicating whether or not to calculate weighted percentages. Default is <code>TRUE</code> for weighted percentages. Set to <code>FALSE</code> for weighted N.</p></dd>
+
+
 <dt>willfilter</dt>
 <dd><p>a logical variable that tells the function whether or not to filter or transmute the data. Leave as default <code>NULL</code> to not filter or transmute. Set as <code>TRUE</code> to filter and <code>FALSE</code> to transmute. See Details.</p></dd>
+
+
 <dt>add_totals</dt>
 <dd><p>logical determining whether to create total rows or columns (as appropriate) that demonstrate the margin that sums to 100. Default is FALSE.</p></dd>
+
+
 <dt>spread_key</dt>
 <dd><p>a string with variable name to pass to <code>names_from</code> argument of <code><a href="https://tidyr.tidyverse.org/reference/pivot_wider.html" class="external-link">tidyr::pivot_wider()</a></code>. Default is <code>NULL</code>.</p></dd>
+
+
 <dt>spread_value</dt>
 <dd><p>a string with variable name to pass to <code>values_from</code> argument of <code><a href="https://tidyr.tidyverse.org/reference/pivot_wider.html" class="external-link">tidyr::pivot_wider()</a></code>. Default is "prop" (the column of percentages created within the function)</p></dd>
+
+
 <dt>arrange_vars</dt>
 <dd><p>a character vector with variables to pass to <code><a href="https://dplyr.tidyverse.org/reference/arrange.html" class="external-link">dplyr::arrange()</a></code>. Default is NULL.</p></dd>
+
+
 <dt>include_SE</dt>
 <dd><p>a logical variable indicating whether to include the standard errors in the table. Default is FALSE. Currently does not work when adding totals, spreading or transmuting.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>a tibble of weighted response percentages or N's</p>
+    
+
+<p>a tibble of weighted response percentages or N's</p>
     </div>
     <div id="details">
     <h2>Details</h2>
@@ -167,13 +198,13 @@
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu">table_weightedpct</span><span class="op">(</span><span class="va">df_adults</span>, </span>
-<span class="r-in">    vars_ids <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"HHID"</span>, <span class="st">"PSU"</span><span class="op">)</span>,</span>
-<span class="r-in">    vars_strata <span class="op">=</span> <span class="st">"strata"</span>,</span>
-<span class="r-in">    vars_weights <span class="op">=</span> <span class="st">"weight"</span>,</span>
-<span class="r-in">    formula_vars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"EF"</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span>,</span>
-<span class="r-in">    formula_vars_levels <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">5</span>,</span>
-<span class="r-in">    by_vars <span class="op">=</span> <span class="st">"sex"</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">table_weightedpct</span><span class="op">(</span><span class="va">df_adults</span>, </span></span>
+<span class="r-in"><span>    vars_ids <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"HHID"</span>, <span class="st">"PSU"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    vars_strata <span class="op">=</span> <span class="st">"strata"</span>,</span></span>
+<span class="r-in"><span>    vars_weights <span class="op">=</span> <span class="st">"weight"</span>,</span></span>
+<span class="r-in"><span>    formula_vars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"EF"</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    formula_vars_levels <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">5</span>,</span></span>
+<span class="r-in"><span>    by_vars <span class="op">=</span> <span class="st">"sex"</span><span class="op">)</span></span></span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>You may have issues with lonely PSUs if you have not set: options(survey.lonely.psu = "adjust")</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 100 × 4</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Groups:   sex, item [20]</span></span>
@@ -204,7 +235,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

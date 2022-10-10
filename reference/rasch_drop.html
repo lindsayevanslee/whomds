@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">whomds</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0.9000</span>
       </span>
     </div>
 
@@ -96,25 +96,34 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">rasch_drop</span><span class="op">(</span><span class="va">vars_metric</span>, <span class="va">drop_vars</span>, <span class="va">max_values</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">rasch_drop</span><span class="op">(</span><span class="va">vars_metric</span>, <span class="va">drop_vars</span>, <span class="va">max_values</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>vars_metric</dt>
 <dd><p>a character vector of items to use in the Rasch Analysis</p></dd>
+
+
 <dt>drop_vars</dt>
 <dd><p>a character vector of column names to drop from the Rasch Analysis. Default is NULL, to not drop items.</p></dd>
+
+
 <dt>max_values</dt>
 <dd><p>a tibble with two columns, <code>var</code> equivalent to <code>vars_metric</code> and <code>max_val</code> with their corresponding maximum possible values</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>a named list with:</p>
+    
+
+<p>a named list with:</p>
 <dl><dt>vars_metric</dt>
 <dd><p>new <code>vars_metric</code> after dropping the desired variables</p></dd>
+
 <dt>max_values</dt>
 <dd><p>new <code>max_values</code> after dropping the desired variables</p></dd>
+
 </dl></div>
     <div id="details">
     <h2>Details</h2>
@@ -164,7 +173,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

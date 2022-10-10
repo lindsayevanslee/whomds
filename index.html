@@ -40,7 +40,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">whomds</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0.9000</span>
       </span>
     </div>
 
@@ -132,42 +132,42 @@
 </h2>
 <p>You can install the release version of the package from CRAN with:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"whomds"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"whomds"</span><span class="op">)</span></span></code></pre></div>
 <p>You can install the development version from <a href="https://github.com/" class="external-link">GitHub</a> with:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># install.packages("devtools")</span>
-<span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"lindsayevanslee/whomds"</span>, build_vignettes <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># install.packages("devtools")</span></span>
+<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"lindsayevanslee/whomds"</span>, build_vignettes <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
 </h2>
 <p>A Rasch model can be used with the function <code><a href="reference/rasch_mds.html">rasch_mds()</a></code>, like so:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/lindsayevanslee/whomds" class="external-link">whomds</a></span><span class="op">)</span>
-
-<span class="va">start</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/rasch_mds.html">rasch_mds</a></span><span class="op">(</span>
-  df <span class="op">=</span> <span class="va">df_adults</span>, 
-  vars_metric <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"EF"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">12</span><span class="op">)</span>,
-  vars_id <span class="op">=</span> <span class="st">"HHID"</span>, 
-  vars_DIF <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"sex"</span>, <span class="st">"age_cat"</span><span class="op">)</span>,
-  resp_opts <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, 
-  max_NA <span class="op">=</span> <span class="fl">2</span>,
-  print_results <span class="op">=</span> <span class="cn">TRUE</span>,
-  path_parent <span class="op">=</span> <span class="st">"/Users/lindsaylee/Desktop/"</span>,
-  model_name <span class="op">=</span> <span class="st">"Start"</span>,
-  testlet_strategy <span class="op">=</span> <span class="cn">NULL</span>,
-  recode_strategy <span class="op">=</span> <span class="cn">NULL</span>,
-  drop_vars <span class="op">=</span> <span class="cn">NULL</span>,
-  split_strategy <span class="op">=</span> <span class="cn">NULL</span>,
-  comment <span class="op">=</span> <span class="st">"Initial run"</span>
-<span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/lindsayevanslee/whomds" class="external-link">whomds</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">start</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/rasch_mds.html">rasch_mds</a></span><span class="op">(</span></span>
+<span>  df <span class="op">=</span> <span class="va">df_adults</span>, </span>
+<span>  vars_metric <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"EF"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">12</span><span class="op">)</span>,</span>
+<span>  vars_id <span class="op">=</span> <span class="st">"HHID"</span>, </span>
+<span>  vars_DIF <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"sex"</span>, <span class="st">"age_cat"</span><span class="op">)</span>,</span>
+<span>  resp_opts <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, </span>
+<span>  max_NA <span class="op">=</span> <span class="fl">2</span>,</span>
+<span>  print_results <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  path_parent <span class="op">=</span> <span class="st">"/Users/lindsaylee/Desktop/"</span>,</span>
+<span>  model_name <span class="op">=</span> <span class="st">"Start"</span>,</span>
+<span>  testlet_strategy <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  recode_strategy <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  drop_vars <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  split_strategy <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  comment <span class="op">=</span> <span class="st">"Initial run"</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="more-information">More information<a class="anchor" aria-label="anchor" href="#more-information"></a>
 </h2>
 <p>An extensive guide on using the package is available from a series of vignettes, in both English and Spanish. You can browse the vignettes by using:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/browseVignettes.html" class="external-link">browseVignettes</a></span><span class="op">(</span><span class="st">"whomds"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/browseVignettes.html" class="external-link">browseVignettes</a></span><span class="op">(</span><span class="st">"whomds"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="contact">Contact<a class="anchor" aria-label="anchor" href="#contact"></a>
@@ -231,7 +231,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer>

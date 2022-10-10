@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">whomds</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0.9000</span>
       </span>
     </div>
 
@@ -208,29 +208,29 @@
 </h2>
 <p>In this section we will examine each argument of the function <code><a href="../reference/rasch_mds_children.html">rasch_mds_children()</a></code>. The help file for the function also describes the arguments. Help files for functions in <code>R</code> can be accessed by writing <code>?</code> before the function name, like so:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="op">?</span><span class="va">rasch_mds_children</span></code></pre></div>
+<code class="sourceCode R"><span><span class="op">?</span><span class="va">rasch_mds_children</span></span></code></pre></div>
 <p>Below is an example of a use of the function <code><a href="../reference/rasch_mds_children.html">rasch_mds_children()</a></code>:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/rasch_mds_children.html">rasch_mds_children</a></span><span class="op">(</span>df <span class="op">=</span> <span class="va">df_children</span>, 
-                   vars_id <span class="op">=</span> <span class="st">"HHID"</span>,
-                   vars_group <span class="op">=</span> <span class="st">"age_cat"</span>,
-                   vars_metric_common <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"child"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span><span class="op">)</span>,
-                   vars_metric_grouped <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>
-                     <span class="st">"Age2to4"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"child"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">12</span>,<span class="fl">15</span>,<span class="fl">16</span>,<span class="fl">19</span>,<span class="fl">20</span>,<span class="fl">24</span>,<span class="fl">25</span><span class="op">)</span><span class="op">)</span>,
-                     <span class="st">"Age5to9"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"child"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">11</span>,<span class="fl">13</span>,<span class="fl">14</span>,<span class="fl">17</span>,<span class="fl">18</span>,<span class="fl">20</span>,<span class="fl">21</span>,<span class="fl">22</span>,<span class="fl">23</span>,<span class="fl">24</span>,<span class="fl">25</span>,<span class="fl">27</span><span class="op">)</span><span class="op">)</span>,
-                     <span class="st">"Age10to17"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"child"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">11</span>,<span class="fl">13</span>,<span class="fl">14</span>,<span class="fl">17</span>,<span class="fl">18</span>,<span class="fl">20</span>,<span class="fl">21</span>,<span class="fl">22</span>,<span class="fl">23</span>,<span class="fl">25</span>,<span class="fl">26</span>,<span class="fl">27</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,
-                   TAM_model <span class="op">=</span> <span class="st">"PCM2"</span>,
-                   resp_opts <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">5</span>,
-                   has_at_least_one <span class="op">=</span> <span class="fl">4</span><span class="op">:</span><span class="fl">5</span>,
-                   max_NA <span class="op">=</span> <span class="fl">10</span>,
-                   print_results <span class="op">=</span> <span class="cn">TRUE</span>,
-                   path_parent <span class="op">=</span> <span class="st">"~/Desktop/"</span>,
-                   model_name <span class="op">=</span> <span class="st">"Start"</span>,
-                   testlet_strategy <span class="op">=</span> <span class="cn">NULL</span>,
-                   recode_strategy <span class="op">=</span> <span class="cn">NULL</span>,
-                   drop_vars <span class="op">=</span> <span class="cn">NULL</span>,
-                   split_strategy <span class="op">=</span> <span class="cn">NULL</span>,
-                   comment <span class="op">=</span> <span class="st">"Initial run"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/rasch_mds_children.html">rasch_mds_children</a></span><span class="op">(</span>df <span class="op">=</span> <span class="va">df_children</span>, </span>
+<span>                   vars_id <span class="op">=</span> <span class="st">"HHID"</span>,</span>
+<span>                   vars_group <span class="op">=</span> <span class="st">"age_cat"</span>,</span>
+<span>                   vars_metric_common <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"child"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>                   vars_metric_grouped <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>                     <span class="st">"Age2to4"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"child"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">12</span>,<span class="fl">15</span>,<span class="fl">16</span>,<span class="fl">19</span>,<span class="fl">20</span>,<span class="fl">24</span>,<span class="fl">25</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>                     <span class="st">"Age5to9"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"child"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">11</span>,<span class="fl">13</span>,<span class="fl">14</span>,<span class="fl">17</span>,<span class="fl">18</span>,<span class="fl">20</span>,<span class="fl">21</span>,<span class="fl">22</span>,<span class="fl">23</span>,<span class="fl">24</span>,<span class="fl">25</span>,<span class="fl">27</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>                     <span class="st">"Age10to17"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"child"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">11</span>,<span class="fl">13</span>,<span class="fl">14</span>,<span class="fl">17</span>,<span class="fl">18</span>,<span class="fl">20</span>,<span class="fl">21</span>,<span class="fl">22</span>,<span class="fl">23</span>,<span class="fl">25</span>,<span class="fl">26</span>,<span class="fl">27</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>                   TAM_model <span class="op">=</span> <span class="st">"PCM2"</span>,</span>
+<span>                   resp_opts <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">5</span>,</span>
+<span>                   has_at_least_one <span class="op">=</span> <span class="fl">4</span><span class="op">:</span><span class="fl">5</span>,</span>
+<span>                   max_NA <span class="op">=</span> <span class="fl">10</span>,</span>
+<span>                   print_results <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>                   path_parent <span class="op">=</span> <span class="st">"~/Desktop/"</span>,</span>
+<span>                   model_name <span class="op">=</span> <span class="st">"Start"</span>,</span>
+<span>                   testlet_strategy <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>                   recode_strategy <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>                   drop_vars <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>                   split_strategy <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>                   comment <span class="op">=</span> <span class="st">"Initial run"</span><span class="op">)</span></span></code></pre></div>
 <p>The first argument is <code>df</code>. This argument is for the data. The data object should be individual survey data, with one row per individual. Here the data is stored in an object <code>df_children</code>, which is a data set included in the <code>whomds</code> package. To find out more about <code>df_children</code> please look at its help file by running: <code><a href="../reference/df_children.html">?df_children</a></code></p>
 <p>The next argument is <code>vars_id</code>, which is the name of the column used to uniquely identify individuals. Here the ID column is called <code>HHID</code>.</p>
 <p>The next argument is <code>vars_group</code>, which is a string with the column name identifying groups, specifically age groups in this case. Here the age group column is <code>age_cat</code>.</p>
@@ -298,7 +298,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer>
