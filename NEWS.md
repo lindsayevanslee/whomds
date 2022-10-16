@@ -1,6 +1,7 @@
 # Unreleased
 
 - Fixed bug with related to printing of DIF results
+- Required eRm dependency to be v1.0-1 due to change in eRm::SepRel() function in subsequent versions
 
 # whomds 1.1.0
 
