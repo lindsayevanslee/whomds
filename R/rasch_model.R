@@ -63,7 +63,7 @@ rasch_model <- function(df, vars_metric, vars_id, print_results = FALSE, path_ou
   
   #------------------------------------------------------------------------------- 
   #5. Person separation index
-  PSIreport <- as.numeric(SepRel(person_parameters)[1])
+  PSIreport <- as.numeric(SepRel_1.0.1(person_parameters)[1])
   
   #-------------------------------------------------------------------------------  
   #6. item.fit
