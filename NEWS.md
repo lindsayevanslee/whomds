@@ -1,7 +1,8 @@
 # Unreleased
 
 - Fixed bug with related to printing of DIF results
-- Required eRm dependency to be v1.0-1 due to change in eRm::SepRel() function in subsequent versions
+- Create new function SepRel_101() which is a copy of eRm::SepRel() v1.0-1
+- Fixed bug with anchored model output in rasch_quality_children_print()
 
 # whomds 1.1.0
 
