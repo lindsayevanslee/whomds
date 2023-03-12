@@ -14,7 +14,7 @@ rasch_mds_children(
   vars_DIF = NULL,
   resp_opts = 1:5,
   has_at_least_one = 4:5,
-  max_NA = 10,
+  max_NA = 2,
   print_results = FALSE,
   path_parent = NULL,
   model_name = NULL,
@@ -44,7 +44,7 @@ rasch_mds_children(
 
 \item{has_at_least_one}{a numeric vector with the response options that a respondent must have at least one of in order to be included in the metric calculation. See details for more information.}
 
-\item{max_NA}{a numeric value for the maximum number of NAs allowed per individual among \code{vars_metric}. Default is 2.}
+\item{max_NA}{a numeric value for the maximum number of NAs allowed per individual among \code{vars_metric_common} and the relevant items from \code{vars_metric_grouped}. Default is 2.}
 
 \item{print_results}{a logical value indicating whether or not to print various files displaying results from the Rasch Model. Default is FALSE, to not print the files.}
 

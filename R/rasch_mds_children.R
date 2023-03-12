@@ -6,6 +6,7 @@
 #' @param TAM_model a string with the type of IRT model to use, passed to \code{irtmodel} argument of \code{TAM::tam()}. Default is \code{"PCM2"}
 #' @param vars_DIF Currently does nothing. In the future, a string with the column names to use for analyzing differential item functioning (DIF). Default is NULL, to skip analysis of DIF.
 #' @param has_at_least_one a numeric vector with the response options that a respondent must have at least one of in order to be included in the metric calculation. See details for more information.
+#' @param max_NA a numeric value for the maximum number of NAs allowed per individual among \code{vars_metric_common} and the relevant items from \code{vars_metric_grouped}. Default is 2.
 #' @inheritParams rasch_mds
 #' 
 #' @details This function combines all of the separate analyses of model fit necessary to assess the quality of the Rasch Model. It is designed to require minimal intervention from the user. Users wishing to have more control over the analysis can use the other Rasch functions in this package separately.
@@ -31,7 +32,7 @@ rasch_mds_children <- function(df,
                                vars_DIF = NULL,
                                resp_opts = 1:5,
                                has_at_least_one = 4:5,
-                               max_NA = 10,
+                               max_NA = 2,
                                print_results = FALSE,
                                path_parent = NULL,
                                model_name = NULL,
@@ -107,10 +108,29 @@ rasch_mds_children <- function(df,
     mutate_at(vars(all_of(vars_id)), list(~ as.character(.)))
   
   #remove people with too many NAs
+  # rm_rows <- df %>% 
+  #   select(helper_varslist(vars_metric)) %>% 
+  #   is.na() %>% 
+  #   rowSums()
+  
+  
   rm_rows <- df %>% 
-    select(helper_varslist(vars_metric)) %>% 
-    is.na() %>% 
-    rowSums()
+    select(all_of(c(vars_group, helper_varslist(vars_metric)))) %>% 
+    rowwise() %>% 
+    group_split() %>% 
+    map_dbl(.f = function(df_row) {
+      
+      this_group <- as.character(pull(df_row, vars_group))
+      
+      vars_to_check <- unique(c(vars_metric_common, vars_metric_grouped[[this_group]]))
+
+      df_row %>%
+        select(all_of(vars_to_check)) %>%
+        is.na() %>%
+        rowSums()
+  
+    })
+  
   rm_rows <- rm_rows > max_NA
   
   df <- df %>% 
