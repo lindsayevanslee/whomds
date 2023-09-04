@@ -16,10 +16,8 @@
 #'
 #'
 #' @references WHO Model Disability Survey: \url{https://www.who.int/health-topics/disability}
-#'
-#' @docType package
-#' @name whomds
-NULL
+#' @keywords internal
+"_PACKAGE"
 
 #quiets R CMD check
 if (getRversion() >= "2.15.1") {
