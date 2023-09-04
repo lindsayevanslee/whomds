@@ -118,7 +118,7 @@ rasch_mds_children <- function(df,
     select(all_of(c(vars_group, helper_varslist(vars_metric)))) %>% 
     rowwise() %>% 
     group_split() %>% 
-    map_dbl(.f = function(df_row) {
+    purrr::map_dbl(.f = function(df_row) {
       
       this_group <- as.character(pull(df_row, vars_group))
       

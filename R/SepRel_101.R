@@ -24,7 +24,7 @@ SepRel_1.0.1 <- function (pobject)
   if (!("ppar" %in% class(pobject))) 
     stop("\"pobject\" must be of class \"ppar\"")
   PersonScoresFull <- pobject[["theta.table"]][["Person Parameter"]]
-  PersonScores <- PersonScoresFull[complete.cases(PersonScoresFull)]
+  PersonScores <- PersonScoresFull[stats::complete.cases(PersonScoresFull)]
   StandardErrors <- unlist(pobject[["se.theta"]])
   SSD.PersonScores <- var(PersonScores)
   MSE <- sum((StandardErrors)^2)/length(StandardErrors)
