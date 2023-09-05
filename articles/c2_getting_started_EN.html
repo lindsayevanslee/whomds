@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">whomds</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0.9006</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0.9010</span>
       </span>
     </div>
 
@@ -108,10 +108,11 @@
 
       
 
-      </header><script src="c2_getting_started_EN_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1 data-toc-skip>2 - Getting started with WHO package for Rasch Analysis</h1>
+      <h1 data-toc-skip>2 - Getting started with WHO package for Rasch
+Analysis</h1>
             
       
       <small class="dont-index">Source: <a href="https://github.com/lindsayevanslee/whomds/blob/HEAD/vignettes/c2_getting_started_EN.Rmd" class="external-link"><code>vignettes/c2_getting_started_EN.Rmd</code></a></small>
@@ -124,38 +125,79 @@
 <div class="section level2">
 <h2 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
 </h2>
-<p>WHO performs the Rasch Analysis for the Model Disability Survey using the software <code>R</code>. <code>R</code> is an open source, statistical programming software. How to program in <code>R</code> is beyond the scope of this guide. However the codes we will discuss as follows have been written in such a way to require minimal programming knowledge, and this guide tries to make the instructions for how to use them as simple as possible.</p>
-<p>To learn about <code>R</code>, please see the references provided at the end of this guide.</p>
-<p>To use the package provided by WHO, <code>R</code> must be installed from the <a href="https://cran.r-project.org" class="external-link">Comprehensive R Archive Network (CRAN)</a>. We also recommend installing <a href="https://www.rstudio.com/products/rstudio/download/" class="external-link">RStudio</a>, a very popular integrated development environment (IDE), for <code>R</code>. One can think of the relationship between <code>R</code> and <code>RStudio</code> like a car: <code>R</code> is the engine of the car, while <code>RStudio</code> is the dashboard and controls. <code>RStudio</code> cannot be run without <code>R</code>, but it makes <code>R</code> easier to use. Both are free to install and use indefinitely.</p>
+<p>WHO performs the Rasch Analysis for the Model Disability Survey using
+the software <code>R</code>. <code>R</code> is an open source,
+statistical programming software. How to program in <code>R</code> is
+beyond the scope of this guide. However the codes we will discuss as
+follows have been written in such a way to require minimal programming
+knowledge, and this guide tries to make the instructions for how to use
+them as simple as possible.</p>
+<p>To learn about <code>R</code>, please see the references provided at
+the end of this guide.</p>
+<p>To use the package provided by WHO, <code>R</code> must be installed
+from the <a href="https://cran.r-project.org" class="external-link">Comprehensive R Archive
+Network (CRAN)</a>. We also recommend installing <a href="https://www.rstudio.com/products/rstudio/download/" class="external-link">RStudio</a>, a
+very popular integrated development environment (IDE), for
+<code>R</code>. One can think of the relationship between <code>R</code>
+and <code>RStudio</code> like a car: <code>R</code> is the engine of the
+car, while <code>RStudio</code> is the dashboard and controls.
+<code>RStudio</code> cannot be run without <code>R</code>, but it makes
+<code>R</code> easier to use. Both are free to install and use
+indefinitely.</p>
 </div>
 <div class="section level2">
 <h2 id="what-is-a-package-and-how-do-i-install-one">What is a package and how do I install one?<a class="anchor" aria-label="anchor" href="#what-is-a-package-and-how-do-i-install-one"></a>
 </h2>
-<p>A “package” is a collection of <code>R</code> functions, data and code with a specific purpose and in a well-defined format. There are thousands of packages for <code>R</code> that have been written by <code>R</code> users. People write packages in order to share codes they have written that make specific tasks easier. WHO has written a package in order to make analysis of the data from the MDS easier. The package written by WHO is called <code>whomds</code>. To install the package, run the following code in the console:</p>
+<p>A “package” is a collection of <code>R</code> functions, data and
+code with a specific purpose and in a well-defined format. There are
+thousands of packages for <code>R</code> that have been written by
+<code>R</code> users. People write packages in order to share codes they
+have written that make specific tasks easier. WHO has written a package
+in order to make analysis of the data from the MDS easier. The package
+written by WHO is called <code>whomds</code>. To install the package,
+run the following code in the console:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"whomds"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="using-whomds">Using <code>whomds</code><a class="anchor" aria-label="anchor" href="#using-whomds"></a>
 </h2>
-<p>Once <code>whomds</code> is installed, it can be opened with the following code:</p>
+<p>Once <code>whomds</code> is installed, it can be opened with the
+following code:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/lindsayevanslee/whomds" class="external-link">whomds</a></span><span class="op">)</span></span></code></pre></div>
 <p><code>whomds</code> contains three kinds of functions:</p>
 <ul>
 <li>
-<code>table_*()</code> functions - produce different fit-for-purpose tables</li>
+<code>table_*()</code> functions - produce different fit-for-purpose
+tables</li>
 <li>
-<code>fig_*()</code> functions - produce different fit-for-purpose figures</li>
+<code>fig_*()</code> functions - produce different fit-for-purpose
+figures</li>
 <li>
-<code>rasch_*()</code> functions - used when performing Rasch Analysis</li>
+<code>rasch_*()</code> functions - used when performing Rasch
+Analysis</li>
 </ul>
-<p>In this section we will focus on the <code>rasch_*()</code> functions.</p>
-<p>There are two sets of <code>rasch_*()</code> functions in the <code>whomds</code> package: one set for adults, and one set for children. The reason different functions are needed for each group is that the type of Rasch Analysis performed for each group is different. The Rasch Analysis performed for adults is straightforward; the whole adult population can be considered in one group. The Rasch Analysis for children requires a more complicated analysis, because children at different ages are very different, and they can perform vastly different types of activities. First we will describe the analysis of adults, and then describe the analysis of children.</p>
+<p>In this section we will focus on the <code>rasch_*()</code>
+functions.</p>
+<p>There are two sets of <code>rasch_*()</code> functions in the
+<code>whomds</code> package: one set for adults, and one set for
+children. The reason different functions are needed for each group is
+that the type of Rasch Analysis performed for each group is different.
+The Rasch Analysis performed for adults is straightforward; the whole
+adult population can be considered in one group. The Rasch Analysis for
+children requires a more complicated analysis, because children at
+different ages are very different, and they can perform vastly different
+types of activities. First we will describe the analysis of adults, and
+then describe the analysis of children.</p>
 <div class="section level3">
 <h3 id="package-dependencies">Package dependencies<a class="anchor" aria-label="anchor" href="#package-dependencies"></a>
 </h3>
-<p>The package <code>whomds</code> depends on several other packages to run properly. When <code>whomds</code> is installed, all of the other packages it uses will also be installed. Be sure that these other packages are installed correctly by investigating any errors that arise during installation.</p>
+<p>The package <code>whomds</code> depends on several other packages to
+run properly. When <code>whomds</code> is installed, all of the other
+packages it uses will also be installed. Be sure that these other
+packages are installed correctly by investigating any errors that arise
+during installation.</p>
 <p>The additional packages are:</p>
 <ul>
 <li><code>colorspace</code></li>
@@ -203,7 +245,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer>

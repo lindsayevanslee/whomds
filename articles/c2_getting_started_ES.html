@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">whomds</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0.9006</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0.9010</span>
       </span>
     </div>
 
@@ -108,10 +108,11 @@
 
       
 
-      </header><script src="c2_getting_started_ES_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1 data-toc-skip>2 - Empezar con el paquete de OMS para Análisis Rasch</h1>
+      <h1 data-toc-skip>2 - Empezar con el paquete de OMS para Análisis
+Rasch</h1>
             
       
       <small class="dont-index">Source: <a href="https://github.com/lindsayevanslee/whomds/blob/HEAD/vignettes/c2_getting_started_ES.Rmd" class="external-link"><code>vignettes/c2_getting_started_ES.Rmd</code></a></small>
@@ -124,35 +125,77 @@
 <div class="section level2">
 <h2 id="introducción">Introducción<a class="anchor" aria-label="anchor" href="#introducci%C3%B3n"></a>
 </h2>
-<p>La OMS realiza el Análisis de Rasch para la Encuesta Modelo sobre la Discapacidad utilizando el software <code>R</code>. <code>R</code> es un software de programación estadística de código abierto. Cómo programar en <code>R</code> está fuera del alcance de esta guía. Sin embargo, los códigos que analizaremos a continuación se han escrito de tal manera que requieren un conocimiento mínimo de programación, y esta guía trata de hacer que las instrucciones sobre cómo usarlas sean lo más simples posible.</p>
-<p>Para obtener información sobre <code>R</code>, consulte las referencias proporcionadas al final de esta guía.</p>
-<p>Para usar el paquete provisto por la OMS, <code>R</code> debe instalarse en el <a href="https://cran.r-project.org" class="external-link">Comprehensive R Archive Network (CRAN)</a>. También recomendamos instalar <a href="https://www.rstudio.com/products/rstudio/download/" class="external-link">RStudio</a>, un <em>integrated development environment (IDE)</em> muy popular, para <code>R</code>. Se puede pensar en la relación entre <code>R</code> y<code>RStudio</code> como un automóvil: <code>R</code> es el motor del automóvil, mientras que<code>RStudio</code> es el tablero y los controles. <code>RStudio</code> no se puede ejecutar sin <code>R</code>, pero hace que <code>R</code> sea más fácil de usar. Ambos son gratis de instalar y usar indefinidamente.</p>
+<p>La OMS realiza el Análisis de Rasch para la Encuesta Modelo sobre la
+Discapacidad utilizando el software <code>R</code>. <code>R</code> es un
+software de programación estadística de código abierto. Cómo programar
+en <code>R</code> está fuera del alcance de esta guía. Sin embargo, los
+códigos que analizaremos a continuación se han escrito de tal manera que
+requieren un conocimiento mínimo de programación, y esta guía trata de
+hacer que las instrucciones sobre cómo usarlas sean lo más simples
+posible.</p>
+<p>Para obtener información sobre <code>R</code>, consulte las
+referencias proporcionadas al final de esta guía.</p>
+<p>Para usar el paquete provisto por la OMS, <code>R</code> debe
+instalarse en el <a href="https://cran.r-project.org" class="external-link">Comprehensive R
+Archive Network (CRAN)</a>. También recomendamos instalar <a href="https://www.rstudio.com/products/rstudio/download/" class="external-link">RStudio</a>,
+un <em>integrated development environment (IDE)</em> muy popular, para
+<code>R</code>. Se puede pensar en la relación entre <code>R</code>
+y<code>RStudio</code> como un automóvil: <code>R</code> es el motor del
+automóvil, mientras que<code>RStudio</code> es el tablero y los
+controles. <code>RStudio</code> no se puede ejecutar sin <code>R</code>,
+pero hace que <code>R</code> sea más fácil de usar. Ambos son gratis de
+instalar y usar indefinidamente.</p>
 </div>
 <div class="section level2">
 <h2 id="qué-es-un-paquete-y-cómo-instalo-uno">¿Qué es un paquete y cómo instalo uno?<a class="anchor" aria-label="anchor" href="#qu%C3%A9-es-un-paquete-y-c%C3%B3mo-instalo-uno"></a>
 </h2>
-<p>Un “paquete” es una colección de funciones, datos y código <code>R</code> con un propósito específico y en un formato bien definido. Hay miles de paquetes para <code>R</code> que han sido escritos por usuarios de <code>R</code>. Las personas escriben paquetes para compartir los códigos que han escrito que facilitan las tareas específicas. La OMS ha escrito un paquete para facilitar el análisis de los datos del MDS. El paquete escrito por la OMS se llama <code>whomds</code>. Se puede instalar <code>whomds</code> ejecutando el siguiente código en la consola:</p>
+<p>Un “paquete” es una colección de funciones, datos y código
+<code>R</code> con un propósito específico y en un formato bien
+definido. Hay miles de paquetes para <code>R</code> que han sido
+escritos por usuarios de <code>R</code>. Las personas escriben paquetes
+para compartir los códigos que han escrito que facilitan las tareas
+específicas. La OMS ha escrito un paquete para facilitar el análisis de
+los datos del MDS. El paquete escrito por la OMS se llama
+<code>whomds</code>. Se puede instalar <code>whomds</code> ejecutando el
+siguiente código en la consola:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"whomds"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="utilizar-whomds">Utilizar <code>whomds</code><a class="anchor" aria-label="anchor" href="#utilizar-whomds"></a>
 </h2>
-<p>Una vez que se instala <code>whomds</code>, se puede abrir con el siguiente código:</p>
+<p>Una vez que se instala <code>whomds</code>, se puede abrir con el
+siguiente código:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/lindsayevanslee/whomds" class="external-link">whomds</a></span><span class="op">)</span></span></code></pre></div>
 <p><code>whomds</code> contiene tres tipos de funciones:</p>
 <ul>
-<li>Funciones <code>table_*()</code> - producen diferentes tablas de estadísticas descriptivas</li>
+<li>Funciones <code>table_*()</code> - producen diferentes tablas de
+estadísticas descriptivas</li>
 <li>Funciones <code>fig_*()</code> - producen diferentes figuras</li>
-<li>Funciones <code>rasch_*()</code> - utilizadas al realizar el Análisis Rasch</li>
+<li>Funciones <code>rasch_*()</code> - utilizadas al realizar el
+Análisis Rasch</li>
 </ul>
-<p>En esta sección nos centraremos en las funciones <code>rasch_*()</code>.</p>
-<p>Hay dos conjuntos de funciones <code>rasch_*()</code> en el paquete <code>whomds</code>: un conjunto para adultos y otro para niños. La razón por la que se necesitan diferentes funciones para cada grupo es que el tipo de Análisis de Rasch realizado para cada grupo es diferente. El Análisis de Rasch realizado para adultos es sencillo; Toda la población adulta puede ser considerada en un grupo. El Análisis de Rasch para niños requiere un análisis más complicado, porque los niños de diferentes edades son muy diferentes y pueden realizar diferentes tipos de actividades. Primero describiremos el análisis de los adultos, y luego describiremos el análisis de los niños.</p>
+<p>En esta sección nos centraremos en las funciones
+<code>rasch_*()</code>.</p>
+<p>Hay dos conjuntos de funciones <code>rasch_*()</code> en el paquete
+<code>whomds</code>: un conjunto para adultos y otro para niños. La
+razón por la que se necesitan diferentes funciones para cada grupo es
+que el tipo de Análisis de Rasch realizado para cada grupo es diferente.
+El Análisis de Rasch realizado para adultos es sencillo; Toda la
+población adulta puede ser considerada en un grupo. El Análisis de Rasch
+para niños requiere un análisis más complicado, porque los niños de
+diferentes edades son muy diferentes y pueden realizar diferentes tipos
+de actividades. Primero describiremos el análisis de los adultos, y
+luego describiremos el análisis de los niños.</p>
 <div class="section level3">
 <h3 id="dependencias-de-paquetes">Dependencias de paquetes<a class="anchor" aria-label="anchor" href="#dependencias-de-paquetes"></a>
 </h3>
-<p>El paquete <code>whomds</code> depende de varios otros paquetes para funcionar correctamente. Cuando se instale <code>whomds</code>, también se instalarán todos los demás paquetes que utiliza. Asegúrate de que estos otros paquetes se instalen correctamente investigando cualquier error que surja durante la instalación.</p>
+<p>El paquete <code>whomds</code> depende de varios otros paquetes para
+funcionar correctamente. Cuando se instale <code>whomds</code>, también
+se instalarán todos los demás paquetes que utiliza. Asegúrate de que
+estos otros paquetes se instalen correctamente investigando cualquier
+error que surja durante la instalación.</p>
 <p>Los paquetes adicionales son:</p>
 <ul>
 <li><code>colorspace</code></li>
@@ -200,7 +243,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer>

@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">whomds</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0.9006</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0.9010</span>
       </span>
     </div>
 
@@ -108,7 +108,7 @@
 
       
 
-      </header><script src="c3_rasch_adults_EN_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>3 - Rasch Analysis for MDS data from adults</h1>
@@ -124,7 +124,12 @@
 <div class="section level2">
 <h2 id="structure">Structure<a class="anchor" aria-label="anchor" href="#structure"></a>
 </h2>
-<p>To perform Rasch Analysis for adults, only one function needs to be used: <code><a href="../reference/rasch_mds.html">rasch_mds()</a></code>. This is referred to as a “wrapper function.” A wrapper function is a function that makes it easier to use other functions. In our case, <code><a href="../reference/rasch_mds.html">rasch_mds()</a></code> utilizes all the other <code>rasch_*()</code> functions to perform the analysis. These other <code>rasch_*()</code> functions used for adults are:</p>
+<p>To perform Rasch Analysis for adults, only one function needs to be
+used: <code><a href="../reference/rasch_mds.html">rasch_mds()</a></code>. This is referred to as a “wrapper
+function.” A wrapper function is a function that makes it easier to use
+other functions. In our case, <code><a href="../reference/rasch_mds.html">rasch_mds()</a></code> utilizes all the
+other <code>rasch_*()</code> functions to perform the analysis. These
+other <code>rasch_*()</code> functions used for adults are:</p>
 <ul>
 <li><code><a href="../reference/rasch_DIF.html">rasch_DIF()</a></code></li>
 <li><code><a href="../reference/rasch_drop.html">rasch_drop()</a></code></li>
@@ -136,23 +141,30 @@
 <li><code><a href="../reference/rasch_split.html">rasch_split()</a></code></li>
 <li><code><a href="../reference/rasch_testlet.html">rasch_testlet()</a></code></li>
 </ul>
-<p>You only need to use the function <code><a href="../reference/rasch_mds.html">rasch_mds()</a></code>. But if you wanted to perform your analysis in a more customized way, you could work with the internal functions directly.</p>
+<p>You only need to use the function <code><a href="../reference/rasch_mds.html">rasch_mds()</a></code>. But if
+you wanted to perform your analysis in a more customized way, you could
+work with the internal functions directly.</p>
 </div>
 <div class="section level2">
 <h2 id="output">Output<a class="anchor" aria-label="anchor" href="#output"></a>
 </h2>
-<p>After each iteration of the Rasch Model, the codes above produce a variety of files that will tell you how well the data fit the assumptions of the model at this iteration. The most important files are the ones below. We will explain each in detail through our example.</p>
+<p>After each iteration of the Rasch Model, the codes above produce a
+variety of files that will tell you how well the data fit the
+assumptions of the model at this iteration. The most important files are
+the ones below. We will explain each in detail through our example.</p>
 <ul>
 <li>
 <code>LID_plot.pdf</code> - shows correlated items</li>
 <li>
-<code>LID_above_0.2.csv</code> - correlations between correlated items</li>
+<code>LID_above_0.2.csv</code> - correlations between correlated
+items</li>
 <li>
 <code>parallel_analysis_scree.pdf</code> - scree plot</li>
 <li>
 <code>bifactor_analysis.pdf</code> - loadings of factors</li>
 <li>
-<code>PImap.pdf</code>- locations of persons and items, ordering of thresholds</li>
+<code>PImap.pdf</code>- locations of persons and items, ordering of
+thresholds</li>
 <li>
 <code>item_fit.csv</code> - item fit</li>
 <li>
@@ -162,10 +174,15 @@
 <div class="section level2">
 <h2 id="arguments-of-rasch_mds">Arguments of <code>rasch_mds()</code><a class="anchor" aria-label="anchor" href="#arguments-of-rasch_mds"></a>
 </h2>
-<p>In this section we will examine each argument of the function <code><a href="../reference/rasch_mds.html">rasch_mds()</a></code>. The help file for the function also describes the arguments. Help files for functions in <code>R</code> can be accessed by writing <code>?</code> before the function name, like so:</p>
+<p>In this section we will examine each argument of the function
+<code><a href="../reference/rasch_mds.html">rasch_mds()</a></code>. The help file for the function also describes
+the arguments. Help files for functions in <code>R</code> can be
+accessed by writing <code>?</code> before the function name, like
+so:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="op">?</span><span class="va">rasch_mds</span></span></code></pre></div>
-<p>Below is an example of a use of the function <code><a href="../reference/rasch_mds.html">rasch_mds()</a></code>:</p>
+<p>Below is an example of a use of the function
+<code><a href="../reference/rasch_mds.html">rasch_mds()</a></code>:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/rasch_mds.html">rasch_mds</a></span><span class="op">(</span></span>
 <span>  df <span class="op">=</span> <span class="va">df_adults</span>, </span>
@@ -183,27 +200,102 @@
 <span>  split_strategy <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  comment <span class="op">=</span> <span class="st">"Initial run"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<p>The first argument is <code>df</code>. This argument is for the data. The data object should be individual survey data, with one row per individual. Here the data is stored in an object <code>df_adults</code>, which is a dataset included in the <code>whomds</code> package. To find out more about <code>df_adults</code> please look at its help file by running: <code><a href="../reference/df_adults.html">?df_adults</a></code></p>
-<p>The second argument is <code>vars_metric</code>, which is equal to a character vector of the column names for the items to use in Rasch Analysis. Here it is equal to <code>paste0("EF", 1:12)</code>, which is a character vector of length 12 of the column names <code>EF1</code>, <code>EF2</code>, … <code>EF11</code>, and <code>EF12</code>.</p>
-<p>The next argument is <code>vars_id</code>, which is the name of the column used to uniquely identify individuals. Here the ID column is called <code>HHID</code>.</p>
-<p>The next argument is <code>vars_DIF</code>. It is equal to a character vector with the names of the columns that are used to analyze differential item functioning (DIF). DIF will be discussed in more detail in later sections. Here <code>vars_DIF</code> is equal to a character vector of length two containing the name of the columns <code>"sex"</code> and <code>"age_cat"</code>.</p>
-<p>The next argument is <code>resp_opts</code>. This is a numeric vector with the possible response options for <code>vars_metric</code>. In this survey, the questions <code>EF1</code> to <code>EF12</code> have response options 1 to 5. So here <code>resp_opts</code> is equal to a numeric vector of length 5 with the values <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code> and <code>5</code>.</p>
-<p>The next argument is <code>max_NA</code>. This is a numeric value for the maximum number of missing values allowed for an individual to be still be considered in the analysis. Rasch Analysis can handle individuals having a few missing values, but too many will cause problems in the analysis. In general all individuals in the sample should have fewer than 15% missing values. Here <code>max_NA</code> is set to <code>2</code>, meaning individuals are allowed to have a maximum of two missing values out of the questions in <code>vars_metric</code> to still be included in the analysis.</p>
-<p>The next argument is <code>print_results</code>, which is either <code>TRUE</code> or <code>FALSE</code>. When it is <code>TRUE</code>, files will be saved onto your computer with results from the Rasch iteration. When it is <code>FALSE</code>, files will not be saved.</p>
-<p>The next argument is <code>path_parent</code>. This is a string with the path to the folder where the results of multiple models will be saved, assuming <code>print_results</code> is <code>TRUE</code>. The folder in <code>path_parent</code> will then contain separate folders with the names specified in <code>model_name</code> at each iteration. In the function call above, all results will be saved on the Desktop. Note that when writing paths for <code>R</code>, the slashes should all be: <code>/</code> (NOT <code>\</code>). Be sure to include a final <code>/</code> on the end of the path.</p>
-<p>The next argument is <code>model_name</code>. This is equal to a string where you give a name of the model you are running. This name will be used as the name of the folder where all the output will be saved on your computer, if <code>print_results</code> is <code>TRUE</code>. The name you give should be short but informative. For example, you may call your first run “Start”, as it is called here. If you create a testlet in your second run perhaps you can call it “Testlet1”, etc. Choose whatever will be meaningful to you.</p>
-<p>The next arguments are <code>testlet_strategy</code>, <code>recode_strategy</code>, <code>drop_vars</code> and <code>split_strategy</code>. These are arguments that control how the data is used in each iteration of the Rasch Model. Each will be discussed in more detail in later sections. Here they are all set to <code>NULL</code>, which means they are not used in the iteration of Rasch Analysis shown here.</p>
-<p>The last argument is <code>comment</code>. This is equal to a string where you can write some free-text information about the current iteration so that when you are looking at the results later you can remember what you did and why you did it. It is better to be more detailed, because you will forget why you chose to run the model in this particular way. This comment will be saved in a file <code>Comment.txt</code>. Here the comment is just <code>"Initial run"</code>.</p>
+<p>The first argument is <code>df</code>. This argument is for the data.
+The data object should be individual survey data, with one row per
+individual. Here the data is stored in an object <code>df_adults</code>,
+which is a dataset included in the <code>whomds</code> package. To find
+out more about <code>df_adults</code> please look at its help file by
+running: <code><a href="../reference/df_adults.html">?df_adults</a></code></p>
+<p>The second argument is <code>vars_metric</code>, which is equal to a
+character vector of the column names for the items to use in Rasch
+Analysis. Here it is equal to <code>paste0("EF", 1:12)</code>, which is
+a character vector of length 12 of the column names <code>EF1</code>,
+<code>EF2</code>, … <code>EF11</code>, and <code>EF12</code>.</p>
+<p>The next argument is <code>vars_id</code>, which is the name of the
+column used to uniquely identify individuals. Here the ID column is
+called <code>HHID</code>.</p>
+<p>The next argument is <code>vars_DIF</code>. It is equal to a
+character vector with the names of the columns that are used to analyze
+differential item functioning (DIF). DIF will be discussed in more
+detail in later sections. Here <code>vars_DIF</code> is equal to a
+character vector of length two containing the name of the columns
+<code>"sex"</code> and <code>"age_cat"</code>.</p>
+<p>The next argument is <code>resp_opts</code>. This is a numeric vector
+with the possible response options for <code>vars_metric</code>. In this
+survey, the questions <code>EF1</code> to <code>EF12</code> have
+response options 1 to 5. So here <code>resp_opts</code> is equal to a
+numeric vector of length 5 with the values <code>1</code>,
+<code>2</code>, <code>3</code>, <code>4</code> and <code>5</code>.</p>
+<p>The next argument is <code>max_NA</code>. This is a numeric value for
+the maximum number of missing values allowed for an individual to be
+still be considered in the analysis. Rasch Analysis can handle
+individuals having a few missing values, but too many will cause
+problems in the analysis. In general all individuals in the sample
+should have fewer than 15% missing values. Here <code>max_NA</code> is
+set to <code>2</code>, meaning individuals are allowed to have a maximum
+of two missing values out of the questions in <code>vars_metric</code>
+to still be included in the analysis.</p>
+<p>The next argument is <code>print_results</code>, which is either
+<code>TRUE</code> or <code>FALSE</code>. When it is <code>TRUE</code>,
+files will be saved onto your computer with results from the Rasch
+iteration. When it is <code>FALSE</code>, files will not be saved.</p>
+<p>The next argument is <code>path_parent</code>. This is a string with
+the path to the folder where the results of multiple models will be
+saved, assuming <code>print_results</code> is <code>TRUE</code>. The
+folder in <code>path_parent</code> will then contain separate folders
+with the names specified in <code>model_name</code> at each iteration.
+In the function call above, all results will be saved on the Desktop.
+Note that when writing paths for <code>R</code>, the slashes should all
+be: <code>/</code> (NOT <code>\</code>). Be sure to include a final
+<code>/</code> on the end of the path.</p>
+<p>The next argument is <code>model_name</code>. This is equal to a
+string where you give a name of the model you are running. This name
+will be used as the name of the folder where all the output will be
+saved on your computer, if <code>print_results</code> is
+<code>TRUE</code>. The name you give should be short but informative.
+For example, you may call your first run “Start”, as it is called here.
+If you create a testlet in your second run perhaps you can call it
+“Testlet1”, etc. Choose whatever will be meaningful to you.</p>
+<p>The next arguments are <code>testlet_strategy</code>,
+<code>recode_strategy</code>, <code>drop_vars</code> and
+<code>split_strategy</code>. These are arguments that control how the
+data is used in each iteration of the Rasch Model. Each will be
+discussed in more detail in later sections. Here they are all set to
+<code>NULL</code>, which means they are not used in the iteration of
+Rasch Analysis shown here.</p>
+<p>The last argument is <code>comment</code>. This is equal to a string
+where you can write some free-text information about the current
+iteration so that when you are looking at the results later you can
+remember what you did and why you did it. It is better to be more
+detailed, because you will forget why you chose to run the model in this
+particular way. This comment will be saved in a file
+<code>Comment.txt</code>. Here the comment is just
+<code>"Initial run"</code>.</p>
 </div>
 <div class="section level2">
 <h2 id="adjusting-the-data">Adjusting the data<a class="anchor" aria-label="anchor" href="#adjusting-the-data"></a>
 </h2>
-<p>Next, we will discuss the arguments that give instructions about how to adjust the data. These parts may not be entirely meaningful now, but will become more so after we go through an example.</p>
+<p>Next, we will discuss the arguments that give instructions about how
+to adjust the data. These parts may not be entirely meaningful now, but
+will become more so after we go through an example.</p>
 <div class="section level3">
 <h3 id="making-testlets">Making testlets<a class="anchor" aria-label="anchor" href="#making-testlets"></a>
 </h3>
-<p>If you want to create testlets–that is, sum up items into super items in order to fix item dependence–then pass a strategy for making testlets to the argument <code>testlet_strategy</code>. <code>testlet_strategy</code> is a list with one element of the list per testlet that you want to create. Each element of the list must be a character vector of column names to use for the testlet. Optionally, you can name the elements of the list to give custom names to the new testlets. Otherwise, the new testlets will be the original column names separated by "_".</p>
-<p>For example, imagine you wanted to make two testlets: one testlet from variables <code>EF4</code>, <code>EF6</code>, and <code>EF8</code> with a new name of <code>new</code>, and another testlet from <code>EF5</code> and <code>EF7</code>, without a new name specified. Then you would specify <code>testlet_strategy</code> as the following:</p>
+<p>If you want to create testlets–that is, sum up items into super items
+in order to fix item dependence–then pass a strategy for making testlets
+to the argument <code>testlet_strategy</code>.
+<code>testlet_strategy</code> is a list with one element of the list per
+testlet that you want to create. Each element of the list must be a
+character vector of column names to use for the testlet. Optionally, you
+can name the elements of the list to give custom names to the new
+testlets. Otherwise, the new testlets will be the original column names
+separated by “_“.</p>
+<p>For example, imagine you wanted to make two testlets: one testlet
+from variables <code>EF4</code>, <code>EF6</code>, and <code>EF8</code>
+with a new name of <code>new</code>, and another testlet from
+<code>EF5</code> and <code>EF7</code>, without a new name specified.
+Then you would specify <code>testlet_strategy</code> as the
+following:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/rasch_mds.html">rasch_mds</a></span><span class="op">(</span></span>
 <span>  <span class="va">...</span>, </span>
@@ -216,8 +308,18 @@
 <div class="section level3">
 <h3 id="recoding">Recoding<a class="anchor" aria-label="anchor" href="#recoding"></a>
 </h3>
-<p>If you want to recode response options–that is, change response options in order to create stochastic ordering–then pass a strategy for the recoding to the argument <code>recode_strategy</code>. <code>recode_strategy</code> takes the form of a named list, with one element of the list per recode strategy. The names of the list are the groups of column names to use for each recoding strategy, separated only by “,”. Each element of the list is a numeric vector giving the new response options to map the variables to.</p>
-<p>For example, if you wanted to collapse the last two response options of the variables <code>EF1</code> and <code>EF2</code>, and collapse the first two response options of <code>EF3</code>, then you would set <code>recode_strategy</code> as the following:</p>
+<p>If you want to recode response options–that is, change response
+options in order to create stochastic ordering–then pass a strategy for
+the recoding to the argument <code>recode_strategy</code>.
+<code>recode_strategy</code> takes the form of a named list, with one
+element of the list per recode strategy. The names of the list are the
+groups of column names to use for each recoding strategy, separated only
+by “,”. Each element of the list is a numeric vector giving the new
+response options to map the variables to.</p>
+<p>For example, if you wanted to collapse the last two response options
+of the variables <code>EF1</code> and <code>EF2</code>, and collapse the
+first two response options of <code>EF3</code>, then you would set
+<code>recode_strategy</code> as the following:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/rasch_mds.html">rasch_mds</a></span><span class="op">(</span></span>
 <span>  <span class="va">...</span>, </span>
@@ -230,8 +332,12 @@
 <div class="section level3">
 <h3 id="dropping-variables">Dropping variables<a class="anchor" aria-label="anchor" href="#dropping-variables"></a>
 </h3>
-<p>If you want to drop any items from your analysis–perhaps in the event of extremely poor fit–then set <code>drop_vars</code> as a character vector of the column names to drop from the analysis.</p>
-<p>For example, if the items <code>EF4</code> and <code>EF7</code> were extremely poorly fitting items, then they could be dropped from the analysis by setting <code>drop_vars</code> as the following:</p>
+<p>If you want to drop any items from your analysis–perhaps in the event
+of extremely poor fit–then set <code>drop_vars</code> as a character
+vector of the column names to drop from the analysis.</p>
+<p>For example, if the items <code>EF4</code> and <code>EF7</code> were
+extremely poorly fitting items, then they could be dropped from the
+analysis by setting <code>drop_vars</code> as the following:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/rasch_mds.html">rasch_mds</a></span><span class="op">(</span></span>
 <span>  <span class="va">...</span>, </span>
@@ -241,10 +347,26 @@
 <div class="section level3">
 <h3 id="splitting">Splitting<a class="anchor" aria-label="anchor" href="#splitting"></a>
 </h3>
-<p>If you want to split items by subgroups–perhaps in the event of high differential item functioning (DIF)–then you give the instructions for your split strategy in the argument <code>split_strategy</code>.</p>
-<p>Splitting items entails taking a single item and separating it into two or more items for different groups. For example, if we wanted to split an item <code>var</code> by sex, then we would create two items: <code>var_Male</code> and <code>var_Female</code>. <code>var_Male</code> would be equivalent to <code>var</code> for all respondents that are men, and <code>NA</code> for the respondents that are women. <code>var_Female</code> would be equivalent to <code>var</code> for all respondents that are women, and <code>NA</code> for the respondents that are men.</p>
-<p><code>split_strategy</code> takes the form of a named list. There is one element of the list per variable to split by. Each element of the list must be a character vector of column names to split. The names of the list are the variables to split each group of variables by.</p>
-<p>For example, if we wanted to split the variables <code>EF1</code> and <code>EF2</code> by <code>sex</code>, and split <code>EF3</code> by age category <code>age_cat</code>, then we would set <code>split_strategy</code> to be the following:</p>
+<p>If you want to split items by subgroups–perhaps in the event of high
+differential item functioning (DIF)–then you give the instructions for
+your split strategy in the argument <code>split_strategy</code>.</p>
+<p>Splitting items entails taking a single item and separating it into
+two or more items for different groups. For example, if we wanted to
+split an item <code>var</code> by sex, then we would create two items:
+<code>var_Male</code> and <code>var_Female</code>. <code>var_Male</code>
+would be equivalent to <code>var</code> for all respondents that are
+men, and <code>NA</code> for the respondents that are women.
+<code>var_Female</code> would be equivalent to <code>var</code> for all
+respondents that are women, and <code>NA</code> for the respondents that
+are men.</p>
+<p><code>split_strategy</code> takes the form of a named list. There is
+one element of the list per variable to split by. Each element of the
+list must be a character vector of column names to split. The names of
+the list are the variables to split each group of variables by.</p>
+<p>For example, if we wanted to split the variables <code>EF1</code> and
+<code>EF2</code> by <code>sex</code>, and split <code>EF3</code> by age
+category <code>age_cat</code>, then we would set
+<code>split_strategy</code> to be the following:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/rasch_mds.html">rasch_mds</a></span><span class="op">(</span></span>
 <span>  <span class="va">...</span>, </span>
@@ -253,17 +375,25 @@
 <span>    age_cat <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"EF3"</span><span class="op">)</span></span>
 <span>  <span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<p>However, because we expect a certain amount of DIF when measuring disability–especially by sex and age–we rarely use this option. To not perform any splitting, leave <code>split_strategy</code> as its default value of <code>NULL.</code></p>
+<p>However, because we expect a certain amount of DIF when measuring
+disability–especially by sex and age–we rarely use this option. To not
+perform any splitting, leave <code>split_strategy</code> as its default
+value of <code>NULL.</code></p>
 </div>
 </div>
 <div class="section level2">
 <h2 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
 </h2>
-<p>Below we will be creating a metric using the sample data <code>df_adults</code> using the environmental factors (EF) questions from the questionnaire. These are questions <code>EF1</code> to <code>EF12</code>.</p>
+<p>Below we will be creating a metric using the sample data
+<code>df_adults</code> using the environmental factors (EF) questions
+from the questionnaire. These are questions <code>EF1</code> to
+<code>EF12</code>.</p>
 <div class="section level3">
 <h3 id="start">Start<a class="anchor" aria-label="anchor" href="#start"></a>
 </h3>
-<p>We will start by trying to run the model without performing any adjustments on our data. To run this model, run a command that is similar to this:</p>
+<p>We will start by trying to run the model without performing any
+adjustments on our data. To run this model, run a command that is
+similar to this:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">start</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rasch_mds.html">rasch_mds</a></span><span class="op">(</span></span>
 <span>  df <span class="op">=</span> <span class="va">df_adults</span>, </span>
@@ -281,25 +411,119 @@
 <span>  split_strategy <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  comment <span class="op">=</span> <span class="st">"Initial run"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<p>The code you run may not be exactly the same, because for instance the directory you use for <code>path_parent</code> will be specific to your machine, and you may choose a different <code>model_name</code> and <code>comment</code> for your model.</p>
-<p>By running this command, in addition to printing results to your machine (because <code>print_results</code> is <code>TRUE</code>), you are also saving some output to an object in <code>R</code>’s global environment called <code>start</code>. This object is a list with three elements: one named <code>df</code>, one named <code>vars_metric</code>, and one named <code>df_results</code>. <code>df</code> contains the data with the transformed variables used to create the score and the rescaled scores. <code>vars_metric</code> is a character vector of the names of the <code>vars_metric</code> after transforming the variables. <code>df_results</code> is a data frame with one row and a column for each of the main statistics for assessing the assumptions of the Rasch Model. <code>df_results</code> from multiple models can be merged in order to create a data frame that allows you to quickly compare different models.</p>
-<p>It is not necessary to save the output of <code><a href="../reference/rasch_mds.html">rasch_mds()</a></code> to an object in the global environment, but it makes it easier to manipulate the resulting output in order to determine what adjustments to make to your data in the next iteration.</p>
-<p>After running this command, various files will be saved to the folder that you specified. Go to the <code>path_parent</code> folder, and you will see a new folder with the name you specified in <code>model_name</code>. Inside that folder, there will be many files. We will focus on the most important ones. Please read again Section @ref(repair) to review how the different Rasch Model assumptions affect one another and to understand why we will check the important files in this particular order.</p>
-<p>First we will check the local item dependence of the items. We can check this by looking at the files <code>LID_plot.pdf</code> and <code>LID_above_0.2.csv</code>. <code>LID_above_0.2.csv</code> gives the correlations of the residuals that are above 0.2, and <code>LID_plot.pdf</code> is a visualization of these correlations. From these files, we can see that the items <code>EF11</code> and <code>EF12</code> are correlated. The value of the correlation is approximately 0.47. These two items have to do with how facilitating or hindering work (<code>EF11</code>) and school (<code>EF12</code>) are. Conceptually, it makes sense that people’s answers to these two questions are related. We will take care of this correlation at the next iteration of the model.</p>
+<p>The code you run may not be exactly the same, because for instance
+the directory you use for <code>path_parent</code> will be specific to
+your machine, and you may choose a different <code>model_name</code> and
+<code>comment</code> for your model.</p>
+<p>By running this command, in addition to printing results to your
+machine (because <code>print_results</code> is <code>TRUE</code>), you
+are also saving some output to an object in <code>R</code>’s global
+environment called <code>start</code>. This object is a list with three
+elements: one named <code>df</code>, one named <code>vars_metric</code>,
+and one named <code>df_results</code>. <code>df</code> contains the data
+with the transformed variables used to create the score and the rescaled
+scores. <code>vars_metric</code> is a character vector of the names of
+the <code>vars_metric</code> after transforming the variables.
+<code>df_results</code> is a data frame with one row and a column for
+each of the main statistics for assessing the assumptions of the Rasch
+Model. <code>df_results</code> from multiple models can be merged in
+order to create a data frame that allows you to quickly compare
+different models.</p>
+<p>It is not necessary to save the output of <code><a href="../reference/rasch_mds.html">rasch_mds()</a></code> to
+an object in the global environment, but it makes it easier to
+manipulate the resulting output in order to determine what adjustments
+to make to your data in the next iteration.</p>
+<p>After running this command, various files will be saved to the folder
+that you specified. Go to the <code>path_parent</code> folder, and you
+will see a new folder with the name you specified in
+<code>model_name</code>. Inside that folder, there will be many files.
+We will focus on the most important ones. Please read again Section
+@ref(repair) to review how the different Rasch Model assumptions affect
+one another and to understand why we will check the important files in
+this particular order.</p>
+<p>First we will check the local item dependence of the items. We can
+check this by looking at the files <code>LID_plot.pdf</code> and
+<code>LID_above_0.2.csv</code>. <code>LID_above_0.2.csv</code> gives the
+correlations of the residuals that are above 0.2, and
+<code>LID_plot.pdf</code> is a visualization of these correlations. From
+these files, we can see that the items <code>EF11</code> and
+<code>EF12</code> are correlated. The value of the correlation is
+approximately 0.47. These two items have to do with how facilitating or
+hindering work (<code>EF11</code>) and school (<code>EF12</code>) are.
+Conceptually, it makes sense that people’s answers to these two
+questions are related. We will take care of this correlation at the next
+iteration of the model.</p>
 <p><img src="Images/ExampleRasch_EF/Start/LID_plot.png" width="80%" style="display: block; margin: auto;"></p>
-<p>Next we will investigate the unidimensionality of the model by analyzing the file <code>parallel_analysis_scree.pdf</code>. This is what’s known as a “scree plot.” A scree plot shows the eigenvalues for our model, and indicates how many underlying dimensions we have in our questionnaire. With this scree plot, we hope to see a very sharp decline after the first eigenvalue on the left, and that the second eigenvalue falls below the green line of the “Parallel Analysis”. This would mean that we have one underlying dimensions that is very strong in our data, and any further dimensions that are computed have very little influence on the model. In our graph, we do see a very sharp decline after the first eigenvalue, and the green line crosses the black line after the second factor. This is sufficient to confirm unidimensionality for the model.</p>
+<p>Next we will investigate the unidimensionality of the model by
+analyzing the file <code>parallel_analysis_scree.pdf</code>. This is
+what’s known as a “scree plot.” A scree plot shows the eigenvalues for
+our model, and indicates how many underlying dimensions we have in our
+questionnaire. With this scree plot, we hope to see a very sharp decline
+after the first eigenvalue on the left, and that the second eigenvalue
+falls below the green line of the “Parallel Analysis”. This would mean
+that we have one underlying dimensions that is very strong in our data,
+and any further dimensions that are computed have very little influence
+on the model. In our graph, we do see a very sharp decline after the
+first eigenvalue, and the green line crosses the black line after the
+second factor. This is sufficient to confirm unidimensionality for the
+model.</p>
 <p><img src="Images/ExampleRasch_EF/Start/parallel_analysis_scree.png" width="80%" style="display: block; margin: auto;"></p>
-<p>Another important file we can examine is the <code>PImap.pdf</code>. This is the “Person-Item Map”, and it shows people and items on the same continuum. The horizontal axis on the bottom of the figure is this continuum, labeled as the “latent dimension”. The top of the figure is labeled the “person parameter distribution”. This is the distribution of people’s scores on the continuum. It can show you if, for instance, you have more people on one end of the scale or another.</p>
+<p>Another important file we can examine is the <code>PImap.pdf</code>.
+This is the “Person-Item Map”, and it shows people and items on the same
+continuum. The horizontal axis on the bottom of the figure is this
+continuum, labeled as the “latent dimension”. The top of the figure is
+labeled the “person parameter distribution”. This is the distribution of
+people’s scores on the continuum. It can show you if, for instance, you
+have more people on one end of the scale or another.</p>
 <p><img src="Images/ExampleRasch_EF/Start/PImap.png" width="80%" style="display: block; margin: auto;"></p>
-<p>The largest part of this figure shows where the thresholds for each item are located on the continuum. The thresholds are labeled with numbers: the first threshold is labeled “1”, the second is labeled “2”, and so on. The black dot is the average of the locations of all these thresholds. The stars on the right side of the figure indicate whether or not the thresholds are out of order. For instance, you can see for <code>EF1</code>, the thresholds are ordered 2, 4, 1, 3 which is clearly out of order. In fact, in this case, all of the items have thresholds out of order. This is likely something we will need to take care of later, but first we will take care of the item dependence.</p>
-<p>Another important file we can analyze is <code>item_fit.csv</code>. This file gives the fit statistics for each item. Two fit statistics used here are “outfit” and “infit”, given in the columns <code>i.outfitMSQ</code> and <code>i.infitMSQ</code>. They are both similar, but outfit is more sensitive to outliers. In general we hope that these figures are as close to 1 as possible. If they are below 1, then it indicates the item is overfitting. “Overfit” refers to the situation when items fit “too closely” to the model. If these statistics are greater than 1, then they indicate the items are underfitting. “Underfit” refers to the situation when items do not fit the model well. Underfitting is more serious than overfitting. We hope in general that items’ infit and outfit are between 0.5 and 1.5. If they are less than 0.5, reliability measures for the model may be misleadingly high, but the scores can still be used. If they are between 1.5 and 2.0, this is a warning sign that the items may be causing problems and you could begin to consider adjusting the data to improve the fit. If they are greater than 2.0, the scores calculated may be significantly distorted and action should be taken to adjust the data to improve fit.</p>
-<p>In this case, all of the items have infit and outfit statistics between 0.5 and 1.5, which is good.</p>
-<p>To analyze overall model fit, we can open the file <code>Targeting.csv</code>. This file gives the mean and standard deviation of the person abilities and of the item difficulties. It also gives the “person separation index”, or PSI, which is a measure of reliability for the model. We hope this value is as close to 1 as possible. It is generally acceptable if it is this figure is above 0.7, though we hope to get values as high as 0.8 or 0.9. For our model here, our PSI is 0.82, which is very good.</p>
+<p>The largest part of this figure shows where the thresholds for each
+item are located on the continuum. The thresholds are labeled with
+numbers: the first threshold is labeled “1”, the second is labeled “2”,
+and so on. The black dot is the average of the locations of all these
+thresholds. The stars on the right side of the figure indicate whether
+or not the thresholds are out of order. For instance, you can see for
+<code>EF1</code>, the thresholds are ordered 2, 4, 1, 3 which is clearly
+out of order. In fact, in this case, all of the items have thresholds
+out of order. This is likely something we will need to take care of
+later, but first we will take care of the item dependence.</p>
+<p>Another important file we can analyze is <code>item_fit.csv</code>.
+This file gives the fit statistics for each item. Two fit statistics
+used here are “outfit” and “infit”, given in the columns
+<code>i.outfitMSQ</code> and <code>i.infitMSQ</code>. They are both
+similar, but outfit is more sensitive to outliers. In general we hope
+that these figures are as close to 1 as possible. If they are below 1,
+then it indicates the item is overfitting. “Overfit” refers to the
+situation when items fit “too closely” to the model. If these statistics
+are greater than 1, then they indicate the items are underfitting.
+“Underfit” refers to the situation when items do not fit the model well.
+Underfitting is more serious than overfitting. We hope in general that
+items’ infit and outfit are between 0.5 and 1.5. If they are less than
+0.5, reliability measures for the model may be misleadingly high, but
+the scores can still be used. If they are between 1.5 and 2.0, this is a
+warning sign that the items may be causing problems and you could begin
+to consider adjusting the data to improve the fit. If they are greater
+than 2.0, the scores calculated may be significantly distorted and
+action should be taken to adjust the data to improve fit.</p>
+<p>In this case, all of the items have infit and outfit statistics
+between 0.5 and 1.5, which is good.</p>
+<p>To analyze overall model fit, we can open the file
+<code>Targeting.csv</code>. This file gives the mean and standard
+deviation of the person abilities and of the item difficulties. It also
+gives the “person separation index”, or PSI, which is a measure of
+reliability for the model. We hope this value is as close to 1 as
+possible. It is generally acceptable if it is this figure is above 0.7,
+though we hope to get values as high as 0.8 or 0.9. For our model here,
+our PSI is 0.82, which is very good.</p>
 </div>
 <div class="section level3">
 <h3 id="testlet1">Testlet1<a class="anchor" aria-label="anchor" href="#testlet1"></a>
 </h3>
-<p>With our next iteration of the model, we will try to address the high item dependence between items <code>EF11</code> and <code>EF12</code>. We will do this by creating a testlet between these two items. We do this by changing the argument <code>testlet_stratey</code> as shown below. We have given the new testlet the name <code>workschool</code>, but you could name it whatever you wished.</p>
+<p>With our next iteration of the model, we will try to address the high
+item dependence between items <code>EF11</code> and <code>EF12</code>.
+We will do this by creating a testlet between these two items. We do
+this by changing the argument <code>testlet_stratey</code> as shown
+below. We have given the new testlet the name <code>workschool</code>,
+but you could name it whatever you wished.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">testlet1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rasch_mds.html">rasch_mds</a></span><span class="op">(</span></span>
 <span>  df <span class="op">=</span> <span class="va">df_adults</span>, </span>
@@ -320,22 +544,65 @@
 <p>After running this model, we get an error:</p>
 <pre><code><span><span class="co">#&gt; Error in tapply(1L:ncol(X01beta), mt_ind, function(xin) { :</span></span>
 <span><span class="co">#&gt;       arguments must have same length</span></span></code></pre>
-<p>This error is a bit strange looking. But sometimes errors like this will arise because of too many NAs in the data or if there are not enough people endorsing all possible response options. Let’s look at the file <code>response_freq.csv</code> in order to see how the response options are distributed. We can see in this file that there are many endorsements for all response options for all questions except for our new testlet <code>workschool</code>, which only has 1 person with an answer of 6, and no one with the possible answers of 5, 7 or 8. Perhaps this is what is causing the problem.</p>
+<p>This error is a bit strange looking. But sometimes errors like this
+will arise because of too many NAs in the data or if there are not
+enough people endorsing all possible response options. Let’s look at the
+file <code>response_freq.csv</code> in order to see how the response
+options are distributed. We can see in this file that there are many
+endorsements for all response options for all questions except for our
+new testlet <code>workschool</code>, which only has 1 person with an
+answer of 6, and no one with the possible answers of 5, 7 or 8. Perhaps
+this is what is causing the problem.</p>
 <div class="section level4">
 <h4 id="more-on-recoding">More on recoding<a class="anchor" aria-label="anchor" href="#more-on-recoding"></a>
 </h4>
 <p>First let’s discuss recoding in a bit more detail.</p>
-<p>Each question with <code>n</code> response options will have <code>n-1</code> thresholds. The first threshold (labeled with a “1” in the person-item map) is the point between the first and second response option where a respondent is equally likely to choose either of these response options; the second threshold (labeled with a “2” in the person-item map) is the point between the second and third response option where a respondent is equally likely to choose either of these response options; and so on.</p>
-<p>We want our thresholds in the person-item map to be in the right order: 1, 2, 3, 4 and so on. Disordered thresholds indicate a problem with our items. For example, if the thresholds are listed in the order 1, 2, 4, 3, then the data are telling us that someone is more likely to surpass the 4th threshold before the 3rd threshold, which does not make sense. We recode the response options in order create fewer thresholds so that it is easier for them to be in order.</p>
-<p>The functions to perform Rasch Analysis shift our response options so that they start with 0. This is done because the functions for performing the analysis require it. For example, our survey has questions that have response options ranging from 1 to 5, but internally the function shifts these response options so they range from 0 to 4. Consequently, it becomes slightly more straightforward to interpret which response options need to be recoded directly from the labels of the thresholds. For example, if an item is disordered in the pattern 1, 2, 4, 3, this means that thresholds 4 and 3 are out of order. This also means that we can recode the transformed response options 4 and 3 in order to collapse these thresholds.</p>
-<p>When we want to recode an item, we supply the function with instructions on what to map the response options to. For example, let’s say an item <code>var</code> has disordered thresholds in the pattern 1, 2, 4, 3. We now want to collapse the 4th and the 3rd threshold so that the item becomes ordered. <code>var</code> has response options ranging from 0 to 4 (after being shifted from the original 1 to 5), so we want to combine the response options 3 and 4 for the item in order to collapse these two thresholds. We do this by telling the function to map the current response options of 0, 1, 2, 3, 4 to 0, 1, 2, 3, 3. This means all responses of “4” are now recoded to be “3”. Now we will only have 4 different response options, which means we will have 3 different thresholds, which will now hopefully be in the proper order.</p>
+<p>Each question with <code>n</code> response options will have
+<code>n-1</code> thresholds. The first threshold (labeled with a “1” in
+the person-item map) is the point between the first and second response
+option where a respondent is equally likely to choose either of these
+response options; the second threshold (labeled with a “2” in the
+person-item map) is the point between the second and third response
+option where a respondent is equally likely to choose either of these
+response options; and so on.</p>
+<p>We want our thresholds in the person-item map to be in the right
+order: 1, 2, 3, 4 and so on. Disordered thresholds indicate a problem
+with our items. For example, if the thresholds are listed in the order
+1, 2, 4, 3, then the data are telling us that someone is more likely to
+surpass the 4th threshold before the 3rd threshold, which does not make
+sense. We recode the response options in order create fewer thresholds
+so that it is easier for them to be in order.</p>
+<p>The functions to perform Rasch Analysis shift our response options so
+that they start with 0. This is done because the functions for
+performing the analysis require it. For example, our survey has
+questions that have response options ranging from 1 to 5, but internally
+the function shifts these response options so they range from 0 to 4.
+Consequently, it becomes slightly more straightforward to interpret
+which response options need to be recoded directly from the labels of
+the thresholds. For example, if an item is disordered in the pattern 1,
+2, 4, 3, this means that thresholds 4 and 3 are out of order. This also
+means that we can recode the transformed response options 4 and 3 in
+order to collapse these thresholds.</p>
+<p>When we want to recode an item, we supply the function with
+instructions on what to map the response options to. For example, let’s
+say an item <code>var</code> has disordered thresholds in the pattern 1,
+2, 4, 3. We now want to collapse the 4th and the 3rd threshold so that
+the item becomes ordered. <code>var</code> has response options ranging
+from 0 to 4 (after being shifted from the original 1 to 5), so we want
+to combine the response options 3 and 4 for the item in order to
+collapse these two thresholds. We do this by telling the function to map
+the current response options of 0, 1, 2, 3, 4 to 0, 1, 2, 3, 3. This
+means all responses of “4” are now recoded to be “3”. Now we will only
+have 4 different response options, which means we will have 3 different
+thresholds, which will now hopefully be in the proper order.</p>
 <p>This will become clearer as we work through the example.</p>
 </div>
 </div>
 <div class="section level3">
 <h3 id="testlet1_recode1">Testlet1_Recode1<a class="anchor" aria-label="anchor" href="#testlet1_recode1"></a>
 </h3>
-<p>At the next iteration, we will try to recode the response options of our testlet so that the model is able to run.</p>
+<p>At the next iteration, we will try to recode the response options of
+our testlet so that the model is able to run.</p>
 <p>We will run the command like below:</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">testlet1_recode1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rasch_mds.html">rasch_mds</a></span><span class="op">(</span></span>
@@ -354,19 +621,43 @@
 <span>  split_strategy <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  comment <span class="op">=</span> <span class="st">"Testlet: EF11,EF12 (LID&gt;0.25); Recode: workschool to 0,1,2,3,4,5,5,5,5"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<p>The difference between the Testlet1 model and this model is that we have now added a recoding strategy. We will recode the response options of the testlet <code>workschool</code> to 0,1,2,3,4,5,5,5,5. This means all response options will stay the same, except the response options 5 through 8 are combined.</p>
-<p>After we run the command, we see the model is able to be calculated as normal.</p>
-<p>First we check <code>LID_plot.pdf</code> to see if we have been able to remove the item correlation. In this file, we see the message “No LID found”, which means our testlet strategy was effective!</p>
-<p>Next, we check the scree plot in the file <code>parallel_analysis_scree.pdf</code> to make sure our unidimensionality was maintained. Indeed, it looks very similar to the initial model, which is what we hope for.</p>
-<p>Next we check the person-item map in <code>PImap.pdf</code>. We can see in this file all the items are still disordered, so this is likely the next thing we will have to take care of in the next iteration of the model.</p>
+<p>The difference between the Testlet1 model and this model is that we
+have now added a recoding strategy. We will recode the response options
+of the testlet <code>workschool</code> to 0,1,2,3,4,5,5,5,5. This means
+all response options will stay the same, except the response options 5
+through 8 are combined.</p>
+<p>After we run the command, we see the model is able to be calculated
+as normal.</p>
+<p>First we check <code>LID_plot.pdf</code> to see if we have been able
+to remove the item correlation. In this file, we see the message “No LID
+found”, which means our testlet strategy was effective!</p>
+<p>Next, we check the scree plot in the file
+<code>parallel_analysis_scree.pdf</code> to make sure our
+unidimensionality was maintained. Indeed, it looks very similar to the
+initial model, which is what we hope for.</p>
+<p>Next we check the person-item map in <code>PImap.pdf</code>. We can
+see in this file all the items are still disordered, so this is likely
+the next thing we will have to take care of in the next iteration of the
+model.</p>
 <p><img src="Images/ExampleRasch_EF/Testlet1_Recode1/PImap.png" width="80%" style="display: block; margin: auto;"></p>
-<p>We finally will check the item fit and the overall model fit in <code>item_fit.csv</code> and <code>Targeting.csv</code>, respectively. We can see these values are all still good–every item still has infit and outfit statistics between 0.5 and 1.5, and the PSI is still 0.82.</p>
+<p>We finally will check the item fit and the overall model fit in
+<code>item_fit.csv</code> and <code>Targeting.csv</code>, respectively.
+We can see these values are all still good–every item still has infit
+and outfit statistics between 0.5 and 1.5, and the PSI is still
+0.82.</p>
 </div>
 <div class="section level3">
 <h3 id="testlet1_recode2">Testlet1_Recode2<a class="anchor" aria-label="anchor" href="#testlet1_recode2"></a>
 </h3>
-<p>Next we will try recoding items in order to create ordered thresholds. We are most worried about having the single items (everything that is not a testlet) ordered.</p>
-<p>There are various ways you can choose the recoding strategy. In general you want to do the minimum amount of recoding necessary to acheive ordered thresholds. We will try first to collapse the first two thresholds for all items that are not the testlet. We will see which items this works for, and try a new strategy at the next iteration for the items where it did not work.</p>
+<p>Next we will try recoding items in order to create ordered
+thresholds. We are most worried about having the single items
+(everything that is not a testlet) ordered.</p>
+<p>There are various ways you can choose the recoding strategy. In
+general you want to do the minimum amount of recoding necessary to
+acheive ordered thresholds. We will try first to collapse the first two
+thresholds for all items that are not the testlet. We will see which
+items this works for, and try a new strategy at the next iteration for
+the items where it did not work.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">testlet1_recode2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rasch_mds.html">rasch_mds</a></span><span class="op">(</span></span>
 <span>  df <span class="op">=</span> <span class="va">df_adults</span>, </span>
@@ -385,15 +676,32 @@
 <span>  split_strategy <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  comment <span class="op">=</span> <span class="st">"Testlet: EF11,EF12 (LID&gt;0.25); Recode: workschool to 0,1,2,3,4,5,5,5,5, everything else 0,1,1,2,3"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<p>We can see in the new person-item map that this strategy did not work for any of the items. So we will try a new strategy at the next iteration.</p>
+<p>We can see in the new person-item map that this strategy did not work
+for any of the items. So we will try a new strategy at the next
+iteration.</p>
 <p><img src="Images/ExampleRasch_EF/Testlet1_Recode2/PImap.png" width="80%" style="display: block; margin: auto;"></p>
-<p>We can also check the other files to see if any other Rasch Model assumptions have now been violated with this recoding strategy. But because we are changing our strategy completely at the next iteration, it is not necessary to pay too much attention to the other files for this iteration.</p>
+<p>We can also check the other files to see if any other Rasch Model
+assumptions have now been violated with this recoding strategy. But
+because we are changing our strategy completely at the next iteration,
+it is not necessary to pay too much attention to the other files for
+this iteration.</p>
 </div>
 <div class="section level3">
 <h3 id="testlet1_recode3">Testlet1_Recode3<a class="anchor" aria-label="anchor" href="#testlet1_recode3"></a>
 </h3>
-<p>From the person-item map for the Start model, we can see our items are disordered in a bit of a complicated way: many items have thresholds in order 2, 4, 1, 3 or in order 2, 3, 4, 1. Usually if an item has disordered thresholds in a fairly uncomplicated pattern (for example, 1, 2, 4, 3 or 2, 1, 3, 4) then then the recoding strategy is straightforward. For example, with disordering of 1, 2, 4, 3 it is clear that the respone options 3 and 4 should be collapsed. With disordering of 2, 1, 3, 4 then the response options of 1 and 2 should be collapsed.</p>
-<p>In our case, the disordering is fairly complicated so the recoding strategy is less straightforward and will likely have to be more extreme. At this iteration, we will try collapsing two sets of response options: we will collapse 1 with 2 and 3 with 4, as shown below.</p>
+<p>From the person-item map for the Start model, we can see our items
+are disordered in a bit of a complicated way: many items have thresholds
+in order 2, 4, 1, 3 or in order 2, 3, 4, 1. Usually if an item has
+disordered thresholds in a fairly uncomplicated pattern (for example, 1,
+2, 4, 3 or 2, 1, 3, 4) then then the recoding strategy is
+straightforward. For example, with disordering of 1, 2, 4, 3 it is clear
+that the respone options 3 and 4 should be collapsed. With disordering
+of 2, 1, 3, 4 then the response options of 1 and 2 should be
+collapsed.</p>
+<p>In our case, the disordering is fairly complicated so the recoding
+strategy is less straightforward and will likely have to be more
+extreme. At this iteration, we will try collapsing two sets of response
+options: we will collapse 1 with 2 and 3 with 4, as shown below.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">testlet1_recode3</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rasch_mds.html">rasch_mds</a></span><span class="op">(</span></span>
 <span>  df <span class="op">=</span> <span class="va">df_adults</span>, </span>
@@ -412,15 +720,33 @@
 <span>  split_strategy <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  comment <span class="op">=</span> <span class="st">"Testlet: EF11,EF12 (LID&gt;0.25); Recode: workschool to 0,1,2,3,4,5,5,5,5, everything else 0,1,1,2,2"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<p>We can see with this recoding strategy that the thresholds are now ordered for most of the items! The only item it did not work for is <code>EF6</code>, which we will have to try a different strategy for at the next iteration.</p>
+<p>We can see with this recoding strategy that the thresholds are now
+ordered for most of the items! The only item it did not work for is
+<code>EF6</code>, which we will have to try a different strategy for at
+the next iteration.</p>
 <p><img src="Images/ExampleRasch_EF/Testlet1_Recode3/PImap.png" width="80%" style="display: block; margin: auto;"></p>
-<p>We made progress on our threshold disordering, but we need to make sure that the other Rasch Model assumptions have not now been violated with this new strategy. We check <code>LID_plot.pdf</code> and see we still have achieved item independence. We also check the scree plot in <code>parallel_analysis_scree.pdf</code> to see if we still have unidimensionality. Finally, we also check <code>item_fit.csv</code> and <code>Targeting.csv</code> and see that the values are still acceptable in these files as well. So we will proceed with an altered recoding strategy in the next iteration.</p>
+<p>We made progress on our threshold disordering, but we need to make
+sure that the other Rasch Model assumptions have not now been violated
+with this new strategy. We check <code>LID_plot.pdf</code> and see we
+still have achieved item independence. We also check the scree plot in
+<code>parallel_analysis_scree.pdf</code> to see if we still have
+unidimensionality. Finally, we also check <code>item_fit.csv</code> and
+<code>Targeting.csv</code> and see that the values are still acceptable
+in these files as well. So we will proceed with an altered recoding
+strategy in the next iteration.</p>
 </div>
 <div class="section level3">
 <h3 id="testlet1_recode4">Testlet1_Recode4<a class="anchor" aria-label="anchor" href="#testlet1_recode4"></a>
 </h3>
-<p>We still have two items that are disordered: <code>EF6</code> and <code>workschool</code>. We do not generally worry about testlets being disordered because they are not items originally included in the questionnaire. We could recode <code>workschool</code> if its item fit was very poor, but in our model it maintains good item fit based on the infit and outfit statistics, so we will not recode it.</p>
-<p>Therefore at this iteration we will just try to solve the disordering of <code>EF6</code>. We will try collapsing the middle three response options, as shown below.</p>
+<p>We still have two items that are disordered: <code>EF6</code> and
+<code>workschool</code>. We do not generally worry about testlets being
+disordered because they are not items originally included in the
+questionnaire. We could recode <code>workschool</code> if its item fit
+was very poor, but in our model it maintains good item fit based on the
+infit and outfit statistics, so we will not recode it.</p>
+<p>Therefore at this iteration we will just try to solve the disordering
+of <code>EF6</code>. We will try collapsing the middle three response
+options, as shown below.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">testlet1_recode4</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rasch_mds.html">rasch_mds</a></span><span class="op">(</span></span>
 <span>  df <span class="op">=</span> <span class="va">df_adults</span>, </span>
@@ -440,16 +766,28 @@
 <span>  split_strategy <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  comment <span class="op">=</span> <span class="st">"Testlet: EF11,EF12 (LID&gt;0.25); Recode: workschool to 0,1,2,3,4,5,5,5,5, everything else except EF6 to 0,1,1,2,2, EF6 to 0,1,1,1,2"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<p>After running this model, we see the disordering for <code>EF6</code> has been resolved! All single items now have ordered thresholds!</p>
+<p>After running this model, we see the disordering for <code>EF6</code>
+has been resolved! All single items now have ordered thresholds!</p>
 <p><img src="Images/ExampleRasch_EF/Testlet1_Recode4/PImap.png" width="80%" style="display: block; margin: auto;"></p>
-<p>We will also check the other files to make sure our other Rasch Model assumptions have been maintained. We check <code>LID_plot.pdf</code> and see we still have achieved item independence. We also check the scree plot in <code>parallel_analysis_scree.pdf</code> to see if we still have unidimensionality. Finally, we also check <code>item_fit.csv</code> and <code>Targeting.csv</code> and see that the values are still acceptable in these files as well.</p>
-<p>All of our Rasch Model assumptions have been reasonably attained, so this means we can stop! We have finished our Rasch Analysis for this set of questions. The data with the scores is in the file <code>Data_final.csv</code>. We will discuss what to do with these scores in later sections.</p>
+<p>We will also check the other files to make sure our other Rasch Model
+assumptions have been maintained. We check <code>LID_plot.pdf</code> and
+see we still have achieved item independence. We also check the scree
+plot in <code>parallel_analysis_scree.pdf</code> to see if we still have
+unidimensionality. Finally, we also check <code>item_fit.csv</code> and
+<code>Targeting.csv</code> and see that the values are still acceptable
+in these files as well.</p>
+<p>All of our Rasch Model assumptions have been reasonably attained, so
+this means we can stop! We have finished our Rasch Analysis for this set
+of questions. The data with the scores is in the file
+<code>Data_final.csv</code>. We will discuss what to do with these
+scores in later sections.</p>
 </div>
 </div>
 <div class="section level2">
 <h2 id="best-practices">Best practices<a class="anchor" aria-label="anchor" href="#best-practices"></a>
 </h2>
-<p>Go to the <a href="c5_best_practices_EN.html">Best Practices in Rasch Analysis</a> vignette to read more about general rules to follow.</p>
+<p>Go to the <a href="c5_best_practices_EN.html">Best Practices in Rasch
+Analysis</a> vignette to read more about general rules to follow.</p>
 </div>
   </div>
 
@@ -470,7 +808,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer>

@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">whomds</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0.9006</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0.9010</span>
       </span>
     </div>
 
@@ -108,10 +108,11 @@
 
       
 
-      </header><script src="c6_after_rasch_EN_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1 data-toc-skip>6 - After Rasch Analysis: Descriptive Analysis</h1>
+      <h1 data-toc-skip>6 - After Rasch Analysis: Descriptive
+Analysis</h1>
             
       
       <small class="dont-index">Source: <a href="https://github.com/lindsayevanslee/whomds/blob/HEAD/vignettes/c6_after_rasch_EN.Rmd" class="external-link"><code>vignettes/c6_after_rasch_EN.Rmd</code></a></small>
@@ -124,8 +125,26 @@
 <div class="section level2">
 <h2 id="joining-scores-with-original-data">Joining scores with original data<a class="anchor" aria-label="anchor" href="#joining-scores-with-original-data"></a>
 </h2>
-<p>After you have finished with Rasch Analysis, the score is outputted in the file <code>Data_final.csv</code> in the column called <code>rescaled</code>. This file will only contain the individuals included in the analysis. Any individual who had too many missing values (<code>NA</code>) will not be in this file. It is often advisable to merge the original data with all individuals with the new scores. Any individual who did not have a score calculated will have an <code>NA</code> in this column.</p>
-<p>This merge can be accomplished with the following code. First, open the library called <code>tidyverse</code> to access the necessary functions. Next, read in the <code>Data_final.csv</code> file and select only the columns you need: <code>ID</code> (or whatever the name of the individual ID column is in your data) and <code>rescaled</code>. The code below assumes that the file is in your working directory. You will have to include the full path to the file if it is not currently in your working directory. Finally, you can create an object <code>merged_data</code> that merges your original data, here represented with the object <code>original_data</code>, with the new score in a column renamed to <code>"DisabilityScore"</code> with the following code:</p>
+<p>After you have finished with Rasch Analysis, the score is outputted
+in the file <code>Data_final.csv</code> in the column called
+<code>rescaled</code>. This file will only contain the individuals
+included in the analysis. Any individual who had too many missing values
+(<code>NA</code>) will not be in this file. It is often advisable to
+merge the original data with all individuals with the new scores. Any
+individual who did not have a score calculated will have an
+<code>NA</code> in this column.</p>
+<p>This merge can be accomplished with the following code. First, open
+the library called <code>tidyverse</code> to access the necessary
+functions. Next, read in the <code>Data_final.csv</code> file and select
+only the columns you need: <code>ID</code> (or whatever the name of the
+individual ID column is in your data) and <code>rescaled</code>. The
+code below assumes that the file is in your working directory. You will
+have to include the full path to the file if it is not currently in your
+working directory. Finally, you can create an object
+<code>merged_data</code> that merges your original data, here
+represented with the object <code>original_data</code>, with the new
+score in a column renamed to <code>"DisabilityScore"</code> with the
+following code:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org" class="external-link">tidyverse</a></span><span class="op">)</span></span>
 <span><span class="va">new_score</span> <span class="op">&lt;-</span> <span class="fu">read_csv</span><span class="op">(</span><span class="st">"Data_final.csv"</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
@@ -133,74 +152,137 @@
 <span><span class="va">merged_data</span> <span class="op">&lt;-</span> <span class="va">original_data</span> <span class="op">%&gt;%</span> </span>
 <span>  <span class="fu">left_join</span><span class="op">(</span><span class="va">new_score</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
 <span>  <span class="fu">rename</span><span class="op">(</span><span class="st">"DisabilityScore"</span> <span class="op">=</span> <span class="st">"rescaled"</span><span class="op">)</span></span></code></pre></div>
-<p>The sample data included in the <code>whomds</code> package called <code>df_adults</code> already has a Rasch score merged with it, in the column <code>disability_score</code>.</p>
+<p>The sample data included in the <code>whomds</code> package called
+<code>df_adults</code> already has a Rasch score merged with it, in the
+column <code>disability_score</code>.</p>
 </div>
 <div class="section level2">
 <h2 id="descriptive-analysis">Descriptive analysis<a class="anchor" aria-label="anchor" href="#descriptive-analysis"></a>
 </h2>
-<p>After calculating the disability scores using Rasch Analysis, you are now ready to analyze the results of the survey by calculating descriptive statistics. The <code>whomds</code> package contains functions to create tables and figures of descriptive statistics. This section will go over these functions.</p>
+<p>After calculating the disability scores using Rasch Analysis, you are
+now ready to analyze the results of the survey by calculating
+descriptive statistics. The <code>whomds</code> package contains
+functions to create tables and figures of descriptive statistics. This
+section will go over these functions.</p>
 <div class="section level3">
 <h3 id="tables">Tables<a class="anchor" aria-label="anchor" href="#tables"></a>
 </h3>
-<p>Descriptive statistics functions included in the <code>whomds</code> package are:</p>
+<p>Descriptive statistics functions included in the <code>whomds</code>
+package are:</p>
 <ul>
 <li>
-<code><a href="../reference/table_weightedpct.html">table_weightedpct()</a></code> - produces weighted tables of N or %</li>
+<code><a href="../reference/table_weightedpct.html">table_weightedpct()</a></code> - produces weighted tables of N or
+%</li>
 <li>
-<code><a href="../reference/table_unweightedpctn.html">table_unweightedpctn()</a></code> - produces unweighted tables of N and %</li>
+<code><a href="../reference/table_unweightedpctn.html">table_unweightedpctn()</a></code> - produces unweighted tables of
+N and %</li>
 <li>
-<code><a href="../reference/table_basicstats.html">table_basicstats()</a></code> - computes basic statistics of the number of members per group per household.</li>
+<code><a href="../reference/table_basicstats.html">table_basicstats()</a></code> - computes basic statistics of the
+number of members per group per household.</li>
 </ul>
 <p>The arguments of each of these codes will be described below.</p>
 <div class="section level4">
 <h4 id="table_weightedpct">
 <code>table_weightedpct()</code><a class="anchor" aria-label="anchor" href="#table_weightedpct"></a>
 </h4>
-<p><code>whomds</code> contains a function called <code><a href="../reference/table_weightedpct.html">table_weightedpct()</a></code> which calculates weighted results tables from the survey, disaggregated by specified variables. The arguments of this function are passed to functions in the package <code>dplyr</code>.</p>
+<p><code>whomds</code> contains a function called
+<code><a href="../reference/table_weightedpct.html">table_weightedpct()</a></code> which calculates weighted results
+tables from the survey, disaggregated by specified variables. The
+arguments of this function are passed to functions in the package
+<code>dplyr</code>.</p>
 <p>Below are the arguments of the function:</p>
 <ul>
 <li>
-<code>df</code> - the data frame with all the variables of interest</li>
+<code>df</code> - the data frame with all the variables of
+interest</li>
 <li>
-<code>vars_ids</code> - variable names of the survey cluster ids</li>
+<code>vars_ids</code> - variable names of the survey cluster
+ids</li>
 <li>
 <code>vars_strata</code> - variable names of the survey strata</li>
 <li>
 <code>vars_weights</code> - variable names of the weights</li>
 <li>
-<code>formula_vars</code> - vector of the column names of variables you would like to print results for</li>
+<code>formula_vars</code> - vector of the column names of variables
+you would like to print results for</li>
 <li>
-<code>...</code> - captures expressions for filtering or transmuting the data. See the description of the argument <code>willfilter</code> below for more details</li>
+<code>...</code> - captures expressions for filtering or transmuting
+the data. See the description of the argument <code>willfilter</code>
+below for more details</li>
 <li>
-<code>formula_vars_levels</code> - numeric vector of the factor levels of the variables in <code>formula_vars</code>. By default, the function assumes the variables have two levels: 0 and 1</li>
+<code>formula_vars_levels</code> - numeric vector of the factor
+levels of the variables in <code>formula_vars</code>. By default, the
+function assumes the variables have two levels: 0 and 1</li>
 <li>
 <code>by_vars</code> - the variables to disaggregate by</li>
 <li>
-<code>pct</code> - a logical variable indicating whether or not to calculate weighted percentages. Default is <code>TRUE</code> for weighted percentages. Set to <code>FALSE</code> for weighted N.</li>
+<code>pct</code> - a logical variable indicating whether or not to
+calculate weighted percentages. Default is <code>TRUE</code> for
+weighted percentages. Set to <code>FALSE</code> for weighted N.</li>
 <li>
-<code>willfilter</code> - a variable that tells the function whether or not to filter the data by a particular value.
+<code>willfilter</code> - a variable that tells the function whether
+or not to filter the data by a particular value.
 <ul>
-<li>For example, if your <code>formula_vars</code> have response options of 0 and 1 but you only want to show the values for 1, then you would say <code>willfilter = TRUE</code>. Then at the end of your argument list you write an expression for the filter. In this case, you would say <code>resp==1</code>.</li>
-<li>If you set <code>willfilter = FALSE</code>, then the function will assume you want to “transmute” the data, in other words manipulate the columns in some way, which for us often means to collapse response options. For example, if your <code>formula_vars</code> have 5 response options, but you only want to show results for the sum of options <code>"Agree"</code> and <code>"StronglyAgree"</code>, (after setting <code>spread_key="resp"</code> to spread the table by the response options) you could set <code>willfilter=FALSE</code>, and then directly after write the expression for the transmutation, giving it a new column name–in this case the expression would be <code>NewColName=Agree+AgreeStrongly</code>. Also write the names of the other columns you would like to keep in the final table.</li>
-<li>If you leave <code>willfilter</code> as its default of <code>NULL</code>, then the function will not filter or transmute data.</li>
+<li>For example, if your <code>formula_vars</code> have response options
+of 0 and 1 but you only want to show the values for 1, then you would
+say <code>willfilter = TRUE</code>. Then at the end of your argument
+list you write an expression for the filter. In this case, you would say
+<code>resp==1</code>.</li>
+<li>If you set <code>willfilter = FALSE</code>, then the function will
+assume you want to “transmute” the data, in other words manipulate the
+columns in some way, which for us often means to collapse response
+options. For example, if your <code>formula_vars</code> have 5 response
+options, but you only want to show results for the sum of options
+<code>"Agree"</code> and <code>"StronglyAgree"</code>, (after setting
+<code>spread_key="resp"</code> to spread the table by the response
+options) you could set <code>willfilter=FALSE</code>, and then directly
+after write the expression for the transmutation, giving it a new column
+name–in this case the expression would be
+<code>NewColName=Agree+AgreeStrongly</code>. Also write the names of the
+other columns you would like to keep in the final table.</li>
+<li>If you leave <code>willfilter</code> as its default of
+<code>NULL</code>, then the function will not filter or transmute
+data.</li>
 </ul>
 </li>
 <li>
-<code>add_totals</code> - a logical variable determining whether to create total rows or columns (as appropriate) that demonstrate the margin that sums to 100. Keep as the default <code>FALSE</code> to not include totals.</li>
+<code>add_totals</code> - a logical variable determining whether to
+create total rows or columns (as appropriate) that demonstrate the
+margin that sums to 100. Keep as the default <code>FALSE</code> to not
+include totals.</li>
 <li>
-<code>spread_key</code> - the variable to spread the table horizontally by. Keep as the default <code>NULL</code> to not spread the table horizontally.</li>
+<code>spread_key</code> - the variable to spread the table
+horizontally by. Keep as the default <code>NULL</code> to not spread the
+table horizontally.</li>
 <li>
-<code>spread_value</code> - the variable to fill the table with after a horizontal spread. By default this argument is <code>"prop"</code>, which is a value created internally by the function, and generally does not need to be changed.</li>
+<code>spread_value</code> - the variable to fill the table with
+after a horizontal spread. By default this argument is
+<code>"prop"</code>, which is a value created internally by the
+function, and generally does not need to be changed.</li>
 <li>
-<code>arrange_vars</code> - the list of variables to arrange the table by. Keep as default <code>NULL</code> to leave the arrangement as is.</li>
+<code>arrange_vars</code> - the list of variables to arrange the
+table by. Keep as default <code>NULL</code> to leave the arrangement as
+is.</li>
 <li>
-<code>include_SE</code> - a logical variable indicating whether to include the standard errors in the table. Keep as the default <code>FALSE</code> to not include standard errors. As of this version of <code>whomds</code>, does not work when adding totals (<code>add_totals</code> is <code>TRUE</code>), spreading (<code>spread_key</code> is not <code>NULL</code>) or transmutting (<code>willfilter</code> is <code>FALSE</code>).</li>
+<code>include_SE</code> - a logical variable indicating whether to
+include the standard errors in the table. Keep as the default
+<code>FALSE</code> to not include standard errors. As of this version of
+<code>whomds</code>, does not work when adding totals
+(<code>add_totals</code> is <code>TRUE</code>), spreading
+(<code>spread_key</code> is not <code>NULL</code>) or transmutting
+(<code>willfilter</code> is <code>FALSE</code>).</li>
 </ul>
-<p>Here are some examples of how <code><a href="../reference/table_weightedpct.html">table_weightedpct()</a></code> would be used in practice. Not all arguments are explicitly set in each example, which means they are kept as their default values.</p>
+<p>Here are some examples of how <code><a href="../reference/table_weightedpct.html">table_weightedpct()</a></code> would
+be used in practice. Not all arguments are explicitly set in each
+example, which means they are kept as their default values.</p>
 <div class="section level5">
 <h5 id="example-1-long-table-one-level-of-disaggregation">Example 1: long table, one level of disaggregation<a class="anchor" aria-label="anchor" href="#example-1-long-table-one-level-of-disaggregation"></a>
 </h5>
-<p>Let’s say we want to print a table of the percentage of people in each disability level who gave each response option for a set of questions about the general environment. We would set the arguments of <code><a href="../reference/table_weightedpct.html">table_weightedpct()</a></code> like this, and the first few rows of the table would look like this:</p>
+<p>Let’s say we want to print a table of the percentage of people in
+each disability level who gave each response option for a set of
+questions about the general environment. We would set the arguments of
+<code><a href="../reference/table_weightedpct.html">table_weightedpct()</a></code> like this, and the first few rows of
+the table would look like this:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#Remove NAs from column used for argument by_vars</span></span>
 <span><span class="va">df_adults_noNA</span> <span class="op">&lt;-</span> <span class="va">df_adults</span> <span class="op">%&gt;%</span> </span>
@@ -233,13 +315,21 @@
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> No             EF10  3      22.8</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> No             EF10  4      11.6</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> No             EF10  5      10.9</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># … with 226 more rows</span></span></span></code></pre></div>
-<p>The outputted table has 4 columns: the variable we disaggregated the data by (<code>disability_cat</code>, in other words the disability level), the item (<code>item</code>), the response option (<code>resp</code>), and the proportion (<code>prop</code>).</p>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 226 more rows</span></span></span></code></pre></div>
+<p>The outputted table has 4 columns: the variable we disaggregated the
+data by (<code>disability_cat</code>, in other words the disability
+level), the item (<code>item</code>), the response option
+(<code>resp</code>), and the proportion (<code>prop</code>).</p>
 </div>
 <div class="section level5">
 <h5 id="example-2-wide-table-one-level-of-disaggregation">Example 2: wide table, one level of disaggregation<a class="anchor" aria-label="anchor" href="#example-2-wide-table-one-level-of-disaggregation"></a>
 </h5>
-<p>This long table from the above example is great for data analysis, but not great for reading with the bare eye. If we want to make it nicer, we convert it to “wide format” by “spreading” by a particular variable. Perhaps we want to spread by <code>disability_cat</code>. Our call to <code><a href="../reference/table_weightedpct.html">table_weightedpct()</a></code> would now look like this, and the outputted table would be:</p>
+<p>This long table from the above example is great for data analysis,
+but not great for reading with the bare eye. If we want to make it
+nicer, we convert it to “wide format” by “spreading” by a particular
+variable. Perhaps we want to spread by <code>disability_cat</code>. Our
+call to <code><a href="../reference/table_weightedpct.html">table_weightedpct()</a></code> would now look like this, and
+the outputted table would be:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/table_weightedpct.html">table_weightedpct</a></span><span class="op">(</span></span>
 <span>  df <span class="op">=</span> <span class="va">df_adults_noNA</span>,</span>
@@ -268,13 +358,16 @@
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> EF10  3      22.8 16.0     18.4   17.2 </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> EF10  4      11.6 11.9     14.6   13.3 </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> EF10  5      10.9  9.64     7.40   9.87</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># … with 50 more rows</span></span></span></code></pre></div>
-<p>Now we can see our <code>prop</code> column has been spread horizontally for each level of <code>disability_cat</code>.</p>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 50 more rows</span></span></span></code></pre></div>
+<p>Now we can see our <code>prop</code> column has been spread
+horizontally for each level of <code>disability_cat</code>.</p>
 </div>
 <div class="section level5">
 <h5 id="example-3-wide-table-one-level-of-disaggregation-filtered">Example 3: wide table, one level of disaggregation, filtered<a class="anchor" aria-label="anchor" href="#example-3-wide-table-one-level-of-disaggregation-filtered"></a>
 </h5>
-<p>Perhaps, though, we are only interested in the proportions of the most extreme response option of 5. We could now add a filter to our call to <code><a href="../reference/table_weightedpct.html">table_weightedpct()</a></code> like so:</p>
+<p>Perhaps, though, we are only interested in the proportions of the
+most extreme response option of 5. We could now add a filter to our call
+to <code><a href="../reference/table_weightedpct.html">table_weightedpct()</a></code> like so:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/table_weightedpct.html">table_weightedpct</a></span><span class="op">(</span></span>
 <span>  df <span class="op">=</span> <span class="va">df_adults_noNA</span>,</span>
@@ -306,12 +399,17 @@
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> EF7   5      4.29  3.28      2.72   4.68</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">11</span> EF8   5      2.28  1.29      1.19   2.41</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">12</span> EF9   5      5.20  3.59      4.89   5.26</span></span></code></pre></div>
-<p>Now you can see only the proportions for the response option of 5 are given.</p>
+<p>Now you can see only the proportions for the response option of 5 are
+given.</p>
 </div>
 <div class="section level5">
-<h5 id="example-4-wide-table-multiple-levels-of-disaggregation-filtered">Example 4: wide table, multiple levels of disaggregation, filtered<a class="anchor" aria-label="anchor" href="#example-4-wide-table-multiple-levels-of-disaggregation-filtered"></a>
+<h5 id="example-4-wide-table-multiple-levels-of-disaggregation-filtered">Example 4: wide table, multiple levels of disaggregation,
+filtered<a class="anchor" aria-label="anchor" href="#example-4-wide-table-multiple-levels-of-disaggregation-filtered"></a>
 </h5>
-<p>With <code><a href="../reference/table_weightedpct.html">table_weightedpct()</a></code>, we can also add more levels of disaggregation by editing the argument <code>by_vars</code>. Here we will produce the same table as in Example 3 above but now disaggregated by disability level and sex:</p>
+<p>With <code><a href="../reference/table_weightedpct.html">table_weightedpct()</a></code>, we can also add more levels of
+disaggregation by editing the argument <code>by_vars</code>. Here we
+will produce the same table as in Example 3 above but now disaggregated
+by disability level and sex:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/table_weightedpct.html">table_weightedpct</a></span><span class="op">(</span></span>
 <span>  df <span class="op">=</span> <span class="va">df_adults_noNA</span>,</span>
@@ -341,12 +439,23 @@
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> Female EF5   5      8.61 13.1      9.77  10.3 </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> Female EF6   5      3.25  3.76     2.29   2.89</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> Female EF7   5      4.44  4.12     2.76   2.34</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># … with 14 more rows</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 14 more rows</span></span></span></code></pre></div>
 </div>
 <div class="section level5">
-<h5 id="example-5-wide-table-multiple-levels-of-disaggregation-transmuted">Example 5: wide table, multiple levels of disaggregation, transmuted<a class="anchor" aria-label="anchor" href="#example-5-wide-table-multiple-levels-of-disaggregation-transmuted"></a>
+<h5 id="example-5-wide-table-multiple-levels-of-disaggregation-transmuted">Example 5: wide table, multiple levels of disaggregation,
+transmuted<a class="anchor" aria-label="anchor" href="#example-5-wide-table-multiple-levels-of-disaggregation-transmuted"></a>
 </h5>
-<p>Perhaps we are still interested not only in response option 5, but the sum of 4 and 5 together. We can do this by “transmuting” our table. To do this, we first choose to “spread” by <code>resp</code> by setting <code>spread_key="resp"</code>. This will convert the table to a wide format as in Example 2, but now each column will represent a response option. Then we set the transmutation by setting <code>willfilter=FALSE</code>, and adding expressions for the transmutation on the next line. We name all the columns we would like to keep and give an expression for how to create the new column of the sum of proportions for response options 4 and 5, here called <code>problems</code>:</p>
+<p>Perhaps we are still interested not only in response option 5, but
+the sum of 4 and 5 together. We can do this by “transmuting” our table.
+To do this, we first choose to “spread” by <code>resp</code> by setting
+<code>spread_key="resp"</code>. This will convert the table to a wide
+format as in Example 2, but now each column will represent a response
+option. Then we set the transmutation by setting
+<code>willfilter=FALSE</code>, and adding expressions for the
+transmutation on the next line. We name all the columns we would like to
+keep and give an expression for how to create the new column of the sum
+of proportions for response options 4 and 5, here called
+<code>problems</code>:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/table_weightedpct.html">table_weightedpct</a></span><span class="op">(</span></span>
 <span>  df <span class="op">=</span> <span class="va">df_adults_noNA</span>,</span>
@@ -376,8 +485,13 @@
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> No             Female EF5      18.5 </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> No             Female EF6       8.12</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> No             Female EF7      11.1 </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># … with 86 more rows</span></span></span></code></pre></div>
-<p>If we would like to modify the table again so that <code>disability_cat</code> represents the columns again, we can feed this table into another function that will perform the pivot The function to pivot tables is called <code>pivot_wider()</code>, and it is in the <code>tidyr</code> package. To perform a second pivot, write the code like this:</p>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 86 more rows</span></span></span></code></pre></div>
+<p>If we would like to modify the table again so that
+<code>disability_cat</code> represents the columns again, we can feed
+this table into another function that will perform the pivot The
+function to pivot tables is called <code>pivot_wider()</code>, and it is
+in the <code>tidyr</code> package. To perform a second pivot, write the
+code like this:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/table_weightedpct.html">table_weightedpct</a></span><span class="op">(</span></span>
 <span>  df <span class="op">=</span> <span class="va">df_adults_noNA</span>,</span>
@@ -408,28 +522,51 @@
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> Female EF5   18.5  24.3     17.8   21.8 </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> Female EF6    8.12  8.72     5.06   5.33</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> Female EF7   11.1   7.58     9.06   8.69</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># … with 14 more rows</span></span></span></code></pre></div>
-<p>The <code>names_from</code> argument of the function <code>pivot_wider()</code> tells <code>R</code> which variable to use as the columns, and <code>values_from</code> tells <code>R</code> what to fill the columns with. The operator <code>%&gt;%</code> is commonly referred to as a “pipe”. It feeds the object before it into the first argument of the function after it. For example, if you have an object <code>x</code> and a function <code>f</code>, writing <code>x %&gt;% f()</code> would be the equivalent as writing <code>f(x)</code>. People use “pipes” because they make long sequences of code easier to read.</p>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 14 more rows</span></span></span></code></pre></div>
+<p>The <code>names_from</code> argument of the function
+<code>pivot_wider()</code> tells <code>R</code> which variable to use as
+the columns, and <code>values_from</code> tells <code>R</code> what to
+fill the columns with. The operator <code>%&gt;%</code> is commonly
+referred to as a “pipe”. It feeds the object before it into the first
+argument of the function after it. For example, if you have an object
+<code>x</code> and a function <code>f</code>, writing
+<code>x %&gt;% f()</code> would be the equivalent as writing
+<code>f(x)</code>. People use “pipes” because they make long sequences
+of code easier to read.</p>
 </div>
 </div>
 <div class="section level4">
 <h4 id="table_unweightedpctn">
 <code>table_unweightedpctn()</code><a class="anchor" aria-label="anchor" href="#table_unweightedpctn"></a>
 </h4>
-<p><code>whomds</code> contains a function called <code><a href="../reference/table_unweightedpctn.html">table_unweightedpctn()</a></code> that produces unweighted tables of N and %. This is generally used for demographic tables. Its arguments are as follows:</p>
+<p><code>whomds</code> contains a function called
+<code><a href="../reference/table_unweightedpctn.html">table_unweightedpctn()</a></code> that produces unweighted tables of N
+and %. This is generally used for demographic tables. Its arguments are
+as follows:</p>
 <ul>
 <li>
-<code>df</code> - the data frame with all the variables of interest</li>
+<code>df</code> - the data frame with all the variables of
+interest</li>
 <li>
-<code>vars_demo</code> - vector with the names of the demographic variables for which the N and % will be calculated</li>
+<code>vars_demo</code> - vector with the names of the demographic
+variables for which the N and % will be calculated</li>
 <li>
-<code>group_by_var</code> - name of the variable in which the statistics should be stratified (e.g. <code>"disability_cat"</code>)</li>
+<code>group_by_var</code> - name of the variable in which the
+statistics should be stratified
+(e.g. <code>"disability_cat"</code>)</li>
 <li>
-<code>spread_by_group_by_var</code> - logical determining whether to spread the table by the variable given in <code>group_by_var</code>. Default is <code>FALSE</code>.</li>
+<code>spread_by_group_by_var</code> - logical determining whether to
+spread the table by the variable given in <code>group_by_var</code>.
+Default is <code>FALSE</code>.</li>
 <li>
-<code>group_by_var_sums_to_100</code> - logical determining whether percentages sum to 100 along the margin of <code>group_by_var</code>, if applicable. Default is <code>FALSE</code>.</li>
+<code>group_by_var_sums_to_100</code> - logical determining whether
+percentages sum to 100 along the margin of <code>group_by_var</code>, if
+applicable. Default is <code>FALSE</code>.</li>
 <li>
-<code>add_totals</code> - a logical variable determining whether to create total rows or columns (as appropriate) that demonstrate the margin that sums to 100. Keep as the default <code>FALSE</code> to not include totals.</li>
+<code>add_totals</code> - a logical variable determining whether to
+create total rows or columns (as appropriate) that demonstrate the
+margin that sums to 100. Keep as the default <code>FALSE</code> to not
+include totals.</li>
 </ul>
 <p>Here is an example of how it is used:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
@@ -438,35 +575,39 @@
 <span>                     group_by_var <span class="op">=</span> <span class="st">"disability_cat"</span>, </span>
 <span>                     spread_by_group_by_var <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 12 × 10</span></span></span>
-<span><span class="co">#&gt;    item     demo     No_pct  No_n Mild_…¹ Mild_n Moder…² Moder…³ Sever…⁴ Sever…⁵</span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;ord&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> sex      Female     52.5   287    53.5    250    49.9     376    49.1     209</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> sex      Male       47.5   260    46.5    217    50.1     377    50.9     217</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> age_cat  18-24       6.9    38     7.3     34     8.8      66     7.7      33</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> age_cat  25-39      19.7   108    16.1     75    19.7     148    16.4      70</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> age_cat  40-64      32.4   177    33.2    155    29.3     221    32.6     139</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> age_cat  64-100     41     224    43.5    203    42.2     318    43.2     184</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> work_cat N          41.7   228    40.5    189    42       316    42.3     180</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> work_cat Y          58.3   319    59.5    278    58       437    57.7     246</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> edu_cat  None       21.8   119    16.7     78    21.4     161    19        81</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> edu_cat  Element…   37.8   207    38.8    181    39.7     299    41.3     176</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">11</span> edu_cat  Seconda…   25     137    28.7    134    23.2     175    25.1     107</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">12</span> edu_cat  Univers…   15.4    84    15.8     74    15.7     118    14.6      62</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># … with abbreviated variable names ¹​Mild_pct, ²​Moderate_pct, ³​Moderate_n,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   ⁴​Severe_pct, ⁵​Severe_n</span></span></span></code></pre></div>
+<span><span class="co">#&gt;    item    demo  No_pct  No_n Mild_pct Mild_n Moderate_pct Moderate_n Severe_pct</span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;ord&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> sex     Fema…   52.5   287     53.5    250         49.9        376       49.1</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> sex     Male    47.5   260     46.5    217         50.1        377       50.9</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> age_cat 18-24    6.9    38      7.3     34          8.8         66        7.7</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> age_cat 25-39   19.7   108     16.1     75         19.7        148       16.4</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> age_cat 40-64   32.4   177     33.2    155         29.3        221       32.6</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> age_cat 64-1…   41     224     43.5    203         42.2        318       43.2</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> work_c… N       41.7   228     40.5    189         42          316       42.3</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> work_c… Y       58.3   319     59.5    278         58          437       57.7</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> edu_cat None    21.8   119     16.7     78         21.4        161       19  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> edu_cat Elem…   37.8   207     38.8    181         39.7        299       41.3</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">11</span> edu_cat Seco…   25     137     28.7    134         23.2        175       25.1</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">12</span> edu_cat Univ…   15.4    84     15.8     74         15.7        118       14.6</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 1 more variable: Severe_n &lt;dbl&gt;</span></span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="table_basicstats">
 <code>table_basicstats()</code><a class="anchor" aria-label="anchor" href="#table_basicstats"></a>
 </h4>
-<p>The function <code><a href="../reference/table_basicstats.html">table_basicstats()</a></code> computes basic statistics of the number of member per group per household. Its arguments are:</p>
+<p>The function <code><a href="../reference/table_basicstats.html">table_basicstats()</a></code> computes basic
+statistics of the number of member per group per household. Its
+arguments are:</p>
 <ul>
 <li>
-<code>df</code> - a data frame of household data where the rows represent members of the households in the sample</li>
+<code>df</code> - a data frame of household data where the rows
+represent members of the households in the sample</li>
 <li>
-<code>hh_id</code> - string (length 1) indicating the name of the variable in <code>df</code> uniquely identifying households</li>
+<code>hh_id</code> - string (length 1) indicating the name of the
+variable in <code>df</code> uniquely identifying households</li>
 <li>
-<code>group_by_var</code> - string (length 1) with name of variable in <code>df</code> to group results by</li>
+<code>group_by_var</code> - string (length 1) with name of variable
+in <code>df</code> to group results by</li>
 </ul>
 <p>Here is an example of how it is used:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
@@ -484,34 +625,48 @@
 <div class="section level3">
 <h3 id="figures">Figures<a class="anchor" aria-label="anchor" href="#figures"></a>
 </h3>
-<p>Descriptive statistics figure functions included in the <code>whomds</code> package are:</p>
+<p>Descriptive statistics figure functions included in the
+<code>whomds</code> package are:</p>
 <ul>
 <li>
-<code><a href="../reference/fig_poppyramid.html">fig_poppyramid()</a></code> - produces a population pyramid figure for the sample</li>
+<code><a href="../reference/fig_poppyramid.html">fig_poppyramid()</a></code> - produces a population pyramid figure
+for the sample</li>
 <li>
-<code><a href="../reference/fig_dist.html">fig_dist()</a></code> - produces a plot of the distribution of a score</li>
+<code><a href="../reference/fig_dist.html">fig_dist()</a></code> - produces a plot of the distribution of a
+score</li>
 <li>
-<code><a href="../reference/fig_density.html">fig_density()</a></code> - produces a plot of the density of a score</li>
+<code><a href="../reference/fig_density.html">fig_density()</a></code> - produces a plot of the density of a
+score</li>
 </ul>
 <p>The arguments of each of these codes will be described below.</p>
 <div class="section level4">
 <h4 id="fig_poppyramid">
 <code>fig_poppyramid()</code><a class="anchor" aria-label="anchor" href="#fig_poppyramid"></a>
 </h4>
-<p><code>whomds</code> contains a function called <code><a href="../reference/fig_poppyramid.html">fig_poppyramid()</a></code> that produces a population pyramid figure for the sample. This function takes as arguments:</p>
+<p><code>whomds</code> contains a function called
+<code><a href="../reference/fig_poppyramid.html">fig_poppyramid()</a></code> that produces a population pyramid figure
+for the sample. This function takes as arguments:</p>
 <ul>
 <li>
-<code>df</code> - the data where each row is a member of the household from the household roster</li>
+<code>df</code> - the data where each row is a member of the
+household from the household roster</li>
 <li>
-<code>var_age</code> - the name of the column in <code>df</code> with the persons’ ages</li>
+<code>var_age</code> - the name of the column in <code>df</code>
+with the persons’ ages</li>
 <li>
-<code>var_sex</code> - the name of the column in <code>df</code> with he persons’ sexes</li>
+<code>var_sex</code> - the name of the column in <code>df</code>
+with he persons’ sexes</li>
 <li>
-<code>x_axis</code> - a string indicating whether to use absolute numbers or sample percentage on the x-axis. Choices are <code>"n"</code> (default) or <code>"pct"</code>.</li>
+<code>x_axis</code> - a string indicating whether to use absolute
+numbers or sample percentage on the x-axis. Choices are <code>"n"</code>
+(default) or <code>"pct"</code>.</li>
 <li>
-<code>age_plus</code> - a numeric value indicating the age that is the first value of the oldest age group. Default is 100, for the last age group to be 100+</li>
+<code>age_plus</code> - a numeric value indicating the age that is
+the first value of the oldest age group. Default is 100, for the last
+age group to be 100+</li>
 <li>
-<code>age_by</code> - a numeric value indicating the width of each age group, in years. Default is 5.</li>
+<code>age_by</code> - a numeric value indicating the width of each
+age group, in years. Default is 5.</li>
 </ul>
 <p>Running this function produces a figure like the one below:</p>
 <p><img src="Images/pop_pyramid.png" width="80%" style="display: block; margin: auto;"></p>
@@ -520,29 +675,43 @@
 <h4 id="fig_dist">
 <code>fig_dist()</code><a class="anchor" aria-label="anchor" href="#fig_dist"></a>
 </h4>
-<p><code>whomds</code> contains a function called <code><a href="../reference/fig_dist.html">fig_dist()</a></code> that produces a plot of the distribution of a score. WHO uses this function to show the distribution of the disability scores calculated with Rasch Analysis. Its arguments are:</p>
+<p><code>whomds</code> contains a function called
+<code><a href="../reference/fig_dist.html">fig_dist()</a></code> that produces a plot of the distribution of a
+score. WHO uses this function to show the distribution of the disability
+scores calculated with Rasch Analysis. Its arguments are:</p>
 <ul>
 <li>
 <code>df</code> - data frame with the score of interest</li>
 <li>
-<code>score</code> - character variable of score variable name ranging from 0 to 100; ex. <code>"disability_score"</code>
+<code>score</code> - character variable of score variable name
+ranging from 0 to 100; ex. <code>"disability_score"</code>
 </li>
 <li>
-<code>score_cat</code> - character variable of score categorization variable name, ex. <code>"disability_cat"</code>
+<code>score_cat</code> - character variable of score categorization
+variable name, ex. <code>"disability_cat"</code>
 </li>
 <li>
-<code>cutoffs</code> - a numeric vector of the cut-offs for the score categorization</li>
+<code>cutoffs</code> - a numeric vector of the cut-offs for the
+score categorization</li>
 <li>
-<code>x_lab</code> - a string giving the x-axis label. Default is <code>"Score"</code>
+<code>x_lab</code> - a string giving the x-axis label. Default is
+<code>"Score"</code>
 </li>
 <li>
-<code>y_max</code> - maximum value to use on the y-axis. If left as the default <code>NULL</code>, the function will calculate a suitable maximum automatically.</li>
+<code>y_max</code> - maximum value to use on the y-axis. If left as
+the default <code>NULL</code>, the function will calculate a suitable
+maximum automatically.</li>
 <li>
-<code>pcent</code> - logical variable indicating whether to use percent on the y-axis or frequency. Leave as default <code>FALSE</code> for frequency and give <code>TRUE</code> for percent.</li>
+<code>pcent</code> - logical variable indicating whether to use
+percent on the y-axis or frequency. Leave as default <code>FALSE</code>
+for frequency and give <code>TRUE</code> for percent.</li>
 <li>
-<code>pal</code> - a string specifying the type of color palette to use, passed to the function <code><a href="https://rdrr.io/pkg/RColorBrewer/man/ColorBrewer.html" class="external-link">RColorBrewer::brewer.pal()</a></code>. Default is <code>"Blues"</code>.</li>
+<code>pal</code> - a string specifying the type of color palette to
+use, passed to the function <code><a href="https://rdrr.io/pkg/RColorBrewer/man/ColorBrewer.html" class="external-link">RColorBrewer::brewer.pal()</a></code>.
+Default is <code>"Blues"</code>.</li>
 <li>
-<code>binwidth</code> - a numeric value giving the width of the bins in the histograph. Default is 5.</li>
+<code>binwidth</code> - a numeric value giving the width of the bins
+in the histograph. Default is 5.</li>
 </ul>
 <p>Running this function produces a figure like the one below.</p>
 <p><img src="Images/distribution.png" width="80%" style="display: block; margin: auto;"></p>
@@ -551,29 +720,51 @@
 <h4 id="fig_density">
 <code>fig_density()</code><a class="anchor" aria-label="anchor" href="#fig_density"></a>
 </h4>
-<p><code>whomds</code> contains a function similar to <code><a href="../reference/fig_dist.html">fig_dist()</a></code> called <code><a href="../reference/fig_density.html">fig_density()</a></code> that produces a plot of the density of a score. WHO uses this function to show the density distribution of the disability scores calculated with Rasch Analysis. Its arguments are:</p>
+<p><code>whomds</code> contains a function similar to
+<code><a href="../reference/fig_dist.html">fig_dist()</a></code> called <code><a href="../reference/fig_density.html">fig_density()</a></code> that produces
+a plot of the density of a score. WHO uses this function to show the
+density distribution of the disability scores calculated with Rasch
+Analysis. Its arguments are:</p>
 <ul>
 <li>
 <code>df</code> - data frame with the score of interest</li>
 <li>
-<code>score</code> - character variable of score variable name ranging from 0 to 100; ex. <code>"disability_score"</code>
+<code>score</code> - character variable of score variable name
+ranging from 0 to 100; ex. <code>"disability_score"</code>
 </li>
 <li>
-<code>var_color</code> - a character variable of the column name to set color of density lines by. Use this variable if you could like to print the densities of different groups onto the same plot. Default is <code>NULL</code>.</li>
+<code>var_color</code> - a character variable of the column name to
+set color of density lines by. Use this variable if you could like to
+print the densities of different groups onto the same plot. Default is
+<code>NULL</code>.</li>
 <li>
-<code>var_facet</code> - a character variable of the column name for the variable to create a <code><a href="https://ggplot2.tidyverse.org/reference/facet_grid.html" class="external-link">ggplot2::facet_grid()</a></code> with, which will plot densities of different groups in side-by-side plots. Default is <code>NULL</code>.</li>
+<code>var_facet</code> - a character variable of the column name for
+the variable to create a <code><a href="https://ggplot2.tidyverse.org/reference/facet_grid.html" class="external-link">ggplot2::facet_grid()</a></code> with, which
+will plot densities of different groups in side-by-side plots. Default
+is <code>NULL</code>.</li>
 <li>
-<code>cutoffs</code> - a numeric vector of the cut-offs for the score categorization</li>
+<code>cutoffs</code> - a numeric vector of the cut-offs for the
+score categorization</li>
 <li>
-<code>x_lab</code> - a string giving the x-axis label. Default is <code>"Score"</code>
+<code>x_lab</code> - a string giving the x-axis label. Default is
+<code>"Score"</code>
 </li>
 <li>
-<code>pal</code> - a string specifying either a manual color to use for the color aesthetic, a character vector explictly specifying the colors to use for the color scale, or as the name of a palette to pass to <code><a href="https://rdrr.io/pkg/RColorBrewer/man/ColorBrewer.html" class="external-link">RColorBrewer::brewer.pal()</a></code> with the name of the color palette to use for the color scale. Default is <code>"Paired"</code>
+<code>pal</code> - a string specifying either a manual color to use
+for the color aesthetic, a character vector explictly specifying the
+colors to use for the color scale, or as the name of a palette to pass
+to <code><a href="https://rdrr.io/pkg/RColorBrewer/man/ColorBrewer.html" class="external-link">RColorBrewer::brewer.pal()</a></code> with the name of the color
+palette to use for the color scale. Default is
+<code>"Paired"</code>
 </li>
 <li>
-<code>adjust</code> - a numeric value to pass to <code>adjust</code> argument of <code><a href="https://ggplot2.tidyverse.org/reference/geom_density.html" class="external-link">ggplot2::geom_density()</a></code>, which controls smoothing of the density function. Default is 2.</li>
+<code>adjust</code> - a numeric value to pass to <code>adjust</code>
+argument of <code><a href="https://ggplot2.tidyverse.org/reference/geom_density.html" class="external-link">ggplot2::geom_density()</a></code>, which controls
+smoothing of the density function. Default is 2.</li>
 <li>
-<code>size</code> - a numeric value to pass to <code>size</code> argument of <code><a href="https://ggplot2.tidyverse.org/reference/geom_density.html" class="external-link">ggplot2::geom_density()</a></code>, which controls the thickness of the lines. Default is 1.5.</li>
+<code>size</code> - a numeric value to pass to <code>size</code>
+argument of <code><a href="https://ggplot2.tidyverse.org/reference/geom_density.html" class="external-link">ggplot2::geom_density()</a></code>, which controls the
+thickness of the lines. Default is 1.5.</li>
 </ul>
 <p>Running this function produces a figure like the one below.</p>
 <p><img src="Images/density.png" width="80%" style="display: block; margin: auto;"></p>
@@ -582,7 +773,10 @@
 <div class="section level3">
 <h3 id="descriptive-statistics-templates">Descriptive statistics templates<a class="anchor" aria-label="anchor" href="#descriptive-statistics-templates"></a>
 </h3>
-<p>WHO also provides a template for calculating many descriptive statistics tables for use in survey reports, also written in <code>R</code>. If you would like a template for your country, please contact us (see DESCRIPTION for contact info).</p>
+<p>WHO also provides a template for calculating many descriptive
+statistics tables for use in survey reports, also written in
+<code>R</code>. If you would like a template for your country, please
+contact us (see DESCRIPTION for contact info).</p>
 </div>
 </div>
   </div>
@@ -604,7 +798,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer>

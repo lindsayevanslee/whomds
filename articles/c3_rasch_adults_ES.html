@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">whomds</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0.9006</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0.9010</span>
       </span>
     </div>
 
@@ -108,10 +108,11 @@
 
       
 
-      </header><script src="c3_rasch_adults_ES_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1 data-toc-skip>3 - Análisis Rasch con los datos de adultos de MDS</h1>
+      <h1 data-toc-skip>3 - Análisis Rasch con los datos de adultos de
+MDS</h1>
             
       
       <small class="dont-index">Source: <a href="https://github.com/lindsayevanslee/whomds/blob/HEAD/vignettes/c3_rasch_adults_ES.Rmd" class="external-link"><code>vignettes/c3_rasch_adults_ES.Rmd</code></a></small>
@@ -124,7 +125,13 @@
 <div class="section level2">
 <h2 id="estructura">Estructura<a class="anchor" aria-label="anchor" href="#estructura"></a>
 </h2>
-<p>Para realizar el Análisis Rasch para adultos, solo se necesita usar una función: <code><a href="../reference/rasch_mds.html">rasch_mds()</a></code>. Esto se conoce como una “función de envoltura” (<em>wrapper function</em>). Una función de envoltura es una función que facilita el uso de otras funciones. En nuestro caso, <code><a href="../reference/rasch_mds.html">rasch_mds()</a></code> utiliza todas las otras funciones <code>rasch_*()</code> para realizar el análisis. Estas otras funciones <code>rasch_*()</code> usadas para adultos son:</p>
+<p>Para realizar el Análisis Rasch para adultos, solo se necesita usar
+una función: <code><a href="../reference/rasch_mds.html">rasch_mds()</a></code>. Esto se conoce como una “función
+de envoltura” (<em>wrapper function</em>). Una función de envoltura es
+una función que facilita el uso de otras funciones. En nuestro caso,
+<code><a href="../reference/rasch_mds.html">rasch_mds()</a></code> utiliza todas las otras funciones
+<code>rasch_*()</code> para realizar el análisis. Estas otras funciones
+<code>rasch_*()</code> usadas para adultos son:</p>
 <ul>
 <li><code><a href="../reference/rasch_DIF.html">rasch_DIF()</a></code></li>
 <li><code><a href="../reference/rasch_drop.html">rasch_drop()</a></code></li>
@@ -136,23 +143,31 @@
 <li><code><a href="../reference/rasch_split.html">rasch_split()</a></code></li>
 <li><code><a href="../reference/rasch_testlet.html">rasch_testlet()</a></code></li>
 </ul>
-<p>Solo necesitas usar la función <code><a href="../reference/rasch_mds.html">rasch_mds()</a></code>. Pero si desea realizar su análisis de una manera más personalizada, puede trabajar directamente con las funciones internas.</p>
+<p>Solo necesitas usar la función <code><a href="../reference/rasch_mds.html">rasch_mds()</a></code>. Pero si
+desea realizar su análisis de una manera más personalizada, puede
+trabajar directamente con las funciones internas.</p>
 </div>
 <div class="section level2">
 <h2 id="salida">Salida<a class="anchor" aria-label="anchor" href="#salida"></a>
 </h2>
-<p>Después de cada iteración del Modelo Rasch, los códigos anteriores producen una variedad de archivos que le dirán qué tan bien los datos se ajustan a las suposiciones del modelo en esta iteración. Los archivos más importantes son los de abajo. Explicaremos cada uno en detalle a través de nuestro ejemplo.</p>
+<p>Después de cada iteración del Modelo Rasch, los códigos anteriores
+producen una variedad de archivos que le dirán qué tan bien los datos se
+ajustan a las suposiciones del modelo en esta iteración. Los archivos
+más importantes son los de abajo. Explicaremos cada uno en detalle a
+través de nuestro ejemplo.</p>
 <ul>
 <li>
 <code>LID_plot.pdf</code> - muestra elementos correlacionados</li>
 <li>
-<code>LID_above_0.2.csv</code> - correlaciones entre elementos correlacionados</li>
+<code>LID_above_0.2.csv</code> - correlaciones entre elementos
+correlacionados</li>
 <li>
 <code>parallel_analysis_scree.pdf</code> - gráfico de scree</li>
 <li>
 <code>bifactor_analysis.pdf</code> - cargas de factores</li>
 <li>
-<code>PImap.pdf</code>- ubicaciones de personas y ítems, ordenamiento de umbrales</li>
+<code>PImap.pdf</code>- ubicaciones de personas y ítems,
+ordenamiento de umbrales</li>
 <li>
 <code>item_fit.xlsx</code> - ajuste de ítems</li>
 <li>
@@ -162,10 +177,15 @@
 <div class="section level2">
 <h2 id="argumentos-de-rasch_mds">Argumentos de <code>rasch_mds()</code><a class="anchor" aria-label="anchor" href="#argumentos-de-rasch_mds"></a>
 </h2>
-<p>En esta sección examinaremos cada argumento de la función <code><a href="../reference/rasch_mds.html">rasch_mds()</a></code>. El archivo de ayuda para la función también describe los argumentos. Se puede acceder a los archivos de ayuda para las funciones en <code>R</code> escribiendo <code>?</code> antes del nombre de la función, de esta manera:</p>
+<p>En esta sección examinaremos cada argumento de la función
+<code><a href="../reference/rasch_mds.html">rasch_mds()</a></code>. El archivo de ayuda para la función también
+describe los argumentos. Se puede acceder a los archivos de ayuda para
+las funciones en <code>R</code> escribiendo <code>?</code> antes del
+nombre de la función, de esta manera:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="op">?</span><span class="va">rasch_mds</span></span></code></pre></div>
-<p>A continuación se muestra un ejemplo de uso de la función <code><a href="../reference/rasch_mds.html">rasch_mds()</a></code>:</p>
+<p>A continuación se muestra un ejemplo de uso de la función
+<code><a href="../reference/rasch_mds.html">rasch_mds()</a></code>:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/rasch_mds.html">rasch_mds</a></span><span class="op">(</span></span>
 <span>  df <span class="op">=</span> <span class="va">df_adults</span>, </span>
@@ -183,27 +203,110 @@
 <span>  split_strategy <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  comment <span class="op">=</span> <span class="st">"Initial run"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<p>El primer argumento es <code>df</code>. Este argumento es para los datos. El objeto de datos debe ser datos de encuestas individuales, con una fila por persona. Aquí los datos se almacenan en un objeto <code>df_adults</code>, que es un base de datos incluido en el paquete<code>whomds</code>. Para obtener más información sobre <code>df_adults</code>, consulta su archivo de ayuda ejecutando:<code><a href="../reference/df_adults.html">?df_adults</a></code></p>
-<p>El segundo argumento es <code>vars_metric</code>, que es igual a un vector de caracteres de los nombres de columna para los elementos a usar en el Análisis de Rasch. Aquí es igual a <code>paste0("EF", 1:12)</code>, que es un vector de caracteres de longitud 12 de los nombres de columna <code>EF1</code>, <code>EF2</code>, … <code>EF11</code> y <code>EF12</code>.</p>
-<p>El siguiente argumento es <code>vars_id</code>, que es el nombre de la columna utilizada para identificar de forma única a los individuos. Aquí la columna de ID se llama <code>HHID</code>.</p>
-<p>El siguiente argumento es <code>vars_DIF</code>. Es igual a un vector de caracteres con los nombres de las columnas que se utilizan para analizar el funcionamiento diferencial de elementos (DIF). DIF se tratará con más detalle en las secciones posteriores. Aquí <code>vars_DIF</code> es igual a un vector de caracteres de longitud dos que contiene el nombre de las columnas <code>"sex"</code> y <code>"age_cat"</code>.</p>
-<p>El siguiente argumento es <code>resp_opts</code>. Este es un vector numérico con las posibles opciones de respuesta para <code>vars_metric</code>. En esta encuesta, las preguntas <code>EF1</code> a <code>EF12</code> tienen las opciones de respuesta 1 a 5. Entonces, <code>resp_opts</code> es igual a un vector numérico de longitud 5 con los valores <code>1</code>, <code>2</code>,<code>3</code>, <code>4</code> y <code>5</code>.</p>
-<p>El siguiente argumento es <code>max_NA</code>. Este es un valor numérico para el número máximo de valores faltantes permitidos para que una persona aún se tenga en cuenta en el análisis. El Análisis de Rasch puede manejar a personas que tienen algunos valores faltantes, pero demasiados causarán problemas en el análisis. En general, todos los individuos en la muestra deben tener menos del 15% de valores faltantes. Aquí <code>max_NA</code> es <code>2</code>, lo que significa que se permite que los individuos tengan un máximo de dos valores faltantes de las preguntas en <code>vars_metric</code> para que aún se incluyan en el análisis.</p>
-<p>El siguiente argumento es <code>print_results</code>, que es <code>TRUE</code> o <code>FALSE</code>. Cuando es <code>TRUE</code>, los archivos se guardarán en su computadora con los resultados de la iteración Rasch. Cuando es <code>FALSE</code>, los archivos no se guardarán.</p>
-<p>El siguiente argumento es <code>path_parent</code>. Esta es una cadena con la ruta a la carpeta donde se guardarán los resultados de múltiples modelos, asumiendo que <code>print_results</code> es <code>TRUE</code>. La carpeta en <code>path_parent</code> contendrá carpetas separadas con los nombres especificados en <code>model_name</code> en cada iteración. En la ejecución de la función anterior, todos los resultados se guardarán en el Desktop. Ten en cuenta que al escribir rutas para <code>R</code>, todas las barras deberían ser: <code>/</code>(NO <code>\</code>). Asegúrate de incluir un <code>/</code> final en el final de la ruta.</p>
-<p>El siguiente argumento es <code>model_name</code>. Esto es igual a una cadena donde le das un nombre del modelo que estás ejecutando. Este nombre se usará como el nombre de la carpeta donde se guardará toda la salida en su computadora, si <code>print_results</code> es <code>TRUE</code>. El nombre que le des debe ser corto pero informativo. Por ejemplo, puede llamar a su primera ejecución “Start”, como se llama aquí. Si creas un testlet en su segunda ejecución, quizás puedas llamarlo “Testlet1”, etc. Elije lo que sea significativo para tí.</p>
-<p>Los siguientes argumentos son <code>testlet_strategy</code>, <code>recode_strategy</code>, <code>drop_vars</code> y <code>split_strategy</code>. Estos son argumentos que controlan cómo se usan los datos en cada iteración del Modelo Rasch. Cada uno será discutido con más detalle en secciones posteriores. Aquí están todos configurados en <code>NULL</code>, lo que significa que no se usan en la iteración del Análisis Rasch que se muestra aquí.</p>
-<p>El último argumento es <code>comment</code>. Esto es igual a una cadena en la que puedes escribir cierta información de texto libre sobre la iteración actual para que cuando veas los resultados más adelante puedas recordar lo que hiciste y por qué lo hiciste. Es mejor ser más detallado, porque olvidarás por qué eligiste ejecutar el modelo de esta manera en particular. Este comentario se guardará en un archivo <code>Comment.txt</code>. Aquí el comentario es solo <code>"Initial run"</code>.</p>
+<p>El primer argumento es <code>df</code>. Este argumento es para los
+datos. El objeto de datos debe ser datos de encuestas individuales, con
+una fila por persona. Aquí los datos se almacenan en un objeto
+<code>df_adults</code>, que es un base de datos incluido en el
+paquete<code>whomds</code>. Para obtener más información sobre
+<code>df_adults</code>, consulta su archivo de ayuda
+ejecutando:<code><a href="../reference/df_adults.html">?df_adults</a></code></p>
+<p>El segundo argumento es <code>vars_metric</code>, que es igual a un
+vector de caracteres de los nombres de columna para los elementos a usar
+en el Análisis de Rasch. Aquí es igual a
+<code>paste0("EF", 1:12)</code>, que es un vector de caracteres de
+longitud 12 de los nombres de columna <code>EF1</code>,
+<code>EF2</code>, … <code>EF11</code> y <code>EF12</code>.</p>
+<p>El siguiente argumento es <code>vars_id</code>, que es el nombre de
+la columna utilizada para identificar de forma única a los individuos.
+Aquí la columna de ID se llama <code>HHID</code>.</p>
+<p>El siguiente argumento es <code>vars_DIF</code>. Es igual a un vector
+de caracteres con los nombres de las columnas que se utilizan para
+analizar el funcionamiento diferencial de elementos (DIF). DIF se
+tratará con más detalle en las secciones posteriores. Aquí
+<code>vars_DIF</code> es igual a un vector de caracteres de longitud dos
+que contiene el nombre de las columnas <code>"sex"</code> y
+<code>"age_cat"</code>.</p>
+<p>El siguiente argumento es <code>resp_opts</code>. Este es un vector
+numérico con las posibles opciones de respuesta para
+<code>vars_metric</code>. En esta encuesta, las preguntas
+<code>EF1</code> a <code>EF12</code> tienen las opciones de respuesta 1
+a 5. Entonces, <code>resp_opts</code> es igual a un vector numérico de
+longitud 5 con los valores <code>1</code>,
+<code>2</code>,<code>3</code>, <code>4</code> y <code>5</code>.</p>
+<p>El siguiente argumento es <code>max_NA</code>. Este es un valor
+numérico para el número máximo de valores faltantes permitidos para que
+una persona aún se tenga en cuenta en el análisis. El Análisis de Rasch
+puede manejar a personas que tienen algunos valores faltantes, pero
+demasiados causarán problemas en el análisis. En general, todos los
+individuos en la muestra deben tener menos del 15% de valores faltantes.
+Aquí <code>max_NA</code> es <code>2</code>, lo que significa que se
+permite que los individuos tengan un máximo de dos valores faltantes de
+las preguntas en <code>vars_metric</code> para que aún se incluyan en el
+análisis.</p>
+<p>El siguiente argumento es <code>print_results</code>, que es
+<code>TRUE</code> o <code>FALSE</code>. Cuando es <code>TRUE</code>, los
+archivos se guardarán en su computadora con los resultados de la
+iteración Rasch. Cuando es <code>FALSE</code>, los archivos no se
+guardarán.</p>
+<p>El siguiente argumento es <code>path_parent</code>. Esta es una
+cadena con la ruta a la carpeta donde se guardarán los resultados de
+múltiples modelos, asumiendo que <code>print_results</code> es
+<code>TRUE</code>. La carpeta en <code>path_parent</code> contendrá
+carpetas separadas con los nombres especificados en
+<code>model_name</code> en cada iteración. En la ejecución de la función
+anterior, todos los resultados se guardarán en el Desktop. Ten en cuenta
+que al escribir rutas para <code>R</code>, todas las barras deberían
+ser: <code>/</code>(NO <code>\</code>). Asegúrate de incluir un
+<code>/</code> final en el final de la ruta.</p>
+<p>El siguiente argumento es <code>model_name</code>. Esto es igual a
+una cadena donde le das un nombre del modelo que estás ejecutando. Este
+nombre se usará como el nombre de la carpeta donde se guardará toda la
+salida en su computadora, si <code>print_results</code> es
+<code>TRUE</code>. El nombre que le des debe ser corto pero informativo.
+Por ejemplo, puede llamar a su primera ejecución “Start”, como se llama
+aquí. Si creas un testlet en su segunda ejecución, quizás puedas
+llamarlo “Testlet1”, etc. Elije lo que sea significativo para tí.</p>
+<p>Los siguientes argumentos son <code>testlet_strategy</code>,
+<code>recode_strategy</code>, <code>drop_vars</code> y
+<code>split_strategy</code>. Estos son argumentos que controlan cómo se
+usan los datos en cada iteración del Modelo Rasch. Cada uno será
+discutido con más detalle en secciones posteriores. Aquí están todos
+configurados en <code>NULL</code>, lo que significa que no se usan en la
+iteración del Análisis Rasch que se muestra aquí.</p>
+<p>El último argumento es <code>comment</code>. Esto es igual a una
+cadena en la que puedes escribir cierta información de texto libre sobre
+la iteración actual para que cuando veas los resultados más adelante
+puedas recordar lo que hiciste y por qué lo hiciste. Es mejor ser más
+detallado, porque olvidarás por qué eligiste ejecutar el modelo de esta
+manera en particular. Este comentario se guardará en un archivo
+<code>Comment.txt</code>. Aquí el comentario es solo
+<code>"Initial run"</code>.</p>
 </div>
 <div class="section level2">
 <h2 id="ajustar-los-datos">Ajustar los datos<a class="anchor" aria-label="anchor" href="#ajustar-los-datos"></a>
 </h2>
-<p>A continuación, discutiremos los argumentos que dan instrucciones sobre cómo ajustar los datos. Es posible que estas partes no sean del todo significativas ahora, pero lo serán aún más después de que pasemos por un ejemplo.</p>
+<p>A continuación, discutiremos los argumentos que dan instrucciones
+sobre cómo ajustar los datos. Es posible que estas partes no sean del
+todo significativas ahora, pero lo serán aún más después de que pasemos
+por un ejemplo.</p>
 <div class="section level3">
 <h3 id="crear-testlets">Crear testlets<a class="anchor" aria-label="anchor" href="#crear-testlets"></a>
 </h3>
-<p>Si deseas crear testlets, es decir, sumar los ítems en súper-ítems para corregir la dependencia de los ítems, luego pasa una estrategia para hacer testlets al argumento <code>testlet_strategy</code>. <code>testlet_strategy</code> es una lista con un elemento de la lista por testlet que deseas crear. Cada elemento de la lista debe ser un vector de caracteres de los nombres de columna para usar para el testlet. Opcionalmente, puede nombrar los elementos de la lista para dar nombres personalizados a los nuevos testlets. Sin nombres especificados, los nuevos testlets serán los nombres de columna originales separados por "_".</p>
-<p>Por ejemplo, imagine que desea hacer dos testlets: un testlet de las variables <code>EF4</code>, <code>EF6</code> y <code>EF8</code> con un nuevo nombre de <code>new</code>, y otro testlet de <code>EF5</code> y <code>EF7</code>, sin un nuevo nombre especificado. Entonces deberías especificar <code>testlet_strategy</code> como lo siguiente:</p>
+<p>Si deseas crear testlets, es decir, sumar los ítems en súper-ítems
+para corregir la dependencia de los ítems, luego pasa una estrategia
+para hacer testlets al argumento <code>testlet_strategy</code>.
+<code>testlet_strategy</code> es una lista con un elemento de la lista
+por testlet que deseas crear. Cada elemento de la lista debe ser un
+vector de caracteres de los nombres de columna para usar para el
+testlet. Opcionalmente, puede nombrar los elementos de la lista para dar
+nombres personalizados a los nuevos testlets. Sin nombres especificados,
+los nuevos testlets serán los nombres de columna originales separados
+por “_“.</p>
+<p>Por ejemplo, imagine que desea hacer dos testlets: un testlet de las
+variables <code>EF4</code>, <code>EF6</code> y <code>EF8</code> con un
+nuevo nombre de <code>new</code>, y otro testlet de <code>EF5</code> y
+<code>EF7</code>, sin un nuevo nombre especificado. Entonces deberías
+especificar <code>testlet_strategy</code> como lo siguiente:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/rasch_mds.html">rasch_mds</a></span><span class="op">(</span></span>
 <span>  <span class="va">...</span>, </span>
@@ -216,8 +319,19 @@
 <div class="section level3">
 <h3 id="recodificación">Recodificación<a class="anchor" aria-label="anchor" href="#recodificaci%C3%B3n"></a>
 </h3>
-<p>Si deseas recodificar las opciones de respuesta, es decir, cambiar las opciones de respuesta para crear un ordenamiento estocástico, entonces pasa una estrategia para la recodificación al argumento <code>recode_strategy</code>. <code>recode_strategy</code> toma la forma de una lista nombrada, con un elemento de la lista por estrategia de recode. Los nombres de la lista son los grupos de nombres de columna que se deben usar para cada estrategia de recodificación, separados solo por “,”. Cada elemento de la lista es un vector numérico que proporciona las nuevas opciones de respuesta para asignar las variables.</p>
-<p>Por ejemplo, si desea combinar las dos últimas opciones de respuesta de las variables <code>EF1</code> y <code>EF2</code>, y combinar las dos primeras opciones de respuesta de <code>EF3</code>, entonces establecería <code>recode_strategy</code> como lo siguiente:</p>
+<p>Si deseas recodificar las opciones de respuesta, es decir, cambiar
+las opciones de respuesta para crear un ordenamiento estocástico,
+entonces pasa una estrategia para la recodificación al argumento
+<code>recode_strategy</code>. <code>recode_strategy</code> toma la forma
+de una lista nombrada, con un elemento de la lista por estrategia de
+recode. Los nombres de la lista son los grupos de nombres de columna que
+se deben usar para cada estrategia de recodificación, separados solo por
+“,”. Cada elemento de la lista es un vector numérico que proporciona las
+nuevas opciones de respuesta para asignar las variables.</p>
+<p>Por ejemplo, si desea combinar las dos últimas opciones de respuesta
+de las variables <code>EF1</code> y <code>EF2</code>, y combinar las dos
+primeras opciones de respuesta de <code>EF3</code>, entonces
+establecería <code>recode_strategy</code> como lo siguiente:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/rasch_mds.html">rasch_mds</a></span><span class="op">(</span></span>
 <span>  <span class="va">...</span>, </span>
@@ -230,8 +344,13 @@
 <div class="section level3">
 <h3 id="eliminar-variables">Eliminar variables<a class="anchor" aria-label="anchor" href="#eliminar-variables"></a>
 </h3>
-<p>Si deseas eliminar cualquier ítem de tu análisis, tal vez en el caso de un ajuste extremadamente deficiente, configura <code>drop_vars</code> como un vector de caracteres de los nombres de columna para que se eliminen del análisis.</p>
-<p>Por ejemplo, si los ítems <code>EF4</code> y <code>EF7</code> eran ítems extremadamente mal ajustados, entonces podrían eliminarse del análisis especificando <code>drop_vars</code> como lo siguiente:</p>
+<p>Si deseas eliminar cualquier ítem de tu análisis, tal vez en el caso
+de un ajuste extremadamente deficiente, configura <code>drop_vars</code>
+como un vector de caracteres de los nombres de columna para que se
+eliminen del análisis.</p>
+<p>Por ejemplo, si los ítems <code>EF4</code> y <code>EF7</code> eran
+ítems extremadamente mal ajustados, entonces podrían eliminarse del
+análisis especificando <code>drop_vars</code> como lo siguiente:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/rasch_mds.html">rasch_mds</a></span><span class="op">(</span></span>
 <span>  <span class="va">...</span>, </span>
@@ -241,10 +360,28 @@
 <div class="section level3">
 <h3 id="dividir">Dividir<a class="anchor" aria-label="anchor" href="#dividir"></a>
 </h3>
-<p>Si deseas dividir los ítems por subgrupos, tal vez en el caso de funcionamiento diferencial de ítems (DIF) alto, a continuación, das las instrucciones para su estrategia de división en el argumento <code>split_strategy</code>.</p>
-<p>La división de ítems implica tomar un solo ítem y separarlo en dos o más ítems para diferentes grupos. Por ejemplo, si quisiéramos dividir un ítem <code>var</code> por sexo, crearíamos dos ítems:<code>var_Male</code> y <code>var_Female</code>. <code>var_Male</code> sería equivalente a <code>var</code> para todos los encuestados que son hombres, y <code>NA</code> para los encuestados que son mujeres. <code>var_Female</code> sería equivalente a <code>var</code> para todos los encuestados que son mujeres, y <code>NA</code> para los encuestados que son hombres.</p>
-<p><code>split_strategy</code> toma la forma de una lista nombrada. Hay un elemento de la lista por variable para la que divides. Cada elemento de la lista debe ser un vector de caracteres de los nombres de columna para dividir. Los nombres de la lista son las variables para las que divides cada grupo de variables.</p>
-<p>Por ejemplo, si quisiéramos dividir las variables <code>EF1</code> y <code>EF2</code> por <code>sex</code>, y dividir <code>EF3</code> por la categoría de edad <code>age_cat</code>, entonces especificaríamos <code>split_strategy</code> como la siguiente:</p>
+<p>Si deseas dividir los ítems por subgrupos, tal vez en el caso de
+funcionamiento diferencial de ítems (DIF) alto, a continuación, das las
+instrucciones para su estrategia de división en el argumento
+<code>split_strategy</code>.</p>
+<p>La división de ítems implica tomar un solo ítem y separarlo en dos o
+más ítems para diferentes grupos. Por ejemplo, si quisiéramos dividir un
+ítem <code>var</code> por sexo, crearíamos dos
+ítems:<code>var_Male</code> y <code>var_Female</code>.
+<code>var_Male</code> sería equivalente a <code>var</code> para todos
+los encuestados que son hombres, y <code>NA</code> para los encuestados
+que son mujeres. <code>var_Female</code> sería equivalente a
+<code>var</code> para todos los encuestados que son mujeres, y
+<code>NA</code> para los encuestados que son hombres.</p>
+<p><code>split_strategy</code> toma la forma de una lista nombrada. Hay
+un elemento de la lista por variable para la que divides. Cada elemento
+de la lista debe ser un vector de caracteres de los nombres de columna
+para dividir. Los nombres de la lista son las variables para las que
+divides cada grupo de variables.</p>
+<p>Por ejemplo, si quisiéramos dividir las variables <code>EF1</code> y
+<code>EF2</code> por <code>sex</code>, y dividir <code>EF3</code> por la
+categoría de edad <code>age_cat</code>, entonces especificaríamos
+<code>split_strategy</code> como la siguiente:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/rasch_mds.html">rasch_mds</a></span><span class="op">(</span></span>
 <span>  <span class="va">...</span>, </span>
@@ -253,17 +390,26 @@
 <span>    age_cat <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"EF3"</span><span class="op">)</span></span>
 <span>  <span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<p>Sin embargo, debido a que esperamos una cierta cantidad de DIF al medir la discapacidad, especialmente por sexo y edad, rara vez usamos esta opción. Para no realizar ninguna división, deje <code>split_strategy</code> como su valor predeterminado de <code>NULL</code>.</p>
+<p>Sin embargo, debido a que esperamos una cierta cantidad de DIF al
+medir la discapacidad, especialmente por sexo y edad, rara vez usamos
+esta opción. Para no realizar ninguna división, deje
+<code>split_strategy</code> como su valor predeterminado de
+<code>NULL</code>.</p>
 </div>
 </div>
 <div class="section level2">
 <h2 id="ejemplo">Ejemplo<a class="anchor" aria-label="anchor" href="#ejemplo"></a>
 </h2>
-<p>A continuación, crearemos una métrica utilizando los datos de muestra <code>df_adults</code> utilizando las preguntas de factores ambientales (EF, por sus siglas en inglés) del cuestionario. Estas son las preguntas <code>EF1</code> a <code>EF12</code>.</p>
+<p>A continuación, crearemos una métrica utilizando los datos de muestra
+<code>df_adults</code> utilizando las preguntas de factores ambientales
+(EF, por sus siglas en inglés) del cuestionario. Estas son las preguntas
+<code>EF1</code> a <code>EF12</code>.</p>
 <div class="section level3">
 <h3 id="start">Start<a class="anchor" aria-label="anchor" href="#start"></a>
 </h3>
-<p>Comenzaremos intentando ejecutar el modelo sin realizar ningún ajuste en nuestros datos. Para ejecutar este modelo, ejecuta un comando que sea similar a este:</p>
+<p>Comenzaremos intentando ejecutar el modelo sin realizar ningún ajuste
+en nuestros datos. Para ejecutar este modelo, ejecuta un comando que sea
+similar a este:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">start</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rasch_mds.html">rasch_mds</a></span><span class="op">(</span></span>
 <span>  df <span class="op">=</span> <span class="va">df_adults</span>, </span>
@@ -281,25 +427,132 @@
 <span>  split_strategy <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  comment <span class="op">=</span> <span class="st">"Initial run"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<p>Es posible que el código que ejecutas no sea exactamente el mismo, porque, por ejemplo, el directorio que usas para <code>path_parent</code> será específico para tu máquina, y puedes elegir un <code>model_name</code> y <code>comment</code> diferentes para tu modelo.</p>
-<p>Al ejecutar este comando, se imprime los resultados en tu máquina (porque <code>print_results</code> es <code>TRUE</code>), también está guardando algo de salida en un objeto en el entorno global de <code>R</code> llamado <code>start</code>. Este objeto es una lista con tres elementos: uno llamado <code>df</code>, uno llamado <code>vars_metric</code> y uno llamado <code>df_results</code>. <code>df</code> contiene los datos con las variables transformadas utilizadas para crear la puntuación y las puntuaciones redimensionadas. <code>vars_metric</code> es un vector de caracteres de los nombres de <code>vars_metric</code> después de transformar las variables. <code>df_results</code> es un marco de datos con una fila y una columna para cada una de las estadísticas principales para evaluar las suposiciones del modelo de Rasch. <code>df_results</code> de múltiples modelos se pueden combinar para crear un marco de datos que le permita comparar rápidamente diferentes modelos.</p>
-<p>No es necesario guardar la salida de <code><a href="../reference/rasch_mds.html">rasch_mds()</a></code> en un objeto en el entorno global, pero facilita la manipulación de la salida resultante para determinar qué ajustes hacer a tus datos en la siguiente iteración.</p>
-<p>Después de ejecutar este comando, se guardarán varios archivos en la carpeta que especificó. Va a la carpeta <code>path_parent</code>, y verás una nueva carpeta con el nombre que especificó en <code>model_name</code>. Dentro de esa carpeta, habrá muchos archivos. Nos centraremos en los más importantes. Lee nuevamente la Sección @ref(reparación) para ver cómo los diferentes suposiciones del Modelo Rasch se afectan entre sí y para comprender por qué revisaremos los archivos importantes en este orden particular.</p>
-<p>Primero revisaremos la dependencia local del artículo de los artículos. Podemos verificar esto mirando los archivos <code>LID_plot.pdf</code> y<code>LID_above_0.2.csv</code>. <code>LID_above_0.2.csv</code> da las correlaciones de los residuos que están por encima de 0.2, y <code>LID_plot.pdf</code> es una visualización de estas correlaciones. De estos archivos, podemos ver que los elementos <code>EF11</code> y <code>EF12</code> están correlacionados. El valor de la correlación es aproximadamente 0.47. Estos dos elementos tienen que ver con la forma en que se facilita o dificulta el trabajo (<code>EF11</code>) y la escuela (<code>EF12</code>). Conceptualmente, tiene sentido que las respuestas de las personas a estas dos preguntas estén relacionadas. Nos ocuparemos de esta correlación en la próxima iteración del modelo.</p>
+<p>Es posible que el código que ejecutas no sea exactamente el mismo,
+porque, por ejemplo, el directorio que usas para
+<code>path_parent</code> será específico para tu máquina, y puedes
+elegir un <code>model_name</code> y <code>comment</code> diferentes para
+tu modelo.</p>
+<p>Al ejecutar este comando, se imprime los resultados en tu máquina
+(porque <code>print_results</code> es <code>TRUE</code>), también está
+guardando algo de salida en un objeto en el entorno global de
+<code>R</code> llamado <code>start</code>. Este objeto es una lista con
+tres elementos: uno llamado <code>df</code>, uno llamado
+<code>vars_metric</code> y uno llamado <code>df_results</code>.
+<code>df</code> contiene los datos con las variables transformadas
+utilizadas para crear la puntuación y las puntuaciones redimensionadas.
+<code>vars_metric</code> es un vector de caracteres de los nombres de
+<code>vars_metric</code> después de transformar las variables.
+<code>df_results</code> es un marco de datos con una fila y una columna
+para cada una de las estadísticas principales para evaluar las
+suposiciones del modelo de Rasch. <code>df_results</code> de múltiples
+modelos se pueden combinar para crear un marco de datos que le permita
+comparar rápidamente diferentes modelos.</p>
+<p>No es necesario guardar la salida de <code><a href="../reference/rasch_mds.html">rasch_mds()</a></code> en un
+objeto en el entorno global, pero facilita la manipulación de la salida
+resultante para determinar qué ajustes hacer a tus datos en la siguiente
+iteración.</p>
+<p>Después de ejecutar este comando, se guardarán varios archivos en la
+carpeta que especificó. Va a la carpeta <code>path_parent</code>, y
+verás una nueva carpeta con el nombre que especificó en
+<code>model_name</code>. Dentro de esa carpeta, habrá muchos archivos.
+Nos centraremos en los más importantes. Lee nuevamente la Sección
+@ref(reparación) para ver cómo los diferentes suposiciones del Modelo
+Rasch se afectan entre sí y para comprender por qué revisaremos los
+archivos importantes en este orden particular.</p>
+<p>Primero revisaremos la dependencia local del artículo de los
+artículos. Podemos verificar esto mirando los archivos
+<code>LID_plot.pdf</code> y<code>LID_above_0.2.csv</code>.
+<code>LID_above_0.2.csv</code> da las correlaciones de los residuos que
+están por encima de 0.2, y <code>LID_plot.pdf</code> es una
+visualización de estas correlaciones. De estos archivos, podemos ver que
+los elementos <code>EF11</code> y <code>EF12</code> están
+correlacionados. El valor de la correlación es aproximadamente 0.47.
+Estos dos elementos tienen que ver con la forma en que se facilita o
+dificulta el trabajo (<code>EF11</code>) y la escuela
+(<code>EF12</code>). Conceptualmente, tiene sentido que las respuestas
+de las personas a estas dos preguntas estén relacionadas. Nos ocuparemos
+de esta correlación en la próxima iteración del modelo.</p>
 <p><img src="Images/ExampleRasch_EF/Start/LID_plot.png" width="80%" style="display: block; margin: auto;"></p>
-<p>A continuación, investigaremos la unidimensionalidad del modelo analizando el archivo <code>parallel_analysis_scree.pdf</code>. Esto es lo que se conoce como una “gráfico scree”. Un gráfico scree muestra los valores propios (<em>eigenvalues</em>) de nuestro modelo e indica cuántas dimensiones subyacentes tenemos en nuestro cuestionario. Con este gráfico, esperamos ver una disminución muy marcada después del primer valor propio a la izquierda, y que el segundo valor propio caiga por debajo de la línea verde del <em>“Parallel Analysis”</em>. Esto significaría que tenemos una dimensión subyacente que es muy sólida en nuestros datos, y cualquier otra dimensión que se calcule tendrá muy poca influencia en el modelo. En nuestro gráfico, vemos una disminución muy marcada después del primer valor propio, y la línea verde cruza la línea negra después del segundo factor. Esto es suficiente para confirmar la unidimensionalidad para el modelo.</p>
+<p>A continuación, investigaremos la unidimensionalidad del modelo
+analizando el archivo <code>parallel_analysis_scree.pdf</code>. Esto es
+lo que se conoce como una “gráfico scree”. Un gráfico scree muestra los
+valores propios (<em>eigenvalues</em>) de nuestro modelo e indica
+cuántas dimensiones subyacentes tenemos en nuestro cuestionario. Con
+este gráfico, esperamos ver una disminución muy marcada después del
+primer valor propio a la izquierda, y que el segundo valor propio caiga
+por debajo de la línea verde del <em>“Parallel Analysis”</em>. Esto
+significaría que tenemos una dimensión subyacente que es muy sólida en
+nuestros datos, y cualquier otra dimensión que se calcule tendrá muy
+poca influencia en el modelo. En nuestro gráfico, vemos una disminución
+muy marcada después del primer valor propio, y la línea verde cruza la
+línea negra después del segundo factor. Esto es suficiente para
+confirmar la unidimensionalidad para el modelo.</p>
 <p><img src="Images/ExampleRasch_EF/Start/parallel_analysis_scree.png" width="80%" style="display: block; margin: auto;"></p>
-<p>Otro archivo importante que podemos examinar es el <code>PImap.pdf</code>. Este es el “Mapa persona-ítem”, y muestra personas y ítems en el mismo continuo. El eje horizontal en la parte inferior de la figura es este continuo, etiquetado como la “dimensión latente”. La parte superior de la figura está etiquetada como “distribución de parámetros de persona”. Esta es la distribución de las puntuaciones de las personas en el continuo. Puede mostrarle si, por ejemplo, tiene más personas en un extremo de la escala u otro.</p>
+<p>Otro archivo importante que podemos examinar es el
+<code>PImap.pdf</code>. Este es el “Mapa persona-ítem”, y muestra
+personas y ítems en el mismo continuo. El eje horizontal en la parte
+inferior de la figura es este continuo, etiquetado como la “dimensión
+latente”. La parte superior de la figura está etiquetada como
+“distribución de parámetros de persona”. Esta es la distribución de las
+puntuaciones de las personas en el continuo. Puede mostrarle si, por
+ejemplo, tiene más personas en un extremo de la escala u otro.</p>
 <p><img src="Images/ExampleRasch_EF/Start/PImap.png" width="80%" style="display: block; margin: auto;"></p>
-<p>La parte más grande de esta figura muestra dónde se ubican los umbrales para cada elemento en el continuo. Los umbrales están etiquetados con números: el primer umbral está etiquetado como “1”, el segundo está etiquetado como “2”, y así sucesivamente. El punto negro es el promedio de las ubicaciones de todos estos umbrales. Las estrellas en el lado derecho de la figura indican si los umbrales están o no fuera de orden. Por ejemplo, puedes ver para <code>EF1</code>, los umbrales están ordenados 2, 4, 1, 3 que están claramente fuera de orden. De hecho, en este caso, todos los elementos tienen umbrales fuera de orden. Es probable que esto sea algo de lo que tengamos que ocuparnos más adelante, pero primero nos encargaremos de la dependencia del artículo.</p>
-<p>Otro archivo importante que podemos analizar es <code>item_fit.csv</code>. Este archivo da las estadísticas de ajuste para cada elemento. Las dos estadísticas de ajuste utilizadas aquí son <em>“outfit”</em> e <em>“infit”</em>, que se muestran en las columnas <code>i.outfitMSQ</code> e <code>i.infitMSQ</code>. Ambos son similares, pero el outfit es más sensible a los valores atípicos. En general, esperamos que estas cifras estén lo más cerca posible de 1. Si están por debajo de 1, entonces indica que el ítem está <em>“overfitting”</em>. <em>“Overfit”</em> se refiere a la situación cuando los ítems se ajustan “demasiado cerca” al modelo. Si estas estadísticas son mayores que 1, entonces indican que los ítems son <em>“underfitting”</em>. <em>“Underfit”</em> se refiere a la situación cuando los ítems no se ajustan bien al modelo. <em>Underfit</em> es más grave que <em>overfit</em>. Esperamos en general que el <em>infit</em> y el <em>outfit</em> de los artículos estén entre 0.5 y 1.5. Si son menos de 0.5, las medidas de fiabilidad para el modelo pueden ser engañosamente altas, pero aún se pueden usar las puntuaciones. Si están entre 1.5 y 2.0, esta es una señal de advertencia de que los ítems pueden estar causando problemas y usted podría comenzar a considerar ajustar los datos para mejorar el ajuste. Si son mayores que 2.0, las puntuaciones calculadas pueden estar significativamente distorsionadas y se deben tomar medidas para ajustar los datos para mejorar el ajuste.</p>
-<p>En este caso, todos los artículos tienen estadísticas infit y outfit entre 0.5 y 1.5, lo que es bueno.</p>
-<p>Para analizar el ajuste global del modelo, podemos abrir el archivo <code>Targeting.csv</code>. Este archivo proporciona la media y la desviación estándar de las capacidades de la persona y de las dificultades del ítems. También proporciona el “índice de separación de personas” o PSI por sus siglas en inglés, que es una medida de fiabilidad para el modelo. Esperamos que este valor sea lo más cercano posible a 1. En general, es aceptable si esta cifra está por encima de 0.7, aunque esperamos obtener valores tan altos como 0.8 o 0.9. Para nuestro modelo aquí, nuestro PSI es 0.82, lo cual es muy bueno.</p>
+<p>La parte más grande de esta figura muestra dónde se ubican los
+umbrales para cada elemento en el continuo. Los umbrales están
+etiquetados con números: el primer umbral está etiquetado como “1”, el
+segundo está etiquetado como “2”, y así sucesivamente. El punto negro es
+el promedio de las ubicaciones de todos estos umbrales. Las estrellas en
+el lado derecho de la figura indican si los umbrales están o no fuera de
+orden. Por ejemplo, puedes ver para <code>EF1</code>, los umbrales están
+ordenados 2, 4, 1, 3 que están claramente fuera de orden. De hecho, en
+este caso, todos los elementos tienen umbrales fuera de orden. Es
+probable que esto sea algo de lo que tengamos que ocuparnos más
+adelante, pero primero nos encargaremos de la dependencia del
+artículo.</p>
+<p>Otro archivo importante que podemos analizar es
+<code>item_fit.csv</code>. Este archivo da las estadísticas de ajuste
+para cada elemento. Las dos estadísticas de ajuste utilizadas aquí son
+<em>“outfit”</em> e <em>“infit”</em>, que se muestran en las columnas
+<code>i.outfitMSQ</code> e <code>i.infitMSQ</code>. Ambos son similares,
+pero el outfit es más sensible a los valores atípicos. En general,
+esperamos que estas cifras estén lo más cerca posible de 1. Si están por
+debajo de 1, entonces indica que el ítem está <em>“overfitting”</em>.
+<em>“Overfit”</em> se refiere a la situación cuando los ítems se ajustan
+“demasiado cerca” al modelo. Si estas estadísticas son mayores que 1,
+entonces indican que los ítems son <em>“underfitting”</em>.
+<em>“Underfit”</em> se refiere a la situación cuando los ítems no se
+ajustan bien al modelo. <em>Underfit</em> es más grave que
+<em>overfit</em>. Esperamos en general que el <em>infit</em> y el
+<em>outfit</em> de los artículos estén entre 0.5 y 1.5. Si son menos de
+0.5, las medidas de fiabilidad para el modelo pueden ser engañosamente
+altas, pero aún se pueden usar las puntuaciones. Si están entre 1.5 y
+2.0, esta es una señal de advertencia de que los ítems pueden estar
+causando problemas y usted podría comenzar a considerar ajustar los
+datos para mejorar el ajuste. Si son mayores que 2.0, las puntuaciones
+calculadas pueden estar significativamente distorsionadas y se deben
+tomar medidas para ajustar los datos para mejorar el ajuste.</p>
+<p>En este caso, todos los artículos tienen estadísticas infit y outfit
+entre 0.5 y 1.5, lo que es bueno.</p>
+<p>Para analizar el ajuste global del modelo, podemos abrir el archivo
+<code>Targeting.csv</code>. Este archivo proporciona la media y la
+desviación estándar de las capacidades de la persona y de las
+dificultades del ítems. También proporciona el “índice de separación de
+personas” o PSI por sus siglas en inglés, que es una medida de
+fiabilidad para el modelo. Esperamos que este valor sea lo más cercano
+posible a 1. En general, es aceptable si esta cifra está por encima de
+0.7, aunque esperamos obtener valores tan altos como 0.8 o 0.9. Para
+nuestro modelo aquí, nuestro PSI es 0.82, lo cual es muy bueno.</p>
 </div>
 <div class="section level3">
 <h3 id="testlet1">Testlet1<a class="anchor" aria-label="anchor" href="#testlet1"></a>
 </h3>
-<p>Con nuestra próxima iteración del modelo, intentaremos abordar la alta dependencia de elementos entre los elementos <code>EF11</code> y <code>EF12</code>. Haremos esto creando un testlet entre estos dos elementos. Hacemos esto cambiando el argumento <code>testlet_stratey</code> como se muestra a continuación. Le hemos dado al nuevo testlet el nombre de <code>workschool</code>, pero puedes nombrarlo como desees.</p>
+<p>Con nuestra próxima iteración del modelo, intentaremos abordar la
+alta dependencia de elementos entre los elementos <code>EF11</code> y
+<code>EF12</code>. Haremos esto creando un testlet entre estos dos
+elementos. Hacemos esto cambiando el argumento
+<code>testlet_stratey</code> como se muestra a continuación. Le hemos
+dado al nuevo testlet el nombre de <code>workschool</code>, pero puedes
+nombrarlo como desees.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">testlet1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rasch_mds.html">rasch_mds</a></span><span class="op">(</span></span>
 <span>  df <span class="op">=</span> <span class="va">df_adults</span>, </span>
@@ -320,22 +573,72 @@
 <p>Después de ejecutar este modelo, obtenemos un error:</p>
 <pre><code><span><span class="co">#&gt; Error in tapply(1L:ncol(X01beta), mt_ind, function(xin) { :</span></span>
 <span><span class="co">#&gt;       arguments must have same length</span></span></code></pre>
-<p>Este error es un poco extraño. Pero a veces surgen errores como este a causa de demasiadas <code>NA</code> en los datos o si no hay suficientes personas que apoyen todas las opciones de respuesta posibles. Veamos el archivo <code>response_freq.csv</code> para ver cómo se distribuyen las opciones de respuesta. Podemos ver en este archivo que hay muchos respaldos para todas las opciones de respuesta para todas las preguntas excepto para nuestro nuevo testlet <code>workschool</code>, que solo tiene 1 persona con una respuesta de 6, y nadie con las repuestas posibles de 5, 7 o 8. Quizás esto es lo que está causando el problema.</p>
+<p>Este error es un poco extraño. Pero a veces surgen errores como este
+a causa de demasiadas <code>NA</code> en los datos o si no hay
+suficientes personas que apoyen todas las opciones de respuesta
+posibles. Veamos el archivo <code>response_freq.csv</code> para ver cómo
+se distribuyen las opciones de respuesta. Podemos ver en este archivo
+que hay muchos respaldos para todas las opciones de respuesta para todas
+las preguntas excepto para nuestro nuevo testlet
+<code>workschool</code>, que solo tiene 1 persona con una respuesta de
+6, y nadie con las repuestas posibles de 5, 7 o 8. Quizás esto es lo que
+está causando el problema.</p>
 <div class="section level4">
 <h4 id="más-sobre-la-recodificación">Más sobre la recodificación<a class="anchor" aria-label="anchor" href="#m%C3%A1s-sobre-la-recodificaci%C3%B3n"></a>
 </h4>
-<p>Primero vamos a discutir la recodificación con un poco más de detalle.</p>
-<p>Cada pregunta con <code>n</code> opciones de respuesta tendrá <code>n-1</code> umbrales. El primer umbral (etiquetado con un “1” en el mapa persona-ítem) es el punto entre la primera y la segunda opción de respuesta donde un encuestado tiene la misma probabilidad de elegir cualquiera de estas opciones de respuesta; el segundo umbral (etiquetado con un “2” en el mapa persona-ítem) es el punto entre la segunda y la tercera opción de respuesta donde un encuestado tiene la misma probabilidad de elegir cualquiera de estas opciones de respuesta; y así.</p>
-<p>Queremos que nuestros umbrales en el mapa persona-ítem estén en el orden correcto: 1, 2, 3, 4 y así sucesivamente. Los umbrales desordenados indican un problema con nuestros ítems Por ejemplo, si los umbrales se enumeran en el orden 1, 2, 4, 3, entonces los datos nos dicen que es más probable que alguien supere el cuarto umbral antes del tercer umbral, lo cual no tiene sentido. Recodificamos las opciones de respuesta para crear menos umbrales, de modo que sea más fácil para ellos estar en orden.</p>
-<p>Las funciones para realizar el Análisis Rasch cambian nuestras opciones de respuesta para que comiencen con 0. Esto se hace porque las funciones para realizar el análisis lo requieren. Por ejemplo, nuestra encuesta tiene preguntas que tienen opciones de respuesta que van del 1 al 5, pero internamente la función cambia estas opciones de respuesta para que varíen de 0 a 4. En consecuencia, es un poco más sencillo interpretar qué opciones de respuesta necesitan ser recodificadas directamente de las etiquetas de los umbrales. Por ejemplo, si un ítem está desordenado en el patrón 1, 2, 4, 3, esto significa que los umbrales 4 y 3 están fuera de orden. Esto también significa que podemos recodificar las opciones de respuesta transformadas 4 y 3 para combinar estos umbrales.</p>
-<p>Cuando queremos recodificar un ítem, proporcionamos a la función instrucciones sobre a qué asignar las opciones de respuesta. Por ejemplo, digamos que un ítem <code>var</code> tiene umbrales desordenados en el patrón 1, 2, 4, 3. Ahora queremos combinar el cuarto y el tercer umbral para que el ítem se ordene. <code>var</code> tiene opciones de respuesta que van de 0 a 4 (después de haber cambiado del original por una sustracción de 1), por lo que queremos combinar las opciones de respuesta 3 y 4 para el ítem para combinar estos dos umbrales. Hacemos esto diciendo a la función que mapee las opciones de respuesta actuales de 0, 1, 2, 3, 4 a 0, 1, 2, 3, 3. Esto significa que todas las respuestas de “4” ahora se recodifican como “3” . Ahora solo tendremos 4 opciones de respuesta diferentes, lo que significa que tendremos 3 umbrales diferentes, que ahora esperamos que estén en el orden correcto.</p>
+<p>Primero vamos a discutir la recodificación con un poco más de
+detalle.</p>
+<p>Cada pregunta con <code>n</code> opciones de respuesta tendrá
+<code>n-1</code> umbrales. El primer umbral (etiquetado con un “1” en el
+mapa persona-ítem) es el punto entre la primera y la segunda opción de
+respuesta donde un encuestado tiene la misma probabilidad de elegir
+cualquiera de estas opciones de respuesta; el segundo umbral (etiquetado
+con un “2” en el mapa persona-ítem) es el punto entre la segunda y la
+tercera opción de respuesta donde un encuestado tiene la misma
+probabilidad de elegir cualquiera de estas opciones de respuesta; y
+así.</p>
+<p>Queremos que nuestros umbrales en el mapa persona-ítem estén en el
+orden correcto: 1, 2, 3, 4 y así sucesivamente. Los umbrales
+desordenados indican un problema con nuestros ítems Por ejemplo, si los
+umbrales se enumeran en el orden 1, 2, 4, 3, entonces los datos nos
+dicen que es más probable que alguien supere el cuarto umbral antes del
+tercer umbral, lo cual no tiene sentido. Recodificamos las opciones de
+respuesta para crear menos umbrales, de modo que sea más fácil para
+ellos estar en orden.</p>
+<p>Las funciones para realizar el Análisis Rasch cambian nuestras
+opciones de respuesta para que comiencen con 0. Esto se hace porque las
+funciones para realizar el análisis lo requieren. Por ejemplo, nuestra
+encuesta tiene preguntas que tienen opciones de respuesta que van del 1
+al 5, pero internamente la función cambia estas opciones de respuesta
+para que varíen de 0 a 4. En consecuencia, es un poco más sencillo
+interpretar qué opciones de respuesta necesitan ser recodificadas
+directamente de las etiquetas de los umbrales. Por ejemplo, si un ítem
+está desordenado en el patrón 1, 2, 4, 3, esto significa que los
+umbrales 4 y 3 están fuera de orden. Esto también significa que podemos
+recodificar las opciones de respuesta transformadas 4 y 3 para combinar
+estos umbrales.</p>
+<p>Cuando queremos recodificar un ítem, proporcionamos a la función
+instrucciones sobre a qué asignar las opciones de respuesta. Por
+ejemplo, digamos que un ítem <code>var</code> tiene umbrales
+desordenados en el patrón 1, 2, 4, 3. Ahora queremos combinar el cuarto
+y el tercer umbral para que el ítem se ordene. <code>var</code> tiene
+opciones de respuesta que van de 0 a 4 (después de haber cambiado del
+original por una sustracción de 1), por lo que queremos combinar las
+opciones de respuesta 3 y 4 para el ítem para combinar estos dos
+umbrales. Hacemos esto diciendo a la función que mapee las opciones de
+respuesta actuales de 0, 1, 2, 3, 4 a 0, 1, 2, 3, 3. Esto significa que
+todas las respuestas de “4” ahora se recodifican como “3” . Ahora solo
+tendremos 4 opciones de respuesta diferentes, lo que significa que
+tendremos 3 umbrales diferentes, que ahora esperamos que estén en el
+orden correcto.</p>
 <p>Esto se aclarará a medida que trabajemos en el ejemplo.</p>
 </div>
 </div>
 <div class="section level3">
 <h3 id="testlet1_recode1">Testlet1_Recode1<a class="anchor" aria-label="anchor" href="#testlet1_recode1"></a>
 </h3>
-<p>En la siguiente iteración, intentaremos recodificar las opciones de respuesta de nuestro testlet para que el modelo pueda ejecutarse.</p>
+<p>En la siguiente iteración, intentaremos recodificar las opciones de
+respuesta de nuestro testlet para que el modelo pueda ejecutarse.</p>
 <p>Ejecutaremos el comando como abajo:</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">testlet1_recode1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rasch_mds.html">rasch_mds</a></span><span class="op">(</span></span>
@@ -354,19 +657,45 @@
 <span>  split_strategy <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  comment <span class="op">=</span> <span class="st">"Testlet: EF11,EF12 (LID&gt;0.25); Recode: workschool to 0,1,2,3,4,5,5,5,5"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<p>La diferencia entre el modelo Testlet1 y este modelo es que ahora hemos agregado una estrategia de recodificación. Recodificaremos las opciones de respuesta del testlet <code>workschool</code> a 0,1,2,3,4,5,6,7,7. Esto significa que todas las opciones de respuesta permanecerán igual, excepto las opciones 5 a 8 están combinadas.</p>
-<p>Después de ejecutar el comando, vemos que el modelo se puede calcular normalmente.</p>
-<p>Primero verificamos <code>LID_plot.pdf</code> para ver si hemos podido eliminar la correlación del elemento. En este archivo, vemos el mensaje <em>“No LID found”</em>, lo que significa que nuestra estrategia de prueba fue efectiva.</p>
-<p>A continuación, verificamos el gráfico scree en el archivo <code>parallel_analysis_scree.pdf</code> para asegurarnos de que se mantiene nuestra unidimensionalidad. De hecho, parece muy similar al modelo inicial, que es lo que esperamos.</p>
-<p>A continuación, verificamos el mapa persona-ítem en <code>PImap.pdf</code>. Podemos ver en este archivo que todos los elementos aún están desordenados, por lo que es probable que esto sea lo próximo que tengamos que cuidar en la próxima iteración del modelo.</p>
+<p>La diferencia entre el modelo Testlet1 y este modelo es que ahora
+hemos agregado una estrategia de recodificación. Recodificaremos las
+opciones de respuesta del testlet <code>workschool</code> a
+0,1,2,3,4,5,6,7,7. Esto significa que todas las opciones de respuesta
+permanecerán igual, excepto las opciones 5 a 8 están combinadas.</p>
+<p>Después de ejecutar el comando, vemos que el modelo se puede calcular
+normalmente.</p>
+<p>Primero verificamos <code>LID_plot.pdf</code> para ver si hemos
+podido eliminar la correlación del elemento. En este archivo, vemos el
+mensaje <em>“No LID found”</em>, lo que significa que nuestra estrategia
+de prueba fue efectiva.</p>
+<p>A continuación, verificamos el gráfico scree en el archivo
+<code>parallel_analysis_scree.pdf</code> para asegurarnos de que se
+mantiene nuestra unidimensionalidad. De hecho, parece muy similar al
+modelo inicial, que es lo que esperamos.</p>
+<p>A continuación, verificamos el mapa persona-ítem en
+<code>PImap.pdf</code>. Podemos ver en este archivo que todos los
+elementos aún están desordenados, por lo que es probable que esto sea lo
+próximo que tengamos que cuidar en la próxima iteración del modelo.</p>
 <p><img src="Images/ExampleRasch_EF/Testlet1_Recode1/PImap.png" width="80%" style="display: block; margin: auto;"></p>
-<p>Finalmente verificaremos el ajuste del ítem y el ajuste general del modelo en <code>item_fit.csv</code> y <code>Targeting.csv</code>, respectivamente. Podemos ver que todos estos valores siguen siendo buenos: cada ítem aún tiene estadísticas de infit y outfit entre 0.5 y 1.5, y el PSI aún es 0.82.</p>
+<p>Finalmente verificaremos el ajuste del ítem y el ajuste general del
+modelo en <code>item_fit.csv</code> y <code>Targeting.csv</code>,
+respectivamente. Podemos ver que todos estos valores siguen siendo
+buenos: cada ítem aún tiene estadísticas de infit y outfit entre 0.5 y
+1.5, y el PSI aún es 0.82.</p>
 </div>
 <div class="section level3">
 <h3 id="testlet1_recode2">Testlet1_Recode2<a class="anchor" aria-label="anchor" href="#testlet1_recode2"></a>
 </h3>
-<p>A continuación, intentaremos recodificar elementos para crear umbrales ordenados. Estamos más preocupados por tener los artículos individuales (todo lo que no es un testlet) ordenados.</p>
-<p>Hay varias formas de elegir la estrategia de recodificación. En general, desea hacer la cantidad mínima de recodificación necesaria para alcanzar los umbrales ordenados. Primero intentaremos combinar los dos primeros umbrales para todos los elementos que no sean el testlet. Veremos para qué elementos funciona esto y probaremos una nueva estrategia en la siguiente iteración para los elementos en los que no funcionó.</p>
+<p>A continuación, intentaremos recodificar elementos para crear
+umbrales ordenados. Estamos más preocupados por tener los artículos
+individuales (todo lo que no es un testlet) ordenados.</p>
+<p>Hay varias formas de elegir la estrategia de recodificación. En
+general, desea hacer la cantidad mínima de recodificación necesaria para
+alcanzar los umbrales ordenados. Primero intentaremos combinar los dos
+primeros umbrales para todos los elementos que no sean el testlet.
+Veremos para qué elementos funciona esto y probaremos una nueva
+estrategia en la siguiente iteración para los elementos en los que no
+funcionó.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">testlet1_recode2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rasch_mds.html">rasch_mds</a></span><span class="op">(</span></span>
 <span>  df <span class="op">=</span> <span class="va">df_adults</span>, </span>
@@ -385,15 +714,33 @@
 <span>  split_strategy <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  comment <span class="op">=</span> <span class="st">"Testlet: EF11,EF12 (LID&gt;0.25); Recode: workschool to 0,1,2,3,4,5,5,5,5, everything else 0,1,1,2,3"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<p>Podemos ver en el nuevo mapa persona-ítem que esta estrategia no funcionó para ninguno de los ítems. Así que intentaremos una nueva estrategia en la próxima iteración.</p>
+<p>Podemos ver en el nuevo mapa persona-ítem que esta estrategia no
+funcionó para ninguno de los ítems. Así que intentaremos una nueva
+estrategia en la próxima iteración.</p>
 <p><img src="Images/ExampleRasch_EF/Testlet1_Recode2/PImap.png" width="80%" style="display: block; margin: auto;"></p>
-<p>También podemos verificar los otros archivos para ver si alguna otra suposición del Modelo Rasch ha sido violada con esta estrategia de recodificación. Pero debido a que estamos cambiando nuestra estrategia completamente en la próxima iteración, no es necesario prestar demasiada atención a los otros archivos para esta iteración.</p>
+<p>También podemos verificar los otros archivos para ver si alguna otra
+suposición del Modelo Rasch ha sido violada con esta estrategia de
+recodificación. Pero debido a que estamos cambiando nuestra estrategia
+completamente en la próxima iteración, no es necesario prestar demasiada
+atención a los otros archivos para esta iteración.</p>
 </div>
 <div class="section level3">
 <h3 id="testlet1_recode3">Testlet1_Recode3<a class="anchor" aria-label="anchor" href="#testlet1_recode3"></a>
 </h3>
-<p>Desde el mapa persona-ítem para el modelo de inicio, podemos ver que nuestros ítems están desordenados de una manera un poco complicada: muchos ítems tienen umbrales en los órdenes 2, 4, 1, 3 o 2, 3, 4, 1. Por lo general, si un ítem tiene umbrales desordenados en un patrón bastante sencillo (por ejemplo, 1, 2, 4, 3 o 2, 1, 3, 4), entonces la estrategia de recodificación es sencilla. Por ejemplo, con un desorden de 1, 2, 4, 3, está claro que las opciones de respuesta 3 y 4 deberían estar combinadas. Con un desorden de 2, 1, 3, 4, entonces las opciones de respuesta de 1 y 2 deberían combinarse.</p>
-<p>En nuestro caso, el desorden es bastante complicado, por lo que la estrategia de recodificación es menos directa y probablemente tendrá que ser más extrema. En esta iteración, intentaremos colapsar dos conjuntos de opciones de respuesta: colapsaremos 1 con 2 y 3 con 4, como se muestra a continuación.</p>
+<p>Desde el mapa persona-ítem para el modelo de inicio, podemos ver que
+nuestros ítems están desordenados de una manera un poco complicada:
+muchos ítems tienen umbrales en los órdenes 2, 4, 1, 3 o 2, 3, 4, 1. Por
+lo general, si un ítem tiene umbrales desordenados en un patrón bastante
+sencillo (por ejemplo, 1, 2, 4, 3 o 2, 1, 3, 4), entonces la estrategia
+de recodificación es sencilla. Por ejemplo, con un desorden de 1, 2, 4,
+3, está claro que las opciones de respuesta 3 y 4 deberían estar
+combinadas. Con un desorden de 2, 1, 3, 4, entonces las opciones de
+respuesta de 1 y 2 deberían combinarse.</p>
+<p>En nuestro caso, el desorden es bastante complicado, por lo que la
+estrategia de recodificación es menos directa y probablemente tendrá que
+ser más extrema. En esta iteración, intentaremos colapsar dos conjuntos
+de opciones de respuesta: colapsaremos 1 con 2 y 3 con 4, como se
+muestra a continuación.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">testlet1_recode3</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rasch_mds.html">rasch_mds</a></span><span class="op">(</span></span>
 <span>  df <span class="op">=</span> <span class="va">df_adults</span>, </span>
@@ -412,15 +759,36 @@
 <span>  split_strategy <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  comment <span class="op">=</span> <span class="st">"Testlet: EF11,EF12 (LID&gt;0.25); Recode: workschool to 0,1,2,3,4,5,5,5,5, everything else 0,1,1,2,2"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<p>¡Podemos ver con esta estrategia de recodificación que los umbrales ahora están ordenados para la mayoría de los artículos! El único elemento para el que no funcionó es <code>EF6</code>, para lo cual tendremos que probar una estrategia diferente en la próxima iteración.</p>
+<p>¡Podemos ver con esta estrategia de recodificación que los umbrales
+ahora están ordenados para la mayoría de los artículos! El único
+elemento para el que no funcionó es <code>EF6</code>, para lo cual
+tendremos que probar una estrategia diferente en la próxima
+iteración.</p>
 <p><img src="Images/ExampleRasch_EF/Testlet1_Recode3/PImap.png" width="80%" style="display: block; margin: auto;"></p>
-<p>Avanzamos en nuestro desordenamiento de umbrales, pero debemos asegurarnos de que las otras suposiciones del Modelo Rasch no se hayan violado con esta nueva estrategia. Verificamos <code>LID_plot.pdf</code> y vemos que todavía hemos logrado la independencia del elemento. También verificamos el gráfico scree en <code>parallel_analysis_scree.pdf</code> para ver si todavía tenemos unidimensionalidad. Finalmente, también verificamos <code>item_fit.csv</code> y <code>Targeting.csv</code> y vemos que los valores también son aceptables en estos archivos. Así que procederemos con una estrategia de recodificación alterada en la siguiente iteración.</p>
+<p>Avanzamos en nuestro desordenamiento de umbrales, pero debemos
+asegurarnos de que las otras suposiciones del Modelo Rasch no se hayan
+violado con esta nueva estrategia. Verificamos <code>LID_plot.pdf</code>
+y vemos que todavía hemos logrado la independencia del elemento. También
+verificamos el gráfico scree en <code>parallel_analysis_scree.pdf</code>
+para ver si todavía tenemos unidimensionalidad. Finalmente, también
+verificamos <code>item_fit.csv</code> y <code>Targeting.csv</code> y
+vemos que los valores también son aceptables en estos archivos. Así que
+procederemos con una estrategia de recodificación alterada en la
+siguiente iteración.</p>
 </div>
 <div class="section level3">
 <h3 id="testlet1_recode4">Testlet1_Recode4<a class="anchor" aria-label="anchor" href="#testlet1_recode4"></a>
 </h3>
-<p>Todavía tenemos dos elementos desordenados: <code>EF6</code> y <code>workschool</code>. Por lo general, no nos preocupa que los testlets se desordenen porque no son elementos incluidos originalmente en el cuestionario. Podríamos recodificar <code>workschool</code> si el ajuste del ítem fuera muy pobre, pero en nuestro modelo mantiene el ajuste adecuado del ítem según las estadísticas de <em>infit</em> y <em>outfit</em>, por lo que no lo recodificaremos.</p>
-<p>Por lo tanto, en esta iteración solo intentaremos resolver el desorden de <code>EF6</code>. Intentaremos combinar las tres opciones de respuesta del medio, como se muestra a continuación.</p>
+<p>Todavía tenemos dos elementos desordenados: <code>EF6</code> y
+<code>workschool</code>. Por lo general, no nos preocupa que los
+testlets se desordenen porque no son elementos incluidos originalmente
+en el cuestionario. Podríamos recodificar <code>workschool</code> si el
+ajuste del ítem fuera muy pobre, pero en nuestro modelo mantiene el
+ajuste adecuado del ítem según las estadísticas de <em>infit</em> y
+<em>outfit</em>, por lo que no lo recodificaremos.</p>
+<p>Por lo tanto, en esta iteración solo intentaremos resolver el
+desorden de <code>EF6</code>. Intentaremos combinar las tres opciones de
+respuesta del medio, como se muestra a continuación.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">testlet1_recode4</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rasch_mds.html">rasch_mds</a></span><span class="op">(</span></span>
 <span>  df <span class="op">=</span> <span class="va">df_adults</span>, </span>
@@ -440,16 +808,32 @@
 <span>  split_strategy <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  comment <span class="op">=</span> <span class="st">"Testlet: EF11,EF12 (LID&gt;0.25); Recode: workschool to 0,1,2,3,4,5,5,5,5, everything else except EF6 to 0,1,1,2,2, EF6 to 0,1,1,1,2"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<p>Después de ejecutar este modelo, vemos que se ha resuelto el desorden para <code>EF6</code>. ¡Todos los artículos individuales ahora tienen umbrales ordenados!</p>
+<p>Después de ejecutar este modelo, vemos que se ha resuelto el desorden
+para <code>EF6</code>. ¡Todos los artículos individuales ahora tienen
+umbrales ordenados!</p>
 <p><img src="Images/ExampleRasch_EF/Testlet1_Recode4/PImap.png" width="80%" style="display: block; margin: auto;"></p>
-<p>También revisaremos los otros archivos para asegurarnos de que se hayan mantenido nuestros otras suposiciones del Modelo Rasch. Verificamos <code>LID_plot.pdf</code> y vemos que todavía hemos logrado la independencia del ítem. También verificamos el gráfico scree en <code>parallel_analysis_scree.pdf</code> para ver si todavía tenemos unidimensionalidad. Finalmente, también verificamos <code>item_fit.csv</code> y <code>Targeting.csv</code> y vemos que los valores también son aceptables en estos archivos.</p>
-<p>Todas nuestras suposiciones del Modelo Rasch se han alcanzado razonablemente, ¡así que esto significa que podemos terminarnos! Hemos terminado nuestro Análisis Rasch para este conjunto de preguntas. Los datos con las puntuaciones se encuentran en el archivo <code>Data_final.csv</code>. Discutiremos qué hacer con estos puntajes en secciones posteriores.</p>
+<p>También revisaremos los otros archivos para asegurarnos de que se
+hayan mantenido nuestros otras suposiciones del Modelo Rasch.
+Verificamos <code>LID_plot.pdf</code> y vemos que todavía hemos logrado
+la independencia del ítem. También verificamos el gráfico scree en
+<code>parallel_analysis_scree.pdf</code> para ver si todavía tenemos
+unidimensionalidad. Finalmente, también verificamos
+<code>item_fit.csv</code> y <code>Targeting.csv</code> y vemos que los
+valores también son aceptables en estos archivos.</p>
+<p>Todas nuestras suposiciones del Modelo Rasch se han alcanzado
+razonablemente, ¡así que esto significa que podemos terminarnos! Hemos
+terminado nuestro Análisis Rasch para este conjunto de preguntas. Los
+datos con las puntuaciones se encuentran en el archivo
+<code>Data_final.csv</code>. Discutiremos qué hacer con estos puntajes
+en secciones posteriores.</p>
 </div>
 </div>
 <div class="section level2">
 <h2 id="mejores-prácticas">Mejores prácticas<a class="anchor" aria-label="anchor" href="#mejores-pr%C3%A1cticas"></a>
 </h2>
-<p>Lea el vignette <a href="c5_best_practices_ES.html">Mejores prácticas con Análisis Rasch</a> para aprender más sobre principios generales para usar.</p>
+<p>Lea el vignette <a href="c5_best_practices_ES.html">Mejores prácticas
+con Análisis Rasch</a> para aprender más sobre principios generales para
+usar.</p>
 </div>
   </div>
 
@@ -470,7 +854,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer>
