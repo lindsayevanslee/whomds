@@ -22,7 +22,7 @@ Copied from eRm::SepRel(), v1.0-1: This function calculates the proportion of pe
 See full documentation at \url{https://www.rdocumentation.org/packages/eRm/versions/1.0-1/topics/Separation\%20Reliability}
 }
 \references{
-Wright, B.D., and Stone, M.H. (1999). Measurement essentials. Wide Range Inc., Wilmington. (\url{http://www.rasch.org/measess/me-all.pdf} 28Mb).
+Wright, B.D., and Stone, M.H. (1999). Measurement essentials. Wide Range Inc., Wilmington. (\url{https://www.rasch.org/measess/me-all.pdf} 28Mb).
 }
 \author{
 Original code by Adrian Brügger (\email{Adrian.Bruegger@imu.unibe.ch}), adapted by Marco J. Maier in package \code{eRm} v1.0-1

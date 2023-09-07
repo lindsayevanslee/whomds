@@ -15,7 +15,7 @@
 #' @author Original code by Adrian Brügger (\email{Adrian.Bruegger@imu.unibe.ch}), adapted by Marco J. Maier in package \code{eRm} v1.0-1
 #' 
 #' @references 
-#' Wright, B.D., and Stone, M.H. (1999). Measurement essentials. Wide Range Inc., Wilmington. (\url{http://www.rasch.org/measess/me-all.pdf} 28Mb).
+#' Wright, B.D., and Stone, M.H. (1999). Measurement essentials. Wide Range Inc., Wilmington. (\url{https://www.rasch.org/measess/me-all.pdf} 28Mb).
 #' 
 #' 
 #' @export
