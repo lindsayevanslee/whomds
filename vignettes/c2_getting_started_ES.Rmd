@@ -26,7 +26,7 @@ La OMS realiza el Análisis de Rasch para la Encuesta Modelo sobre la Discapacid
 
 Para obtener información sobre `R`, consulte las referencias proporcionadas al final de esta guía.
 
-Para usar el paquete provisto por la OMS, `R` debe instalarse en el [Comprehensive R Archive Network (CRAN)](https://cran.r-project.org). También recomendamos instalar [RStudio](https://www.rstudio.com/products/rstudio/download/), un _integrated development environment (IDE)_ muy popular, para `R`. Se puede pensar en la relación entre `R` y` RStudio` como un automóvil: `R` es el motor del automóvil, mientras que` RStudio` es el tablero y los controles. `RStudio` no se puede ejecutar sin `R`, pero hace que `R` sea más fácil de usar. Ambos son gratis de instalar y usar indefinidamente.
+Para usar el paquete provisto por la OMS, `R` debe instalarse en el [Comprehensive R Archive Network (CRAN)](https://cran.r-project.org). También recomendamos instalar [RStudio](https://posit.co/download/rstudio-desktop/), un _integrated development environment (IDE)_ muy popular, para `R`. Se puede pensar en la relación entre `R` y` RStudio` como un automóvil: `R` es el motor del automóvil, mientras que` RStudio` es el tablero y los controles. `RStudio` no se puede ejecutar sin `R`, pero hace que `R` sea más fácil de usar. Ambos son gratis de instalar y usar indefinidamente.
 
 # ¿Qué es un paquete y cómo instalo uno?
 

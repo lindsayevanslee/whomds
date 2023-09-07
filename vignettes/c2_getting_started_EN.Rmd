@@ -26,7 +26,7 @@ WHO performs the Rasch Analysis for the Model Disability Survey using the softwa
 
 To learn about `R`, please see the references provided at the end of this guide. 
 
-To use the package provided by WHO, `R` must be installed from the [Comprehensive R Archive Network (CRAN)](https://cran.r-project.org). We also recommend installing [RStudio](https://www.rstudio.com/products/rstudio/download/), a very popular integrated development environment (IDE), for `R`. One can think of the relationship between `R` and `RStudio` like a car: `R` is the engine of the car, while `RStudio` is the dashboard and controls. `RStudio` cannot be run without `R`, but it makes `R` easier to use. Both are free to install and use indefinitely.
+To use the package provided by WHO, `R` must be installed from the [Comprehensive R Archive Network (CRAN)](https://cran.r-project.org). We also recommend installing [RStudio](https://posit.co/download/rstudio-desktop/), a very popular integrated development environment (IDE), for `R`. One can think of the relationship between `R` and `RStudio` like a car: `R` is the engine of the car, while `RStudio` is the dashboard and controls. `RStudio` cannot be run without `R`, but it makes `R` easier to use. Both are free to install and use indefinitely.
 
 # What is a package and how do I install one?
 
