@@ -1,15 +1,8 @@
-## Resubmission
-
-This is a resubmission. In this version I have changed the example used in the documentation for table_basicstats() in order to reduce its runtime to <5s.
-
-Package (v1.0.1) was previously archived on CRAN after downstream dependency CDM was archived. Changes since this archived version are summarized in NEWS.md.
-
-
 ## Test environments
-* macOS Monterey 12.3.1 (local install); R 4.2.0
-* macOS 11.6.5 (GitHub Actions); R 4.2.0
-* Microsoft Windows Server 2022 10.0.20348 (GitHub Actions); R 4.2.0 and R 3.6.3
-* ubuntu 18.04.6 (Github Actions);  R devel r82390, R 4.2.0, R 4.1.3, R 4.0.5, R 3.6.3
+* macOS Ventura 13.3.1(a) (local install); R 4.2.0
+* macOS 12.6.7 (GitHub Actions); R 4.3.1
+* Microsoft Windows Server 2022 10.0.20348 (GitHub Actions); R 4.3.1
+* ubuntu 22.04.3 (Github Actions);  R devel r85079, R 4.3.1, R 4.2.3
 * win-builder (devel and release)
 
 
@@ -17,13 +10,23 @@ Package (v1.0.1) was previously archived on CRAN after downstream dependency CDM
 
 There were no ERRORs or WARNINGs. 
 
-There was 1 NOTE when run on macOS locally:
+There were 2 NOTEs when run on macOS locally:
 
 * checking package dependencies ... NOTE
   
   "Imports includes 22 non-default packages..."
   
-  I have tried to be careful to minimize the dependencies, and removed dependencies since the last version.
+  I have tried to be careful to minimize the dependencies.
+
+* checking CRAN incoming feasibility ... NOTE
+  
+  Found the following (possibly) invalid DOIs:
+    DOI: 10.1586/erp.11.59
+      From: DESCRIPTION
+      Status: Forbidden
+      Message: 403
+      
+  I have manually checked this doi, and it does direct you to the appropriate paper.
 
 There were 3 NOTEs when testing on macOS, windows, and ubuntu through GitHub Actions:
 
@@ -31,7 +34,7 @@ There were 3 NOTEs when testing on macOS, windows, and ubuntu through GitHub Act
 
   "Imports includes 22 non-default packages..."
   
-  I have tried to be careful to minimize the dependencies, and removed dependencies since the last version.
+  I have tried to be careful to minimize the dependencies.
   
 * checking for hidden files and directories ... NOTE
   
@@ -45,20 +48,7 @@ There were 3 NOTEs when testing on macOS, windows, and ubuntu through GitHub Act
   
   All files listed are ones included in .Rbuildignore
     
-There was 1 NOTE when run through win-builder:
-
-* checking CRAN incoming feasibility ... NOTE
-
-  "Maintainer: 'Lindsay Lee <lindsayevanslee@gmail.com>'
-
-  New submission
-  
-  Package was archived on CRAN
-  
-  Possibly misspelled words in DESCRIPTION"
-  
-  This package is an updated to the previously archived version. The words possibility-misspelled are names or acronyms.
-
+There were 0 NOTEs when run through win-builder.
 
 ## Reverse dependencies 
 

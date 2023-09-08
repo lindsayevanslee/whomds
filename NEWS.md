@@ -1,9 +1,10 @@
-# Unreleased
+# whomds 1.1.1
 
 - Fixed bug with related to printing of DIF results
 - Create new function SepRel_101() which is a copy of eRm::SepRel() v1.0-1
 - Fixed bug with anchored model output in rasch_quality_children_print()
 - Updated use of max_NA in rasch_mds_children() so that the function only looks for missing values in the items relevant to the respondent's group
+- Fixed documentation issue with whomds-package alias as requested by CRAN
 
 # whomds 1.1.0
 
