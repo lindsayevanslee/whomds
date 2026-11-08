@@ -1,5 +1,6 @@
 # whomds (development version)
 
+- New function `helper_disability_cat()` categorizes a disability score into ordered levels, by default No, Mild, Moderate and Severe with cut-offs at the mean minus one SD, the mean and the mean plus one SD of the score, which is how `disability_cat` in `df_adults` was created. Explicit cut-offs and labels can be supplied. Documented in the `c6_after_rasch` vignette (#10)
 - `rasch_mds()` and `rasch_mds_children()` now also return the standard error of each person's ability estimate in a new column `person_pars_se`, next to `person_pars`, in the returned data and in `Data_final.csv` (#14). It is on the same logit scale as `person_pars`. This requires eRm >= 1.0-7
 - Fixed error in `rasch_mds()` / `rasch_model()` ("Can't use NA as column index in a tibble for assignment") caused by eRm >= 1.0-7 adding a `Std.Error` column to `person.parameter()$theta.table`. The person ability columns in `df_score` are now selected by name instead of by position, so `NAgroup` and `Interpolated` are labeled correctly again
 - Fixed tidyselect deprecation warnings in `rasch_recode()`, `rasch_rawscore()`, `rasch_DIF()`, `rasch_split_age()` and `rasch_rescale()`, and replaced a deprecated matrix-to-tibble conversion in `rasch_rawscore()`

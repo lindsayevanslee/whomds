@@ -51,6 +51,11 @@ fig_density(df_adults, score = "disability_score", var_color = "sex",
 cutoffs = c(19.1, 34.4, 49.6), x_lab = "Disability score")
 fig_density(df_adults, score = "disability_score", var_color = "sex", 
 var_facet = "age_cat",  cutoffs = c(19.1, 34.4, 49.6), x_lab = "Disability score")
+
+# derive the cut-offs from the score with helper_disability_cat()
+cutoffs_derived <- attr(helper_disability_cat(df_adults$disability_score), "cutoffs")
+fig_density(df_adults, score = "disability_score", cutoffs = cutoffs_derived, 
+x_lab = "Disability score")
 }
 \seealso{
 Other figure functions:

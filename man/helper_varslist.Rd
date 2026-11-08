@@ -18,6 +18,7 @@ Convert list to vector with unique elements
 \seealso{
 Other helper functions:
 \code{\link[=helper_checkrow]{helper_checkrow()}},
+\code{\link[=helper_disability_cat]{helper_disability_cat()}},
 \code{\link[=helper_palette]{helper_palette()}}
 }
 \concept{helper functions}

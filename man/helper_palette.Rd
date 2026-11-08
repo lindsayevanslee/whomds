@@ -51,6 +51,7 @@ Generated with \code{colorspace::choose_palette()}
 \seealso{
 Other helper functions:
 \code{\link[=helper_checkrow]{helper_checkrow()}},
+\code{\link[=helper_disability_cat]{helper_disability_cat()}},
 \code{\link[=helper_varslist]{helper_varslist()}}
 }
 \concept{helper functions}

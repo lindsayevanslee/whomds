@@ -42,6 +42,25 @@ merged_data <- original_data %>%
 
 The sample data included in the `whomds` package called `df_adults` already has a Rasch score merged with it, in the column `disability_score`.
 
+# Creating disability levels
+
+WHO often reports results by level of disability in addition to the continuous score. The sample data `df_adults` has such a variable, `disability_cat`, with four levels: No, Mild, Moderate and Severe. The function `helper_disability_cat()` creates these levels from a score. By default it places the cut-offs at the mean minus one standard deviation, the mean, and the mean plus one standard deviation of the score, so the levels are defined relative to the population surveyed. A score of exactly 0 is always "No". This is how `disability_cat` in `df_adults` was created:
+
+```{r disability-cat, eval=TRUE}
+disability_cat <- helper_disability_cat(df_adults$disability_score)
+table(disability_cat)
+attr(disability_cat, "cutoffs")
+```
+
+The cut-offs used are stored with the result, as shown above, so they can be passed to the `cutoffs` argument of `fig_dist()` and `fig_density()` described below. If you need the levels to be comparable with a previous survey, pass the earlier cut-offs explicitly with the `cutoffs` argument instead of using the default.
+
+To add the levels to your merged data, use `mutate()`:
+
+```{r disability-cat-mutate}
+merged_data <- merged_data %>% 
+  mutate(DisabilityCat = helper_disability_cat(DisabilityScore))
+```
+
 # Descriptive analysis 
 
 After calculating the disability scores using Rasch Analysis, you are now ready to analyze the results of the survey by calculating descriptive statistics. The `whomds` package contains functions to create tables and figures of descriptive statistics. This section will go over these functions.

@@ -41,6 +41,25 @@ merged_data <- original_data %>%
 
 Los datos de ejemplo incluidos en el paquete `whomds` llamado `df_adults` ya tienen una puntuación de Rasch combinada, en la columna `disability_score`.
 
+# Crear niveles de discapacidad
+
+La OMS suele presentar los resultados por nivel de discapacidad además de la puntuación continua. Los datos de ejemplo `df_adults` tienen una variable de este tipo, `disability_cat`, con cuatro niveles: No, Mild (leve), Moderate (moderada) y Severe (severa). La función `helper_disability_cat()` crea estos niveles a partir de una puntuación. Por defecto coloca los puntos de corte en la media menos una desviación estándar, la media y la media más una desviación estándar de la puntuación, de modo que los niveles se definen en relación con la población encuestada. Una puntuación exactamente igual a 0 siempre es "No". Así fue creada la variable `disability_cat` en `df_adults`:
+
+```{r disability-cat, eval=TRUE}
+disability_cat <- helper_disability_cat(df_adults$disability_score)
+table(disability_cat)
+attr(disability_cat, "cutoffs")
+```
+
+Los puntos de corte utilizados se guardan con el resultado, como se muestra arriba, para que puedan pasarse al argumento `cutoffs` de `fig_dist()` y `fig_density()` descritos más abajo. Si necesita que los niveles sean comparables con una encuesta anterior, pase los puntos de corte anteriores explícitamente con el argumento `cutoffs` en lugar de usar el valor por defecto.
+
+Para agregar los niveles a sus datos unidos, use `mutate()`:
+
+```{r disability-cat-mutate}
+merged_data <- merged_data %>% 
+  mutate(DisabilityCat = helper_disability_cat(DisabilityScore))
+```
+
 # Después de Rasch: análisis descriptivo
 
 Después de calcular los puntajes de discapacidad con el Análisis Rasch, ahora estás listo para analizar los resultados de la encuesta mediante el cálculo de estadísticas descriptivas. El paquete `whomds` contiene funciones para crear tablas y figuras de estadísticas descriptivas. Esta sección repasará estas funciones.
