@@ -20,6 +20,13 @@
 #' 
 #' @importFrom GPArotation GPForth
 #' @importFrom psych fa factor.residuals vgQ.bimin
+#'
+#' @note psych is listed in Depends rather than Imports on purpose. The bifactor
+#'   rotation in \code{psych::fa()} is carried out by \code{GPArotation::GPForth()},
+#'   which looks up the rotation criterion \code{vgQ.bimin} by name on the search
+#'   path. If psych is only loaded and not attached, that lookup fails and the
+#'   bifactor model is silently skipped. Tested with psych 2.6.9 and
+#'   GPArotation 2026.8.2.
 rasch_factor <- function(df, vars_metric, print_results = FALSE, path_output = NULL) {
   #----------------------------
   #convert to tibble

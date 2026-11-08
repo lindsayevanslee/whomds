@@ -31,6 +31,14 @@ Calculate a factor analysis for a Rasch Model
 \details{
 Unidimensionality of the data is one of the core assumptions of the Rasch Model. This function performs the factor analysis to assess the unidimensionality of the data.
 }
+\note{
+psych is listed in Depends rather than Imports on purpose. The bifactor
+  rotation in \code{psych::fa()} is carried out by \code{GPArotation::GPForth()},
+  which looks up the rotation criterion \code{vgQ.bimin} by name on the search
+  path. If psych is only loaded and not attached, that lookup fails and the
+  bifactor model is silently skipped. Tested with psych 2.6.9 and
+  GPArotation 2026.8.2.
+}
 \seealso{
 Other rasch functions:
 \code{\link[=rasch_DIF]{rasch_DIF()}},
