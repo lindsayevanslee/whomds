@@ -116,18 +116,18 @@ rasch_model <- function(df, vars_metric, vars_id, print_results = FALSE, path_ou
 
   #------------------------------------------------------------------------------- 
   #8. Person Abilities
-  person_par <-  person_parameters$theta.table 
-  names(person_par) <- c("person_pars", "NAgroup", "Interpolated")
-  table(person_par$Interpolated, is.na(person_par$person_pars))                                                               
+  # Select the columns of theta.table by name rather than by position. eRm 1.0-7
+  # inserted a "Std.Error" column into theta.table, so positional renaming
+  # mislabeled the columns and left the last one with an NA name, which made
+  # the left_join() in rasch_rescale() fail.
+  person_par <- person_parameters$theta.table %>% 
+    select(person_pars = "Person Parameter", "NAgroup", "Interpolated")
   
-  data_persons <-  cbind(df[,c(vars_id,vars_metric)],person_par)
-  summary(data_persons$person_pars)
+  data_persons <- cbind(df[, c(vars_id, vars_metric)], person_par)
   
-  for(i in 1:nrow(data_persons)){
-    if(is.na(data_persons[i,"person_pars"])){
-      data_persons[i,"person_pars"]<-min(data_persons[,"person_pars"], na.rm=TRUE)
-    }
-  }
+  # Persons without an estimable ability (e.g. all items missing) get the
+  # minimum estimated ability
+  data_persons$person_pars[is.na(data_persons$person_pars)] <- min(data_persons$person_pars, na.rm = TRUE)
   
   ###more persons abilities 
   Person_Abilities <- cbind(person_parameters$thetapar$NAgroup1,person_parameters$se.theta$NAgroup1)
