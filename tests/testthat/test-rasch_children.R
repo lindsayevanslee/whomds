@@ -3,7 +3,7 @@
 # mirrors the example in the c4_rasch_children vignette.
 
 test_that("rasch_mds_children() runs end to end on the example data", {
-  res <- suppressWarnings(suppressMessages(
+  res <- expect_no_deprecation(suppressMessages(
     rasch_mds_children(
       df = df_children,
       vars_id = "HHID",

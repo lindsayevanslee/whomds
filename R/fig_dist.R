@@ -35,7 +35,7 @@ fig_dist <- function(df, score, score_cat, cutoffs,
   
   if (pcent) {
     y_lab <- "Percent"
-    type <- "..count../sum(..count..)"
+    y_mapping <- aes(y = after_stat(count / sum(count)))
     
     # default y-axis values to try
     possible_scale <- c(0.01,0.05,0.1,0.2,0.25)
@@ -44,7 +44,7 @@ fig_dist <- function(df, score, score_cat, cutoffs,
     
   } else {
     y_lab <- "Frequency"
-    type <- "..count.."
+    y_mapping <- aes(y = after_stat(count))
 
     # default y-axis values to try
     possible_scale <- c(200,250,300,500,1000)
@@ -57,13 +57,13 @@ fig_dist <- function(df, score, score_cat, cutoffs,
 
   
   #Begin plot
-  plot_dist <- ggplot(df, aes_string(x = score, fill = score_cat)) +
-    geom_histogram(position = "identity", binwidth = binwidth, aes_string(y=type), col="black") +
+  plot_dist <- ggplot(df, aes(x = .data[[score]], fill = .data[[score_cat]])) +
+    geom_histogram(position = "identity", binwidth = binwidth, mapping = y_mapping, col="black") +
     scale_fill_manual(values = fill_colors, drop=FALSE)  +
     scale_x_continuous(breaks = seq(0, 100, by = 10), limits = c(min(-2.5,min(cutoffs)),102.5)) +
     # scale_y_continuous(breaks = seq(0, y_max, by = final_scale), limits=c(NA,y_max), labels=lab) +
     labs(x = x_lab, y = y_lab) +
-    geom_vline(xintercept = cutoffs, color="black", linetype="dashed", size=1) +
+    geom_vline(xintercept = cutoffs, color="black", linetype="dashed", linewidth = 1) +
     theme(plot.margin = unit(c(1, 1, 3, 1), "lines"),
           legend.title=element_blank(),
           panel.grid.minor = element_blank(),

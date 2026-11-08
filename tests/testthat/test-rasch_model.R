@@ -40,6 +40,16 @@ test_that("rasch_model() returns df_score with valid, correctly labeled person c
   )
 })
 
+test_that("rasch_DIF() runs without deprecation warnings", {
+  model_result <- suppressWarnings(rasch_model(df_small, vars_metric = vars_metric, vars_id = "HHID"))
+  # rasch_DIF() matches residuals to rows of df through the "person" column, as rasch_mds() does
+  dif <- expect_no_deprecation(suppressMessages(
+    rasch_DIF(df = df_small, vars_metric = vars_metric, vars_DIF = "sex",
+              residuals_PCM = model_result$residuals_PCM)
+  ))
+  expect_type(dif$DIF_results, "character")
+})
+
 test_that("rasch_rescale() joins df_score without error and adds rescaled", {
   model_result <- suppressWarnings(rasch_model(df_small, vars_metric = vars_metric, vars_id = "HHID"))
 
@@ -53,7 +63,7 @@ test_that("rasch_rescale() joins df_score without error and adds rescaled", {
 test_that("rasch_mds() runs end to end on the example data", {
   skip_on_cran()
 
-  model_result <- suppressWarnings(suppressMessages(
+  model_result <- expect_no_deprecation(suppressMessages(
     rasch_mds(
       df = df_adults,
       vars_metric = vars_metric,
@@ -63,7 +73,7 @@ test_that("rasch_mds() runs end to end on the example data", {
       max_NA = 2,
       print_results = FALSE
     )
-  ))
+  ), ignore = "polychoric correlation")   # sparse response categories in EF12, expected
 
   expect_true(all(c("person_pars", "rescaled") %in% names(model_result$df)))
   expect_false(anyNA(names(model_result$df)))

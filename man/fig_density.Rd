@@ -33,7 +33,7 @@ fig_density(
 
 \item{adjust}{a numeric value to pass to \code{adjust} argument of \code{ggplot2::geom_density()}. Default is 2.}
 
-\item{size}{a numeric value to pass to \code{size} argument of \code{ggplot2::geom_density()}. Default is 1.5.}
+\item{size}{a numeric value for the width of the density lines, passed to the \code{linewidth} argument of \code{ggplot2::geom_density()}. Default is 1.5.}
 }
 \value{
 A density figure

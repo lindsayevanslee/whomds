@@ -5,6 +5,7 @@
 - Fixed `table_basicstats()` giving wrong results when `group_by_var` is a character variable rather than a factor: households with no members in a group were omitted instead of being counted as 0
 - Removed a `na.rm` argument in `table_weightedpct()` that had no effect on grouped proportions and triggered a warning from srvyr
 - Fixed `fig_LID()` failing with "adjacency matrix contains NAs" when two items have no respondents in common (for example items split by age group in `rasch_mds_children()`, or by `split_strategy` in `rasch_mds()`), which broke `print_results = TRUE`. Such item pairs are now treated as having no local dependence
+- Fixed remaining deprecation warnings: `as_tibble()` on unnamed matrices and bare column selections in `rasch_DIF()` and `rasch_split_age()`, the `size` aesthetic for lines in `fig_density()` (now `linewidth`, requiring ggplot2 >= 3.4.0), and `aes_string()` in `fig_dist()`. Also fixed a spurious "no non-missing arguments to min" warning from `fig_density()` when `cutoffs` is NULL
 - Removed dependencies on plyr, readr, scales and stringr, replacing them with base R equivalents and small internal helpers. Output CSV files are now written with `utils::write.csv()`, so character values are quoted
 - Added unit tests for the data-preparation functions, input validation in `rasch_mds()`, and the helper functions
 
