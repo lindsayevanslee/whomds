@@ -9,8 +9,6 @@
 [![CRAN
 status](https://www.r-pkg.org/badges/version/whomds)](https://CRAN.R-project.org/package=whomds)
 [![lifecycle](https://lifecycle.r-lib.org/articles/figures/lifecycle-stable.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
-[![Codecov test
-coverage](https://codecov.io/gh/lindsayevanslee/whomds/branch/master/graph/badge.svg)](https://app.codecov.io/gh/lindsayevanslee/whomds?branch=master)
 <!-- badges: end -->
 
 ## Introduction
