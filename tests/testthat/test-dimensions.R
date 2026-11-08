@@ -17,6 +17,7 @@ test_that("Dimensions as multiple of formula_vars, levels, and by_vars", {
   formula_vars_levels <-1:5
   by_vars <- "sex"
   
+  withr::local_options(survey.lonely.psu = "adjust")
   tab <- table_weightedpct(df_adults, 
                            vars_ids = c("PSU","HHID"),
                            vars_strata = "strata",

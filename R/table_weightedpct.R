@@ -86,7 +86,7 @@ table_weightedpct <- function(df, vars_ids, vars_strata, vars_weights,
 
 
   #warning if lonely psu option is not set correctly
-  if (getOption("survey.lonely.psu")!="adjust") warning('You may have issues with lonely PSUs if you have not set: options(survey.lonely.psu = "adjust")')
+  if (!identical(getOption("survey.lonely.psu"), "adjust")) warning('You may have issues with lonely PSUs if you have not set: options(survey.lonely.psu = "adjust")')
   
   
   #create survey design object
@@ -122,7 +122,7 @@ table_weightedpct <- function(df, vars_ids, vars_strata, vars_weights,
     
     prevtab <- des %>%
       group_by_at(c(by_vars, "item", "resp")) %>%
-      summarize(prop = survey_mean(na.rm=TRUE)) %>% 
+      summarize(prop = survey_mean()) %>% 
       mutate(prop = prop*100)
     
     if (include_SE) {

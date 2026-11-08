@@ -36,6 +36,13 @@ table_basicstats <- function(df, hh_id, group_by_var) {
 
   sym_group_by_var <- sym(group_by_var)
   
+  # tidyr::complete() only fills in missing groups for every household when the
+  # grouping variable is a factor. With a character variable, households with no
+  # members in a group were silently left out instead of counted as 0.
+  if (!is.factor(pull(df, !!sym_group_by_var))) {
+    df <- df %>% mutate(!!sym_group_by_var := factor(!!sym_group_by_var))
+  }
+  
   disaggregated <- df %>%
     group_by_at(c(hh_id, group_by_var)) %>%
     summarize(nperHH = n()) %>%

@@ -2,6 +2,8 @@
 
 - Fixed error in `rasch_mds()` / `rasch_model()` ("Can't use NA as column index in a tibble for assignment") caused by eRm >= 1.0-7 adding a `Std.Error` column to `person.parameter()$theta.table`. The person ability columns in `df_score` are now selected by name instead of by position, so `NAgroup` and `Interpolated` are labeled correctly again
 - Fixed tidyselect deprecation warnings in `rasch_recode()`, `rasch_rawscore()`, `rasch_DIF()`, `rasch_split_age()` and `rasch_rescale()`, and replaced a deprecated matrix-to-tibble conversion in `rasch_rawscore()`
+- Fixed `table_basicstats()` giving wrong results when `group_by_var` is a character variable rather than a factor: households with no members in a group were omitted instead of being counted as 0
+- Removed a `na.rm` argument in `table_weightedpct()` that had no effect on grouped proportions and triggered a warning from srvyr
 - Added unit tests for the data-preparation functions, input validation in `rasch_mds()`, and the helper functions
 
 # whomds 1.1.1
