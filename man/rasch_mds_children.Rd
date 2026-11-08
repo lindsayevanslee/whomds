@@ -63,7 +63,7 @@ rasch_mds_children(
 \item{comment}{a string giving a comment describing the analysis, printed to a txt file. Default is NULL, to not print a comment.}
 }
 \value{
-a tibble with new columns representing the original person abilities (\code{person_pars}) and the rescaled person abilities (\code{rescaled}). 
+a tibble with new columns representing the original person abilities (\code{person_pars}), their standard errors (\code{person_pars_se}, on the same logit scale) and the rescaled person abilities (\code{rescaled}). 
 
 If \code{print_results} is TRUE, prints files to the working directory with the results of the Rasch Model.
 }

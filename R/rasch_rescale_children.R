@@ -4,7 +4,7 @@
 #' @inheritParams rasch_mds_children
 #' @inheritParams rasch_model_children
 #'
-#' @return a tibble with the data \code{df} or unnested \code{df_nest} and new columns "person_pars" and "rescaled" with the original and rescaled person abilities, ranging from 0 to 100, and filter out any rows with an artificial minimum or maximum
+#' @return a tibble with the data \code{df} or unnested \code{df_nest} and new columns \code{person_pars} (person abilities), \code{person_pars_se} (their standard errors, on the same logit scale) and \code{rescaled} (abilities rescaled to range from 0 to 100), with any rows with an artificial minimum or maximum filtered out
 #'
 #' @family rasch functions
 #' @family children analysis functions
@@ -19,7 +19,7 @@ rasch_rescale_children <- function(df, df_nest, vars_group, vars_id) {
     df_final <- df_nest %>% 
       dplyr::mutate(df_split = purrr::map2(df_split, WLE_anchored, function(df_age, WLE_age) {
         df_age <- df_age %>% 
-          tibble::add_column(person_pars = WLE_age$theta) %>% 
+          tibble::add_column(person_pars = WLE_age$theta, person_pars_se = WLE_age$error) %>% 
           dplyr::select(-!!rlang::sym(vars_group)) 
         return(df_age)
       })) %>% 
@@ -29,7 +29,8 @@ rasch_rescale_children <- function(df, df_nest, vars_group, vars_id) {
   #Multigroup
   else {
     df_final <- df %>% 
-      tibble::add_column(person_pars = df_nest$WLE_multigroup[[1]]$theta)
+      tibble::add_column(person_pars = df_nest$WLE_multigroup[[1]]$theta,
+                         person_pars_se = df_nest$WLE_multigroup[[1]]$error)
     
   }
   

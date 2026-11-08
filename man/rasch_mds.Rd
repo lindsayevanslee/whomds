@@ -52,7 +52,7 @@ rasch_mds(
 }
 \value{
 a named list with:
-\item{df}{a tibble with new columns representing the original person abilities (\code{person_pars}) and the rescaled person abilities (\code{rescaled})} 
+\item{df}{a tibble with new columns representing the original person abilities (\code{person_pars}), their standard errors (\code{person_pars_se}, on the same logit scale) and the rescaled person abilities (\code{rescaled})} 
 \item{vars_metric}{a character vector with the variables used in the metric after all adjustments}
 \item{df_results}{a tibble of one row with key results of the model}
 

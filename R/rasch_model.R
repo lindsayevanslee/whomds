@@ -8,7 +8,7 @@
 #' 
 #' @return a list with results from the Rasch Model:
 #' \item{model}{the results from the Rasch Model}
-#' \item{df_score}{a tibble with the items used in the analysis and the person abilities}
+#' \item{df_score}{a tibble with the items used in the analysis, the person abilities (\code{person_pars}) and their standard errors (\code{person_pars_se}, on the same logit scale as \code{person_pars}; \code{NA} where eRm could not estimate one, e.g. for some extreme scores)}
 #' \item{thresholds}{the item thresholds (i.e., crossings)}
 #' \item{person_parameters}{person abilities}
 #' \item{PSI}{the person-separation index}
@@ -121,7 +121,7 @@ rasch_model <- function(df, vars_metric, vars_id, print_results = FALSE, path_ou
   # mislabeled the columns and left the last one with an NA name, which made
   # the left_join() in rasch_rescale() fail.
   person_par <- person_parameters$theta.table %>% 
-    select(person_pars = "Person Parameter", "NAgroup", "Interpolated")
+    select(person_pars = "Person Parameter", person_pars_se = "Std.Error", "NAgroup", "Interpolated")
   
   data_persons <- cbind(df[, c(vars_id, vars_metric)], person_par)
   

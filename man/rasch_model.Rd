@@ -29,7 +29,7 @@ rasch_model(
 \value{
 a list with results from the Rasch Model:
 \item{model}{the results from the Rasch Model}
-\item{df_score}{a tibble with the items used in the analysis and the person abilities}
+\item{df_score}{a tibble with the items used in the analysis, the person abilities (\code{person_pars}) and their standard errors (\code{person_pars_se}, on the same logit scale as \code{person_pars}; \code{NA} where eRm could not estimate one, e.g. for some extreme scores)}
 \item{thresholds}{the item thresholds (i.e., crossings)}
 \item{person_parameters}{person abilities}
 \item{PSI}{the person-separation index}

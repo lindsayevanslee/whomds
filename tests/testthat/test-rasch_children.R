@@ -26,8 +26,11 @@ test_that("rasch_mds_children() runs end to end on the example data", {
   expect_s3_class(res$df, "data.frame")
   expect_false(anyNA(names(res$df)))
 
-  expect_true(all(c("person_pars", "rescaled") %in% names(res$df)))
+  expect_true(all(c("person_pars", "person_pars_se", "rescaled") %in% names(res$df)))
   expect_false(anyNA(res$df$rescaled))
+  # WLE standard errors are present and positive for every child (#14)
+  expect_false(anyNA(res$df$person_pars_se))
+  expect_true(all(res$df$person_pars_se > 0))
   expect_equal(range(res$df$rescaled), c(0, 100))
   expect_true(all(res$df$age_cat %in% c("Age2to4", "Age5to9", "Age10to17")))
 

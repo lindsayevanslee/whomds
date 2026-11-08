@@ -18,7 +18,7 @@
 #' @details This function combines all of the separate analyses of model fit necessary to assess the quality of the Rasch Model. It is designed to require minimal intervention from the user. Users wishing to have more control over the analysis can use the other Rasch functions in this package separately.
 #' 
 #' @return a named list with:
-#' \item{df}{a tibble with new columns representing the original person abilities (\code{person_pars}) and the rescaled person abilities (\code{rescaled})} 
+#' \item{df}{a tibble with new columns representing the original person abilities (\code{person_pars}), their standard errors (\code{person_pars_se}, on the same logit scale) and the rescaled person abilities (\code{rescaled})} 
 #' \item{vars_metric}{a character vector with the variables used in the metric after all adjustments}
 #' \item{df_results}{a tibble of one row with key results of the model}
 #' 

@@ -14,7 +14,7 @@ rasch_rescale(df, df_score, vars_id)
 \item{vars_id}{a string with column name uniquely identifying individuals}
 }
 \value{
-a tibble with the left join between \code{df} and \code{df_score} and new column "rescaled" with the rescaled person abilities, ranging from 0 to 100, and filter out any rows with an artificial minimum or maximum
+a tibble with the left join between \code{df} and \code{df_score} (which carries \code{person_pars} and \code{person_pars_se}) and new column \code{rescaled} with the rescaled person abilities, ranging from 0 to 100, with any rows with an artificial minimum or maximum filtered out
 }
 \description{
 Rescale score from Rasch Analysis to range from 0 to 100

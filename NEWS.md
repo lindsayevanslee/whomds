@@ -1,5 +1,6 @@
 # whomds (development version)
 
+- `rasch_mds()` and `rasch_mds_children()` now also return the standard error of each person's ability estimate in a new column `person_pars_se`, next to `person_pars`, in the returned data and in `Data_final.csv` (#14). It is on the same logit scale as `person_pars`. This requires eRm >= 1.0-7
 - Fixed error in `rasch_mds()` / `rasch_model()` ("Can't use NA as column index in a tibble for assignment") caused by eRm >= 1.0-7 adding a `Std.Error` column to `person.parameter()$theta.table`. The person ability columns in `df_score` are now selected by name instead of by position, so `NAgroup` and `Interpolated` are labeled correctly again
 - Fixed tidyselect deprecation warnings in `rasch_recode()`, `rasch_rawscore()`, `rasch_DIF()`, `rasch_split_age()` and `rasch_rescale()`, and replaced a deprecated matrix-to-tibble conversion in `rasch_rawscore()`
 - Fixed `table_basicstats()` giving wrong results when `group_by_var` is a character variable rather than a factor: households with no members in a group were omitted instead of being counted as 0

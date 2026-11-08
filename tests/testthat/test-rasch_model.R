@@ -25,12 +25,16 @@ test_that("rasch_model() returns df_score with valid, correctly labeled person c
   expect_true(all(nzchar(names(df_score))))
 
   # exactly the expected columns, in the expected order
-  expect_identical(names(df_score), c("HHID", vars_metric, "person_pars", "NAgroup", "Interpolated"))
+  expect_identical(names(df_score), c("HHID", vars_metric, "person_pars", "person_pars_se", "NAgroup", "Interpolated"))
   expect_equal(nrow(df_score), nrow(df_small))
 
   # columns carry the right content, not shifted neighbours from theta.table
   expect_type(df_score$person_pars, "double")
   expect_false(anyNA(df_score$person_pars))
+  # standard errors are positive wherever eRm could estimate one (#14)
+  expect_type(df_score$person_pars_se, "double")
+  expect_true(all(df_score$person_pars_se > 0, na.rm = TRUE))
+  expect_true(all(!is.na(df_score$person_pars_se[!df_score$Interpolated])))
   expect_type(df_score$NAgroup, "integer")
   expect_type(df_score$Interpolated, "logical")
   expect_equal(
@@ -55,7 +59,7 @@ test_that("rasch_rescale() joins df_score without error and adds rescaled", {
 
   df_final <- suppressMessages(rasch_rescale(df_small, model_result$df_score, vars_id = "HHID"))
 
-  expect_true(all(c("person_pars", "rescaled") %in% names(df_final)))
+  expect_true(all(c("person_pars", "person_pars_se", "rescaled") %in% names(df_final)))
   expect_equal(nrow(df_final), nrow(df_small))
   expect_equal(range(df_final$rescaled), c(0, 100))
 })
@@ -75,7 +79,7 @@ test_that("rasch_mds() runs end to end on the example data", {
     )
   ), ignore = "polychoric correlation")   # sparse response categories in EF12, expected
 
-  expect_true(all(c("person_pars", "rescaled") %in% names(model_result$df)))
+  expect_true(all(c("person_pars", "person_pars_se", "rescaled") %in% names(model_result$df)))
   expect_false(anyNA(names(model_result$df)))
   expect_equal(range(model_result$df$rescaled), c(0, 100))
 })

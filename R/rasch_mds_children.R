@@ -13,7 +13,7 @@
 #' 
 #' Often Rasch Analysis of children data is more difficult because of the extreme skewness of the responses. For this reason, it is often advisable to build a scale only with the respondents on the more severe end of the disability continuum. By specifying \code{has_at_least_one}, the function will remove all children from the sample who do endorse an answer of any of \code{has_at_least_one} in at least one \code{vars_metric}. The scores created can be reunited with the excluded children post-hoc.
 #' 
-#' @return a tibble with new columns representing the original person abilities (\code{person_pars}) and the rescaled person abilities (\code{rescaled}). 
+#' @return a tibble with new columns representing the original person abilities (\code{person_pars}), their standard errors (\code{person_pars_se}, on the same logit scale) and the rescaled person abilities (\code{rescaled}). 
 #' 
 #' If \code{print_results} is TRUE, prints files to the working directory with the results of the Rasch Model. 
 #' 
