@@ -48,7 +48,7 @@ rasch_recode <- function(df, vars_metric, recode_strategy, max_values) {
   
     #perform the recode
     df <- df %>% 
-      mutate_at(vars(new_recoded), 
+      mutate_at(vars(all_of(new_recoded)), 
                 list(~ plyr::mapvalues(., from = 0:unique(resp_opts_range), 
                                        to = new_outcome, 
                                        warn_missing = FALSE)))

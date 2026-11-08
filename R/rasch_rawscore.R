@@ -15,17 +15,16 @@ rasch_rawscore <- function(df, vars_metric, vars_id, max_values) {
   if (!tibble::is_tibble(df)) df <- df %>% as_tibble()
   
   df <- df %>% 
-    mutate(RawScore = rowSums(df %>% select(vars_metric), na.rm=TRUE))
+    mutate(RawScore = rowSums(df %>% select(all_of(vars_metric)), na.rm=TRUE))
   
   max_value <- max_values %>% pull(max_val) %>% sum
   
   #if max value not attained, add row with artificial maximum
   if (!any(pull(df, RawScore)==max_value, na.rm=TRUE)) {
     
-    df_max <- t(max_values) %>% 
-      as_tibble() %>% 
-      rename_all(list(~ pull(max_values, var))) %>% 
-      slice(2) %>% 
+    df_max <- max_values %>% 
+      select(var, max_val) %>% 
+      tidyr::pivot_wider(names_from = var, values_from = max_val) %>% 
       mutate_all(list(~ as.numeric(.))) %>% 
       mutate(!!rlang::sym(vars_id) := "MAX",
              RawScore = max_value)

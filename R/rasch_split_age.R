@@ -47,7 +47,7 @@ rasch_split_age <- function (df, vars_group, vars_metric, vars_id, max_values) {
       #pivot variables to create three discrete variables
       subtbl_pivot <- subtbl %>% 
         tidyr::pivot_wider(names_from = !!quo(vars_group), values_from = !!quo(var)) %>%
-        rename_at(vars(levels_age_group), list(~ paste0(var,"_",.)))
+        rename_at(vars(all_of(levels_age_group)), list(~ paste0(var,"_",.)))
       
       #give error if number of rows isn't maintained
       if (nrow(subtbl_pivot) != nrow(df)) stop(paste0("Pivoted table for ", var, " has nrow that doesn't match nrow(df). Check what's going on."))
