@@ -40,6 +40,11 @@ Useful links:
 \author{
 \strong{Maintainer}: Lindsay Lee \email{lindsayevanslee@gmail.com}
 
+Authors:
+\itemize{
+  \item Lindsay Lee \email{lindsayevanslee@gmail.com}
+}
+
 Other contributors:
 \itemize{
   \item Carolina Fellinghauer \email{carolina.fellinghauer@data-fittery.ch} [contributor]

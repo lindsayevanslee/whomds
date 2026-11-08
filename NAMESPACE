@@ -34,6 +34,8 @@ import(rlang)
 import(srvyr)
 import(tidyr)
 importFrom(GPArotation,GPForth)
-importFrom(psych,fa)
-importFrom(psych,factor.residuals)
-importFrom(psych,vgQ.bimin)
+importFrom(psych,
+  fa,
+  factor.residuals,
+  vgQ.bimin
+)

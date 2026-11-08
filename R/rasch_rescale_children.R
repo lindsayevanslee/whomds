@@ -34,7 +34,7 @@ rasch_rescale_children <- function(df, df_nest, vars_group, vars_id) {
   }
   
    df_final <- df_final  %>% 
-    dplyr::mutate(rescaled = scales::rescale(person_pars, c(0, 100))) %>% 
+    dplyr::mutate(rescaled = helper_rescale(person_pars, c(0, 100))) %>% 
     dplyr::filter_at(dplyr::vars(dplyr::all_of(vars_id)), dplyr::any_vars(. != "MAX")) %>% 
     dplyr::filter_at(dplyr::vars(dplyr::all_of(vars_id)), dplyr::any_vars(. !="MIN"))
   

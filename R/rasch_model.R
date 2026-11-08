@@ -46,7 +46,7 @@ rasch_model <- function(df, vars_metric, vars_id, print_results = FALSE, path_ou
     as.data.frame() %>% 
     tibble::rownames_to_column("var") %>% 
     as_tibble() %>% 
-    mutate(var = stringr::str_replace_all(var, "thresh beta ", "")) %>% 
+    mutate(var = gsub("thresh beta ", "", var, fixed = TRUE)) %>% 
     tidyr::separate(col = var, into = c("var", "n_threshold"), sep = "\\.") %>% 
     select(-`SE Threshold`) %>% 
     arrange(var, n_threshold) %>% 
@@ -234,7 +234,7 @@ rasch_model <- function(df, vars_metric, vars_id, print_results = FALSE, path_ou
     utils::write.csv(Residuals_PCM_Recoded,file=paste0(path_output,"/Residuals_PCM.csv"))
     
     #data with abilities
-    readr::write_csv(data_persons, paste0(path_output,"/DatawAbilities.csv"))
+    utils::write.csv(data_persons, paste0(path_output,"/DatawAbilities.csv"), row.names = FALSE)
     
     #person parameters
     utils::write.csv(Person_Abilities, file=paste0(path_output,"/PersonPara.csv"))

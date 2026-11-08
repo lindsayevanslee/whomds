@@ -51,22 +51,22 @@ The Rasch Model is calculated using the function \code{eRm::PCM()}.
 Christensen, K. B., Makransky, G., & Horton, M. (2017). Critical Values for Yen’s Q 3 : Identification of Local Dependence in the Rasch Model Using Residual Correlations.  Applied Psychological Measurement, 41(3), 178-194. \doi{10.1177/0146621616677520}
 }
 \seealso{
-Other rasch functions: 
-\code{\link{rasch_DIF}()},
-\code{\link{rasch_df_nest}()},
-\code{\link{rasch_drop}()},
-\code{\link{rasch_factor}()},
-\code{\link{rasch_mds_children}()},
-\code{\link{rasch_mds}()},
-\code{\link{rasch_model_children}()},
-\code{\link{rasch_quality_children_print}()},
-\code{\link{rasch_quality_children}()},
-\code{\link{rasch_rawscore}()},
-\code{\link{rasch_recode}()},
-\code{\link{rasch_rescale_children}()},
-\code{\link{rasch_rescale}()},
-\code{\link{rasch_split_age}()},
-\code{\link{rasch_split}()},
-\code{\link{rasch_testlet}()}
+Other rasch functions:
+\code{\link[=rasch_DIF]{rasch_DIF()}},
+\code{\link[=rasch_df_nest]{rasch_df_nest()}},
+\code{\link[=rasch_drop]{rasch_drop()}},
+\code{\link[=rasch_factor]{rasch_factor()}},
+\code{\link[=rasch_mds]{rasch_mds()}},
+\code{\link[=rasch_mds_children]{rasch_mds_children()}},
+\code{\link[=rasch_model_children]{rasch_model_children()}},
+\code{\link[=rasch_quality_children]{rasch_quality_children()}},
+\code{\link[=rasch_quality_children_print]{rasch_quality_children_print()}},
+\code{\link[=rasch_rawscore]{rasch_rawscore()}},
+\code{\link[=rasch_recode]{rasch_recode()}},
+\code{\link[=rasch_rescale]{rasch_rescale()}},
+\code{\link[=rasch_rescale_children]{rasch_rescale_children()}},
+\code{\link[=rasch_split]{rasch_split()}},
+\code{\link[=rasch_split_age]{rasch_split_age()}},
+\code{\link[=rasch_testlet]{rasch_testlet()}}
 }
 \concept{rasch functions}

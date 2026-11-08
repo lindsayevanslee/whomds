@@ -84,7 +84,7 @@ rasch_mds <- function(df,
   
   df <- df %>%
     mutate_at(vars(all_of(vars_metric)),
-              list(~ plyr::mapvalues(., from = to_NA, to = rep(NA, length(to_NA)), warn_missing = FALSE
+              list(~ helper_mapvalues(., from = to_NA, to = rep(NA, length(to_NA)), warn_missing = FALSE
               ))) %>% 
     mutate_at(vars(all_of(vars_id)), list(as.character))
   
@@ -129,7 +129,7 @@ rasch_mds <- function(df,
       testlet_strategy %>% 
         tibble::enframe(name = "testlet", value = "original_var") %>% 
         tidyr::unnest(cols = original_var) %>% 
-        readr::write_csv(file = paste0(path_output, "/testlet_strategy.csv"))
+        utils::write.csv(file = paste0(path_output, "/testlet_strategy.csv"), row.names = FALSE)
       
     }
     
@@ -154,7 +154,7 @@ rasch_mds <- function(df,
         tidyr::separate(col = variable,
                         #programmatically determine number of columns to separate into
                         into = pull(., "variable") %>% 
-                          stringr::str_split(",") %>% 
+                          strsplit(",") %>% 
                           purrr::map_dbl(length) %>% 
                           max() %>% 
                           `:`(1,.) %>% 
@@ -167,7 +167,7 @@ rasch_mds <- function(df,
         dplyr::mutate(original = list(0:(length(recoded) - 1))) %>% 
         tidyr::unnest(cols = c(original, recoded)) %>% 
         dplyr::select(variable, original, recoded) %>% 
-        readr::write_csv(file = paste0(path_output, "/recode_strategy.csv"))     
+        utils::write.csv(file = paste0(path_output, "/recode_strategy.csv"), row.names = FALSE)
       
     }
     
@@ -187,7 +187,7 @@ rasch_mds <- function(df,
     if (print_results) {
       
       tibble::tibble(dropped_var = drop_vars) %>% 
-        readr::write_csv(file = paste0(path_output, "/drop_vars.csv"))
+        utils::write.csv(file = paste0(path_output, "/drop_vars.csv"), row.names = FALSE)
       
       
     }
@@ -206,7 +206,7 @@ rasch_mds <- function(df,
       tidyr::pivot_wider(names_from = Q, values_from = n) %>% 
       dplyr::mutate(resp = as.numeric(resp)) %>% 
       dplyr::arrange(resp) %>% 
-      readr::write_csv(paste0(path_output, "/response_freq.csv"))
+      utils::write.csv(paste0(path_output, "/response_freq.csv"), row.names = FALSE)
     
   }
   
@@ -235,7 +235,7 @@ rasch_mds <- function(df,
       split_strategy %>% 
         tibble::enframe(name = "split_category", value = "variable_to_split") %>% 
         tidyr::unnest(cols = c(split_category, variable_to_split)) %>% 
-        readr::write_csv(file = paste0(path_output, "/split_strategy.csv"))
+        utils::write.csv(file = paste0(path_output, "/split_strategy.csv"), row.names = FALSE)
       
     }
     
@@ -283,7 +283,7 @@ rasch_mds <- function(df,
                             vars_id = vars_id)
   
   # PRINT DATA ---------
-  if (print_results) df_final %>% readr::write_csv(file = paste0(path_output, "/Data_final.csv"))
+  if (print_results) df_final %>% utils::write.csv(file = paste0(path_output, "/Data_final.csv"), row.names = FALSE)
   
   
   # PREPARE RESULTS DF ROW ----------

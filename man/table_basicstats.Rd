@@ -38,8 +38,8 @@ age_cat = ordered(sample(
 table_basicstats(df_hh, "HHID", "age_cat")
 }
 \seealso{
-Other table functions: 
-\code{\link{table_unweightedpctn}()},
-\code{\link{table_weightedpct}()}
+Other table functions:
+\code{\link[=table_unweightedpctn]{table_unweightedpctn()}},
+\code{\link[=table_weightedpct]{table_weightedpct()}}
 }
 \concept{table functions}

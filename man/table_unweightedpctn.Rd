@@ -40,8 +40,8 @@ table_unweightedpctn(df_adults, vars_demo = c("sex", "age_cat", "work_cat", "edu
 group_by_var = "disability_cat", spread_by_group_by_var = TRUE)
 }
 \seealso{
-Other table functions: 
-\code{\link{table_basicstats}()},
-\code{\link{table_weightedpct}()}
+Other table functions:
+\code{\link[=table_basicstats]{table_basicstats()}},
+\code{\link[=table_weightedpct]{table_weightedpct()}}
 }
 \concept{table functions}

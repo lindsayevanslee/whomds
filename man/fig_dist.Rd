@@ -53,9 +53,9 @@ fig_dist(df_adults, score = "disability_score", score_cat = "disability_cat",
 cutoffs = c(19.1, 34.4, 49.6), x_lab = "Disability score", y_max = 0.2, pcent=TRUE)
 }
 \seealso{
-Other figure functions: 
-\code{\link{fig_LID}()},
-\code{\link{fig_density}()},
-\code{\link{fig_poppyramid}()}
+Other figure functions:
+\code{\link[=fig_LID]{fig_LID()}},
+\code{\link[=fig_density]{fig_density()}},
+\code{\link[=fig_poppyramid]{fig_poppyramid()}}
 }
 \concept{figure functions}

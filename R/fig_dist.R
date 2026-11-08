@@ -40,7 +40,7 @@ fig_dist <- function(df, score, score_cat, cutoffs,
     # default y-axis values to try
     possible_scale <- c(0.01,0.05,0.1,0.2,0.25)
     final_scale <- 0.05
-    lab <- scales::percent_format()
+    lab <- function(x) ifelse(is.na(x), NA_character_, paste0(format(x * 100, trim = TRUE, drop0trailing = TRUE), "%"))
     
   } else {
     y_lab <- "Frequency"

@@ -17,7 +17,7 @@ helper_installation <- function() {
   
   #capture date of installation of package
   install_datetime <- utils::packageDescription("whomds", fields = "Built")
-  install_datetime <- stringr::str_split(install_datetime, "; ") 
+  install_datetime <- strsplit(install_datetime, "; ", fixed = TRUE) 
   install_datetime <- base::unlist(install_datetime)
   install_datetime <- base::suppressWarnings(lubridate::as_datetime(install_datetime))
   install_datetime <- stats::na.exclude(install_datetime)

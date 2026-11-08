@@ -41,9 +41,9 @@ The function divides the \code{var_age} variable into intervals of width \code{a
 fig_poppyramid(df_adults, "age", "sex")
 }
 \seealso{
-Other figure functions: 
-\code{\link{fig_LID}()},
-\code{\link{fig_density}()},
-\code{\link{fig_dist}()}
+Other figure functions:
+\code{\link[=fig_LID]{fig_LID()}},
+\code{\link[=fig_density]{fig_density()}},
+\code{\link[=fig_dist]{fig_dist()}}
 }
 \concept{figure functions}

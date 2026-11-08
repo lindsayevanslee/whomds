@@ -17,9 +17,9 @@ helper_indicator(
 
 \item{vars_indicators}{a character vector of the variables from \code{df} to create indicators for}
 
-\item{mapvalues_from}{vector to pass to \code{plyr::mapvalues()} argument \code{from}}
+\item{mapvalues_from}{vector of values of \code{vars_indicators} to replace}
 
-\item{mapvalues_to}{vector to pass to \code{plyr::mapvalues()} argument \code{to}}
+\item{mapvalues_to}{vector of replacement values, the same length as \code{mapvalues_from}}
 
 \item{make_factor}{a logical indicating whether resulting indicators should be factors. Default is \code{TRUE}.}
 }

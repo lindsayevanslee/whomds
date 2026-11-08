@@ -15,10 +15,14 @@
 fig_LID <- function(LIDforgraph, LIDcutoff = 0.2, path_output, extra_file_label = NULL, vertex_print_grey = NULL) {
   
   
-  #create dependency graph
-  fullgraph <- igraph::graph_from_adjacency_matrix((LIDforgraph >= LIDcutoff)*1,
-                                                   diag=FALSE,
-                                                   mode="upper")
+  #create dependency graph. An NA correlation means the two items were never
+  #observed on the same respondents (e.g. items split by group), so there is no
+  #dependence to show; igraph (>= 2.0) refuses NAs in the adjacency matrix.
+  adjacency <- (LIDforgraph >= LIDcutoff) * 1
+  adjacency[is.na(adjacency)] <- 0
+  fullgraph <- igraph::graph_from_adjacency_matrix(adjacency,
+                                                   diag = FALSE,
+                                                   mode = "upper")
   
   #remove vertices not connected to other vertices
   comp.no <- which(igraph::components(fullgraph)$csize>1)

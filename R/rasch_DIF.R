@@ -41,7 +41,7 @@ rasch_DIF <- function(df, vars_metric, vars_DIF, residuals_PCM, split_strategy =
   
   rows <- residuals_PCM %>% 
     pull(person) %>% 
-    stringr::str_extract_all("[:digit:]+") %>% 
+    regmatches(., gregexpr("[[:digit:]]+", .)) %>% 
     unlist() %>% 
     as.numeric()
   
@@ -187,9 +187,9 @@ rasch_DIF <- function(df, vars_metric, vars_DIF, residuals_PCM, split_strategy =
   
   if (print_results) {
     
-    readr::write_csv(df_DIF_class, file = paste0(path_output,"/Anova_Residuals.csv"))
+    utils::write.csv(df_DIF_class, file = paste0(path_output,"/Anova_Residuals.csv"), row.names = FALSE)
     
-    readr::write_csv(tab_aov_DIF, file = paste0(path_output, "/DIF_rumm.csv"))
+    utils::write.csv(tab_aov_DIF, file = paste0(path_output, "/DIF_rumm.csv"), row.names = FALSE)
     
   }
   

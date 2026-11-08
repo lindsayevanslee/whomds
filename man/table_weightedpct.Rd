@@ -76,8 +76,8 @@ table_weightedpct(df_adults,
 \seealso{
 See \code{vignette("programming", package = "dplyr")} for more about non-standard evaluation (NSE)
 
-Other table functions: 
-\code{\link{table_basicstats}()},
-\code{\link{table_unweightedpctn}()}
+Other table functions:
+\code{\link[=table_basicstats]{table_basicstats()}},
+\code{\link[=table_unweightedpctn]{table_unweightedpctn()}}
 }
 \concept{table functions}

@@ -4,6 +4,8 @@
 - Fixed tidyselect deprecation warnings in `rasch_recode()`, `rasch_rawscore()`, `rasch_DIF()`, `rasch_split_age()` and `rasch_rescale()`, and replaced a deprecated matrix-to-tibble conversion in `rasch_rawscore()`
 - Fixed `table_basicstats()` giving wrong results when `group_by_var` is a character variable rather than a factor: households with no members in a group were omitted instead of being counted as 0
 - Removed a `na.rm` argument in `table_weightedpct()` that had no effect on grouped proportions and triggered a warning from srvyr
+- Fixed `fig_LID()` failing with "adjacency matrix contains NAs" when two items have no respondents in common (for example items split by age group in `rasch_mds_children()`, or by `split_strategy` in `rasch_mds()`), which broke `print_results = TRUE`. Such item pairs are now treated as having no local dependence
+- Removed dependencies on plyr, readr, scales and stringr, replacing them with base R equivalents and small internal helpers. Output CSV files are now written with `utils::write.csv()`, so character values are quoted
 - Added unit tests for the data-preparation functions, input validation in `rasch_mds()`, and the helper functions
 
 # whomds 1.1.1

@@ -48,22 +48,22 @@ Differential Item Functioning (DIF) refers to the circumstance when different gr
 Currently the calculation of the class intervals is quite slow. Reducing the number of breaks can improve speed.
 }
 \seealso{
-Other rasch functions: 
-\code{\link{rasch_df_nest}()},
-\code{\link{rasch_drop}()},
-\code{\link{rasch_factor}()},
-\code{\link{rasch_mds_children}()},
-\code{\link{rasch_mds}()},
-\code{\link{rasch_model_children}()},
-\code{\link{rasch_model}()},
-\code{\link{rasch_quality_children_print}()},
-\code{\link{rasch_quality_children}()},
-\code{\link{rasch_rawscore}()},
-\code{\link{rasch_recode}()},
-\code{\link{rasch_rescale_children}()},
-\code{\link{rasch_rescale}()},
-\code{\link{rasch_split_age}()},
-\code{\link{rasch_split}()},
-\code{\link{rasch_testlet}()}
+Other rasch functions:
+\code{\link[=rasch_df_nest]{rasch_df_nest()}},
+\code{\link[=rasch_drop]{rasch_drop()}},
+\code{\link[=rasch_factor]{rasch_factor()}},
+\code{\link[=rasch_mds]{rasch_mds()}},
+\code{\link[=rasch_mds_children]{rasch_mds_children()}},
+\code{\link[=rasch_model]{rasch_model()}},
+\code{\link[=rasch_model_children]{rasch_model_children()}},
+\code{\link[=rasch_quality_children]{rasch_quality_children()}},
+\code{\link[=rasch_quality_children_print]{rasch_quality_children_print()}},
+\code{\link[=rasch_rawscore]{rasch_rawscore()}},
+\code{\link[=rasch_recode]{rasch_recode()}},
+\code{\link[=rasch_rescale]{rasch_rescale()}},
+\code{\link[=rasch_rescale_children]{rasch_rescale_children()}},
+\code{\link[=rasch_split]{rasch_split()}},
+\code{\link[=rasch_split_age]{rasch_split_age()}},
+\code{\link[=rasch_testlet]{rasch_testlet()}}
 }
 \concept{rasch functions}

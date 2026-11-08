@@ -99,7 +99,7 @@ rasch_mds_children <- function(df,
   
   df <- df %>%
     mutate_at(vars(all_of(helper_varslist(vars_metric))),
-              list(~ plyr::mapvalues(., 
+              list(~ helper_mapvalues(., 
                                      from = to_NA, 
                                      to = rep(NA, length(to_NA)), 
                                      warn_missing = FALSE)
@@ -231,12 +231,12 @@ rasch_mds_children <- function(df,
   # PRINT RESPONSE FREQUENCIES -------
   if (print_results) {
     df %>% 
-      select(helper_varslist(vars_metric)) %>% 
+      select(all_of(helper_varslist(vars_metric))) %>% 
       purrr::map(~ table(resp = ., useNA = "always")) %>% 
       purrr::map(~ as_tibble(.)) %>% 
       bind_rows(.id = "Q") %>% 
       tidyr::pivot_wider(names_from = Q, values_from = n) %>% 
-      readr::write_csv(paste0(path_output, "/response_freq.csv"))
+      utils::write.csv(paste0(path_output, "/response_freq.csv"), row.names = FALSE)
     
   }
   
@@ -293,7 +293,7 @@ rasch_mds_children <- function(df,
                                      vars_id = vars_id)
   
   # PRINT DATA ---------
-  if (print_results) df_final %>% readr::write_csv(file = paste0(path_output, "/Data_final.csv"))
+  if (print_results) df_final %>% utils::write.csv(file = paste0(path_output, "/Data_final.csv"), row.names = FALSE)
   
   
   # RETURN DATA WITH SCORE ----------
