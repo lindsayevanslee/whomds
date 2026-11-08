@@ -1,0 +1,14 @@
+^data-raw$
+^.*\.Rproj$
+^\.Rproj\.user$
+^README\.Rmd$
+^\.travis\.yml$
+^appveyor\.yml$
+^cran-comments\.md$
+^LICENSE\.md$
+^doc$
+^Meta$
+^CRAN-RELEASE$
+^\.github$
+^CRAN-SUBMISSION$
+^CLAUDE\.md$

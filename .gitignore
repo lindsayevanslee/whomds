@@ -1,0 +1,12 @@
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+whomds.Rproj
+inst/doc
+doc
+Meta
+/doc/
+/Meta/
+*.log
+CLAUDE.md
