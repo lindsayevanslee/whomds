@@ -14,6 +14,21 @@
 #' 
 #' @family rasch functions
 #' 
+#' @example inst/examples/prep_adults.R
+#' @example inst/examples/prep_adults_model.R
+#' @examples
+#'
+#' # DIF analysis needs the person residuals from the Rasch Model
+#' model <- rasch_model(df, items, vars_id = "HHID")
+#'
+#' dif <- rasch_DIF(df, items, vars_DIF = c("sex", "age_cat"),
+#'   residuals_PCM = model$residuals_PCM)
+#'
+#' # items whose responses differ by sex or age group, after accounting for
+#' # the person's overall level of disability (empty when there is no DIF)
+#' dif$DIF_results
+#' # the ANOVA table behind that conclusion, one block per item and variable
+#' head(dif$tab_aov_DIF)
 #' @export
 #' @import dplyr
 #' 

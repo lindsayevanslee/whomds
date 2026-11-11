@@ -11,6 +11,21 @@
 #' \item{testlet_strategy}{new \code{testlet_strategy} after creating desired testlets}
 #' \item{max_values}{new \code{max_values} after creating desired testlets}
 #' 
+#' @example inst/examples/prep_adults.R
+#' @examples
+#'
+#' # Combine EF4, EF6 and EF8 into one testlet named "new", and EF5 and EF7
+#' # into another. The second testlet is not named, so it is called "EF5_EF7"
+#' testlets <- rasch_testlet(df, items,
+#'   testlet_strategy = list(new = c("EF4", "EF6", "EF8"), c("EF5", "EF7")),
+#'   max_values = max_values, resp_opts = 1:5)
+#'
+#' # the testlets replace their items in the list of items ...
+#' testlets$vars_metric
+#' # ... and in the data, where a testlet is the sum of its items
+#' head(testlets$df[c("EF4", "EF6", "EF8", "new")])
+#' # a testlet of three items with values 0 to 4 can reach 12
+#' testlets$max_values
 #' @export
 #' 
 #' @family rasch functions

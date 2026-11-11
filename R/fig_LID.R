@@ -9,6 +9,19 @@
 #' @return Returns a ggplot graph showing the items with correlation >= \code{LIDcutoff} and prints a csv of the corresponding correlations
 #' 
 #' @details This function could be applied to visualize any kind of correlations. But within the context of the Rasch Analysis used for the WHO Model Disability Survey, the  residual correlations are used when analyzing item dependence.
+#' @example inst/examples/prep_adults.R
+#' @example inst/examples/prep_adults_model.R
+#' @examples
+#'
+#' \dontrun{
+#' # the residual correlations between items come from rasch_model()
+#' model <- rasch_model(df, items, vars_id = "HHID")
+#'
+#' # draw the items whose residual correlation is 0.2 or more. A spreadsheet of
+#' # these correlations is also saved in path_output, which must be a folder
+#' # that already exists on your computer
+#' fig_LID(model$LID, LIDcutoff = 0.2, path_output = "/Users/yourname/Desktop/Start")
+#' }
 #' @export
 #' 
 #' @family figure functions

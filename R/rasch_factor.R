@@ -16,6 +16,21 @@
 #' 
 #' @family rasch functions
 #' 
+#' @example inst/examples/prep_adults.R
+#' @examples
+#'
+#' # (warnings that a polychoric correlation "removed a row with zero marginal"
+#' # are expected here: few people answered EF12, so some of its response
+#' # options are never seen together with those of other items)
+#' factors <- rasch_factor(df, items)
+#'
+#' # the Rasch Model assumes the items measure one single thing (they are
+#' # "unidimensional"); the parallel analysis suggests how many factors there are
+#' factors$n_group_factors
+#' # a first eigenvalue much larger than the rest also points to one dimension
+#' round(factors$eigenvalues, 2)
+#' # the one-factor model shows how strongly each item relates to that factor
+#' factors$fa_onefactor$loadings
 #' @export
 #' 
 #' @importFrom GPArotation GPForth

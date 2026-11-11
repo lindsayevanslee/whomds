@@ -8,6 +8,19 @@
 #' @family children analysis functions
 #'
 #' @return a nested tibble with new columns with the Rasch Models calculated with the \code{TAM} package
+#' @example inst/examples/prep_children.R
+#' @examples
+#'
+#' split <- rasch_split_age(df, "age_cat", vars_metric, "HHID", max_values)
+#' df_nest <- rasch_df_nest(split$df, "age_cat", "HHID")
+#'
+#' df_nest <- rasch_model_children(split$df, df_nest, split$vars_metric,
+#'   vars_group = "age_cat", TAM_model = "PCM2")
+#'
+#' # new columns hold the models: a "multigroup" model fitted to all age groups
+#' # together and an "anchored" model for each age group
+#' names(df_nest)
+#' df_nest$mod_multigroup[[1]]
 #' @export
 #'
 rasch_model_children <- function(df, df_nest, vars_metric, vars_group, TAM_model) {

@@ -27,6 +27,30 @@ Split survey items by categories for a Rasch Model
 \details{
 If significant differential item functioning (DIF) is observed, it may be desirable to split variables based on the characteristic for which DIF is observed. For example, if men and women have significantly different patterns of responses to items, then it may be desirable to split items by sex. This function performs that variable splitting.
 }
+\examples{
+# rasch_mds() prepares the survey data before calling this function. To use
+# the function on its own, do the same preparation by hand:
+# 1. choose the items (survey questions) that will make up the scale
+items <- paste0("EF", 1:12)
+# 2. shift the responses 1 to 5 down to 0 to 4, as the Rasch Model expects
+df <- df_adults
+df[items] <- df[items] - 1
+# 3. make the ID column text, so that the artificial IDs "MIN" and "MAX" can
+#    be added to it later
+df$HHID <- as.character(df$HHID)
+# 4. record the highest possible value of each item (5, or 4 after the shift)
+max_values <- data.frame(var = items, max_val = 4)
+
+# Split EF1 and EF2 by sex, so that each becomes two items: one answered
+# only by women and one only by men
+split <- rasch_split(df, items, split_strategy = list(sex = c("EF1", "EF2")),
+  max_values = max_values)
+
+# the split items replace the originals in the list of items ...
+split$vars_metric
+# ... and in the data, where each new item is missing for the other sex
+head(split$df[c("sex", "EF1_Female", "EF1_Male")])
+}
 \seealso{
 Other rasch functions:
 \code{\link[=rasch_DIF]{rasch_DIF()}},

@@ -10,6 +10,18 @@
 #' \item{df}{new \code{df} after splitting the desired variables}
 #' \item{vars_metric}{new \code{vars_metric} after splitting the desired variables}
 #' \item{max_values}{new \code{max_values} after splitting the desired variables}
+#' @example inst/examples/prep_adults.R
+#' @examples
+#'
+#' # Split EF1 and EF2 by sex, so that each becomes two items: one answered
+#' # only by women and one only by men
+#' split <- rasch_split(df, items, split_strategy = list(sex = c("EF1", "EF2")),
+#'   max_values = max_values)
+#'
+#' # the split items replace the originals in the list of items ...
+#' split$vars_metric
+#' # ... and in the data, where each new item is missing for the other sex
+#' head(split$df[c("sex", "EF1_Female", "EF1_Male")])
 #' @export
 #' 
 #' @family rasch functions

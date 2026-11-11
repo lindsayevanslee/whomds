@@ -9,6 +9,21 @@
 #' @family rasch functions
 #' @family children analysis functions
 #'
+#' @example inst/examples/prep_children.R
+#' @examples
+#'
+#' split <- rasch_split_age(df, "age_cat", vars_metric, "HHID", max_values)
+#' df_nest <- rasch_df_nest(split$df, "age_cat", "HHID")
+#' df_nest <- rasch_model_children(split$df, df_nest, split$vars_metric,
+#'   vars_group = "age_cat", TAM_model = "PCM2")
+#' df_nest <- rasch_quality_children(df_nest, split$vars_metric)
+#'
+#' df_final <- rasch_rescale_children(split$df, df_nest, vars_group = "age_cat",
+#'   vars_id = "HHID")
+#'
+#' # each child's ability ("person_pars"), its standard error and the ability
+#' # rescaled to a 0 to 100 disability score
+#' head(df_final[c("HHID", "age_cat", "person_pars", "person_pars_se", "rescaled")])
 #' @export
 #'
 rasch_rescale_children <- function(df, df_nest, vars_group, vars_id) {

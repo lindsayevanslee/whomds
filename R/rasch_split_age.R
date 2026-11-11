@@ -8,6 +8,16 @@
 #' \item{df}{new \code{df} after splitting the variables}
 #' \item{vars_metric}{new \code{vars_metric} after splitting the variables}
 #' \item{max_values}{new \code{max_values} after splitting the variables}
+#' @example inst/examples/prep_children.R
+#' @examples
+#'
+#' split <- rasch_split_age(df, vars_group = "age_cat", vars_metric = vars_metric,
+#'   vars_id = "HHID", max_values = max_values)
+#'
+#' # items asked of more than one age group (child11 is asked of ages 5 to 17)
+#' # are split into one item per age group, so each can have its own difficulty
+#' split$vars_metric$Age5to9
+#' head(split$df[c("age_cat", "child11", "child11_Age5to9", "child11_Age10to17")])
 #' @export
 #' 
 #' @family rasch functions

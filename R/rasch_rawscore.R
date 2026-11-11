@@ -7,6 +7,17 @@
 #'
 #' @family rasch functions
 #' 
+#' @example inst/examples/prep_adults.R
+#' @examples
+#'
+#' df_raw <- rasch_rawscore(df, items, vars_id = "HHID", max_values = max_values)
+#'
+#' # each person's raw score is the sum of their responses
+#' head(df_raw[c("HHID", items, "RawScore")])
+#' # nobody in df_adults answered 4 to every item, so an artificial person with
+#' # ID "MAX" and the highest possible score is added at the end of the data.
+#' # Someone already has the lowest score, so no "MIN" person is needed
+#' tail(df_raw[c("HHID", items, "RawScore")], 2)
 #' @export
 #'
 rasch_rawscore <- function(df, vars_metric, vars_id, max_values) {

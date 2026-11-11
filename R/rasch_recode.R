@@ -10,6 +10,20 @@
 #' @family rasch functions
 #' @family children analysis functions
 #' 
+#' @example inst/examples/prep_adults.R
+#' @examples
+#'
+#' # Collapse the response options of EF1 and EF2 so that the two highest
+#' # options (3 and 4 after the shift) become one, and those of EF3 from five
+#' # options to three
+#' recoded <- rasch_recode(df, items,
+#'   recode_strategy = list("EF1,EF2" = c(0, 1, 2, 3, 3), "EF3" = c(0, 1, 1, 2, 2)),
+#'   max_values = max_values)
+#'
+#' # compare the original and recoded responses to EF1
+#' table(original = df$EF1, recoded = recoded$df$EF1)
+#' # the highest possible values of the recoded items are updated
+#' recoded$max_values
 #' @export
 #' 
 #' @import dplyr

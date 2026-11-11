@@ -4,6 +4,20 @@
 #' @inheritParams rasch_model_children
 #'
 #' @return a nested tibble with new columns with information about model quality
+#' @example inst/examples/prep_children.R
+#' @examples
+#'
+#' split <- rasch_split_age(df, "age_cat", vars_metric, "HHID", max_values)
+#' df_nest <- rasch_df_nest(split$df, "age_cat", "HHID")
+#' df_nest <- rasch_model_children(split$df, df_nest, split$vars_metric,
+#'   vars_group = "age_cat", TAM_model = "PCM2")
+#'
+#' df_nest <- rasch_quality_children(df_nest, split$vars_metric)
+#'
+#' # new columns hold the quality measures for each model, for example the
+#' # item fit and the residual correlations ("cor") of the multigroup model
+#' names(df_nest)
+#' head(df_nest$itemfit_multigroup[[1]])
 #' @export
 #' 
 #' @family rasch functions

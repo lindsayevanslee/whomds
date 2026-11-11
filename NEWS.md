@@ -10,6 +10,7 @@
 - Fixed remaining deprecation warnings: `as_tibble()` on unnamed matrices and bare column selections in `rasch_DIF()` and `rasch_split_age()`, the `size` aesthetic for lines in `fig_density()` (now `linewidth`, requiring ggplot2 >= 3.4.0), and `aes_string()` in `fig_dist()`. Also fixed a spurious "no non-missing arguments to min" warning from `fig_density()` when `cutoffs` is NULL
 - Removed dependencies on plyr, readr, scales and stringr, replacing them with base R equivalents and small internal helpers. Output CSV files are now written with `utils::write.csv()`, so character values are quoted
 - Added unit tests for the data-preparation functions, input validation in `rasch_mds()`, and the helper functions
+- Added examples to every exported function. The examples for the `rasch_*()` building blocks show the data preparation that `rasch_mds()` and `rasch_mds_children()` do before calling them, and explain what each result means
 
 # whomds 1.1.1
 

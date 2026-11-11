@@ -6,6 +6,21 @@
 #' @inheritParams fig_LID
 #'
 #' @return does not return anything to the environment, but prints files to the folder specified in \code{path_output}
+#' @example inst/examples/prep_children.R
+#' @examples
+#'
+#' split <- rasch_split_age(df, "age_cat", vars_metric, "HHID", max_values)
+#' df_nest <- rasch_df_nest(split$df, "age_cat", "HHID")
+#' df_nest <- rasch_model_children(split$df, df_nest, split$vars_metric,
+#'   vars_group = "age_cat", TAM_model = "PCM2")
+#' df_nest <- rasch_quality_children(df_nest, split$vars_metric)
+#'
+#' \dontrun{
+#' # save spreadsheets and plots of the quality measures in path_output, which
+#' # must be a folder that already exists on your computer
+#' rasch_quality_children_print(df_nest, split$vars_metric, vars_group = "age_cat",
+#'   TAM_model = "PCM2", path_output = "/Users/yourname/Desktop/Start")
+#' }
 #' @export
 #'
 #' @family rasch functions

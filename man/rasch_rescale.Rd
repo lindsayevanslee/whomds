@@ -19,6 +19,36 @@ a tibble with the left join between \code{df} and \code{df_score} (which carries
 \description{
 Rescale score from Rasch Analysis to range from 0 to 100
 }
+\examples{
+# rasch_mds() prepares the survey data before calling this function. To use
+# the function on its own, do the same preparation by hand:
+# 1. choose the items (survey questions) that will make up the scale
+items <- paste0("EF", 1:12)
+# 2. shift the responses 1 to 5 down to 0 to 4, as the Rasch Model expects
+df <- df_adults
+df[items] <- df[items] - 1
+# 3. make the ID column text, so that the artificial IDs "MIN" and "MAX" can
+#    be added to it later
+df$HHID <- as.character(df$HHID)
+# 4. record the highest possible value of each item (5, or 4 after the shift)
+max_values <- data.frame(var = items, max_val = 4)
+
+# rasch_mds() also removes people with too many missing answers, here more
+# than 2 of the 12 items. The model takes about 10 seconds on all 2500
+# adults, so this example uses only the first 300 who remain
+n_missing <- rowSums(is.na(df[items]))
+df <- df[n_missing <= 2, ]
+df <- df[1:300, ]
+
+model <- rasch_model(df, items, vars_id = "HHID")
+
+df_final <- rasch_rescale(df, model$df_score, vars_id = "HHID")
+
+# the person abilities are on a logit scale; "rescaled" puts them on the
+# 0 to 100 disability score used in WHO reports
+head(df_final[c("HHID", "person_pars", "person_pars_se", "rescaled")])
+range(df_final$rescaled)
+}
 \seealso{
 Other rasch functions:
 \code{\link[=rasch_DIF]{rasch_DIF()}},

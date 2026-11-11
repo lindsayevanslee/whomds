@@ -12,6 +12,13 @@
 #' @family rasch functions
 #' @family children analysis functions
 #' 
+#' @example inst/examples/prep_adults.R
+#' @examples
+#'
+#' # Remove EF11 and EF12 from the scale, for example because they fit poorly
+#' dropped <- rasch_drop(items, drop_vars = c("EF11", "EF12"), max_values = max_values)
+#' dropped$vars_metric
+#' dropped$max_values
 #' @export
 rasch_drop <- function(vars_metric, drop_vars, max_values) {
   

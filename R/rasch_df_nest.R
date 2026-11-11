@@ -3,6 +3,15 @@
 #' @inheritParams rasch_mds_children
 #'
 #' @return nested tibble with two columns: the age group given by \code{vars_group} and \code{df_split} with the split data
+#' @example inst/examples/prep_children.R
+#' @examples
+#'
+#' split <- rasch_split_age(df, "age_cat", vars_metric, "HHID", max_values)
+#'
+#' # one row per age group, with that group's data in the column df_split
+#' df_nest <- rasch_df_nest(split$df, vars_group = "age_cat", vars_id = "HHID")
+#' df_nest
+#' head(df_nest$df_split[[1]][1:6])
 #' @export
 #' 
 #' @family rasch functions

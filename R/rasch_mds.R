@@ -26,6 +26,47 @@
 #' 
 #' @family rasch functions
 #' 
+#' @examples
+#' \donttest{
+#' # One iteration of Rasch Analysis on the 12 environmental factor items of
+#' # the example adult data, checking for differential item functioning (DIF)
+#' # by sex and age group. This takes about 15 seconds. No files are saved
+#' # because print_results is FALSE
+#' start <- rasch_mds(
+#'   df = df_adults,
+#'   vars_metric = paste0("EF", 1:12),
+#'   vars_id = "HHID",
+#'   vars_DIF = c("sex", "age_cat"),
+#'   resp_opts = 1:5,
+#'   max_NA = 2,
+#'   print_results = FALSE
+#' )
+#'
+#' # the data with each person's ability ("person_pars"), its standard error
+#' # and the ability rescaled to a 0 to 100 disability score
+#' head(start$df[c("HHID", "person_pars", "person_pars_se", "rescaled")])
+#' # a one-row summary of how well the data fit the model
+#' start$df_results
+#' }
+#'
+#' \dontrun{
+#' # To save the full set of results (plots, spreadsheets and the scored data)
+#' # on your computer, set print_results to TRUE and give a folder that already
+#' # exists, ending in "/". A new folder named after model_name is created
+#' # inside it. On Windows the path looks like "C:/Users/yourname/Desktop/"
+#' start <- rasch_mds(
+#'   df = df_adults,
+#'   vars_metric = paste0("EF", 1:12),
+#'   vars_id = "HHID",
+#'   vars_DIF = c("sex", "age_cat"),
+#'   resp_opts = 1:5,
+#'   max_NA = 2,
+#'   print_results = TRUE,
+#'   path_parent = "/Users/yourname/Desktop/",
+#'   model_name = "Start",
+#'   comment = "Initial run with all 12 items"
+#' )
+#' }
 #' @export
 #' 
 #' @import dplyr

@@ -18,6 +18,16 @@
 #' Wright, B.D., and Stone, M.H. (1999). Measurement essentials. Wide Range Inc., Wilmington. (\url{https://www.rasch.org/measess/me-all.pdf} 28Mb).
 #' 
 #' 
+#' @example inst/examples/prep_adults.R
+#' @example inst/examples/prep_adults_model.R
+#' @examples
+#'
+#' model <- rasch_model(df, items, vars_id = "HHID")
+#'
+#' # the person separation reliability of the model; this is the same value
+#' # that rasch_model() returns as PSI
+#' SepRel_1.0.1(model$person_parameters)
+#' model$PSI
 #' @export
 SepRel_1.0.1 <- function (pobject) 
 {
