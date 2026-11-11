@@ -31,12 +31,14 @@
 #' @example inst/examples/prep_adults_model.R
 #' @examples
 #'
+#' \donttest{
 #' model <- rasch_model(df, items, vars_id = "HHID")
 #'
 #' # the person separation reliability of the model; this is the same value
 #' # that rasch_model() returns as PSI
 #' SepRel_1.0.1(model$person_parameters)
 #' model$PSI
+#' }
 #' @export
 SepRel_1.0.1 <- function (pobject) 
 {

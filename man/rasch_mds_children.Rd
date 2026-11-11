@@ -76,6 +76,7 @@ This function combines all of the separate analyses of model fit necessary to as
 Often Rasch Analysis of children data is more difficult because of the extreme skewness of the responses. For this reason, it is often advisable to build a scale only with the respondents on the more severe end of the disability continuum. By specifying \code{has_at_least_one}, the function will remove all children from the sample who do endorse an answer of any of \code{has_at_least_one} in at least one \code{vars_metric}. The scores created can be reunited with the excluded children post-hoc.
 }
 \examples{
+\donttest{
 # One iteration of Rasch Analysis on the example children data. Ten items
 # were asked of every child and the others only of certain age groups, so
 # the items are given in two parts. Only children with at least one answer
@@ -109,6 +110,7 @@ start$vars_metric
 # print_results = TRUE, path_parent = "/Users/yourname/Desktop/" (a folder
 # that already exists, ending in "/") and model_name = "Start", as in the
 # example for rasch_mds()
+}
 }
 \seealso{
 Other rasch functions:

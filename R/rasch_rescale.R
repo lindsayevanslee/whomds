@@ -11,6 +11,7 @@
 #' @example inst/examples/prep_adults_model.R
 #' @examples
 #'
+#' \donttest{
 #' model <- rasch_model(df, items, vars_id = "HHID")
 #'
 #' df_final <- rasch_rescale(df, model$df_score, vars_id = "HHID")
@@ -19,6 +20,7 @@
 #' # 0 to 100 disability score used in WHO reports
 #' head(df_final[c("HHID", "person_pars", "person_pars_se", "rescaled")])
 #' range(df_final$rescaled)
+#' }
 #' @export
 #'
 #'

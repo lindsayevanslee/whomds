@@ -21,6 +21,7 @@
 #' @family children analysis functions
 #' 
 #' @examples
+#' \donttest{
 #' # One iteration of Rasch Analysis on the example children data. Ten items
 #' # were asked of every child and the others only of certain age groups, so
 #' # the items are given in two parts. Only children with at least one answer
@@ -54,6 +55,7 @@
 #' # print_results = TRUE, path_parent = "/Users/yourname/Desktop/" (a folder
 #' # that already exists, ending in "/") and model_name = "Start", as in the
 #' # example for rasch_mds()
+#' }
 #' @export
 #' 
 #' @import dplyr

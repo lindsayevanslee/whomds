@@ -18,6 +18,7 @@
 #' @example inst/examples/prep_adults_model.R
 #' @examples
 #'
+#' \donttest{
 #' # DIF analysis needs the person residuals from the Rasch Model
 #' model <- rasch_model(df, items, vars_id = "HHID")
 #'
@@ -29,6 +30,7 @@
 #' dif$DIF_results
 #' # the ANOVA table behind that conclusion, one block per item and variable
 #' head(dif$tab_aov_DIF)
+#' }
 #' @export
 #' @import dplyr
 #' 

@@ -51,12 +51,14 @@ n_missing <- rowSums(is.na(df[items]))
 df <- df[n_missing <= 2, ]
 df <- df[1:300, ]
 
+\donttest{
 model <- rasch_model(df, items, vars_id = "HHID")
 
 # the person separation reliability of the model; this is the same value
 # that rasch_model() returns as PSI
 SepRel_1.0.1(model$person_parameters)
 model$PSI
+}
 }
 \references{
 Wright, B.D., and Stone, M.H. (1999). Measurement essentials. Wide Range Inc., Wilmington. (\url{https://www.rasch.org/measess/me-all.pdf} 28Mb).

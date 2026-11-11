@@ -68,6 +68,7 @@ n_missing <- rowSums(is.na(df[items]))
 df <- df[n_missing <= 2, ]
 df <- df[1:300, ]
 
+\donttest{
 # DIF analysis needs the person residuals from the Rasch Model
 model <- rasch_model(df, items, vars_id = "HHID")
 
@@ -79,6 +80,7 @@ dif <- rasch_DIF(df, items, vars_DIF = c("sex", "age_cat"),
 dif$DIF_results
 # the ANOVA table behind that conclusion, one block per item and variable
 head(dif$tab_aov_DIF)
+}
 }
 \seealso{
 Other rasch functions:

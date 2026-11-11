@@ -28,6 +28,7 @@
 #' @example inst/examples/prep_adults_model.R
 #' @examples
 #'
+#' \donttest{
 #' model <- rasch_model(df, items, vars_id = "HHID")
 #'
 #' # summaries of how well the data fit the model (see the package vignettes
@@ -39,6 +40,7 @@
 #'
 #' # each person's ability estimate ("person_pars") and its standard error
 #' head(model$df_score)
+#' }
 #' @export
 #' 
 #' @import eRm

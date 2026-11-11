@@ -68,6 +68,7 @@ n_missing <- rowSums(is.na(df[items]))
 df <- df[n_missing <= 2, ]
 df <- df[1:300, ]
 
+\donttest{
 model <- rasch_model(df, items, vars_id = "HHID")
 
 # summaries of how well the data fit the model (see the package vignettes
@@ -79,6 +80,7 @@ model$PSI                 # person separation index, the reliability
 
 # each person's ability estimate ("person_pars") and its standard error
 head(model$df_score)
+}
 }
 \references{
 Christensen, K. B., Makransky, G., & Horton, M. (2017). Critical Values for Yen’s Q 3 : Identification of Local Dependence in the Rasch Model Using Residual Correlations.  Applied Psychological Measurement, 41(3), 178-194. \doi{10.1177/0146621616677520}
