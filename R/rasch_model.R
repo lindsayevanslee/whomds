@@ -78,6 +78,7 @@ rasch_model <- function(df, vars_metric, vars_id, print_results = FALSE, path_ou
   
   #------------------------------------------------------------------------------- 
   #5. Person separation index
+  # SepRel_1.0.1() is a copy of eRm::SepRel() from eRm 1.0-1; see ?SepRel_1.0.1
   PSIreport <- as.numeric(SepRel_1.0.1(person_parameters)[1])
   
   #-------------------------------------------------------------------------------  

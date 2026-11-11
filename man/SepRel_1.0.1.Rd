@@ -20,6 +20,15 @@ Copied from eRm::SepRel(), v1.0-1: This function calculates the proportion of pe
 }
 \details{
 See full documentation at \url{https://www.rdocumentation.org/packages/eRm/versions/1.0-1/topics/Separation\%20Reliability}
+
+\strong{Why whomds keeps its own copy.} From version 1.0-2,
+\code{eRm::SepRel()} excludes respondents who chose the lowest or the
+highest option for every item. This copy of the earlier version includes
+them, which gives a noticeably higher value in Model Disability Survey
+data, where many respondents report no problems at all. whomds keeps the
+earlier definition so that the \code{PSI} reported by \code{rasch_model()}
+stays comparable with earlier WHO analyses. Keep this in mind when comparing
+it with values from other software.
 }
 \examples{
 # rasch_mds() prepares the survey data before calling this function. To use
