@@ -1,3 +1,5 @@
+# whomds (development version)
+
 # whomds 1.2.0
 
 - Fixed error in `rasch_mds()` / `rasch_model()` ("Can't use NA as column index in a tibble for assignment") caused by eRm >= 1.0-7 adding a `Std.Error` column to `person.parameter()$theta.table`. The person ability columns in `df_score` are now selected by name instead of by position, so `NAgroup` and `Interpolated` are labeled correctly again
